@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'plm.selectedPatterns';
 const WORD_SIZE_KEY = 'plm.wordSize';
+const VOLUME_KEY = 'plm.volume';
 
 export type KeyValueStore = Pick<Storage, 'getItem' | 'setItem'>;
 
@@ -62,3 +63,28 @@ export function saveWordSize(
 }
 
 export { WORD_SIZE_KEY };
+
+export function loadVolume(store: KeyValueStore | undefined = defaultStore()): number | null {
+  try {
+    const raw = store?.getItem(VOLUME_KEY);
+    if (raw === null || raw === undefined || raw === '') return null;
+    const parsed = Number(raw);
+    return Number.isFinite(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveVolume(
+  index: number,
+  store: KeyValueStore | undefined = defaultStore(),
+): boolean {
+  try {
+    store?.setItem(VOLUME_KEY, String(index));
+    return Boolean(store);
+  } catch {
+    return false;
+  }
+}
+
+export { VOLUME_KEY };
