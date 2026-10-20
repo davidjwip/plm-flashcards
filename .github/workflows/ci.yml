@@ -24,8 +24,8 @@ jobs:
       - name: unit tests
         run: npm test
 
-      - name: deck validator
-        run: npm run validate:decks
+      - name: word bank validator
+        run: npm run validate:bank
 
       - name: guardrail scan
         run: npm run guardrail:scan

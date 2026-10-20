@@ -1,0 +1,1386 @@
+{
+  "patterns": [
+    {
+      "id": "a",
+      "label": "short a"
+    },
+    {
+      "id": "e",
+      "label": "short e"
+    },
+    {
+      "id": "i",
+      "label": "short i"
+    },
+    {
+      "id": "o",
+      "label": "short o"
+    },
+    {
+      "id": "u",
+      "label": "short u"
+    },
+    {
+      "id": "a_e",
+      "label": "a…e (cake)"
+    },
+    {
+      "id": "ai",
+      "label": "ai (rain)"
+    },
+    {
+      "id": "ay",
+      "label": "ay (day)"
+    },
+    {
+      "id": "ee",
+      "label": "ee (bee)"
+    },
+    {
+      "id": "ea",
+      "label": "ea (sea)"
+    },
+    {
+      "id": "i_e",
+      "label": "i…e (bike)"
+    },
+    {
+      "id": "ie",
+      "label": "ie (pie)"
+    },
+    {
+      "id": "igh",
+      "label": "igh (night)"
+    },
+    {
+      "id": "o_e",
+      "label": "o…e (home)"
+    },
+    {
+      "id": "oa",
+      "label": "oa (boat)"
+    },
+    {
+      "id": "ue",
+      "label": "ue (blue)"
+    },
+    {
+      "id": "ui",
+      "label": "ui (fruit)"
+    },
+    {
+      "id": "u_e",
+      "label": "u…e (cube)"
+    },
+    {
+      "id": "ew",
+      "label": "ew (new)"
+    },
+    {
+      "id": "ou",
+      "label": "ou (out)"
+    },
+    {
+      "id": "ow",
+      "label": "ow (cow)"
+    },
+    {
+      "id": "oi",
+      "label": "oi (coin)"
+    },
+    {
+      "id": "oy",
+      "label": "oy (boy)"
+    },
+    {
+      "id": "ar",
+      "label": "ar (car)"
+    },
+    {
+      "id": "or",
+      "label": "or (for)"
+    },
+    {
+      "id": "ear",
+      "label": "ear (hear)"
+    },
+    {
+      "id": "eer",
+      "label": "eer (deer)"
+    },
+    {
+      "id": "air",
+      "label": "air (chair)"
+    },
+    {
+      "id": "are",
+      "label": "are (care)"
+    },
+    {
+      "id": "au",
+      "label": "au (haul)"
+    },
+    {
+      "id": "aw",
+      "label": "aw (saw)"
+    },
+    {
+      "id": "al",
+      "label": "al (ball)"
+    },
+    {
+      "id": "oo",
+      "label": "oo (moon)"
+    },
+    {
+      "id": "ur",
+      "label": "ur (turn)"
+    },
+    {
+      "id": "ir",
+      "label": "ir (bird)"
+    },
+    {
+      "id": "er",
+      "label": "er (her)"
+    },
+    {
+      "id": "schwa",
+      "label": "schwa (about)"
+    },
+    {
+      "id": "ck",
+      "label": "ck (kick)"
+    },
+    {
+      "id": "k",
+      "label": "k (kite)"
+    }
+  ],
+  "words": [
+    {
+      "word": "about",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "again",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "air",
+      "patterns": ["air"]
+    },
+    {
+      "word": "alone",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "annoy",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "around",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "author",
+      "patterns": ["au"]
+    },
+    {
+      "word": "autumn",
+      "patterns": ["au"]
+    },
+    {
+      "word": "away",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "back",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "bag",
+      "patterns": ["a"]
+    },
+    {
+      "word": "ball",
+      "patterns": ["al"]
+    },
+    {
+      "word": "banana",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "bare",
+      "patterns": ["are"]
+    },
+    {
+      "word": "bat",
+      "patterns": ["a"]
+    },
+    {
+      "word": "bean",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "beard",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "bed",
+      "patterns": ["e"]
+    },
+    {
+      "word": "bee",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "beer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "bike",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "bird",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "blue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "boat",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "boil",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "bone",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "book",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "boot",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "born",
+      "patterns": ["or"]
+    },
+    {
+      "word": "box",
+      "patterns": ["o"]
+    },
+    {
+      "word": "boy",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "brown",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "bruise",
+      "patterns": ["ui"]
+    },
+    {
+      "word": "bug",
+      "patterns": ["u"]
+    },
+    {
+      "word": "burn",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "bus",
+      "patterns": ["u"]
+    },
+    {
+      "word": "cake",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "call",
+      "patterns": ["al"]
+    },
+    {
+      "word": "car",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "card",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "care",
+      "patterns": ["are"]
+    },
+    {
+      "word": "cat",
+      "patterns": ["a"]
+    },
+    {
+      "word": "cause",
+      "patterns": ["au"]
+    },
+    {
+      "word": "chain",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "chair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "cheer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "chew",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "chirp",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "claw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "clay",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "clean",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "clear",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "close",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "cloud",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "clue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "coat",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "coin",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "comma",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "cook",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "cow",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "crown",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "cruise",
+      "patterns": ["ui"]
+    },
+    {
+      "word": "cube",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "cue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "cup",
+      "patterns": ["u"]
+    },
+    {
+      "word": "curl",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "cute",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "dad",
+      "patterns": ["a"]
+    },
+    {
+      "word": "dare",
+      "patterns": ["are"]
+    },
+    {
+      "word": "day",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "dear",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "deer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "die",
+      "patterns": ["ie"]
+    },
+    {
+      "word": "dog",
+      "patterns": ["o"]
+    },
+    {
+      "word": "down",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "draw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "drew",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "duck",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "due",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "ear",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "eat",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "enjoy",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "fair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "fairy",
+      "patterns": ["air"]
+    },
+    {
+      "word": "fall",
+      "patterns": ["al"]
+    },
+    {
+      "word": "farm",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "fault",
+      "patterns": ["au"]
+    },
+    {
+      "word": "fear",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "feet",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "fern",
+      "patterns": ["er"]
+    },
+    {
+      "word": "few",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "fight",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "first",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "fit",
+      "patterns": ["i"]
+    },
+    {
+      "word": "five",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "flew",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "float",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "flower",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "food",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "foot",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "for",
+      "patterns": ["or"]
+    },
+    {
+      "word": "fork",
+      "patterns": ["or"]
+    },
+    {
+      "word": "fruit",
+      "patterns": ["ui"]
+    },
+    {
+      "word": "fur",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "garden",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "gate",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "germ",
+      "patterns": ["er"]
+    },
+    {
+      "word": "girl",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "glue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "goat",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "good",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "gray",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "green",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "grew",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "ground",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "gum",
+      "patterns": ["u"]
+    },
+    {
+      "word": "hair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "hall",
+      "patterns": ["al"]
+    },
+    {
+      "word": "hard",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "hare",
+      "patterns": ["are"]
+    },
+    {
+      "word": "hat",
+      "patterns": ["a"]
+    },
+    {
+      "word": "haul",
+      "patterns": ["au"]
+    },
+    {
+      "word": "hear",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "hen",
+      "patterns": ["e"]
+    },
+    {
+      "word": "her",
+      "patterns": ["er"]
+    },
+    {
+      "word": "herd",
+      "patterns": ["er"]
+    },
+    {
+      "word": "high",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "hip",
+      "patterns": ["i"]
+    },
+    {
+      "word": "hole",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "home",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "hook",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "hop",
+      "patterns": ["o"]
+    },
+    {
+      "word": "hope",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "horse",
+      "patterns": ["or"]
+    },
+    {
+      "word": "house",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "how",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "hue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "huge",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "hurt",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "hut",
+      "patterns": ["u"]
+    },
+    {
+      "word": "jam",
+      "patterns": ["a"]
+    },
+    {
+      "word": "jaw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "join",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "joy",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "juice",
+      "patterns": ["ui"]
+    },
+    {
+      "word": "june",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "keep",
+      "patterns": ["ee", "k"]
+    },
+    {
+      "word": "kick",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "kid",
+      "patterns": ["i"]
+    },
+    {
+      "word": "kilo",
+      "patterns": ["k"]
+    },
+    {
+      "word": "kind",
+      "patterns": ["k"]
+    },
+    {
+      "word": "king",
+      "patterns": ["k"]
+    },
+    {
+      "word": "kiss",
+      "patterns": ["k"]
+    },
+    {
+      "word": "kite",
+      "patterns": ["i_e", "k"]
+    },
+    {
+      "word": "lake",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "late",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "laundry",
+      "patterns": ["au"]
+    },
+    {
+      "word": "law",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "lawn",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "leaf",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "leg",
+      "patterns": ["e"]
+    },
+    {
+      "word": "lick",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "lid",
+      "patterns": ["i"]
+    },
+    {
+      "word": "lie",
+      "patterns": ["ie"]
+    },
+    {
+      "word": "light",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "line",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "load",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "lock",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "log",
+      "patterns": ["o"]
+    },
+    {
+      "word": "look",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "loud",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "mail",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "map",
+      "patterns": ["a"]
+    },
+    {
+      "word": "meat",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "meet",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "might",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "moon",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "mop",
+      "patterns": ["o"]
+    },
+    {
+      "word": "mouse",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "mud",
+      "patterns": ["u"]
+    },
+    {
+      "word": "mule",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "name",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "near",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "neck",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "net",
+      "patterns": ["e"]
+    },
+    {
+      "word": "new",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "night",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "noise",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "north",
+      "patterns": ["or"]
+    },
+    {
+      "word": "note",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "now",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "nurse",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "oil",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "out",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "pain",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "pair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "park",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "pause",
+      "patterns": ["au"]
+    },
+    {
+      "word": "paw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "peer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "pen",
+      "patterns": ["e"]
+    },
+    {
+      "word": "perch",
+      "patterns": ["er"]
+    },
+    {
+      "word": "pick",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "pie",
+      "patterns": ["ie"]
+    },
+    {
+      "word": "pig",
+      "patterns": ["i"]
+    },
+    {
+      "word": "play",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "point",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "pool",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "pot",
+      "patterns": ["o"]
+    },
+    {
+      "word": "purple",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "rain",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "rare",
+      "patterns": ["are"]
+    },
+    {
+      "word": "read",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "red",
+      "patterns": ["e"]
+    },
+    {
+      "word": "repair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "ride",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "right",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "road",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "rock",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "roof",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "room",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "rope",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "round",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "royal",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "rug",
+      "patterns": ["u"]
+    },
+    {
+      "word": "rule",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "sail",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "same",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "sauce",
+      "patterns": ["au"]
+    },
+    {
+      "word": "saw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "say",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "screw",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "sea",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "see",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "seed",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "serve",
+      "patterns": ["er"]
+    },
+    {
+      "word": "share",
+      "patterns": ["are"]
+    },
+    {
+      "word": "shark",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "shirt",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "short",
+      "patterns": ["or"]
+    },
+    {
+      "word": "shout",
+      "patterns": ["ou"]
+    },
+    {
+      "word": "sick",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "side",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "sigh",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "six",
+      "patterns": ["i"]
+    },
+    {
+      "word": "skirt",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "small",
+      "patterns": ["al"]
+    },
+    {
+      "word": "sneer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "soap",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "sob",
+      "patterns": ["o"]
+    },
+    {
+      "word": "sock",
+      "patterns": ["ck"]
+    },
+    {
+      "word": "sofa",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "soil",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "soon",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "sport",
+      "patterns": ["or"]
+    },
+    {
+      "word": "square",
+      "patterns": ["are"]
+    },
+    {
+      "word": "stair",
+      "patterns": ["air"]
+    },
+    {
+      "word": "star",
+      "patterns": ["ar"]
+    },
+    {
+      "word": "stare",
+      "patterns": ["are"]
+    },
+    {
+      "word": "stay",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "steer",
+      "patterns": ["eer"]
+    },
+    {
+      "word": "stew",
+      "patterns": ["ew"]
+    },
+    {
+      "word": "stir",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "stone",
+      "patterns": ["o_e"]
+    },
+    {
+      "word": "storm",
+      "patterns": ["or"]
+    },
+    {
+      "word": "straw",
+      "patterns": ["aw"]
+    },
+    {
+      "word": "sue",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "suit",
+      "patterns": ["ui"]
+    },
+    {
+      "word": "sun",
+      "patterns": ["u"]
+    },
+    {
+      "word": "surf",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "tail",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "tall",
+      "patterns": ["al"]
+    },
+    {
+      "word": "tap",
+      "patterns": ["a"]
+    },
+    {
+      "word": "tape",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "tea",
+      "patterns": ["ea"]
+    },
+    {
+      "word": "ten",
+      "patterns": ["e"]
+    },
+    {
+      "word": "term",
+      "patterns": ["er"]
+    },
+    {
+      "word": "third",
+      "patterns": ["ir"]
+    },
+    {
+      "word": "tie",
+      "patterns": ["ie"]
+    },
+    {
+      "word": "tight",
+      "patterns": ["igh"]
+    },
+    {
+      "word": "time",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "toast",
+      "patterns": ["oa"]
+    },
+    {
+      "word": "took",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "tooth",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "top",
+      "patterns": ["o"]
+    },
+    {
+      "word": "town",
+      "patterns": ["ow"]
+    },
+    {
+      "word": "toy",
+      "patterns": ["oy"]
+    },
+    {
+      "word": "train",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "tray",
+      "patterns": ["ay"]
+    },
+    {
+      "word": "tree",
+      "patterns": ["ee"]
+    },
+    {
+      "word": "true",
+      "patterns": ["ue"]
+    },
+    {
+      "word": "tube",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "turn",
+      "patterns": ["ur"]
+    },
+    {
+      "word": "use",
+      "patterns": ["u_e"]
+    },
+    {
+      "word": "voice",
+      "patterns": ["oi"]
+    },
+    {
+      "word": "wait",
+      "patterns": ["ai"]
+    },
+    {
+      "word": "walk",
+      "patterns": ["al"]
+    },
+    {
+      "word": "wall",
+      "patterns": ["al"]
+    },
+    {
+      "word": "wave",
+      "patterns": ["a_e"]
+    },
+    {
+      "word": "web",
+      "patterns": ["e"]
+    },
+    {
+      "word": "white",
+      "patterns": ["i_e"]
+    },
+    {
+      "word": "win",
+      "patterns": ["i"]
+    },
+    {
+      "word": "wood",
+      "patterns": ["oo"]
+    },
+    {
+      "word": "year",
+      "patterns": ["ear"]
+    },
+    {
+      "word": "zebra",
+      "patterns": ["schwa"]
+    },
+    {
+      "word": "zip",
+      "patterns": ["i"]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+// Word bank validator: the data rules from specs/v1.md §6, enforced.
+import { readFileSync } from 'node:fs';
+
+const FILE = new URL('../data/wordbank.json', import.meta.url).pathname;
+const WORD_RE = /^[a-z]+(?:['-][a-z]+)*$/;
+
+const problems = [];
+let bank;
+try {
+  bank = JSON.parse(readFileSync(FILE, 'utf8'));
+} catch (error) {
+  console.error(`validate:bank — cannot read data/wordbank.json (${error.message})`);
+  process.exit(1);
+}
+
+const fail = (message) => problems.push(message);
+
+if (!Array.isArray(bank.patterns) || bank.patterns.length === 0) fail('no patterns array');
+if (!Array.isArray(bank.words) || bank.words.length === 0) fail('no words array');
+
+const patternIds = new Set();
+for (const pattern of bank.patterns ?? []) {
+  if (!/^[a-z_]+$/.test(pattern.id ?? ''))
+    fail(`pattern id ${JSON.stringify(pattern.id)} is not a-z/_`);
+  if (!pattern.label) fail(`pattern ${pattern.id} has no label`);
+  if (patternIds.has(pattern.id)) fail(`duplicate pattern id ${pattern.id}`);
+  patternIds.add(pattern.id);
+}
+
+const usedPatterns = new Set();
+const seenWords = new Set();
+for (const entry of bank.words ?? []) {
+  if (typeof entry.word !== 'string' || !WORD_RE.test(entry.word)) {
+    fail(`word ${JSON.stringify(entry.word)} is not plain lowercase letters`);
+    continue;
+  }
+  if (seenWords.has(entry.word)) fail(`duplicate word ${entry.word}`);
+  seenWords.add(entry.word);
+
+  if (!Array.isArray(entry.patterns) || entry.patterns.length === 0) {
+    fail(`word ${entry.word} has no patterns`);
+    continue;
+  }
+  for (const pattern of entry.patterns) {
+    if (!patternIds.has(pattern)) fail(`word ${entry.word} uses unknown pattern ${pattern}`);
+    usedPatterns.add(pattern);
+  }
+}
+
+for (const id of patternIds) {
+  if (!usedPatterns.has(id)) fail(`pattern ${id} has no words (it would be a dead option)`);
+}
+
+if (problems.length) {
+  for (const problem of problems) console.error(`  ${problem}`);
+  console.error(`\nvalidate:bank — ${problems.length} problem(s)`);
+  process.exit(1);
+}
+
+console.log(
+  `validate:bank — ${bank.words.length} words across ${bank.patterns.length} patterns, all valid`,
+);
