@@ -53,6 +53,18 @@ pronunciation every time matters for a spelling bee.
 | `npm run validate:decks` | every word decodable from patterns already taught at its unit |
 | `npm run build` | static build to `dist/` |
 
+## Git workflow
+
+- `main` is never pushed to directly. One branch per change, one pull request
+  per branch, reviewed and merged by Dave.
+- Branch names: `spec/<slug>` for spec-only work, `feat/<slug>` for a feature,
+  `fix/<slug>` for a defect, `chore/<slug>` for tooling.
+- Agents may commit on a branch but may **not** push: `git push` is denied in
+  `opencode.json`, so the agent that wrote the code is never the one that
+  publishes it.
+- A PR body carries the failing-test output and the passing-test output, pasted,
+  not summarised.
+
 ## Guardrails — public repo, non-negotiable
 
 1. **No PLM book content.** No scans, screenshots, page images, PDFs. Only our
