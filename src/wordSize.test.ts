@@ -32,6 +32,12 @@ describe('word size', () => {
     expect(wordSizeStyle(2)).toBe('font-size: 5.5rem');
   });
 
+  it('goes big enough for an adult reading across the room', () => {
+    const top = WORD_SIZE_STEPS.length - 1;
+    expect(wordSizeRem(top)).toBe('20rem');
+    expect(stepWordSize(top - 2, 'up')).toBe(top - 1);
+  });
+
   it('clamps at both ends instead of running off', () => {
     expect(stepWordSize(0, 'down')).toBe(0);
     expect(stepWordSize(WORD_SIZE_STEPS.length - 1, 'up')).toBe(WORD_SIZE_STEPS.length - 1);

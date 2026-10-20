@@ -1,9 +1,11 @@
 /**
  * The adult can resize the word: a small child across a table, a bigger one on a
- * lap, a tired evening. Five steps, persisted per device.
+ * lap, and an adult checking the deck on a 27-inch monitor. Eight steps, the top
+ * one deliberately absurd for reading distance at the far end of a room.
  */
-export const WORD_SIZE_STEPS = [3, 4, 5.5, 7, 9] as const;
+export const WORD_SIZE_STEPS = [3, 4, 5.5, 7, 9, 12, 16, 20] as const;
 
+/** The step the stylesheet's clamp() roughly matches on an iPad. */
 export const DEFAULT_WORD_SIZE = 2;
 
 export function clampWordSize(index: number): number {
