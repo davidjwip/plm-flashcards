@@ -12,7 +12,8 @@
     "e2e": "npm run build && playwright test",
     "format": "prettier --write .",
     "guardrail:scan": "node scripts/guardrail-scan.mjs",
-    "validate:bank": "node scripts/validate-bank.mjs"
+    "validate:bank": "node scripts/validate-bank.mjs",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

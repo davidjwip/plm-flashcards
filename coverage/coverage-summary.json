@@ -1,0 +1,45 @@
+{
+  "total": {
+    "lines": { "total": 106, "covered": 105, "skipped": 0, "pct": 99.05 },
+    "statements": { "total": 121, "covered": 118, "skipped": 0, "pct": 97.52 },
+    "functions": { "total": 42, "covered": 41, "skipped": 0, "pct": 97.61 },
+    "branches": { "total": 73, "covered": 69, "skipped": 0, "pct": 94.52 },
+    "branchesTrue": { "total": 0, "covered": 0, "skipped": 0, "pct": "Unknown" }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/app.ts": {
+    "lines": { "total": 50, "covered": 50, "skipped": 0, "pct": 100 },
+    "functions": { "total": 16, "covered": 15, "skipped": 0, "pct": 93.75 },
+    "statements": { "total": 55, "covered": 53, "skipped": 0, "pct": 96.36 },
+    "branches": { "total": 10, "covered": 9, "skipped": 0, "pct": 90 }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/engine.ts": {
+    "lines": { "total": 22, "covered": 22, "skipped": 0, "pct": 100 },
+    "functions": { "total": 14, "covered": 14, "skipped": 0, "pct": 100 },
+    "statements": { "total": 29, "covered": 29, "skipped": 0, "pct": 100 },
+    "branches": { "total": 21, "covered": 19, "skipped": 0, "pct": 90.47 }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/main.ts": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/speech.ts": {
+    "lines": { "total": 8, "covered": 8, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 9, "covered": 9, "skipped": 0, "pct": 100 },
+    "branches": { "total": 10, "covered": 9, "skipped": 0, "pct": 90 }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/storage.ts": {
+    "lines": { "total": 13, "covered": 12, "skipped": 0, "pct": 92.3 },
+    "functions": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "statements": { "total": 14, "covered": 13, "skipped": 0, "pct": 92.85 },
+    "branches": { "total": 6, "covered": 6, "skipped": 0, "pct": 100 }
+  },
+  "/home/hermesdev/src/plm-flashcards/src/views.ts": {
+    "lines": { "total": 11, "covered": 11, "skipped": 0, "pct": 100 },
+    "functions": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 },
+    "statements": { "total": 11, "covered": 11, "skipped": 0, "pct": 100 },
+    "branches": { "total": 24, "covered": 24, "skipped": 0, "pct": 100 }
+  }
+}
