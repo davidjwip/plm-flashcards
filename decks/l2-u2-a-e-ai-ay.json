@@ -1,0 +1,142 @@
+{
+  "id": "l2-u2-a-e-ai-ay",
+  "level": 2,
+  "unit": 2,
+  "title": "Long a and long e \u2014 a_e, ai, ay, ee, ea",
+  "patterns": ["a_e", "ai", "ay", "ee", "ea"],
+  "words": [
+    {
+      "word": "cake",
+      "graphemes": [
+        {
+          "text": "c"
+        },
+        {
+          "text": "a",
+          "pattern": "a_e"
+        },
+        {
+          "text": "k"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "rain",
+      "graphemes": [
+        {
+          "text": "r"
+        },
+        {
+          "text": "ai"
+        },
+        {
+          "text": "n"
+        }
+      ]
+    },
+    {
+      "word": "play",
+      "graphemes": [
+        {
+          "text": "p"
+        },
+        {
+          "text": "l"
+        },
+        {
+          "text": "ay"
+        }
+      ]
+    },
+    {
+      "word": "bee",
+      "graphemes": [
+        {
+          "text": "b"
+        },
+        {
+          "text": "ee"
+        }
+      ]
+    },
+    {
+      "word": "sea",
+      "graphemes": [
+        {
+          "text": "s"
+        },
+        {
+          "text": "ea"
+        }
+      ]
+    },
+    {
+      "word": "late",
+      "graphemes": [
+        {
+          "text": "l"
+        },
+        {
+          "text": "a",
+          "pattern": "a_e"
+        },
+        {
+          "text": "t"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "wait",
+      "graphemes": [
+        {
+          "text": "w"
+        },
+        {
+          "text": "ai"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "day",
+      "graphemes": [
+        {
+          "text": "d"
+        },
+        {
+          "text": "ay"
+        }
+      ]
+    },
+    {
+      "word": "see",
+      "graphemes": [
+        {
+          "text": "s"
+        },
+        {
+          "text": "ee"
+        }
+      ]
+    },
+    {
+      "word": "eat",
+      "graphemes": [
+        {
+          "text": "ea"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    }
+  ]
+}

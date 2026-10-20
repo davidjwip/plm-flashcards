@@ -1,0 +1,149 @@
+{
+  "id": "l2-u1-short-vowels",
+  "level": 2,
+  "unit": 1,
+  "title": "Short vowels \u2014 a, e, i, o, u",
+  "patterns": ["a", "e", "i", "o", "u"],
+  "words": [
+    {
+      "word": "cat",
+      "graphemes": [
+        {
+          "text": "c"
+        },
+        {
+          "text": "a"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "bed",
+      "graphemes": [
+        {
+          "text": "b"
+        },
+        {
+          "text": "e"
+        },
+        {
+          "text": "d"
+        }
+      ]
+    },
+    {
+      "word": "pig",
+      "graphemes": [
+        {
+          "text": "p"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "g"
+        }
+      ]
+    },
+    {
+      "word": "hop",
+      "graphemes": [
+        {
+          "text": "h"
+        },
+        {
+          "text": "o"
+        },
+        {
+          "text": "p"
+        }
+      ]
+    },
+    {
+      "word": "sun",
+      "graphemes": [
+        {
+          "text": "s"
+        },
+        {
+          "text": "u"
+        },
+        {
+          "text": "n"
+        }
+      ]
+    },
+    {
+      "word": "map",
+      "graphemes": [
+        {
+          "text": "m"
+        },
+        {
+          "text": "a"
+        },
+        {
+          "text": "p"
+        }
+      ]
+    },
+    {
+      "word": "net",
+      "graphemes": [
+        {
+          "text": "n"
+        },
+        {
+          "text": "e"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "lid",
+      "graphemes": [
+        {
+          "text": "l"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "d"
+        }
+      ]
+    },
+    {
+      "word": "dog",
+      "graphemes": [
+        {
+          "text": "d"
+        },
+        {
+          "text": "o"
+        },
+        {
+          "text": "g"
+        }
+      ]
+    },
+    {
+      "word": "cup",
+      "graphemes": [
+        {
+          "text": "c"
+        },
+        {
+          "text": "u"
+        },
+        {
+          "text": "p"
+        }
+      ]
+    }
+  ]
+}

@@ -33,3 +33,12 @@ against a typed table mirroring the above; a violating word fails the build.
 Consonant graphemes assumed known before unit 1: single consonants, and the
 digraphs `sh ch th ng` — if a deck needs one of these earlier than that, the
 catalogue is wrong and must be corrected here first.
+
+## How a deck spells a word
+
+Tiles are the letters the child taps, so they concatenate to the word exactly.
+Multi-letter graphemes are a single tile (`ai`, `igh`, `ck`). A split digraph is
+tagged rather than merged — `cake` is `c · a · k · e` with the `a` carrying
+`pattern: "a_e"` — because the child has to produce all four letters when
+spelling. The deck validator enforces the concatenation rule, which is how the
+first, merged-tile version of this model was caught.

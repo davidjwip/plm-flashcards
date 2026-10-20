@@ -1,0 +1,166 @@
+{
+  "id": "l2-u3-long-i-o",
+  "level": 2,
+  "unit": 3,
+  "title": "Long i and long o \u2014 i_e, ie, igh, o_e, oa",
+  "patterns": ["i_e", "ie", "igh", "o_e", "oa"],
+  "words": [
+    {
+      "word": "bike",
+      "graphemes": [
+        {
+          "text": "b"
+        },
+        {
+          "text": "i",
+          "pattern": "i_e"
+        },
+        {
+          "text": "k"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "time",
+      "graphemes": [
+        {
+          "text": "t"
+        },
+        {
+          "text": "i",
+          "pattern": "i_e"
+        },
+        {
+          "text": "m"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "pie",
+      "graphemes": [
+        {
+          "text": "p"
+        },
+        {
+          "text": "ie"
+        }
+      ]
+    },
+    {
+      "word": "night",
+      "graphemes": [
+        {
+          "text": "n"
+        },
+        {
+          "text": "igh"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "light",
+      "graphemes": [
+        {
+          "text": "l"
+        },
+        {
+          "text": "igh"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "home",
+      "graphemes": [
+        {
+          "text": "h"
+        },
+        {
+          "text": "o",
+          "pattern": "o_e"
+        },
+        {
+          "text": "m"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "note",
+      "graphemes": [
+        {
+          "text": "n"
+        },
+        {
+          "text": "o",
+          "pattern": "o_e"
+        },
+        {
+          "text": "t"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    },
+    {
+      "word": "boat",
+      "graphemes": [
+        {
+          "text": "b"
+        },
+        {
+          "text": "oa"
+        },
+        {
+          "text": "t"
+        }
+      ]
+    },
+    {
+      "word": "road",
+      "graphemes": [
+        {
+          "text": "r"
+        },
+        {
+          "text": "oa"
+        },
+        {
+          "text": "d"
+        }
+      ]
+    },
+    {
+      "word": "ride",
+      "graphemes": [
+        {
+          "text": "r"
+        },
+        {
+          "text": "i",
+          "pattern": "i_e"
+        },
+        {
+          "text": "d"
+        },
+        {
+          "text": "e"
+        }
+      ]
+    }
+  ]
+}

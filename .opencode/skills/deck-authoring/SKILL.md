@@ -18,9 +18,12 @@ A deck is data, and the data has a rule that a machine checks. Read
    at or before the deck's unit. `npm run validate:decks` enforces this and fails
    the build. If a word you love fails, the word is wrong, not the rule.
 2. **8–12 words per deck.** Fewer is a thin lesson, more is a lost child.
-3. **One grapheme = one tile.** Segmentation is what the child taps, so write it
-   explicitly: `ship` → `["sh","i","p"]`, `rain` → `["r","ai","n"]`,
-   `cake` → `["c","a_e","k"]` with the split digraph as a single tile.
+3. **One tap = one tile, and the tiles must spell the word.** Multi-letter
+   graphemes are one tile (`ship` → `sh · i · p`, `rain` → `r · ai · n`,
+   `night` → `n · igh · t`). A split digraph is **not** merged: the child spells
+   all four letters, so `cake` → `c · a · k · e`, with the `a` tile tagged
+   `pattern: "a_e"`. The validator enforces `tiles.join('') === word`, which is
+   what caught the first draft of this model trying `["c","a_e","k"]`.
 4. **No proper nouns, no names.** Ever — that is a child-identity rule wearing a
    deck's clothes.
 5. **Words are ours.** Invented or ordinary English words that fit the pattern.
@@ -40,14 +43,22 @@ A deck is data, and the data has a rule that a machine checks. Read
   "title": "Long i — i_e, ie, igh",
   "patterns": ["i_e", "ie", "igh"],
   "words": [
-    { "word": "bike", "graphemes": ["b", "i_e", "k"], "audio": "bike.mp3" },
-    { "word": "night", "graphemes": ["n", "igh", "t"], "audio": "night.mp3" }
+    {
+      "word": "bike",
+      "graphemes": [
+        { "text": "b" },
+        { "text": "i", "pattern": "i_e" },
+        { "text": "k" },
+        { "text": "e" }
+      ]
+    },
+    { "word": "night", "graphemes": [{ "text": "n" }, { "text": "igh" }, { "text": "t" }] }
   ]
 }
 ```
 
-`unit` and `patterns` are what the validator reads. `graphemes` must concatenate
-to `word` exactly — the validator checks that too.
+`unit` and `patterns` are what the validator reads. The `text` values must concatenate to `word` exactly, and any `pattern` used
+must appear in the deck's `patterns` list — the validator checks both.
 
 ## Adding a deck is two changes
 

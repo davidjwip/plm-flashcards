@@ -1,0 +1,149 @@
+{
+  "id": "l3-u1-ck-c-k",
+  "level": 3,
+  "unit": 1,
+  "title": "Level 3 \u2014 ck, c, k = /k/",
+  "patterns": ["ck", "c", "k"],
+  "words": [
+    {
+      "word": "kick",
+      "graphemes": [
+        {
+          "text": "k"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "sock",
+      "graphemes": [
+        {
+          "text": "s"
+        },
+        {
+          "text": "o"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "pick",
+      "graphemes": [
+        {
+          "text": "p"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "back",
+      "graphemes": [
+        {
+          "text": "b"
+        },
+        {
+          "text": "a"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "lick",
+      "graphemes": [
+        {
+          "text": "l"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "rock",
+      "graphemes": [
+        {
+          "text": "r"
+        },
+        {
+          "text": "o"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "duck",
+      "graphemes": [
+        {
+          "text": "d"
+        },
+        {
+          "text": "u"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "neck",
+      "graphemes": [
+        {
+          "text": "n"
+        },
+        {
+          "text": "e"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "lock",
+      "graphemes": [
+        {
+          "text": "l"
+        },
+        {
+          "text": "o"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    },
+    {
+      "word": "sick",
+      "graphemes": [
+        {
+          "text": "s"
+        },
+        {
+          "text": "i"
+        },
+        {
+          "text": "ck"
+        }
+      ]
+    }
+  ]
+}
