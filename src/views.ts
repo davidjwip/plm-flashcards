@@ -56,6 +56,7 @@ export function gameView(
   wordSizeStyle: string | null,
   canGrow: boolean,
   canShrink: boolean,
+  volume: { label: string; canLouder: boolean; canQuieter: boolean },
 ): string {
   const { position, total } = progress(session);
   const lastVerdict = session.marks.at(-1);
@@ -73,6 +74,10 @@ export function gameView(
       <div class="size-controls" data-testid="size-controls">
         <button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
         <button class="size-btn" data-testid="word-bigger" ${canGrow ? '' : 'disabled'} aria-label="Bigger word">A+</button>
+        <span class="control-sep" aria-hidden="true"></span>
+        <button class="size-btn" data-testid="volume-down" ${volume.canQuieter ? '' : 'disabled'} aria-label="Quieter">🔉−</button>
+        <span class="volume-label" data-testid="volume-label">${volume.label}</span>
+        <button class="size-btn" data-testid="volume-up" ${volume.canLouder ? '' : 'disabled'} aria-label="Louder">🔉+</button>
       </div>
 
       ${flash ? `<div class="flash" data-testid="flash">${flash}</div>` : '<div class="flash-slot"></div>'}

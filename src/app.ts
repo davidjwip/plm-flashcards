@@ -1,12 +1,24 @@
 import { buildDictionary, createSession, currentWord, mark, patternOptions } from './engine';
-import { speakWord, type Speaker } from './speech';
+import { playWord } from './audio';
+import type { Speaker } from './speech';
 import {
   loadSelection,
+  loadVolume,
   loadWordSize,
   saveSelection,
+  saveVolume,
   saveWordSize,
   type KeyValueStore,
 } from './storage';
+import {
+  DEFAULT_VOLUME,
+  canLouder,
+  canQuieter,
+  clampVolume,
+  stepVolume,
+  volumeValue,
+} from './volume';
+import audioManifest from '../src/audio-manifest.json';
 import type { Bank, Session, Verdict } from './types';
 import { endView, gameView, settingsView } from './views';
 import { DEFAULT_WORD_SIZE, canGrow, canShrink, stepWordSize, wordSizeStyle } from './wordSize';
@@ -33,6 +45,8 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   let selected: string[] = loadSelection(store);
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
+  let volume = clampVolume(loadVolume(store) ?? DEFAULT_VOLUME);
+  const spokenWords = new Set((audioManifest as { words: string[] }).words);
   let session: Session | null = null;
   /**
    * Which milestone has been dismissed — not a boolean. A boolean would silence
@@ -74,6 +88,11 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
       wordSizeStyle(wordSize),
       canGrow(wordSize),
       canShrink(wordSize),
+      {
+        label: `${Math.round(volumeValue(volume) * 100)}%`,
+        canLouder: canLouder(volume),
+        canQuieter: canQuieter(volume),
+      },
     );
 
     // One fade timer, ever: a rapid run of right answers must not queue a timer
@@ -87,9 +106,24 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
         }, FLASH_MS)
       : null;
 
-    root
-      .querySelector('[data-testid="hear"]')
-      ?.addEventListener('click', () => speakWord(word.word, synth));
+    root.querySelector('[data-testid="hear"]')?.addEventListener('click', () =>
+      playWord(word.word, {
+        volume: volumeValue(volume),
+        hasFile: (candidate) => spokenWords.has(candidate),
+        synth,
+      }),
+    );
+
+    for (const [id, direction] of [
+      ['volume-up', 'up'],
+      ['volume-down', 'down'],
+    ] as const) {
+      root.querySelector(`[data-testid="${id}"]`)?.addEventListener('click', () => {
+        volume = stepVolume(volume, direction);
+        saveVolume(volume, store_);
+        render();
+      });
+    }
 
     for (const [id, direction] of [
       ['word-bigger', 'up'],

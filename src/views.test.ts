@@ -37,7 +37,11 @@ describe('settings view', () => {
 
 describe('game view', () => {
   it('shows the word, position and a ten-step track', () => {
-    const html = gameView(sessionWith([]), word, true, 'font-size: 5.5rem', true, true);
+    const html = gameView(sessionWith([]), word, true, 'font-size: 5.5rem', true, true, {
+      label: '85%',
+      canLouder: true,
+      canQuieter: true,
+    });
     expect(html).toContain('data-testid="word"');
     expect(html).toContain('>boat<');
     expect(html).toContain('1 of 20');
@@ -47,17 +51,29 @@ describe('game view', () => {
 
   it('flashes encouragement only after a right answer', () => {
     expect(
-      gameView(sessionWith(['wrong']), word, true, 'font-size: 5.5rem', true, true),
+      gameView(sessionWith(['wrong']), word, true, 'font-size: 5.5rem', true, true, {
+        label: '85%',
+        canLouder: true,
+        canQuieter: true,
+      }),
     ).not.toContain('data-testid="flash"');
-    const praised = gameView(sessionWith(['right']), word, true, 'font-size: 5.5rem', true, true);
+    const praised = gameView(sessionWith(['right']), word, true, 'font-size: 5.5rem', true, true, {
+      label: '85%',
+      canLouder: true,
+      canQuieter: true,
+    });
     expect(praised).toContain('data-testid="flash"');
     expect(praised).toContain('Nice!');
   });
 
   it('hides the streak at zero and shows it once earned', () => {
-    expect(gameView(sessionWith(['wrong']), word, true, 'font-size: 5.5rem', true, true)).toMatch(
-      /data-testid="streak" hidden/,
-    );
+    expect(
+      gameView(sessionWith(['wrong']), word, true, 'font-size: 5.5rem', true, true, {
+        label: '85%',
+        canLouder: true,
+        canQuieter: true,
+      }),
+    ).toMatch(/data-testid="streak" hidden/);
     const streaked = gameView(
       sessionWith(['right', 'right']),
       word,
@@ -65,6 +81,7 @@ describe('game view', () => {
       'font-size: 5.5rem',
       true,
       true,
+      { label: '85%', canLouder: true, canQuieter: true },
     );
     expect(streaked).toMatch(/data-testid="streak" >/);
     expect(streaked).toContain('2 in a row');
@@ -72,23 +89,39 @@ describe('game view', () => {
 
   it('shows the celebration on a milestone only while it is un-dismissed', () => {
     const milestone = sessionWith(Array(10).fill('right'));
-    expect(gameView(milestone, word, true, 'font-size: 5.5rem', true, true)).toContain(
-      'data-testid="celebration"',
-    );
-    expect(gameView(milestone, word, false, 'font-size: 5.5rem', true, true)).not.toContain(
-      'data-testid="celebration"',
-    );
+    expect(
+      gameView(milestone, word, true, 'font-size: 5.5rem', true, true, {
+        label: '85%',
+        canLouder: true,
+        canQuieter: true,
+      }),
+    ).toContain('data-testid="celebration"');
+    expect(
+      gameView(milestone, word, false, 'font-size: 5.5rem', true, true, {
+        label: '85%',
+        canLouder: true,
+        canQuieter: true,
+      }),
+    ).not.toContain('data-testid="celebration"');
   });
 });
 
 describe('word size controls', () => {
   it('applies the chosen size inline and offers both buttons', () => {
-    const big = gameView(sessionWith([]), word, true, 'font-size: 9rem', false, true);
+    const big = gameView(sessionWith([]), word, true, 'font-size: 9rem', false, true, {
+      label: '85%',
+      canLouder: true,
+      canQuieter: true,
+    });
     expect(big).toContain('style="font-size: 9rem"');
     expect(big).toMatch(/data-testid="word-bigger"\s+disabled/);
     expect(big).not.toMatch(/data-testid="word-smaller"\s+disabled/);
 
-    const small = gameView(sessionWith([]), word, true, 'font-size: 3rem', true, false);
+    const small = gameView(sessionWith([]), word, true, 'font-size: 3rem', true, false, {
+      label: '85%',
+      canLouder: true,
+      canQuieter: true,
+    });
     expect(small).toContain('style="font-size: 3rem"');
     expect(small).toMatch(/data-testid="word-smaller"\s+disabled/);
   });
@@ -96,7 +129,11 @@ describe('word size controls', () => {
 
 describe('word size: unchosen', () => {
   it('leaves the card without an inline size so clamp() applies', () => {
-    const html = gameView(sessionWith([]), word, true, null, true, true);
+    const html = gameView(sessionWith([]), word, true, null, true, true, {
+      label: '85%',
+      canLouder: true,
+      canQuieter: true,
+    });
     expect(html).toContain('data-testid="word"');
     expect(html).not.toContain('style="font-size');
   });

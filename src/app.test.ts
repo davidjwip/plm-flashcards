@@ -101,17 +101,18 @@ describe('app wiring', () => {
     expect(el.querySelector('[data-testid="streak"]')!.hasAttribute('hidden')).toBe(true);
   });
 
-  it('speaks the word when the hint is pressed', () => {
-    // jsdom has no SpeechSynthesisUtterance; speech.ts resolves it at call time.
+  it('AC21 — a word with no committed audio falls back to the browser voice', () => {
+    // jsdom has no SpeechSynthesisUtterance; audio.ts resolves it at call time.
     (globalThis as unknown as { SpeechSynthesisUtterance: unknown }).SpeechSynthesisUtterance =
       class {
         lang = '';
+        volume = 1;
         constructor(public text: string) {}
       };
     const el = root();
     const speak = vi.fn();
     mount({
-      bank: bank(['rain']),
+      bank: bank(['zorb']),
       root: el,
       store: store(),
       synth: { cancel: vi.fn(), speak } as never,
@@ -226,6 +227,37 @@ describe('app wiring', () => {
     });
     click(el.querySelector('[data-testid="start"]'));
     expect((el.querySelector('[data-testid="word"]') as HTMLElement).style.fontSize).toBe('9rem');
+  });
+
+  it('AC22 — the volume buttons trim playback and the choice is remembered', () => {
+    const el = root();
+    const s = store();
+    mount({ bank: bank(['rain', 'sail']), root: el, store: s });
+    check('ai');
+    click(el.querySelector('[data-testid="start"]'));
+
+    expect(el.querySelector('[data-testid="volume-label"]')!.textContent).toBe('85%');
+    click(el.querySelector('[data-testid="volume-down"]'));
+    expect(el.querySelector('[data-testid="volume-label"]')!.textContent).toBe('70%');
+    expect(s.data['plm.volume']).toBe('2');
+
+    click(el.querySelector('[data-testid="volume-up"]'));
+    click(el.querySelector('[data-testid="volume-up"]'));
+    expect(s.data['plm.volume']).toBe('4');
+  });
+
+  it('AC22b — a stored volume is used from the first render', () => {
+    const el = root();
+    mount({
+      bank: bank(['rain', 'sail']),
+      root: el,
+      store: {
+        getItem: (key: string) => (key === 'plm.volume' ? '0' : '["ai"]'),
+        setItem: () => {},
+      },
+    });
+    click(el.querySelector('[data-testid="start"]'));
+    expect(el.querySelector('[data-testid="volume-label"]')!.textContent).toBe('30%');
   });
 
   it('finishes a run, reports the score and can start again', () => {
