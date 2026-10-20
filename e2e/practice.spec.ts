@@ -56,3 +56,47 @@ test('AC12 — the pattern selection survives a reload', async ({ page }) => {
   await expect(page.locator('[data-testid="pattern-option"][value="igh"]')).toBeChecked();
   await expect(page.getByTestId('start')).toBeEnabled();
 });
+
+test('AC13/AC14 — the party track fills and encouragement flashes without blocking the game', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await openPicker(page);
+  await page.locator('[data-testid="pattern-option"][value="a"]').check();
+  await page.locator('[data-testid="pattern-option"][value="ai"]').check();
+  await page.getByTestId('start').click();
+
+  const track = page.getByTestId('track');
+  await expect(track).toHaveAttribute('data-filled', '0');
+  await expect(track.locator('.step')).toHaveCount(10);
+
+  await page.getByTestId('mark-right').click();
+  await expect(page.getByTestId('track')).toHaveAttribute('data-filled', '1');
+  await expect(page.getByTestId('flash')).toBeVisible();
+  await expect(page.getByTestId('word')).toBeVisible();
+  await expect(page.getByTestId('mark-right')).toBeEnabled();
+
+  await page.getByTestId('mark-wrong').click();
+  await expect(page.getByTestId('track')).toHaveAttribute('data-filled', '1');
+  await expect(page.getByTestId('streak')).toBeHidden();
+});
+
+test('AC16 — ten right answers raise the celebration, and the track starts again', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await openPicker(page);
+  await page.locator('[data-testid="pattern-option"][value="a"]').check();
+  await page.locator('[data-testid="pattern-option"][value="ai"]').check();
+  await page.getByTestId('start').click();
+
+  for (let i = 0; i < 10; i++) {
+    await page.getByTestId('mark-right').click();
+  }
+
+  await expect(page.getByTestId('celebration')).toBeVisible();
+  await page.getByTestId('celebration-close').click();
+  await expect(page.getByTestId('celebration')).toBeHidden();
+  await expect(page.getByTestId('track')).toHaveAttribute('data-filled', '0');
+  await expect(page.getByTestId('streak')).toContainText('10 in a row');
+});

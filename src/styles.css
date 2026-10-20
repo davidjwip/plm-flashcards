@@ -266,3 +266,123 @@ body {
     transform: none;
   }
 }
+
+/* ---------- party track, streak, flash, celebration ---------- */
+
+.flash,
+.flash-slot {
+  min-height: 2.6rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.flash {
+  animation: flash-in 0.18s ease-out;
+}
+
+.flash.gone {
+  opacity: 0;
+  transition: opacity 0.35s ease-out;
+}
+
+@keyframes flash-in {
+  from {
+    transform: translateY(6px) scale(0.96);
+    opacity: 0;
+  }
+}
+
+.streak {
+  text-align: center;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.party {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.party-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.track {
+  display: grid;
+  gap: 0.35rem;
+  align-items: center;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.step.filled {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.track-end {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  font-size: 1.1rem;
+}
+
+.celebration {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgb(0 0 0 / 45%);
+  z-index: 10;
+}
+
+.celebration-card {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  max-width: 26rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.celebration-card h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.celebration-emojis {
+  font-size: 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash,
+  .step {
+    animation: none;
+    transition: none;
+  }
+}
