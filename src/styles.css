@@ -386,3 +386,30 @@ body {
     transition: none;
   }
 }
+
+/* ---------- word size controls ---------- */
+
+.size-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: -0.5rem;
+}
+
+.size-btn {
+  min-width: 3.5rem;
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.size-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
