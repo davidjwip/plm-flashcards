@@ -6,23 +6,23 @@ from the method.
 
 Level 2, in order. A deck may use any pattern at or above its own row.
 
-| Unit | Patterns introduced | Notes |
-|---|---|---|
-| 1 | short `a e i o u` | CVC words only |
-| 2 | `a_e`, `ai`, `ay`; `ee`, `ea` | first split digraph |
-| 3 | `i_e`, `ie`, `igh`; `o_e`, `oa` | |
-| 4 | `ue`, `ui`; `u_e`, `ew` | |
-| 5 | `ou`, `ow`; `oi`, `oy` | |
-| 6 | `ar`; `or` | r-controlled begins |
-| 7 | `ear`, `eer`; `air`, `are` | |
-| 8 | `au`, `aw`, `al`; `oo` (long and short), `u` | |
-| 9 | `ur`, `ir`; `or`, `er`; schwa | schwa is the last concept taught |
+| Unit | Patterns introduced                          | Notes                            |
+| ---- | -------------------------------------------- | -------------------------------- |
+| 1    | short `a e i o u`                            | CVC words only                   |
+| 2    | `a_e`, `ai`, `ay`; `ee`, `ea`                | first split digraph              |
+| 3    | `i_e`, `ie`, `igh`; `o_e`, `oa`              |                                  |
+| 4    | `ue`, `ui`; `u_e`, `ew`                      |                                  |
+| 5    | `ou`, `ow`; `oi`, `oy`                       |                                  |
+| 6    | `ar`; `or`                                   | r-controlled begins              |
+| 7    | `ear`, `eer`; `air`, `are`                   |                                  |
+| 8    | `au`, `aw`, `al`; `oo` (long and short), `u` |                                  |
+| 9    | `ur`, `ir`; `or`, `er`; schwa                | schwa is the last concept taught |
 
 Level 3, seeded in this spec by unit 1 only.
 
-| Unit | Patterns introduced | Notes |
-|---|---|---|
-| 1 | `ck`, `c`, `k` = /k/ | alternative spellings, sentence-level work |
+| Unit | Patterns introduced  | Notes                                      |
+| ---- | -------------------- | ------------------------------------------ |
+| 1    | `ck`, `c`, `k` = /k/ | alternative spellings, sentence-level work |
 
 ## Decodability rule
 

@@ -27,6 +27,9 @@ jobs:
       - name: deck validator
         run: npm run validate:decks
 
+      - name: guardrail scan
+        run: npm run guardrail:scan
+
       # Activates by itself the moment the app shell exists.
       - name: build
         if: ${{ hashFiles('index.html') != '' }}
