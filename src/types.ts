@@ -22,6 +22,10 @@ export type Session = {
   right: number;
   wrong: number;
   marks: Verdict[];
+  /** Consecutive right answers; a wrong answer resets it. */
+  streak: number;
+  /** Best streak in this run. */
+  bestStreak: number;
   /** True on the turn the grown-up's verdict lands on a milestone. */
   celebrate: boolean;
 };
