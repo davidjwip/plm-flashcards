@@ -37,7 +37,7 @@ describe('settings view', () => {
 
 describe('game view', () => {
   it('shows the word, position and a ten-step track', () => {
-    const html = gameView(sessionWith([]), word, false);
+    const html = gameView(sessionWith([]), word, true);
     expect(html).toContain('data-testid="word">boat<');
     expect(html).toContain('1 of 20');
     expect(html).toContain('data-filled="0"');
@@ -45,23 +45,23 @@ describe('game view', () => {
   });
 
   it('flashes encouragement only after a right answer', () => {
-    expect(gameView(sessionWith(['wrong']), word, false)).not.toContain('data-testid="flash"');
-    const praised = gameView(sessionWith(['right']), word, false);
+    expect(gameView(sessionWith(['wrong']), word, true)).not.toContain('data-testid="flash"');
+    const praised = gameView(sessionWith(['right']), word, true);
     expect(praised).toContain('data-testid="flash"');
     expect(praised).toContain('Nice!');
   });
 
   it('hides the streak at zero and shows it once earned', () => {
-    expect(gameView(sessionWith(['wrong']), word, false)).toMatch(/data-testid="streak" hidden/);
-    const streaked = gameView(sessionWith(['right', 'right']), word, false);
+    expect(gameView(sessionWith(['wrong']), word, true)).toMatch(/data-testid="streak" hidden/);
+    const streaked = gameView(sessionWith(['right', 'right']), word, true);
     expect(streaked).toMatch(/data-testid="streak" >/);
     expect(streaked).toContain('2 in a row');
   });
 
-  it('shows the celebration on a milestone until it is dismissed', () => {
+  it('shows the celebration on a milestone only while it is un-dismissed', () => {
     const milestone = sessionWith(Array(10).fill('right'));
-    expect(gameView(milestone, word, false)).toContain('data-testid="celebration"');
-    expect(gameView(milestone, word, true)).not.toContain('data-testid="celebration"');
+    expect(gameView(milestone, word, true)).toContain('data-testid="celebration"');
+    expect(gameView(milestone, word, false)).not.toContain('data-testid="celebration"');
   });
 });
 

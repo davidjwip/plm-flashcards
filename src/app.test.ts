@@ -139,6 +139,61 @@ describe('app wiring', () => {
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
   });
 
+  it('AC16 — after dismissing the tenth, the twentieth celebration still appears', () => {
+    const el = root();
+    mount({ bank: bank(Array.from({ length: 25 }, (_, i) => `w${i}`)), root: el, store: store() });
+    check('ai');
+    click(el.querySelector('[data-testid="start"]'));
+
+    for (let i = 0; i < 10; i++) click(el.querySelector('[data-testid="mark-right"]'));
+    expect(el.querySelector('[data-testid="celebration"]')).toBeTruthy();
+    click(el.querySelector('[data-testid="celebration-close"]'));
+    expect(el.querySelector('[data-testid="celebration"]')).toBeFalsy();
+
+    for (let i = 0; i < 10; i++) click(el.querySelector('[data-testid="mark-right"]'));
+    expect(el.querySelector('[data-testid="celebration"]')).toBeTruthy();
+  });
+
+  it('AC18 — a rapid run of right answers leaves exactly one flash timer pending', () => {
+    const el = root();
+    mount({ bank: bank(Array.from({ length: 12 }, (_, i) => `w${i}`)), root: el, store: store() });
+
+    const setTimer = vi.spyOn(globalThis, 'setTimeout');
+    const clearTimer = vi.spyOn(globalThis, 'clearTimeout');
+
+    check('ai');
+    click(el.querySelector('[data-testid="start"]'));
+    const scheduled: unknown[] = [];
+    for (let i = 0; i < 3; i++) {
+      click(el.querySelector('[data-testid="mark-right"]'));
+      scheduled.push(setTimer.mock.results.at(-1)?.value);
+    }
+
+    const cleared = clearTimer.mock.calls.map((call) => call[0]);
+    const stillPending = scheduled.filter((id) => !cleared.includes(id as never));
+    expect(stillPending).toHaveLength(1);
+    setTimer.mockRestore();
+    clearTimer.mockRestore();
+  });
+
+  it('AC18b — unmount clears the pending flash timer', () => {
+    const el = root();
+    const app = mount({ bank: bank(['rain', 'sail']), root: el, store: store() });
+
+    const setTimer = vi.spyOn(globalThis, 'setTimeout');
+    const clearTimer = vi.spyOn(globalThis, 'clearTimeout');
+
+    check('ai');
+    click(el.querySelector('[data-testid="start"]'));
+    click(el.querySelector('[data-testid="mark-right"]'));
+    const flashId = setTimer.mock.results.at(-1)?.value;
+
+    app.unmount();
+    expect(clearTimer.mock.calls.map((call) => call[0])).toContain(flashId);
+    setTimer.mockRestore();
+    clearTimer.mockRestore();
+  });
+
   it('finishes a run, reports the score and can start again', () => {
     const el = root();
     mount({ bank: bank(['rain', 'sail']), root: el, store: store() });

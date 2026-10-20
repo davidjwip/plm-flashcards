@@ -15,6 +15,8 @@ export type MountOptions = {
 export type AppHandle = {
   /** Current session, or null when the setup screen is showing. */
   session: () => Session | null;
+  /** Clear pending timers (the flash fade) so a torn-down app is inert. */
+  unmount: () => void;
 };
 
 const FLASH_MS = 1100;
@@ -23,7 +25,13 @@ const FLASH_MS = 1100;
 export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   let selected: string[] = loadSelection(store);
   let session: Session | null = null;
-  let celebrationDismissed = false;
+  /**
+   * Which milestone has been dismissed — not a boolean. A boolean would silence
+   * the celebration for the rest of the run after the first one, which is the
+   * bug this replaced.
+   */
+  let dismissedMilestone: number | null = null;
+  let flashTimer: ReturnType<typeof setTimeout> | null = null;
 
   const store_ = store;
 
@@ -49,10 +57,19 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
       return;
     }
 
-    root.innerHTML = gameView(session, word, celebrationDismissed);
+    const showCelebration = dismissedMilestone !== session.right;
+    root.innerHTML = gameView(session, word, showCelebration);
 
+    // One fade timer, ever: a rapid run of right answers must not queue a timer
+    // per word (the maths game has a regression test for exactly this).
+    if (flashTimer !== null) clearTimeout(flashTimer);
     const flash = root.querySelector('[data-testid="flash"]');
-    if (flash) setTimeout(() => flash.classList.add('gone'), FLASH_MS);
+    flashTimer = flash
+      ? setTimeout(() => {
+          flash.classList.add('gone');
+          flashTimer = null;
+        }, FLASH_MS)
+      : null;
 
     root
       .querySelector('[data-testid="hear"]')
@@ -69,7 +86,7 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
     }
 
     root.querySelector('[data-testid="celebration-close"]')?.addEventListener('click', () => {
-      celebrationDismissed = true;
+      dismissedMilestone = session!.right;
       render();
     });
 
@@ -81,7 +98,7 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   function wireEnd(): void {
     root.querySelector('[data-testid="again"]')?.addEventListener('click', () => {
       session = createSession(buildDictionary(bank, selected));
-      celebrationDismissed = false;
+      dismissedMilestone = null;
       render();
     });
     root
@@ -104,17 +121,23 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
       const dictionary = buildDictionary(bank, selected);
       if (!dictionary.length) return;
       session = createSession(dictionary);
-      celebrationDismissed = false;
+      dismissedMilestone = null;
       render();
     });
   }
 
   function backToSettings(): void {
     session = null;
-    celebrationDismissed = false;
+    dismissedMilestone = null;
     renderSettings();
   }
 
   renderSettings();
-  return { session: () => session };
+  return {
+    session: () => session,
+    unmount: () => {
+      if (flashTimer !== null) clearTimeout(flashTimer);
+      flashTimer = null;
+    },
+  };
 }

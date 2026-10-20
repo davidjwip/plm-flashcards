@@ -49,7 +49,7 @@ export function trackView(session: Session): string {
     </div>`;
 }
 
-export function gameView(session: Session, word: Word, celebrationDismissed: boolean): string {
+export function gameView(session: Session, word: Word, showCelebration: boolean): string {
   const { position, total } = progress(session);
   const lastVerdict = session.marks.at(-1);
   const flash = lastVerdict === 'right' ? praiseFor(session.right) : '';
@@ -84,7 +84,7 @@ export function gameView(session: Session, word: Word, celebrationDismissed: boo
       <button class="link" data-testid="choose-patterns">Change patterns</button>
 
       ${
-        session.celebrate && !celebrationDismissed
+        session.celebrate && showCelebration
           ? `<div class="celebration" data-testid="celebration">
                <div class="celebration-card">
                  <h2>🎉 Amazing job! 🎉</h2>

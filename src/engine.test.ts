@@ -132,6 +132,27 @@ describe('progression and encouragement', () => {
     expect(cycleProgress(session).filled).toBe(1);
   });
 
+  it('AC16 — the celebration fires at ten and re-arms for twenty', () => {
+    let session = createSession(
+      Array.from({ length: 25 }, (_, i) => ({ word: `w${i}`, patterns: ['a'] })),
+    );
+    const fired: number[] = [];
+    for (let i = 0; i < 20; i++) {
+      session = mark(session, 'right');
+      if (session.celebrate) fired.push(session.right);
+    }
+    expect(fired).toEqual([10, 20]);
+  });
+
+  it('AC16b — a wrong answer never celebrates, even at the tenth attempt', () => {
+    let session = createSession(
+      Array.from({ length: 20 }, (_, i) => ({ word: `w${i}`, patterns: ['a'] })),
+    );
+    for (let i = 0; i < 9; i++) session = mark(session, 'right');
+    session = mark(session, 'wrong');
+    expect(session.celebrate).toBe(false);
+  });
+
   it('AC14 — encouragement rotates per right answer and is silent at zero', () => {
     expect(praiseFor(0)).toBe('');
     expect(praiseFor(1)).toBe(PRAISE[0]);
