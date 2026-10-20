@@ -1,6 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md"],
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-flash",
+  "instructions": [
+    "AGENTS.md"
+  ],
   "autoupdate": false,
   "permission": {
     "read": {
@@ -43,13 +47,15 @@
           "git status*": "allow",
           "git diff*": "allow"
         }
-      }
+      },
+      "model": "deepseek/deepseek-v4-pro"
     },
     "build": {
       "description": "Test-first implementation. RED before GREEN, always.",
       "mode": "primary",
       "temperature": 0.2,
-      "steps": 40
+      "steps": 40,
+      "model": "deepseek/deepseek-flash"
     },
     "review": {
       "description": "Read-only reviewer: spec coverage, test quality, guardrails.",
@@ -63,7 +69,8 @@
           "git log*": "allow",
           "npm test*": "allow"
         }
-      }
+      },
+      "model": "deepseek/deepseek-v4-pro"
     }
   }
 }
