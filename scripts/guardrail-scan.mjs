@@ -6,8 +6,18 @@ import { readFileSync } from 'node:fs';
 
 const ALLOWED_EMAIL_DOMAINS = ['users.noreply.github.com', 'example.com'];
 
-// Files we never scan: lockfiles are noise, this scanner contains the patterns.
-const SKIP = [/^package-lock\.json$/, /^scripts\/guardrail-scan\.mjs$/];
+// Files we never scan: lockfiles are noise, this scanner contains the patterns,
+// and binary assets (audio, images, fonts) cannot contain a readable secret.
+const SKIP = [
+  /^package-lock\.json$/,
+  /^scripts\/guardrail-scan\.mjs$/,
+  /\.(?:mp3|wav|ogg|png|jpe?g|gif|webp|ico|woff2?|ttf|zip)$/i,
+];
+
+/** A NUL byte in the first chunk is as good a binary test as any. */
+function looksBinary(buffer) {
+  return buffer.subarray(0, 512).includes(0);
+}
 
 const RULES = [
   {
@@ -42,9 +52,11 @@ let failures = 0;
 for (const file of files) {
   let text;
   try {
-    text = readFileSync(file, 'utf8');
+    const buffer = readFileSync(file);
+    if (looksBinary(buffer)) continue;
+    text = buffer.toString('utf8');
   } catch {
-    continue; // binary or unreadable
+    continue; // unreadable
   }
   for (const rule of RULES) {
     for (const m of text.matchAll(rule.re)) {
