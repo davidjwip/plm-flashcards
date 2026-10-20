@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: unit tests
+        run: npm test
+
+      - name: deck validator
+        run: npm run validate:decks
+
+      # Activates by itself the moment the app shell exists.
+      - name: build
+        if: ${{ hashFiles('index.html') != '' }}
+        run: npm run build
+
+      # Activates by itself the moment the first e2e spec lands.
+      - name: install browser
+        if: ${{ hashFiles('e2e/**/*.spec.ts') != '' }}
+        run: npx playwright install --with-deps chromium
+
+      - name: e2e
+        if: ${{ hashFiles('e2e/**/*.spec.ts') != '' }}
+        run: npm run e2e
