@@ -1,5 +1,5 @@
 import { buildDictionary, createSession, currentWord, mark, patternOptions } from './engine';
-import { playWord } from './audio';
+import { createPlayer } from './audio';
 import type { Speaker } from './speech';
 import {
   loadSelection,
@@ -47,6 +47,7 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   let wordSize: number | null = loadWordSize(store);
   let volume = clampVolume(loadVolume(store) ?? DEFAULT_VOLUME);
   const spokenWords = new Set((audioManifest as { words: string[] }).words);
+  const player = createPlayer({ hasFile: (candidate) => spokenWords.has(candidate), synth });
   let session: Session | null = null;
   /**
    * Which milestone has been dismissed — not a boolean. A boolean would silence
@@ -106,13 +107,13 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
         }, FLASH_MS)
       : null;
 
-    root.querySelector('[data-testid="hear"]')?.addEventListener('click', () =>
-      playWord(word.word, {
-        volume: volumeValue(volume),
-        hasFile: (candidate) => spokenWords.has(candidate),
-        synth,
-      }),
-    );
+    root.querySelector('[data-testid="hear"]')?.addEventListener('click', () => {
+      // Ignored while the word is still playing: no layering, no double-tap echo.
+      const result = player.play(word.word, volumeValue(volume));
+      const button = root.querySelector<HTMLButtonElement>('[data-testid="hear"]');
+      if (button) button.classList.toggle('playing', result === 'file' || result === 'speech');
+      if (result === 'busy') return;
+    });
 
     for (const [id, direction] of [
       ['volume-up', 'up'],
@@ -141,6 +142,8 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
       ['mark-wrong', 'wrong'],
     ] as const) {
       root.querySelector(`[data-testid="${id}"]`)?.addEventListener('click', () => {
+        // Moving on stops the word: the next one should not start under the last.
+        player.stop();
         session = mark(session!, verdict as Verdict);
         render();
       });
@@ -199,6 +202,7 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
     unmount: () => {
       if (flashTimer !== null) clearTimeout(flashTimer);
       flashTimer = null;
+      player.stop();
     },
   };
 }
