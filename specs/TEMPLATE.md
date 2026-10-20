@@ -12,20 +12,20 @@ One paragraph. Who is this for and what can they not do today.
 
 Each behaviour gets an ID. No ID, no implementation.
 
-| ID | Behaviour |
-|---|---|
-| B1 | … |
-| B2 | … |
+| ID  | Behaviour |
+| --- | --------- |
+| B1  | …         |
+| B2  | …         |
 
 ## 3. Acceptance criteria
 
 Written so a test can be derived mechanically. One criterion per row, each with
 a stable ID that appears in the test name.
 
-| ID | Given | When | Then |
-|---|---|---|---|
-| AC1 | … | … | … |
-| AC2 | … | … | … |
+| ID  | Given | When | Then |
+| --- | ----- | ---- | ---- |
+| AC1 | …     | …    | …    |
+| AC2 | …     | …    | …    |
 
 ## 4. Edge cases and refusals
 
@@ -36,9 +36,9 @@ paste-in list with punctuation, 4½-year-old mashing the keyboard.
 
 Filled in as tests land. A PR that adds a test but not a row here is incomplete.
 
-| Criterion | Test file | Test name | Status |
-|---|---|---|---|
-| AC1 | `src/x.test.ts` | `x does y` | red / green |
+| Criterion | Test file       | Test name  | Status      |
+| --------- | --------------- | ---------- | ----------- |
+| AC1       | `src/x.test.ts` | `x does y` | red / green |
 
 ## 6. Decisions
 

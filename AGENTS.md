@@ -11,7 +11,7 @@ Read this before touching anything in this repo.
 - Every acceptance criterion gets a test that fails **before** it passes. A
   commit may not contain implementation code without the failing test that
   preceded it in an earlier or same commit.
-- A spec is *approved* only when Dave says so in the project thread. "The agent
+- A spec is _approved_ only when Dave says so in the project thread. "The agent
   thinks it's clear" is not approval. Silence is not approval.
 
 ## Test-first loop
@@ -45,18 +45,36 @@ pronunciation every time matters for a spelling bee.
 
 ## Commands
 
-| command | does |
-|---|---|
-| `npm run dev` | dev server on :5173 |
-| `npm test` | Vitest unit + logic |
-| `npm run e2e` | Playwright chromium |
-| `npm run validate:decks` | every word decodable from patterns already taught at its unit |
-| `npm run build` | static build to `dist/` |
+| command                  | does                                                           |
+| ------------------------ | -------------------------------------------------------------- |
+| `npm run dev`            | dev server on :5173                                            |
+| `npm test`               | Vitest unit + logic                                            |
+| `npm run e2e`            | Playwright chromium                                            |
+| `npm run validate:decks` | every word decodable from patterns already taught at its unit  |
+| `npm run guardrail:scan` | fails if a tracked file contains an email, private IP or token |
+| `npm run format`         | prettier                                                       |
+| `npm run build`          | static build to `dist/`                                        |
+
+## Tooling layout
+
+- `.opencode/skills/` — on-demand know-how: `tdd-loop`, `deck-authoring`,
+  `audio-pipeline`, `ipad-audio-ux`. Load the relevant one before starting.
+- `.opencode/commands/` — `/red <AC>`, `/green <AC>`, `/audit`, invoked inside the
+  opencode TUI. (Headless `opencode run --command` errors in 1.19.3 — a client
+  bug, so these are interactive conveniences; the loop itself lives in the
+  `tdd-loop` skill, which loads headless.)
+- `opencode.json` — agents, models, permissions. `formatter: true` (prettier on
+  write), and **bash is deny-by-default**: only the test, build, format and
+  local-git commands are allowed. In a headless run "ask" is effectively "allow",
+  so anything not explicitly permitted is refused.
 
 ## Git workflow
 
 - `main` is never pushed to directly. One branch per change, one pull request
   per branch, reviewed and merged by Dave.
+- **One branch per change, created fresh from `main` after the previous PR
+  merges.** Never continue work on a merged branch, never stack a second change
+  on top of an open PR.
 - Branch names: `spec/<slug>` for spec-only work, `feat/<slug>` for a feature,
   `fix/<slug>` for a defect, `chore/<slug>` for tooling.
 - Agents may commit on a branch but may **not** push: `git push` is denied in
@@ -68,7 +86,7 @@ pronunciation every time matters for a spelling bee.
 ## Guardrails — public repo, non-negotiable
 
 1. **No PLM book content.** No scans, screenshots, page images, PDFs. Only our
-   own generated decks plus the pattern *sequence* as facts about the method.
+   own generated decks plus the pattern _sequence_ as facts about the method.
 2. **No child-identifying data.** No names, school, class, photos. Weekly class
    lists live in `localStorage` on the device only — never in a commit, fixture,
    log, screenshot or error string.
