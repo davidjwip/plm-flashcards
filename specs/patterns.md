@@ -24,12 +24,19 @@ Level 3, seeded in this spec by unit 1 only.
 | ---- | -------------------- | ------------------------------------------ |
 | 1    | `ck`, `c`, `k` = /k/ | alternative spellings, sentence-level work |
 
-## Decodability rule
+## How the app uses this
 
-A word is decodable at unit N when every grapheme in it belongs to a pattern
-introduced at unit ≤ N. The validator (`npm run validate:decks`) implements this
-against a typed table mirroring the above; a violating word fails the build.
+The order above is why the pattern picker is grouped the way it is: a pattern
+is offered once its prerequisites have been taught. The app itself does not
+enforce prerequisites — the grown-up chooses what to practise, and this file is
+the reference for what is reasonable to choose together.
 
 Consonant graphemes assumed known before unit 1: single consonants, and the
 digraphs `sh ch th ng` — if a deck needs one of these earlier than that, the
 catalogue is wrong and must be corrected here first.
+
+## Word structure
+
+A word is shown whole and read aloud; there are no tiles in this game. Patterns
+are tags on words in `data/wordbank.json`, and the validator enforces that every
+tag exists and every pattern has words.

@@ -1,5 +1,5 @@
 {
-  "name": "plm-flashcards",
+  "name": "sound-pattern-practice",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,9 +10,9 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "validate:decks": "node scripts/validate-decks.mjs",
     "format": "prettier --write .",
-    "guardrail:scan": "node scripts/guardrail-scan.mjs"
+    "guardrail:scan": "node scripts/guardrail-scan.mjs",
+    "validate:bank": "node scripts/validate-bank.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

@@ -1,4 +1,4 @@
-# AGENTS.md — plm-flashcards
+# AGENTS.md — sound-pattern-practice
 
 Read this before touching anything in this repo.
 
@@ -31,7 +31,7 @@ criterion done without a row in the feature's test map.
 - [ ] test map updated (criterion → test file → test name)
 - [ ] `npm test` green — output pasted in the PR body, not summarised
 - [ ] `npm run e2e` green for the affected flows (Playwright, chromium)
-- [ ] `npm run validate:decks` green for any deck touched
+- [ ] `npm run validate:bank` green for any word-bank change
 - [ ] no new dependency without an entry in `specs/decisions.md` (what, why,
       what we rejected)
 - [ ] guardrails below hold
@@ -39,26 +39,30 @@ criterion done without a row in the feature's test map.
 ## Stack
 
 Vite + TypeScript, no UI framework, vanilla DOM. Vitest for logic, Playwright
-for UI + audio behaviour. Static build to `dist/`, deployed to GitHub Pages by
-Actions. Audio is pre-generated (piper, one UK voice) and committed — the same
-pronunciation every time matters for a spelling bee.
+for UI. Static build to `dist/`, deployed to GitHub Pages by Actions (Cloudflare
+Pages later). Layering mirrors Dave's maths game: a pure engine with no DOM, a
+thin rendering layer, tests against both.
+
+The product is a **supervised** pronunciation game: the grown-up picks sound
+patterns, the app builds the word set, the child reads each word aloud and the
+grown-up presses got-it / not-yet. No timers, no self-marking, no child data.
 
 ## Commands
 
-| command                  | does                                                           |
-| ------------------------ | -------------------------------------------------------------- |
-| `npm run dev`            | dev server on :5173                                            |
-| `npm test`               | Vitest unit + logic                                            |
-| `npm run e2e`            | Playwright chromium                                            |
-| `npm run validate:decks` | every word decodable from patterns already taught at its unit  |
-| `npm run guardrail:scan` | fails if a tracked file contains an email, private IP or token |
-| `npm run format`         | prettier                                                       |
-| `npm run build`          | static build to `dist/`                                        |
+| command                  | does                                                                |
+| ------------------------ | ------------------------------------------------------------------- |
+| `npm run dev`            | dev server on :5173                                                 |
+| `npm test`               | Vitest unit + logic                                                 |
+| `npm run e2e`            | Playwright chromium                                                 |
+| `npm run validate:bank`  | word bank: tags exist, no duplicates, plain words, no dead patterns |
+| `npm run guardrail:scan` | fails if a tracked file contains an email, private IP or token      |
+| `npm run format`         | prettier                                                            |
+| `npm run build`          | static build to `dist/`                                             |
 
 ## Tooling layout
 
-- `.opencode/skills/` — on-demand know-how: `tdd-loop`, `deck-authoring`,
-  `audio-pipeline`, `ipad-audio-ux`. Load the relevant one before starting.
+- `.opencode/skills/` — on-demand know-how: `tdd-loop`, `word-bank`,
+  `audio-pipeline`, `supervised-game-ux`. Load the relevant one before starting.
 - `.opencode/commands/` — `/red <AC>`, `/green <AC>`, `/audit`, invoked inside the
   opencode TUI. (Headless `opencode run --command` errors in 1.19.3 — a client
   bug, so these are interactive conveniences; the loop itself lives in the
@@ -86,9 +90,9 @@ pronunciation every time matters for a spelling bee.
 ## Guardrails — public repo, non-negotiable
 
 1. **No PLM book content.** No scans, screenshots, page images, PDFs. Only our
-   own generated decks plus the pattern _sequence_ as facts about the method.
-2. **No child-identifying data.** No names, school, class, photos. Weekly class
-   lists live in `localStorage` on the device only — never in a commit, fixture,
+   own word bank plus the pattern _sequence_ as facts about the method.
+2. **No child-identifying data.** No names, school, class, photos. A class word
+   list lives in `localStorage` on the device only — never in a commit, fixture,
    log, screenshot or error string.
 3. **No secrets.** No tokens, calendar ids, homelab addresses. `.env` is denied
    to agents by config; an agent must never ask for one.

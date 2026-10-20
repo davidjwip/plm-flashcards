@@ -1,0 +1,268 @@
+:root {
+  --bg: #fbf7ef;
+  --ink: #241f1a;
+  --muted: #6b6257;
+  --card: #ffffff;
+  --line: #e4dbcd;
+  --accent: #b4531f;
+  --right: #2f7d4f;
+  --wrong: #a3341f;
+  --shadow: 0 1px 2px rgb(36 31 26 / 8%), 0 10px 30px rgb(36 31 26 / 7%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171412;
+    --ink: #f4efe7;
+    --muted: #a89d90;
+    --card: #221d19;
+    --line: #352d26;
+    --accent: #f09055;
+    --right: #7fc79a;
+    --wrong: #f08b74;
+    --shadow: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: max(1rem, env(safe-area-inset-top)) 1.25rem max(1rem, env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    17px/1.5 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.title {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.hint {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- pattern picker ---------- */
+
+.picker {
+  margin: 0 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.picker summary {
+  padding: 1rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.picker summary::after {
+  content: '▾';
+  float: right;
+  color: var(--muted);
+}
+
+.picker[open] summary::after {
+  content: '▴';
+}
+
+.options {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.25rem 0.6rem 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  max-height: 55vh;
+  overflow: auto;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.option input {
+  width: 1.5rem;
+  height: 1.5rem;
+  accent-color: var(--accent);
+}
+
+.count {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+/* ---------- buttons ---------- */
+
+.primary,
+.secondary,
+.hear,
+.verdict,
+.link {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0.9rem;
+}
+
+.primary {
+  width: 100%;
+  min-height: 4rem;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.secondary {
+  width: 100%;
+  min-height: 3.25rem;
+  margin-top: 0.6rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+}
+
+.link {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  text-decoration: underline;
+  padding: 0.5rem;
+}
+
+/* ---------- game ---------- */
+
+.game {
+  display: grid;
+  gap: 1rem;
+  min-height: 80vh;
+  align-content: start;
+}
+
+.game-bar {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.score {
+  font-weight: 600;
+}
+
+.card {
+  display: grid;
+  place-items: center;
+  min-height: 38vh;
+  border-radius: 1.5rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: clamp(3.5rem, 18vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+.hear {
+  justify-self: center;
+  min-height: 3rem;
+  padding: 0 1.25rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+}
+
+.verdicts {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.verdict {
+  min-height: 6rem;
+  border: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.verdict.right {
+  background: var(--right);
+}
+
+.verdict.wrong {
+  background: var(--wrong);
+}
+
+.verdict:active {
+  transform: scale(0.985);
+}
+
+/* ---------- summary + celebration ---------- */
+
+.summary {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.celebrate {
+  position: fixed;
+  inset: auto 50% 6vh auto;
+  transform: translateX(50%);
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-weight: 700;
+  animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+  from {
+    transform: translateX(50%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebrate {
+    animation: none;
+  }
+  .verdict:active {
+    transform: none;
+  }
+}
