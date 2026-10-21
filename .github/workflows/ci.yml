@@ -43,3 +43,24 @@ jobs:
       - name: e2e
         if: ${{ hashFiles('e2e/**/*.spec.ts') != '' }}
         run: npm run e2e
+
+      # Fails the build when a criterion has no test, a test names an unknown
+      # criterion, or the map points at a file that does not cover it.
+      - name: spec audit
+        run: npm run spec:audit
+
+      # Drives the built app and screenshots every step. The exit code catches
+      # behavioural regressions; the artifact gives the reviewer the visual evidence
+      # without anyone running it locally.
+      - name: behavioural verification
+        if: ${{ hashFiles('index.html') != '' }}
+        run: npm run verify:behaviour
+
+      - name: upload verification screenshots
+        if: ${{ always() && hashFiles('verify/**/*.png') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-behaviour-${{ github.run_number }}
+          path: verify/
+          retention-days: 14
+          if-no-files-found: warn
