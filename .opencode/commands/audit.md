@@ -1,19 +1,31 @@
 ---
-description: Compare the spec's test map against the tests that actually exist
+description: Check the spec's test map against the tests that actually exist
 agent: review
 ---
 
-Audit the repo for spec drift. Read-only: change nothing.
+Run the deterministic audit first. Do not do this by hand — the script is the
+source of truth and it is what CI can gate on.
 
-1. List every criterion in `specs/v1.md` with its test-map row.
-2. List every test in `src/**/*.test.ts` and `e2e/**/*.spec.ts` that names a
-   criterion ID.
-3. Report three lists:
-   - **uncovered** — criteria with no test at all
-   - **orphaned** — tests naming an ID that the spec does not define
-   - **mislabelled** — test-map rows pointing at a file or test that no longer
-     exists, or whose status says green while the test does not exist
-4. Then run `npm test` and `npm run validate:decks`, and paste both outputs.
+```
+npm run spec:audit
+```
 
-Finish with one sentence: is the repo in a state where the next criterion can be
-started, and if not, what is in the way.
+Read every finding. For each one, decide and say which of these it is:
+
+- **the spec is stale** — the behaviour changed and the criterion no longer describes it.
+  Fix the criterion, and say what changed.
+- **the test is misnamed** — the test exists and covers the criterion, but its name does
+  not carry the id. Rename the test to `ACn — …`. That is a one-line fix, and it is the
+  usual cause.
+- **the criterion is unbuilt** — nothing covers it yet. Either map it to the criterion's
+  future test with status `pending`, or leave it uncovered and say so; do not invent a
+  passing row for work that does not exist.
+- **the map is wrong** — the row points at a file that no longer holds that test. Point it
+  at the file that does.
+
+Then run `npm test`, `npm run validate:bank` and `npm run verify:behaviour`, and paste
+the three outputs. Change no implementation code: this command is read-only apart from
+test names, spec rows and the map.
+
+Finish with one sentence: is the repo in a state where the next criterion can be started,
+and if not, what is in the way.

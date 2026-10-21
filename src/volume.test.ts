@@ -14,7 +14,7 @@ describe('volume', () => {
     expect(volumeValue(DEFAULT_VOLUME)).toBe(0.85);
   });
 
-  it('steps one notch at a time and clamps at both ends', () => {
+  it('AC22 — steps one notch at a time and clamps at both ends', () => {
     expect(stepVolume(DEFAULT_VOLUME, 'up')).toBe(DEFAULT_VOLUME + 1);
     expect(stepVolume(DEFAULT_VOLUME, 'down')).toBe(DEFAULT_VOLUME - 1);
     expect(stepVolume(0, 'down')).toBe(0);

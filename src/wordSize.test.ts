@@ -22,7 +22,7 @@ describe('word size', () => {
     expect(wordSizeRem(stepWordSize(2, 'up'))).toBe('7rem');
   });
 
-  it('steps from the middle the first time, when nothing has been chosen', () => {
+  it('AC19 — steps from the middle the first time, when nothing has been chosen', () => {
     expect(stepWordSize(null, 'up')).toBe(3);
     expect(stepWordSize(null, 'down')).toBe(1);
   });

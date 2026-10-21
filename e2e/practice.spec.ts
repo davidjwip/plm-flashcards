@@ -47,7 +47,7 @@ test('AC5/AC6/AC8 — each press records a verdict, advances, and the run ends w
   await expect(page.getByTestId('summary')).toContainText('3 of 4');
 });
 
-test('AC12 — the pattern selection survives a reload', async ({ page }) => {
+test('AC10 — the pattern selection survives a reload', async ({ page }) => {
   await page.goto('/');
   await openPicker(page);
   await page.locator('[data-testid="pattern-option"][value="igh"]').check();
