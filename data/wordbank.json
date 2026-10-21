@@ -185,6 +185,12 @@
       ]
     },
     {
+      "word": "affair",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "again",
       "patterns": [
         "schwa"
@@ -197,9 +203,51 @@
       ]
     },
     {
+      "word": "airline",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "airmail",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "almost",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
       "word": "alone",
       "patterns": [
         "schwa"
+      ]
+    },
+    {
+      "word": "already",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "also",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "always",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "amuse",
+      "patterns": [
+        "u_e"
       ]
     },
     {
@@ -209,9 +257,57 @@
       ]
     },
     {
+      "word": "applaud",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "argue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "arm",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "armchair",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "around",
       "patterns": [
         "schwa"
+      ]
+    },
+    {
+      "word": "art",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "astronaut",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "auction",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "audience",
+      "patterns": [
+        "au"
       ]
     },
     {
@@ -227,9 +323,40 @@
       ]
     },
     {
+      "word": "avenue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "avoid",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "aware",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
       "word": "away",
       "patterns": [
-        "ay"
+        "ay",
+        "schwa"
+      ]
+    },
+    {
+      "word": "awful",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "awkward",
+      "patterns": [
+        "aw"
       ]
     },
     {
@@ -239,9 +366,27 @@
       ]
     },
     {
+      "word": "bad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "bag",
       "patterns": [
         "a"
+      ]
+    },
+    {
+      "word": "bake",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "bald",
+      "patterns": [
+        "al"
       ]
     },
     {
@@ -263,6 +408,18 @@
       ]
     },
     {
+      "word": "bar",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "barbecue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
       "word": "bare",
       "patterns": [
         "are"
@@ -281,6 +438,18 @@
       ]
     },
     {
+      "word": "bay",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "beach",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
       "word": "bean",
       "patterns": [
         "ea"
@@ -290,6 +459,18 @@
       "word": "beard",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "beat",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "because",
+      "patterns": [
+        "au"
       ]
     },
     {
@@ -311,9 +492,27 @@
       ]
     },
     {
+      "word": "beg",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "bench",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "beware",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "big",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -323,15 +522,63 @@
       ]
     },
     {
+      "word": "bin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "bird",
       "patterns": [
         "ir"
       ]
     },
     {
+      "word": "birthday",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "biscuit",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "bit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "black",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
+      "word": "blew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "blow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
       "word": "blue",
       "patterns": [
         "ue"
+      ]
+    },
+    {
+      "word": "board",
+      "patterns": [
+        "oa"
       ]
     },
     {
@@ -371,6 +618,18 @@
       ]
     },
     {
+      "word": "bound",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "bow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
       "word": "box",
       "patterns": [
         "o"
@@ -380,6 +639,55 @@
       "word": "boy",
       "patterns": [
         "oy"
+      ]
+    },
+    {
+      "word": "brain",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
+      "word": "branch",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "bread",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "brief",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "bright",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
+      "word": "bring",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "broil",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "brother",
+      "patterns": [
+        "er",
+        "schwa"
       ]
     },
     {
@@ -401,7 +709,31 @@
       ]
     },
     {
+      "word": "buck",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
       "word": "bug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "build",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "built",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "bun",
       "patterns": [
         "u"
       ]
@@ -413,9 +745,21 @@
       ]
     },
     {
+      "word": "burst",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
       "word": "bus",
       "patterns": [
         "u"
+      ]
+    },
+    {
+      "word": "cage",
+      "patterns": [
+        "a_e"
       ]
     },
     {
@@ -428,6 +772,18 @@
       "word": "call",
       "patterns": [
         "al"
+      ]
+    },
+    {
+      "word": "cane",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "cap",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -449,6 +805,18 @@
       ]
     },
     {
+      "word": "career",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "cashew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
       "word": "cat",
       "patterns": [
         "a"
@@ -467,6 +835,12 @@
       ]
     },
     {
+      "word": "caution",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
       "word": "chain",
       "patterns": [
         "ai"
@@ -479,7 +853,25 @@
       ]
     },
     {
+      "word": "chalk",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "chart",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
       "word": "chat",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "cheek",
       "patterns": [
         "ch"
       ]
@@ -491,9 +883,69 @@
       ]
     },
     {
+      "word": "cheerful",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "cheering",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "cheese",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chess",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chest",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
       "word": "chew",
       "patterns": [
         "ew"
+      ]
+    },
+    {
+      "word": "chicken",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chief",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "child",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chill",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chimney",
+      "patterns": [
+        "ch"
       ]
     },
     {
@@ -515,9 +967,40 @@
       ]
     },
     {
+      "word": "choice",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
       "word": "chop",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "church",
+      "patterns": [
+        "ur",
+        "ch"
+      ]
+    },
+    {
+      "word": "circle",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "circuit",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "circus",
+      "patterns": [
+        "ir"
       ]
     },
     {
@@ -545,6 +1028,18 @@
       ]
     },
     {
+      "word": "cloak",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
+      "word": "clock",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
       "word": "close",
       "patterns": [
         "o_e"
@@ -563,9 +1058,45 @@
       ]
     },
     {
+      "word": "clutch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "coach",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
+      "word": "coal",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
+      "word": "coast",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
       "word": "coat",
       "patterns": [
         "oa"
+      ]
+    },
+    {
+      "word": "code",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
+      "word": "coil",
+      "patterns": [
+        "oi"
       ]
     },
     {
@@ -575,9 +1106,39 @@
       ]
     },
     {
+      "word": "colour",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "comma",
       "patterns": [
         "schwa"
+      ]
+    },
+    {
+      "word": "compare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "compute",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "cone",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
+      "word": "continue",
+      "patterns": [
+        "ue"
       ]
     },
     {
@@ -587,9 +1148,87 @@
       ]
     },
     {
+      "word": "cool",
+      "patterns": [
+        "oo"
+      ]
+    },
+    {
+      "word": "cork",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "corn",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "costume",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "cot",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "couch",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "count",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
       "word": "cow",
       "patterns": [
         "ow"
+      ]
+    },
+    {
+      "word": "cowboy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "coy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "crawl",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "cream",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "crew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "cried",
+      "patterns": [
+        "ie"
       ]
     },
     {
@@ -629,6 +1268,24 @@
       ]
     },
     {
+      "word": "curly",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "curve",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "cut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "cute",
       "patterns": [
         "u_e"
@@ -641,9 +1298,27 @@
       ]
     },
     {
+      "word": "dairy",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "dare",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "dark",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "dawn",
+      "patterns": [
+        "aw"
       ]
     },
     {
@@ -659,9 +1334,63 @@
       ]
     },
     {
+      "word": "deck",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
+      "word": "declare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "decoy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "deep",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
       "word": "deer",
       "patterns": [
         "eer"
+      ]
+    },
+    {
+      "word": "delay",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "delight",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
+      "word": "despair",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "destroy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "dew",
+      "patterns": [
+        "ew"
       ]
     },
     {
@@ -671,9 +1400,39 @@
       ]
     },
     {
+      "word": "dig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "dine",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "dinosaur",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "dirt",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
       "word": "dish",
       "patterns": [
         "sh"
+      ]
+    },
+    {
+      "word": "disturb",
+      "patterns": [
+        "ur"
       ]
     },
     {
@@ -683,7 +1442,19 @@
       ]
     },
     {
+      "word": "doctor",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "dog",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "dot",
       "patterns": [
         "o"
       ]
@@ -695,15 +1466,39 @@
       ]
     },
     {
+      "word": "downstairs",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "drain",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
       "word": "draw",
       "patterns": [
         "aw"
       ]
     },
     {
+      "word": "dream",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
       "word": "drew",
       "patterns": [
         "ew"
+      ]
+    },
+    {
+      "word": "dried",
+      "patterns": [
+        "ie"
       ]
     },
     {
@@ -719,7 +1514,37 @@
       ]
     },
     {
+      "word": "dug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "duke",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
       "word": "ear",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "early",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "earn",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "earth",
       "patterns": [
         "ear"
       ]
@@ -731,9 +1556,57 @@
       ]
     },
     {
+      "word": "employ",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "employer",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "engineer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
       "word": "enjoy",
       "patterns": [
         "oy"
+      ]
+    },
+    {
+      "word": "enjoyable",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "excuse",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "exhausted",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "face",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "faint",
+      "patterns": [
+        "ai"
       ]
     },
     {
@@ -755,9 +1628,33 @@
       ]
     },
     {
+      "word": "fan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "far",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "fare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
       "word": "farm",
       "patterns": [
         "ar"
+      ]
+    },
+    {
+      "word": "father",
+      "patterns": [
+        "schwa"
       ]
     },
     {
@@ -770,6 +1667,24 @@
       "word": "fear",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "fed",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "fee",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "feed",
+      "patterns": [
+        "ee"
       ]
     },
     {
@@ -797,9 +1712,63 @@
       ]
     },
     {
+      "word": "field",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "fierce",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "fig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "fight",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "fin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "fine",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "finish",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "fir",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "fire",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "firm",
+      "patterns": [
+        "ir"
       ]
     },
     {
@@ -827,9 +1796,33 @@
       ]
     },
     {
+      "word": "flair",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "flare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
       "word": "flew",
       "patterns": [
         "ew"
+      ]
+    },
+    {
+      "word": "flies",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "flight",
+      "patterns": [
+        "igh"
       ]
     },
     {
@@ -839,7 +1832,37 @@
       ]
     },
     {
+      "word": "flow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
       "word": "flower",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "fluid",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "flute",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "fog",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "follow",
       "patterns": [
         "ow"
       ]
@@ -869,9 +1892,63 @@
       ]
     },
     {
+      "word": "forty",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "found",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "fox",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "free",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "fresh",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "fried",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "fright",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
       "word": "fruit",
       "patterns": [
         "ui"
+      ]
+    },
+    {
+      "word": "fruitful",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "fun",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -881,9 +1958,40 @@
       ]
     },
     {
+      "word": "furry",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "further",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "fuse",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "gain",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
+      "word": "game",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
       "word": "garden",
       "patterns": [
-        "ar"
+        "ar",
+        "schwa"
       ]
     },
     {
@@ -893,9 +2001,21 @@
       ]
     },
     {
+      "word": "gear",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
       "word": "germ",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "get",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -905,9 +2025,27 @@
       ]
     },
     {
+      "word": "glare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "glow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
       "word": "glue",
       "patterns": [
         "ue"
+      ]
+    },
+    {
+      "word": "goal",
+      "patterns": [
+        "oa"
       ]
     },
     {
@@ -947,6 +2085,24 @@
       ]
     },
     {
+      "word": "grow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "guilt",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "guitar",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
       "word": "gum",
       "patterns": [
         "u"
@@ -959,9 +2115,33 @@
       ]
     },
     {
+      "word": "hairy",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "hall",
       "patterns": [
         "al"
+      ]
+    },
+    {
+      "word": "halt",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "ham",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "hang",
+      "patterns": [
+        "ng"
       ]
     },
     {
@@ -995,9 +2175,39 @@
       ]
     },
     {
+      "word": "hawk",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "hay",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "head",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
       "word": "hear",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "heard",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "heat",
+      "patterns": [
+        "ea"
       ]
     },
     {
@@ -1013,9 +2223,21 @@
       ]
     },
     {
+      "word": "herb",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
       "word": "herd",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "hide",
+      "patterns": [
+        "i_e"
       ]
     },
     {
@@ -1031,9 +2253,27 @@
       ]
     },
     {
+      "word": "hit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "hoist",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
       "word": "hole",
       "patterns": [
         "o_e"
+      ]
+    },
+    {
+      "word": "holiday",
+      "patterns": [
+        "ay"
       ]
     },
     {
@@ -1061,9 +2301,21 @@
       ]
     },
     {
+      "word": "horn",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
       "word": "horse",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "hot",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -1085,9 +2337,33 @@
       ]
     },
     {
+      "word": "hug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "huge",
       "patterns": [
         "u_e"
+      ]
+    },
+    {
+      "word": "hung",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "hurl",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "hurry",
+      "patterns": [
+        "ur"
       ]
     },
     {
@@ -1103,9 +2379,33 @@
       ]
     },
     {
+      "word": "hutch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "issue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "jail",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
       "word": "jam",
       "patterns": [
         "a"
+      ]
+    },
+    {
+      "word": "jar",
+      "patterns": [
+        "ar"
       ]
     },
     {
@@ -1115,9 +2415,51 @@
       ]
     },
     {
+      "word": "jeer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "jerk",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "jet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "jewel",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "job",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "join",
       "patterns": [
         "oi"
+      ]
+    },
+    {
+      "word": "joint",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "joke",
+      "patterns": [
+        "o_e"
       ]
     },
     {
@@ -1127,15 +2469,69 @@
       ]
     },
     {
+      "word": "joyful",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "jug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "juice",
       "patterns": [
         "ui"
       ]
     },
     {
+      "word": "kangaroo",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "keen",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
       "word": "keep",
       "patterns": [
         "ee",
+        "k"
+      ]
+    },
+    {
+      "word": "keg",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kelp",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kennel",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kept",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kettle",
+      "patterns": [
         "k"
       ]
     },
@@ -1148,11 +2544,30 @@
     {
       "word": "kid",
       "patterns": [
-        "i"
+        "i",
+        "k"
+      ]
+    },
+    {
+      "word": "kill",
+      "patterns": [
+        "k"
       ]
     },
     {
       "word": "kilo",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kilt",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kin",
       "patterns": [
         "k"
       ]
@@ -1171,9 +2586,27 @@
       ]
     },
     {
+      "word": "kiosk",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
       "word": "kiss",
       "patterns": [
         "k"
+      ]
+    },
+    {
+      "word": "kit",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "kitchen",
+      "patterns": [
+        "tch"
       ]
     },
     {
@@ -1184,15 +2617,51 @@
       ]
     },
     {
+      "word": "kitten",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "koala",
+      "patterns": [
+        "k"
+      ]
+    },
+    {
+      "word": "lair",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "lake",
       "patterns": [
         "a_e"
       ]
     },
     {
+      "word": "lane",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "latch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
       "word": "late",
       "patterns": [
         "a_e"
+      ]
+    },
+    {
+      "word": "launch",
+      "patterns": [
+        "au"
       ]
     },
     {
@@ -1214,13 +2683,37 @@
       ]
     },
     {
+      "word": "lay",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
       "word": "leaf",
       "patterns": [
         "ea"
       ]
     },
     {
+      "word": "learn",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "led",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "leg",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "let",
       "patterns": [
         "e"
       ]
@@ -1256,7 +2749,19 @@
       ]
     },
     {
+      "word": "lip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "load",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
+      "word": "loaf",
       "patterns": [
         "oa"
       ]
@@ -1274,6 +2779,12 @@
       ]
     },
     {
+      "word": "loin",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
       "word": "long",
       "patterns": [
         "ng"
@@ -1286,9 +2797,33 @@
       ]
     },
     {
+      "word": "lot",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "loud",
       "patterns": [
         "ou"
+      ]
+    },
+    {
+      "word": "low",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "loyal",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "luck",
+      "patterns": [
+        "ck"
       ]
     },
     {
@@ -1304,7 +2839,43 @@
       ]
     },
     {
+      "word": "main",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
+      "word": "make",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "mall",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "man",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "map",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "mark",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "mat",
       "patterns": [
         "a"
       ]
@@ -1328,9 +2899,45 @@
       ]
     },
     {
+      "word": "men",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "midnight",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
       "word": "might",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "mildew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "mile",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "moist",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "mole",
+      "patterns": [
+        "o_e"
       ]
     },
     {
@@ -1352,7 +2959,26 @@
       ]
     },
     {
+      "word": "mother",
+      "patterns": [
+        "schwa",
+        "th"
+      ]
+    },
+    {
+      "word": "mount",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
       "word": "mouse",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "mouth",
       "patterns": [
         "ou"
       ]
@@ -1370,9 +2996,27 @@
       ]
     },
     {
+      "word": "mug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "mule",
       "patterns": [
         "u_e"
+      ]
+    },
+    {
+      "word": "mute",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "nail",
+      "patterns": [
+        "ai"
       ]
     },
     {
@@ -1382,15 +3026,45 @@
       ]
     },
     {
+      "word": "nap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "near",
       "patterns": [
         "ear"
       ]
     },
     {
+      "word": "neat",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
       "word": "neck",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "need",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "nephew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "nerve",
+      "patterns": [
+        "er"
       ]
     },
     {
@@ -1406,9 +3080,39 @@
       ]
     },
     {
+      "word": "news",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "newt",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "niece",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
       "word": "night",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "nine",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "nod",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -1418,9 +3122,33 @@
       ]
     },
     {
+      "word": "nor",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
       "word": "north",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "nose",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
+      "word": "not",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "notch",
+      "patterns": [
+        "tch"
       ]
     },
     {
@@ -1436,9 +3164,27 @@
       ]
     },
     {
+      "word": "nuisance",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
       "word": "nurse",
       "patterns": [
         "ur"
+      ]
+    },
+    {
+      "word": "nut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "oak",
+      "patterns": [
+        "oa"
       ]
     },
     {
@@ -1448,9 +3194,27 @@
       ]
     },
     {
+      "word": "open",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "out",
       "patterns": [
         "ou"
+      ]
+    },
+    {
+      "word": "pack",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
+      "word": "page",
+      "patterns": [
+        "a_e"
       ]
     },
     {
@@ -1460,9 +3224,33 @@
       ]
     },
     {
+      "word": "paint",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
       "word": "pair",
       "patterns": [
         "air"
+      ]
+    },
+    {
+      "word": "pale",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "pan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "paper",
+      "patterns": [
+        "schwa"
       ]
     },
     {
@@ -1496,9 +3284,51 @@
       ]
     },
     {
+      "word": "pay",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "pea",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "peach",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "pearl",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "peck",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
       "word": "peer",
       "patterns": [
         "eer"
+      ]
+    },
+    {
+      "word": "peering",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "peg",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -1508,9 +3338,39 @@
       ]
     },
     {
+      "word": "pencil",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "perch",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "perk",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "perm",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "person",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "pet",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -1526,15 +3386,63 @@
       ]
     },
     {
+      "word": "piece",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "pierce",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
       "word": "pig",
       "patterns": [
         "i"
       ]
     },
     {
+      "word": "pile",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "pillow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "pin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "pine",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "pioneer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
       "word": "pitch",
       "patterns": [
         "tch"
+      ]
+    },
+    {
+      "word": "plain",
+      "patterns": [
+        "ai"
       ]
     },
     {
@@ -1550,9 +3458,33 @@
       ]
     },
     {
+      "word": "poison",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "pole",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
       "word": "pool",
       "patterns": [
         "oo"
+      ]
+    },
+    {
+      "word": "pop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "porch",
+      "patterns": [
+        "or"
       ]
     },
     {
@@ -1562,9 +3494,99 @@
       ]
     },
     {
+      "word": "pound",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "prawn",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "pray",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "prepare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "proud",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "prune",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "punch",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "pup",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "purple",
       "patterns": [
         "ur"
+      ]
+    },
+    {
+      "word": "purse",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "pursuit",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "queen",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "queue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "race",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "rack",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
+      "word": "rail",
+      "patterns": [
+        "ai"
       ]
     },
     {
@@ -1574,9 +3596,39 @@
       ]
     },
     {
+      "word": "rang",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
       "word": "rare",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "rat",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "raw",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "ray",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "reach",
+      "patterns": [
+        "ea"
       ]
     },
     {
@@ -1586,15 +3638,45 @@
       ]
     },
     {
+      "word": "recruit",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
       "word": "red",
       "patterns": [
         "e"
       ]
     },
     {
+      "word": "refuse",
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "rehearse",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
       "word": "repair",
       "patterns": [
         "air"
+      ]
+    },
+    {
+      "word": "rescue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "restaurant",
+      "patterns": [
+        "au"
       ]
     },
     {
@@ -1622,7 +3704,19 @@
       ]
     },
     {
+      "word": "rip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "road",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
+      "word": "roast",
       "patterns": [
         "oa"
       ]
@@ -1631,6 +3725,18 @@
       "word": "rock",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "rod",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "rode",
+      "patterns": [
+        "o_e"
       ]
     },
     {
@@ -1652,9 +3758,21 @@
       ]
     },
     {
+      "word": "rose",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
       "word": "round",
       "patterns": [
         "ou"
+      ]
+    },
+    {
+      "word": "row",
+      "patterns": [
+        "ow"
       ]
     },
     {
@@ -1670,9 +3788,21 @@
       ]
     },
     {
+      "word": "ruin",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
       "word": "rule",
       "patterns": [
         "u_e"
+      ]
+    },
+    {
+      "word": "run",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -1682,9 +3812,39 @@
       ]
     },
     {
+      "word": "sack",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
+      "word": "sad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "sail",
       "patterns": [
         "ai"
+      ]
+    },
+    {
+      "word": "sale",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "salt",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "salute",
+      "patterns": [
+        "u_e"
       ]
     },
     {
@@ -1694,7 +3854,25 @@
       ]
     },
     {
+      "word": "sang",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "sat",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "sauce",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "sausages",
       "patterns": [
         "au"
       ]
@@ -1712,6 +3890,24 @@
       ]
     },
     {
+      "word": "scare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "scarf",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "scratch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
       "word": "screw",
       "patterns": [
         "ew"
@@ -1719,6 +3915,18 @@
     },
     {
       "word": "sea",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "search",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "seat",
       "patterns": [
         "ea"
       ]
@@ -1736,9 +3944,27 @@
       ]
     },
     {
+      "word": "seesaw",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
       "word": "serve",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "shake",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "shape",
+      "patterns": [
+        "sh"
       ]
     },
     {
@@ -1750,7 +3976,20 @@
     {
       "word": "shark",
       "patterns": [
-        "ar"
+        "ar",
+        "sh"
+      ]
+    },
+    {
+      "word": "sharp",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "shawl",
+      "patterns": [
+        "aw"
       ]
     },
     {
@@ -1760,7 +3999,43 @@
       ]
     },
     {
+      "word": "sheep",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "sheer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "sheet",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "shelf",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
       "word": "shell",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "shield",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "shine",
       "patterns": [
         "sh"
       ]
@@ -1790,9 +4065,27 @@
       ]
     },
     {
+      "word": "shot",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
       "word": "shout",
       "patterns": [
         "ou"
+      ]
+    },
+    {
+      "word": "show",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "shrimp",
+      "patterns": [
+        "sh"
       ]
     },
     {
@@ -1820,9 +4113,34 @@
       ]
     },
     {
+      "word": "sight",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
       "word": "sing",
       "patterns": [
         "ng"
+      ]
+    },
+    {
+      "word": "sir",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "sister",
+      "patterns": [
+        "er",
+        "schwa"
+      ]
+    },
+    {
+      "word": "sit",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -1832,9 +4150,33 @@
       ]
     },
     {
+      "word": "sketch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
       "word": "skirt",
       "patterns": [
         "ir"
+      ]
+    },
+    {
+      "word": "sleep",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "slight",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
+      "word": "slow",
+      "patterns": [
+        "ow"
       ]
     },
     {
@@ -1844,9 +4186,33 @@
       ]
     },
     {
+      "word": "smart",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "smirk",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "snail",
+      "patterns": [
+        "ai"
+      ]
+    },
+    {
       "word": "sneer",
       "patterns": [
         "eer"
+      ]
+    },
+    {
+      "word": "snow",
+      "patterns": [
+        "ow"
       ]
     },
     {
@@ -1874,6 +4240,12 @@
       ]
     },
     {
+      "word": "software",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
       "word": "soil",
       "patterns": [
         "oi"
@@ -1892,9 +4264,81 @@
       ]
     },
     {
+      "word": "sort",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "sound",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "south",
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "soy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "spare",
+      "patterns": [
+        "are"
+      ]
+    },
+    {
+      "word": "spied",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "splash",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "spoil",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "spoon",
+      "patterns": [
+        "oo"
+      ]
+    },
+    {
       "word": "sport",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "spray",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "spring",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "sprout",
+      "patterns": [
+        "ou"
       ]
     },
     {
@@ -1904,9 +4348,21 @@
       ]
     },
     {
+      "word": "squirt",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
       "word": "stair",
       "patterns": [
         "air"
+      ]
+    },
+    {
+      "word": "stalk",
+      "patterns": [
+        "al"
       ]
     },
     {
@@ -1922,6 +4378,18 @@
       ]
     },
     {
+      "word": "start",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "statue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
       "word": "stay",
       "patterns": [
         "ay"
@@ -1934,15 +4402,39 @@
       ]
     },
     {
+      "word": "steering",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "stern",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
       "word": "stew",
       "patterns": [
         "ew"
       ]
     },
     {
+      "word": "sting",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
       "word": "stir",
       "patterns": [
         "ir"
+      ]
+    },
+    {
+      "word": "stitch",
+      "patterns": [
+        "tch"
       ]
     },
     {
@@ -1958,9 +4450,39 @@
       ]
     },
     {
+      "word": "story",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
       "word": "straw",
       "patterns": [
         "aw"
+      ]
+    },
+    {
+      "word": "strawberry",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "stray",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "stretch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "string",
+      "patterns": [
+        "ng"
       ]
     },
     {
@@ -1982,9 +4504,33 @@
       ]
     },
     {
+      "word": "sugar",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "suit",
       "patterns": [
         "ui"
+      ]
+    },
+    {
+      "word": "suitable",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "suitcase",
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "sum",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -1994,15 +4540,69 @@
       ]
     },
     {
+      "word": "sung",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "sunlight",
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
       "word": "surf",
       "patterns": [
         "ur"
       ]
     },
     {
+      "word": "sweep",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "swing",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "switch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "sword",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "tag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "tail",
       "patterns": [
         "ai"
+      ]
+    },
+    {
+      "word": "take",
+      "patterns": [
+        "a_e"
+      ]
+    },
+    {
+      "word": "talk",
+      "patterns": [
+        "al"
       ]
     },
     {
@@ -2024,9 +4624,40 @@
       ]
     },
     {
+      "word": "tar",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
       "word": "tea",
       "patterns": [
         "ea"
+      ]
+    },
+    {
+      "word": "teach",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "teacher",
+      "patterns": [
+        "er",
+        "schwa"
+      ]
+    },
+    {
+      "word": "team",
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "tear",
+      "patterns": [
+        "ear"
       ]
     },
     {
@@ -2048,7 +4679,25 @@
       ]
     },
     {
+      "word": "than",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thank",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
       "word": "that",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "their",
       "patterns": [
         "th"
       ]
@@ -2060,9 +4709,27 @@
       ]
     },
     {
+      "word": "there",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
       "word": "thick",
       "patterns": [
         "th"
+      ]
+    },
+    {
+      "word": "thief",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "thigh",
+      "patterns": [
+        "igh"
       ]
     },
     {
@@ -2090,9 +4757,89 @@
       ]
     },
     {
+      "word": "thirsty",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "this",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thorn",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "those",
+      "patterns": [
+        "o_e",
+        "th"
+      ]
+    },
+    {
+      "word": "thought",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thousand",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thread",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "three",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "threw",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "throat",
+      "patterns": [
+        "oa",
+        "th"
+      ]
+    },
+    {
+      "word": "throw",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "thumb",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
       "word": "tie",
       "patterns": [
         "ie"
+      ]
+    },
+    {
+      "word": "tiger",
+      "patterns": [
+        "schwa"
       ]
     },
     {
@@ -2102,15 +4849,69 @@
       ]
     },
     {
+      "word": "tile",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
       "word": "time",
       "patterns": [
         "i_e"
       ]
     },
     {
+      "word": "tin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "tip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "tissue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "toad",
+      "patterns": [
+        "oa"
+      ]
+    },
+    {
       "word": "toast",
       "patterns": [
         "oa"
+      ]
+    },
+    {
+      "word": "today",
+      "patterns": [
+        "ay"
+      ]
+    },
+    {
+      "word": "toil",
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "tomboy",
+      "patterns": [
+        "oy"
+      ]
+    },
+    {
+      "word": "tonight",
+      "patterns": [
+        "igh"
       ]
     },
     {
@@ -2129,6 +4930,24 @@
       "word": "top",
       "patterns": [
         "o"
+      ]
+    },
+    {
+      "word": "torch",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "torn",
+      "patterns": [
+        "or"
+      ]
+    },
+    {
+      "word": "tower",
+      "patterns": [
+        "ow"
       ]
     },
     {
@@ -2162,6 +4981,18 @@
       ]
     },
     {
+      "word": "tried",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "truck",
+      "patterns": [
+        "ck"
+      ]
+    },
+    {
       "word": "true",
       "patterns": [
         "ue"
@@ -2174,9 +5005,21 @@
       ]
     },
     {
+      "word": "tug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "tune",
       "patterns": [
         "u_e"
+      ]
+    },
+    {
+      "word": "turkey",
+      "patterns": [
+        "ur"
       ]
     },
     {
@@ -2186,15 +5029,105 @@
       ]
     },
     {
+      "word": "turtle",
+      "patterns": [
+        "ur"
+      ]
+    },
+    {
+      "word": "twirl",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "under",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "upstairs",
+      "patterns": [
+        "air"
+      ]
+    },
+    {
       "word": "use",
       "patterns": [
         "u_e"
       ]
     },
     {
+      "word": "value",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "van",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "vault",
+      "patterns": [
+        "au"
+      ]
+    },
+    {
+      "word": "veer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "venue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
+      "word": "verse",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "vine",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "virtue",
+      "patterns": [
+        "ue"
+      ]
+    },
+    {
       "word": "voice",
       "patterns": [
         "oi"
+      ]
+    },
+    {
+      "word": "volunteer",
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "vote",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
+      "word": "voyage",
+      "patterns": [
+        "oy"
       ]
     },
     {
@@ -2216,9 +5149,40 @@
       ]
     },
     {
+      "word": "walnut",
+      "patterns": [
+        "al"
+      ]
+    },
+    {
+      "word": "war",
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "watch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "water",
+      "patterns": [
+        "er",
+        "schwa"
+      ]
+    },
+    {
       "word": "wave",
       "patterns": [
         "a_e"
+      ]
+    },
+    {
+      "word": "way",
+      "patterns": [
+        "ay"
       ]
     },
     {
@@ -2228,9 +5192,39 @@
       ]
     },
     {
+      "word": "week",
+      "patterns": [
+        "ee"
+      ]
+    },
+    {
+      "word": "wet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "whirl",
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
       "word": "white",
       "patterns": [
         "i_e"
+      ]
+    },
+    {
+      "word": "wide",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
+      "word": "wig",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -2240,9 +5234,27 @@
       ]
     },
     {
+      "word": "window",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
       "word": "wing",
       "patterns": [
         "ng"
+      ]
+    },
+    {
+      "word": "winter",
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "wire",
+      "patterns": [
+        "i_e"
       ]
     },
     {
@@ -2252,15 +5264,81 @@
       ]
     },
     {
+      "word": "withdraw",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "withdrew",
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "woke",
+      "patterns": [
+        "o_e"
+      ]
+    },
+    {
       "word": "wood",
       "patterns": [
         "oo"
       ]
     },
     {
+      "word": "wool",
+      "patterns": [
+        "oo"
+      ]
+    },
+    {
+      "word": "yawn",
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
       "word": "year",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "yearn",
+      "patterns": [
+        "ear"
+      ]
+    },
+    {
+      "word": "yellow",
+      "patterns": [
+        "ow"
+      ]
+    },
+    {
+      "word": "yes",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "yet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "yield",
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "young",
+      "patterns": [
+        "ng"
       ]
     },
     {
@@ -2273,6 +5351,12 @@
       "word": "zip",
       "patterns": [
         "i"
+      ]
+    },
+    {
+      "word": "zoo",
+      "patterns": [
+        "oo"
       ]
     }
   ]

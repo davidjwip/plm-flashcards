@@ -51,6 +51,16 @@ async function settle(page, selector) {
   await page.waitForTimeout(350);
 }
 
+async function dismissCelebration(page) {
+  // AC16: every tenth right answer raises a celebration that must be clicked away.
+  // Without this, a set of 10+ words stalls the run at the milestone.
+  const cel = page.getByTestId('celebration');
+  if (await cel.isVisible().catch(() => false)) {
+    await page.getByTestId('celebration-close').click().catch(() => {});
+    await page.waitForTimeout(150);
+  }
+}
+
 async function text(page, testid) {
   return (await page.getByTestId(testid).textContent().catch(() => null))?.trim() ?? null;
 }
@@ -112,8 +122,10 @@ async function main() {
       if (await page.getByTestId('summary').isVisible().catch(() => false)) break;
       const w = await text(page, 'word');
       seen.push(w);
+      await dismissCelebration(page);
       await page.getByTestId(i === 0 ? 'mark-wrong' : 'mark-right').click();
       await sleep(180);
+      await dismissCelebration(page);
       if (i === Math.floor(total / 2)) await shot('mid-run');
     }
     await settle(page, '[data-testid="summary"]');
