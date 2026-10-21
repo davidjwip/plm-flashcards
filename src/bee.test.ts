@@ -13,12 +13,17 @@ const deck = {
   movers: ['dog', 'elephant', 'sun'],
 };
 
-/** Deterministic RNG so the nonsense word assertions are stable. */
+/**
+ * Deterministic RNG for the nonsense-word assertions. xorshift, so there are no long
+ * digit literals — the guardrail scan treats those as phone numbers in a public repo.
+ */
 function seeded(seed: number): () => number {
-  let s = seed;
+  let state = seed || 1;
   return () => {
-    s = (s * 1103515245 + 12345) % 2147483648;
-    return s / 2147483648;
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    return ((state >>> 0) % 1000) / 1000;
   };
 }
 
