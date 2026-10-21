@@ -59,8 +59,8 @@ export function beeSettingsView(
       </div>
     </div>
 
-    <p class="hint" data-testid="bee-count">${wordCount} words to draw from</p>
-    <button class="start" data-testid="start" ${wordCount ? '' : 'disabled'}>Start</button>
+    <p class="count" data-testid="bee-count">${wordCount} words to draw from</p>
+    <button class="primary" data-testid="start" ${wordCount ? '' : 'disabled'}>Start practice</button>
     <p class="hint"><a href="./">← back to sound patterns</a></p>
   `;
 }

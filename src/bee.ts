@@ -81,7 +81,7 @@ export function beeDictionary(
   if (!choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);
-  const nonsense: Word[] = nonsenseWords(Math.max(3, Math.round(BEE_ROUND / 2)), known, rng).map(
+  const nonsense: Word[] = nonsenseWords(BEE_ROUND, known, rng).map(
     (word) => ({ word, patterns: [NONSENSE_TAG] }),
   );
   return [...real, ...nonsense];
