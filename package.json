@@ -12,6 +12,7 @@
     "e2e": "npm run build && playwright test",
     "format": "prettier --write .",
     "guardrail:scan": "node scripts/guardrail-scan.mjs",
+    "verify:behaviour": "npm run build && node scripts/verify-behaviour.mjs",
     "validate:bank": "node scripts/validate-bank.mjs",
     "coverage": "vitest run --coverage"
   },

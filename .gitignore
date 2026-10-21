@@ -9,3 +9,5 @@ blob-report/
 .DS_Store
 *.log
 coverage/
+# behavioural verification evidence (screenshots per run)
+verify/
