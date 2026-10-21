@@ -22,7 +22,7 @@
     },
     {
       "id": "a_e",
-      "label": "a…e (cake)"
+      "label": "a\u2026e (cake)"
     },
     {
       "id": "ai",
@@ -42,7 +42,7 @@
     },
     {
       "id": "i_e",
-      "label": "i…e (bike)"
+      "label": "i\u2026e (bike)"
     },
     {
       "id": "ie",
@@ -54,7 +54,7 @@
     },
     {
       "id": "o_e",
-      "label": "o…e (home)"
+      "label": "o\u2026e (home)"
     },
     {
       "id": "oa",
@@ -70,7 +70,7 @@
     },
     {
       "id": "u_e",
-      "label": "u…e (cube)"
+      "label": "u\u2026e (cube)"
     },
     {
       "id": "ew",
@@ -155,1232 +155,2125 @@
     {
       "id": "k",
       "label": "k (kite)"
+    },
+    {
+      "id": "sh",
+      "label": "sh (ship)"
+    },
+    {
+      "id": "ch",
+      "label": "ch (chin)"
+    },
+    {
+      "id": "th",
+      "label": "th (thin)"
+    },
+    {
+      "id": "ng",
+      "label": "ng (ring)"
+    },
+    {
+      "id": "tch",
+      "label": "tch (catch)"
     }
   ],
   "words": [
     {
       "word": "about",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "again",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "air",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "alone",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "annoy",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "around",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "author",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "autumn",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "away",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "back",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "bag",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
     },
     {
       "word": "ball",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "banana",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
+      "word": "bang",
+      "patterns": [
+        "ng"
+      ]
     },
     {
       "word": "bare",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "bat",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "bath",
+      "patterns": [
+        "th"
+      ]
     },
     {
       "word": "bean",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "beard",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "bed",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "bee",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "beer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
+    },
+    {
+      "word": "bench",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "bike",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "bird",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
     },
     {
       "word": "blue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "boat",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "boil",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "bone",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "book",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "boot",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "born",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "box",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "boy",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "brown",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "bruise",
-      "patterns": ["ui"]
+      "patterns": [
+        "ui"
+      ]
+    },
+    {
+      "word": "brush",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "bug",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "burn",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "bus",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "cake",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "call",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "car",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "card",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "care",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "cat",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "catch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "cause",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "chain",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "chair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "chat",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "cheer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
     },
     {
       "word": "chew",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
+    },
+    {
+      "word": "chin",
+      "patterns": [
+        "ch"
+      ]
+    },
+    {
+      "word": "chip",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "chirp",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "chop",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "claw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "clay",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "clean",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "clear",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "close",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "cloud",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
     },
     {
       "word": "clue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "coat",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "coin",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "comma",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "cook",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "cow",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "crown",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "cruise",
-      "patterns": ["ui"]
+      "patterns": [
+        "ui"
+      ]
     },
     {
       "word": "cube",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "cue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "cup",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "curl",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "cute",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "dad",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
     },
     {
       "word": "dare",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "day",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "dear",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "deer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
     },
     {
       "word": "die",
-      "patterns": ["ie"]
+      "patterns": [
+        "ie"
+      ]
+    },
+    {
+      "word": "dish",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "ditch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "dog",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "down",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "draw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "drew",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "duck",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "due",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "ear",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "eat",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "enjoy",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "fair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "fairy",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "fall",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "farm",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "fault",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "fear",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "feet",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "fern",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "fetch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "few",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "fight",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "first",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "fish",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "fit",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     },
     {
       "word": "five",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "flew",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "float",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "flower",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "food",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "foot",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "for",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "fork",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "fruit",
-      "patterns": ["ui"]
+      "patterns": [
+        "ui"
+      ]
     },
     {
       "word": "fur",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "garden",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "gate",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "germ",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
     },
     {
       "word": "girl",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
     },
     {
       "word": "glue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "goat",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "good",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "gray",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "green",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "grew",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "ground",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
     },
     {
       "word": "gum",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "hair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "hall",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "hard",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "hare",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "hat",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "hatch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "haul",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "hear",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "hen",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "her",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
     },
     {
       "word": "herd",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
     },
     {
       "word": "high",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "hip",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     },
     {
       "word": "hole",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "home",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "hook",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "hop",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "hope",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "horse",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "house",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
     },
     {
       "word": "how",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "hue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "huge",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "hurt",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "hut",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "jam",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
     },
     {
       "word": "jaw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "join",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "joy",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "juice",
-      "patterns": ["ui"]
-    },
-    {
-      "word": "june",
-      "patterns": ["u_e"]
+      "patterns": [
+        "ui"
+      ]
     },
     {
       "word": "keep",
-      "patterns": ["ee", "k"]
+      "patterns": [
+        "ee",
+        "k"
+      ]
     },
     {
       "word": "kick",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "kid",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     },
     {
       "word": "kilo",
-      "patterns": ["k"]
+      "patterns": [
+        "k"
+      ]
     },
     {
       "word": "kind",
-      "patterns": ["k"]
+      "patterns": [
+        "k"
+      ]
     },
     {
       "word": "king",
-      "patterns": ["k"]
+      "patterns": [
+        "k",
+        "ng"
+      ]
     },
     {
       "word": "kiss",
-      "patterns": ["k"]
+      "patterns": [
+        "k"
+      ]
     },
     {
       "word": "kite",
-      "patterns": ["i_e", "k"]
+      "patterns": [
+        "i_e",
+        "k"
+      ]
     },
     {
       "word": "lake",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "late",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "laundry",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "law",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "lawn",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "leaf",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "leg",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "lick",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "lid",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     },
     {
       "word": "lie",
-      "patterns": ["ie"]
+      "patterns": [
+        "ie"
+      ]
     },
     {
       "word": "light",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "line",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "load",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "lock",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "log",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "long",
+      "patterns": [
+        "ng"
+      ]
     },
     {
       "word": "look",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "loud",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "lunch",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "mail",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "map",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "match",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "meat",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "meet",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "might",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "moon",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "mop",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "moth",
+      "patterns": [
+        "th"
+      ]
     },
     {
       "word": "mouse",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "much",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "mud",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "mule",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "name",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "near",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "neck",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "net",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "new",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "night",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "noise",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "north",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "note",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "now",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "nurse",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "oil",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "out",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
     },
     {
       "word": "pain",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "pair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "park",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "patch",
+      "patterns": [
+        "tch"
+      ]
+    },
+    {
+      "word": "path",
+      "patterns": [
+        "th"
+      ]
     },
     {
       "word": "pause",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "paw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "peer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
     },
     {
       "word": "pen",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "perch",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
     },
     {
       "word": "pick",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "pie",
-      "patterns": ["ie"]
+      "patterns": [
+        "ie"
+      ]
     },
     {
       "word": "pig",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "pitch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "play",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "point",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "pool",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "pot",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "purple",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "rain",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "rare",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "read",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "red",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "repair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
+    },
+    {
+      "word": "rich",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "ride",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "right",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
+      "word": "ring",
+      "patterns": [
+        "ng"
+      ]
     },
     {
       "word": "road",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "rock",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "roof",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "room",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "rope",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "round",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
     },
     {
       "word": "royal",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "rug",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "rule",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "rush",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "sail",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "same",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "sauce",
-      "patterns": ["au"]
+      "patterns": [
+        "au"
+      ]
     },
     {
       "word": "saw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
     },
     {
       "word": "say",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "screw",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "sea",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
     },
     {
       "word": "see",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "seed",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "serve",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
     },
     {
       "word": "share",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "shark",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
+    },
+    {
+      "word": "shed",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "shell",
+      "patterns": [
+        "sh"
+      ]
+    },
+    {
+      "word": "ship",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "shirt",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
+    },
+    {
+      "word": "shop",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "short",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "shout",
-      "patterns": ["ou"]
+      "patterns": [
+        "ou"
+      ]
+    },
+    {
+      "word": "shut",
+      "patterns": [
+        "sh"
+      ]
     },
     {
       "word": "sick",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "side",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "sigh",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
+    },
+    {
+      "word": "sing",
+      "patterns": [
+        "ng"
+      ]
     },
     {
       "word": "six",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     },
     {
       "word": "skirt",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
     },
     {
       "word": "small",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "sneer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
     },
     {
       "word": "soap",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "sob",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "sock",
-      "patterns": ["ck"]
+      "patterns": [
+        "ck"
+      ]
     },
     {
       "word": "sofa",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "soil",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
+    },
+    {
+      "word": "song",
+      "patterns": [
+        "ng"
+      ]
     },
     {
       "word": "soon",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "sport",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "square",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "stair",
-      "patterns": ["air"]
+      "patterns": [
+        "air"
+      ]
     },
     {
       "word": "star",
-      "patterns": ["ar"]
+      "patterns": [
+        "ar"
+      ]
     },
     {
       "word": "stare",
-      "patterns": ["are"]
+      "patterns": [
+        "are"
+      ]
     },
     {
       "word": "stay",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "steer",
-      "patterns": ["eer"]
+      "patterns": [
+        "eer"
+      ]
     },
     {
       "word": "stew",
-      "patterns": ["ew"]
+      "patterns": [
+        "ew"
+      ]
     },
     {
       "word": "stir",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
     },
     {
       "word": "stone",
-      "patterns": ["o_e"]
+      "patterns": [
+        "o_e"
+      ]
     },
     {
       "word": "storm",
-      "patterns": ["or"]
+      "patterns": [
+        "or"
+      ]
     },
     {
       "word": "straw",
-      "patterns": ["aw"]
+      "patterns": [
+        "aw"
+      ]
+    },
+    {
+      "word": "strong",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "such",
+      "patterns": [
+        "ch"
+      ]
     },
     {
       "word": "sue",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "suit",
-      "patterns": ["ui"]
+      "patterns": [
+        "ui"
+      ]
     },
     {
       "word": "sun",
-      "patterns": ["u"]
+      "patterns": [
+        "u"
+      ]
     },
     {
       "word": "surf",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "tail",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "tall",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "tap",
-      "patterns": ["a"]
+      "patterns": [
+        "a"
+      ]
     },
     {
       "word": "tape",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "tea",
-      "patterns": ["ea"]
+      "patterns": [
+        "ea"
+      ]
+    },
+    {
+      "word": "teeth",
+      "patterns": [
+        "th"
+      ]
     },
     {
       "word": "ten",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "term",
-      "patterns": ["er"]
+      "patterns": [
+        "er"
+      ]
+    },
+    {
+      "word": "that",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "then",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thick",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thin",
+      "patterns": [
+        "th"
+      ]
+    },
+    {
+      "word": "thing",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "think",
+      "patterns": [
+        "th"
+      ]
     },
     {
       "word": "third",
-      "patterns": ["ir"]
+      "patterns": [
+        "ir"
+      ]
     },
     {
       "word": "tie",
-      "patterns": ["ie"]
+      "patterns": [
+        "ie"
+      ]
     },
     {
       "word": "tight",
-      "patterns": ["igh"]
+      "patterns": [
+        "igh"
+      ]
     },
     {
       "word": "time",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "toast",
-      "patterns": ["oa"]
+      "patterns": [
+        "oa"
+      ]
     },
     {
       "word": "took",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "tooth",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "top",
-      "patterns": ["o"]
+      "patterns": [
+        "o"
+      ]
     },
     {
       "word": "town",
-      "patterns": ["ow"]
+      "patterns": [
+        "ow"
+      ]
     },
     {
       "word": "toy",
-      "patterns": ["oy"]
+      "patterns": [
+        "oy"
+      ]
     },
     {
       "word": "train",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "tray",
-      "patterns": ["ay"]
+      "patterns": [
+        "ay"
+      ]
     },
     {
       "word": "tree",
-      "patterns": ["ee"]
+      "patterns": [
+        "ee"
+      ]
     },
     {
       "word": "true",
-      "patterns": ["ue"]
+      "patterns": [
+        "ue"
+      ]
     },
     {
       "word": "tube",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
+    },
+    {
+      "word": "tune",
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "turn",
-      "patterns": ["ur"]
+      "patterns": [
+        "ur"
+      ]
     },
     {
       "word": "use",
-      "patterns": ["u_e"]
+      "patterns": [
+        "u_e"
+      ]
     },
     {
       "word": "voice",
-      "patterns": ["oi"]
+      "patterns": [
+        "oi"
+      ]
     },
     {
       "word": "wait",
-      "patterns": ["ai"]
+      "patterns": [
+        "ai"
+      ]
     },
     {
       "word": "walk",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "wall",
-      "patterns": ["al"]
+      "patterns": [
+        "al"
+      ]
     },
     {
       "word": "wave",
-      "patterns": ["a_e"]
+      "patterns": [
+        "a_e"
+      ]
     },
     {
       "word": "web",
-      "patterns": ["e"]
+      "patterns": [
+        "e"
+      ]
     },
     {
       "word": "white",
-      "patterns": ["i_e"]
+      "patterns": [
+        "i_e"
+      ]
     },
     {
       "word": "win",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "wing",
+      "patterns": [
+        "ng"
+      ]
+    },
+    {
+      "word": "witch",
+      "patterns": [
+        "tch"
+      ]
     },
     {
       "word": "wood",
-      "patterns": ["oo"]
+      "patterns": [
+        "oo"
+      ]
     },
     {
       "word": "year",
-      "patterns": ["ear"]
+      "patterns": [
+        "ear"
+      ]
     },
     {
       "word": "zebra",
-      "patterns": ["schwa"]
+      "patterns": [
+        "schwa"
+      ]
     },
     {
       "word": "zip",
-      "patterns": ["i"]
+      "patterns": [
+        "i"
+      ]
     }
   ]
 }
