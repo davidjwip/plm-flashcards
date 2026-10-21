@@ -116,3 +116,39 @@ describe('player', () => {
     expect(noSynth.play('night', 1)).toBe('none');
   });
 });
+
+describe('AC31 — a word can be heard as many times as the child asks', () => {
+  it('AC31 — plays again after the previous utterance finishes', () => {
+    const synth = fakeSynth();
+    const player = createPlayer({
+      hasFile: () => false,
+      synth: synth as never,
+      Utterance: FakeUtterance as never,
+    });
+
+    expect(player.play('ship', 1)).toBe('speech');
+    const utterance = synth.speak.mock.calls.at(0)?.[0] as (FakeUtterance & { onend?: () => void }) | undefined;
+    utterance?.onend?.();
+    expect(player.play('ship', 1)).toBe('speech');
+    expect(synth.speak).toHaveBeenCalledTimes(2);
+  });
+
+  it('AC31 — does not stay busy when the utterance never reports completion', () => {
+    vi.useFakeTimers();
+    try {
+      const synth = fakeSynth();
+      const player = createPlayer({
+        hasFile: () => false,
+        synth: synth as never,
+        Utterance: FakeUtterance as never,
+      });
+
+      expect(player.play('thin', 1)).toBe('speech');
+      expect(player.play('thin', 1)).toBe('busy');
+      vi.advanceTimersByTime(5000);
+      expect(player.play('thin', 1)).toBe('speech');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

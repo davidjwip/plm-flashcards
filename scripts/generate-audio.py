@@ -59,6 +59,14 @@ async def main() -> int:
 
     bank = json.loads(BANK.read_text())
     words = [entry["word"] for entry in bank["words"]]
+
+    # Bee mode draws on its own deck, so those words need committed audio too —
+    # otherwise they speak in whatever voice the tablet happens to have.
+    bee_path = ROOT / "data" / "bee.json"
+    if bee_path.exists():
+        bee = json.loads(bee_path.read_text())
+        words += bee["starters"] + bee["movers"]
+    words = sorted(set(words))
     OUT.mkdir(parents=True, exist_ok=True)
 
     manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {"voice": VOICE, "rate": RATE, "words": []}
@@ -87,6 +95,12 @@ async def main() -> int:
         "words": sorted(done),
     }
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
+
+    # The app imports the manifest from src/, which used to be copied by hand after
+    # every run. Two copies is one too many: write both, so a word that gains audio
+    # can never be silently invisible to the player.
+    APP_MANIFEST = ROOT / "src" / "audio-manifest.json"
+    APP_MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"manifest: {len(manifest['words'])} words, voice {VOICE}")
     return 0
 

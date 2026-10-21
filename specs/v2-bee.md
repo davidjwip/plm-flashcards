@@ -27,6 +27,9 @@ grown-up presses got it / not yet. No typing, no self-marking, no timer.
 | AC28 | a bee dictionary | a round starts | the round is ten words with no repeats |
 | AC29 | nonsense words are requested | they are generated | each is lowercase, pronounceable (onset + rime), and never a word already in the bank or deck |
 | AC30 | nonsense words are generated | the dictionary is built | each carries the `nonsense` tag so the screen can label it |
+| AC31 | a word has just been spoken | the grown-up presses hear it again | it plays again, and a stalled utterance never leaves the button dead |
+| AC32 | a bee round is running | a word appears | the word is hidden and only the audio gives it away, with a Show word control for the grown-up marking it |
+| AC33 | the setup screen renders | the mode is shown | Sound patterns and Spelling bee are both visible, the active one is marked, and the choice survives a reload |
 
 ## Test map
 
@@ -48,3 +51,29 @@ personal practice, not redistributed as the original document.
 ## Out of scope
 
 Spelling aloud against a clock, oral-bee rehearsal, per-child progress history.
+
+## Fixes after first use (2026-10-22)
+
+### AC31 — a word can be heard as many times as the child asks
+
+Given a word has just been spoken
+When the grown-up presses "hear it" again
+Then it is spoken again, and a stalled utterance never leaves the button dead.
+
+### AC32 — bee mode never shows the word
+
+Given a bee round is running
+When a word appears
+Then the word is hidden and only the audio gives it away, with a "Show word"
+control for the grown-up marking the spelling.
+
+### AC33 — mode is a visible toggle
+
+Given the setup screen
+When it renders
+Then "Sound patterns" and "Spelling bee" are both visible, the active one is
+marked, and the choice survives a reload.
+
+| AC31 | `src/audio.test.ts` | a word can be heard again after it finishes | green |
+| AC32 | `src/views.test.ts` | bee mode hides the word and offers the grown-up a peek | green |
+| AC33 | `src/views.test.ts` | the setup screen shows which mode is active | green |

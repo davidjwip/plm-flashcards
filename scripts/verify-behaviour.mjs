@@ -88,8 +88,18 @@ async function beeFlow(page, shot) {
   await page.locator('[data-testid="level-nonsense"]').check();
   await settle(page, '[data-testid="bee-count"]');
   await page.getByTestId('start').click();
-  await settle(page, '[data-testid="word"]');
+  await settle(page, '[data-testid="hear"]');
   await shot('bee-first-word');
+
+  // AC32: the word is dictated, not read — and the grown-up can peek to mark it.
+  const wordHidden = await page.getByTestId('word').isHidden();
+  record('bee word is dictated, not shown', wordHidden, `word hidden=${wordHidden}`);
+
+  await page.getByTestId('peek').click();
+  const peeked = await page.getByTestId('word').isVisible();
+  const peekedText = (await page.getByTestId('word').textContent())?.trim() ?? '';
+  record('grown-up can reveal the word to mark it', peeked && peekedText.length > 0,
+    `visible=${peeked}; word="${peekedText}"`);
 
   let answered = 0;
   let labelled = 0;

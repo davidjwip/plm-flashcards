@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createSession, mark } from './engine';
-import { endView, gameView, settingsView, trackView } from './views';
+import { endView, gameView, modeBar, settingsView, trackView } from './views';
 import type { Session } from './types';
 
 const options = [
@@ -151,5 +151,35 @@ describe('track and end views', () => {
     expect(html).toContain('Done — 2 of 3');
     expect(html).toContain('Not yet: 1');
     expect(html).toContain('Best streak: 2');
+  });
+});
+
+function volume() {
+  return { label: '85%', canLouder: true, canQuieter: true };
+}
+
+describe('AC32 — bee mode dictates the word instead of showing it', () => {
+  const base = () => createSession([word]);
+
+  it('AC32 — hides the word and offers the grown-up a peek', () => {
+    const html = gameView(base(), word, false, null, true, false, volume(), undefined, true);
+    expect(html).toContain('data-testid="word" hidden');
+    expect(html).toContain('data-testid="peek"');
+  });
+
+  it('AC32 — shows the word normally in pattern mode', () => {
+    const html = gameView(base(), word, false, null, true, false, volume());
+    expect(html).not.toContain('data-testid="word" hidden');
+    expect(html).not.toContain('data-testid="peek"');
+  });
+});
+
+describe('AC33 — the mode is a visible toggle, not a hidden address', () => {
+  it('AC33 — marks the active mode and offers both', () => {
+    const bee = modeBar('bee');
+    expect(bee).toContain('data-testid="mode-bee" aria-pressed="true"');
+    expect(bee).toContain('data-testid="mode-patterns" aria-pressed="false"');
+    const patterns = modeBar('patterns');
+    expect(patterns).toContain('data-testid="mode-patterns" aria-pressed="true"');
   });
 });

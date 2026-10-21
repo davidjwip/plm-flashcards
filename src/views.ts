@@ -38,6 +38,18 @@ export function settingsView(
     </button>`;
 }
 
+/** Mode switch shown above both setup screens (AC33). */
+export function modeBar(mode: 'patterns' | 'bee'): string {
+  const active = (value: string): string => (mode === value ? 'true' : 'false');
+  return `
+    <nav class="mode-bar" data-testid="mode-bar">
+      <button data-testid="mode-patterns" aria-pressed="${active('patterns')}"
+        class="${mode === 'patterns' ? 'on' : ''}">Sound patterns</button>
+      <button data-testid="mode-bee" aria-pressed="${active('bee')}"
+        class="${mode === 'bee' ? 'on' : ''}">Spelling bee</button>
+    </nav>`;
+}
+
 export function beeSettingsView(
   choice: { starters: boolean; movers: boolean; nonsense: boolean },
   wordCount: number,
@@ -85,6 +97,7 @@ export function gameView(
   canShrink: boolean,
   volume: { label: string; canLouder: boolean; canQuieter: boolean },
   note?: string,
+  hideWord = false,
 ): string {
   const { position, total } = progress(session);
   const lastVerdict = session.marks.at(-1);
@@ -99,7 +112,9 @@ export function gameView(
 
       ${note ? `<p class="hint" data-testid="bee-note">${note}</p>` : ''}
 
-      <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}>${word.word}</div>
+      <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}${hideWord ? ' hidden' : ''}>${word.word}</div>
+
+      ${hideWord ? '<button class="size-btn" data-testid="peek" aria-label="Show the word to the grown-up">Show word</button>' : ''}
 
       <div class="size-controls" data-testid="size-controls">
         <button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
