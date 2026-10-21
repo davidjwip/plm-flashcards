@@ -34,6 +34,7 @@ criterion done without a row in the feature's test map.
 - [ ] `npm run validate:bank` green for any word-bank change
 - [ ] no new dependency without an entry in `specs/decisions.md` (what, why,
       what we rejected)
+- [ ] `npm run spec:audit` green, or its findings explained in the PR body
 - [ ] `npm run verify:behaviour` green for any change that touches the game flow,
       with the `verify/<stamp>/` path in the PR body
 - [ ] guardrails below hold
@@ -59,13 +60,14 @@ grown-up presses got-it / not-yet. No timers, no self-marking, no child data.
 | `npm run validate:bank`  | word bank: tags exist, no duplicates, plain words, no dead patterns |
 | `npm run guardrail:scan` | fails if a tracked file contains an email, private IP or token      |
 | `npm run verify:behaviour` | drives the built game in Chromium, screenshots every step, prints what it saw |
+| `npm run spec:audit`      | checks every criterion has a test and every test names a real criterion    |
 | `npm run format`         | prettier                                                            |
 | `npm run build`          | static build to `dist/`                                             |
 
 ## Tooling layout
 
 - `.opencode/skills/` — on-demand know-how: `tdd-loop`, `word-bank`,
-  `audio-pipeline`, `supervised-game-ux`, `verify-behaviour`. Load the relevant
+  `audio-pipeline`, `supervised-game-ux`, `spec-audit`, `verify-behaviour`. Load the relevant
   one before starting.
 - `.opencode/commands/` — `/red <AC>`, `/green <AC>`, `/audit`, invoked inside the
   opencode TUI. (Headless `opencode run --command` errors in 1.19.3 — a client

@@ -128,7 +128,7 @@ describe('word size controls', () => {
 });
 
 describe('word size: unchosen', () => {
-  it('leaves the card without an inline size so clamp() applies', () => {
+  it('AC20 — leaves the card without an inline size so clamp() applies', () => {
     const html = gameView(sessionWith([]), word, true, null, true, true, {
       label: '85%',
       canLouder: true,

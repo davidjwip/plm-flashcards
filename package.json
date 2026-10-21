@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "guardrail:scan": "node scripts/guardrail-scan.mjs",
     "verify:behaviour": "npm run build && node scripts/verify-behaviour.mjs",
+    "spec:audit": "node scripts/spec-audit.mjs",
     "validate:bank": "node scripts/validate-bank.mjs",
     "coverage": "vitest run --coverage"
   },
