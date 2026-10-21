@@ -21,6 +21,7 @@ const STAMP = new Date().toISOString().replace(/[:T]/g, '-').slice(0, 19);
 const OUT = join('verify', STAMP);
 const pattern = (process.argv.find((a) => a.startsWith('--pattern=')) ?? '--pattern=ai').split('=')[1];
 const headful = process.argv.includes('--headful');
+const HASH = (process.argv.find((a) => a.startsWith('--hash=')) ?? '').replace('--hash=', '');
 
 const rows = [];
 let failed = 0;
@@ -65,6 +66,49 @@ async function text(page, testid) {
   return (await page.getByTestId(testid).textContent().catch(() => null))?.trim() ?? null;
 }
 
+async function beeFlow(page, shot) {
+  await page.goto(`${BASE}/#bee`, { waitUntil: 'load' });
+  await settle(page, '[data-testid="bee-count"]');
+  await shot('bee-setup');
+  const count = await text(page, 'bee-count');
+  const startOn = await page.getByTestId('start').isEnabled();
+  record('bee setup loads', Boolean(startOn) && /\d+ words/.test(count ?? ''), `count="${count}"; start enabled=${startOn}`);
+
+  // AC27 / C5: no level chosen => no words, Start disabled.
+  for (const level of ['starters', 'movers', 'nonsense']) {
+    await page.locator(`[data-testid="level-${level}"]`).uncheck();
+  }
+  await settle(page, '[data-testid="bee-count"]');
+  await shot('bee-no-levels');
+  const none = await text(page, 'bee-count');
+  const off = await page.getByTestId('start').isDisabled();
+  record('no level means no words', Boolean(off) && /^0 words/.test(none ?? ''), `count="${none}"; start disabled=${off}`);
+
+  // Nonsense only, so the round is guaranteed to contain labelled nonsense words (C4/AC30).
+  await page.locator('[data-testid="level-nonsense"]').check();
+  await settle(page, '[data-testid="bee-count"]');
+  await page.getByTestId('start').click();
+  await settle(page, '[data-testid="word"]');
+  await shot('bee-first-word');
+
+  let answered = 0;
+  let labelled = 0;
+  for (let i = 0; i < 14; i += 1) {
+    if (await page.getByTestId('summary').isVisible().catch(() => false)) break;
+    if (await page.getByTestId('bee-note').isVisible().catch(() => false)) labelled += 1;
+    await dismissCelebration(page);
+    await page.getByTestId('mark-right').click();
+    answered += 1;
+    await sleep(150);
+    await dismissCelebration(page);
+  }
+  await settle(page, '[data-testid="summary"]');
+  await shot('bee-summary');
+  const summary = await text(page, 'summary');
+  record('bee round completes', Boolean(summary), `${answered} words answered; summary="${(summary ?? '').slice(0, 48)}"`);
+  record('nonsense word is labelled', labelled > 0, `words showing the note: ${labelled}`);
+}
+
 async function main() {
   mkdirSync(OUT, { recursive: true });
   console.log(`\nverify-behaviour — pattern "${pattern}" — screenshots in ${OUT}\n`);
@@ -88,8 +132,12 @@ async function main() {
   try {
     if (!(await waitForServer(BASE))) throw new Error(`server never came up on ${BASE}`);
 
+    if (HASH === 'bee') {
+      await beeFlow(page, shot);
+    } else {
+
     // 1. Cold load — nothing selected, Start must be gated.
-    await page.goto(BASE, { waitUntil: 'load' });
+    await page.goto(HASH ? `${BASE}/#${HASH}` : BASE, { waitUntil: 'load' });
     await settle(page, '[data-testid="app"]');
     await shot('loaded');
     const count0 = await text(page, 'word-count');
@@ -142,6 +190,7 @@ async function main() {
     const stillChecked = await page.locator(`[data-testid="pattern-option"][value="${pattern}"]`).isChecked();
     const startAfter = await page.getByTestId('start').isEnabled();
     record('selection persists', stillChecked && startAfter, `checked=${stillChecked}; start enabled=${startAfter}`);
+    }
   } catch (err) {
     failed++;
     console.error(`\n  FAIL  unexpected error: ${err?.message ?? err}`);

@@ -20,12 +20,15 @@ import {
 } from './volume';
 import audioManifest from '../src/audio-manifest.json';
 import type { Bank, Session, Verdict } from './types';
-import { endView, gameView, settingsView } from './views';
+import { beeSettingsView, endView, gameView, settingsView } from './views';
+import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
 import { DEFAULT_WORD_SIZE, canGrow, canShrink, stepWordSize, wordSizeStyle } from './wordSize';
 import './styles.css';
 
 export type MountOptions = {
   bank: Bank;
+  /** Present => spelling-bee mode: dictation deck instead of sound patterns. */
+  beeDeck?: BeeDeck;
   root: HTMLElement;
   store?: KeyValueStore;
   synth?: Speaker;
@@ -41,7 +44,8 @@ export type AppHandle = {
 const FLASH_MS = 1100;
 
 /** Wire the app to a root element. All state lives in this closure. */
-export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
+export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppHandle {
+  let beeChoice: BeeChoice = { starters: true, movers: true, nonsense: true };
   let selected: string[] = loadSelection(store);
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
@@ -60,6 +64,11 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   const store_ = store;
 
   function renderSettings(): void {
+    if (beeDeck) {
+      root.innerHTML = beeSettingsView(beeChoice, beeDictionary(beeDeck, beeChoice).length);
+      wireBeeSettings();
+      return;
+    }
     const open =
       root.querySelector<HTMLDetailsElement>('[data-testid="pattern-panel"]')?.open ??
       selected.length === 0;
@@ -94,6 +103,9 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
         canLouder: canLouder(volume),
         canQuieter: canQuieter(volume),
       },
+      word.patterns.includes(NONSENSE_TAG)
+        ? 'This one is not a real word — sound it out, then write what you hear.'
+        : undefined,
     );
 
     // One fade timer, ever: a rapid run of right answers must not queue a timer
@@ -168,6 +180,26 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
     root
       .querySelector('[data-testid="choose-patterns"]')
       ?.addEventListener('click', backToSettings);
+  }
+
+function wireBeeSettings(): void {
+    for (const key of ['starters', 'movers', 'nonsense'] as const) {
+      root
+        .querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)
+        ?.addEventListener('change', (event) => {
+          beeChoice = { ...beeChoice, [key]: (event.target as HTMLInputElement).checked };
+          renderSettings();
+        });
+    }
+
+    root.querySelector('[data-testid="start"]')?.addEventListener('click', () => {
+      if (!beeDeck) return;
+      const dictionary = beeDictionary(beeDeck, beeChoice);
+      if (!dictionary.length) return;
+      session = createSession(beeRound(dictionary));
+      dismissedMilestone = null;
+      render();
+    });
   }
 
   function wireSettings(): void {

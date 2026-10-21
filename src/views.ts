@@ -38,6 +38,33 @@ export function settingsView(
     </button>`;
 }
 
+export function beeSettingsView(
+  choice: { starters: boolean; movers: boolean; nonsense: boolean },
+  wordCount: number,
+): string {
+  const box = (id: string, checked: boolean, label: string): string => `
+        <label class="option">
+          <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} />
+          <span>${label}</span>
+        </label>`;
+  return `
+    <h1 class="title">Spelling bee</h1>
+    <p class="hint">Grown-up screen. The app says a word, the child writes it, you press. Ten words a round.</p>
+
+    <div class="picker" data-testid="bee-panel">
+      <div class="options">
+        ${box('starters', choice.starters, 'Cambridge Starters words')}
+        ${box('movers', choice.movers, 'Cambridge Movers words')}
+        ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)')}
+      </div>
+    </div>
+
+    <p class="hint" data-testid="bee-count">${wordCount} words to draw from</p>
+    <button class="start" data-testid="start" ${wordCount ? '' : 'disabled'}>Start</button>
+    <p class="hint"><a href="./">← back to sound patterns</a></p>
+  `;
+}
+
 export function trackView(session: Session): string {
   const { filled, target } = cycleProgress(session);
   return `
@@ -57,6 +84,7 @@ export function gameView(
   canGrow: boolean,
   canShrink: boolean,
   volume: { label: string; canLouder: boolean; canQuieter: boolean },
+  note?: string,
 ): string {
   const { position, total } = progress(session);
   const lastVerdict = session.marks.at(-1);
@@ -68,6 +96,8 @@ export function gameView(
         <span data-testid="progress">${position + 1} of ${total}</span>
         <span class="score">✓ ${session.right} · ✗ ${session.wrong}</span>
       </header>
+
+      ${note ? `<p class="hint" data-testid="bee-note">${note}</p>` : ''}
 
       <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}>${word.word}</div>
 
