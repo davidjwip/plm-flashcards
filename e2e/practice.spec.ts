@@ -35,16 +35,24 @@ test('AC5/AC6/AC8 — each press records a verdict, advances, and the run ends w
   await page.locator('[data-testid="pattern-option"][value="ie"]').check();
   await page.getByTestId('start').click();
 
-  // "ie" has four words: every press must move the counter.
-  for (let i = 1; i <= 3; i++) {
-    await expect(page.getByTestId('progress')).toContainText(`${i} of 4`);
+  // The set size comes from the bank, which changes as patterns gain words: read it
+  // from the screen rather than hardcoding it, and answer every word in the run.
+  const first = (await page.getByTestId('progress').textContent()) ?? '';
+  const total = Number(first.match(/of\s+(\d+)/)?.[1] ?? 0);
+  expect(total).toBeGreaterThan(1);
+
+  for (let i = 1; i <= total; i++) {
+    await expect(page.getByTestId('progress')).toContainText(`${i} of ${total}`);
+    // AC16: every tenth right answer raises a celebration that covers the buttons.
+    const cel = page.getByTestId('celebration');
+    if (await cel.isVisible().catch(() => false)) {
+      await page.getByTestId('celebration-close').click();
+    }
     await page.getByTestId(i === 1 ? 'mark-wrong' : 'mark-right').click();
   }
-  await expect(page.getByTestId('progress')).toContainText('4 of 4');
-  await page.getByTestId('mark-right').click();
 
   await expect(page.getByTestId('summary')).toBeVisible();
-  await expect(page.getByTestId('summary')).toContainText('3 of 4');
+  await expect(page.getByTestId('summary')).toContainText(`${total - 1} of ${total}`);
 });
 
 test('AC10 — the pattern selection survives a reload', async ({ page }) => {
