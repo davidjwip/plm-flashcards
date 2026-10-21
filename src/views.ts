@@ -88,6 +88,27 @@ export function trackView(session: Session): string {
     </div>`;
 }
 
+function gameControls(
+  canGrow: boolean,
+  canShrink: boolean,
+  volume: { label: string; canLouder: boolean; canQuieter: boolean },
+  hideWord: boolean,
+): string {
+  return `
+      <div class="size-controls" data-testid="size-controls">
+        ${
+          hideWord
+            ? ''
+            : `<button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
+        <button class="size-btn" data-testid="word-bigger" ${canGrow ? '' : 'disabled'} aria-label="Bigger word">A+</button>
+        <span class="control-sep" aria-hidden="true"></span>`
+        }
+        <button class="size-btn" data-testid="volume-down" ${volume.canQuieter ? '' : 'disabled'} aria-label="Quieter">🔉−</button>
+        <span class="volume-label" data-testid="volume-label">${volume.label}</span>
+        <button class="size-btn" data-testid="volume-up" ${volume.canLouder ? '' : 'disabled'} aria-label="Louder">🔉+</button>
+      </div>`;
+}
+
 export function gameView(
   session: Session,
   word: Word,
@@ -116,14 +137,7 @@ export function gameView(
 
       ${hideWord ? '<button class="size-btn" data-testid="peek" aria-label="Show the word to the grown-up">Show word</button>' : ''}
 
-      <div class="size-controls" data-testid="size-controls">
-        <button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
-        <button class="size-btn" data-testid="word-bigger" ${canGrow ? '' : 'disabled'} aria-label="Bigger word">A+</button>
-        <span class="control-sep" aria-hidden="true"></span>
-        <button class="size-btn" data-testid="volume-down" ${volume.canQuieter ? '' : 'disabled'} aria-label="Quieter">🔉−</button>
-        <span class="volume-label" data-testid="volume-label">${volume.label}</span>
-        <button class="size-btn" data-testid="volume-up" ${volume.canLouder ? '' : 'disabled'} aria-label="Louder">🔉+</button>
-      </div>
+      ${gameControls(canGrow, canShrink, volume, hideWord)}
 
       ${flash ? `<div class="flash" data-testid="flash">${flash}</div>` : '<div class="flash-slot"></div>'}
 
@@ -143,7 +157,7 @@ export function gameView(
         ${trackView(session)}
       </div>
 
-      <button class="link" data-testid="choose-patterns">Change patterns</button>
+      <button class="link" data-testid="choose-patterns">${hideWord ? 'Change settings' : 'Change patterns'}</button>
 
       ${
         session.celebrate && showCelebration
