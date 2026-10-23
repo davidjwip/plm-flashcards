@@ -20,12 +20,15 @@ import {
 } from './volume';
 import audioManifest from '../src/audio-manifest.json';
 import type { Bank, Session, Verdict } from './types';
-import { endView, gameView, settingsView } from './views';
+import { beeSettingsView, endView, gameView, modeBar, settingsView } from './views';
+import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
 import { DEFAULT_WORD_SIZE, canGrow, canShrink, stepWordSize, wordSizeStyle } from './wordSize';
 import './styles.css';
 
 export type MountOptions = {
   bank: Bank;
+  /** Present => spelling-bee mode: dictation deck instead of sound patterns. */
+  beeDeck?: BeeDeck;
   root: HTMLElement;
   store?: KeyValueStore;
   synth?: Speaker;
@@ -41,7 +44,26 @@ export type AppHandle = {
 const FLASH_MS = 1100;
 
 /** Wire the app to a root element. All state lives in this closure. */
-export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
+export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppHandle {
+  let beeChoice: BeeChoice = { starters: true, movers: true, nonsense: true };
+  const MODE_KEY = 'mode';
+  const readMode = (): 'patterns' | 'bee' => {
+    try {
+      return window.localStorage.getItem(MODE_KEY) === 'bee' ? 'bee' : 'patterns';
+    } catch {
+      return 'patterns';
+    }
+  };
+  // #bee stays a deep link (bookmarks, the phone home screen) even though the mode is
+  // now a visible toggle: the hash wins at load, the toggle wins afterwards.
+  const HASH = String.fromCharCode(35);
+  const hashMode = (): 'patterns' | 'bee' =>
+    typeof window !== 'undefined' && window.location.hash.replace(HASH, '') === 'bee'
+      ? 'bee'
+      : readMode();
+  let mode: 'patterns' | 'bee' = hashMode();
+  const beeMode = (): boolean => Boolean(beeDeck) && mode === 'bee';
+  let spokenAt: string | null = null;
   let selected: string[] = loadSelection(store);
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
@@ -60,15 +82,20 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
   const store_ = store;
 
   function renderSettings(): void {
+    if (beeMode() && beeDeck) {
+      root.innerHTML =
+        modeBar('bee') + beeSettingsView(beeChoice, beeDictionary(beeDeck, beeChoice).length);
+      wireMode();
+      wireBeeSettings();
+      return;
+    }
     const open =
       root.querySelector<HTMLDetailsElement>('[data-testid="pattern-panel"]')?.open ??
       selected.length === 0;
-    root.innerHTML = settingsView(
-      patternOptions(bank),
-      selected,
-      buildDictionary(bank, selected).length,
-      open,
-    );
+    root.innerHTML =
+      modeBar('patterns') +
+      settingsView(patternOptions(bank), selected, buildDictionary(bank, selected).length, open);
+    wireMode();
     wireSettings();
   }
 
@@ -94,7 +121,24 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
         canLouder: canLouder(volume),
         canQuieter: canQuieter(volume),
       },
+      word.patterns.includes(NONSENSE_TAG)
+        ? 'This one is not a real word — sound it out, then write what you hear.'
+        : undefined,
+      beeMode(),
     );
+
+    // AC32: in bee mode the word is dictated, never read. The grown-up can reveal
+    // it to mark the child's spelling, and each new word is spoken once on arrival.
+    if (beeMode()) {
+      root.querySelector('[data-testid="peek"]')?.addEventListener('click', () => {
+        root.querySelector('[data-testid="word"]')?.removeAttribute('hidden');
+      });
+      const key = `${word.word}:${session.right}:${session.wrong}`;
+      if (spokenAt !== key) {
+        spokenAt = key;
+        player.play(word.word, volumeValue(volume));
+      }
+    }
 
     // One fade timer, ever: a rapid run of right answers must not queue a timer
     // per word (the maths game has a regression test for exactly this).
@@ -168,6 +212,49 @@ export function mount({ bank, root, store, synth }: MountOptions): AppHandle {
     root
       .querySelector('[data-testid="choose-patterns"]')
       ?.addEventListener('click', backToSettings);
+  }
+
+function wireMode(): void {
+  const pairs = [
+    ["patterns", "mode-patterns"],
+    ["bee", "mode-bee"],
+  ] as const;
+  for (const [value, testid] of pairs) {
+    root.querySelector(`[data-testid="${testid}"]`)?.addEventListener("click", () => {
+      if (!beeDeck || mode === value) return;
+      mode = value;
+      try {
+        window.localStorage.setItem(MODE_KEY, value);
+        window.history.replaceState(null, '', value === 'bee' ? '#bee' : window.location.pathname);
+      } catch {
+        /* private mode: the toggle still works for this session */
+      }
+      session = null;
+      spokenAt = null;
+      player.stop();
+      renderSettings();
+    });
+  }
+}
+
+function wireBeeSettings(): void {
+    for (const key of ['starters', 'movers', 'nonsense'] as const) {
+      root
+        .querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)
+        ?.addEventListener('change', (event) => {
+          beeChoice = { ...beeChoice, [key]: (event.target as HTMLInputElement).checked };
+          renderSettings();
+        });
+    }
+
+    root.querySelector('[data-testid="start"]')?.addEventListener('click', () => {
+      if (!beeDeck) return;
+      const dictionary = beeDictionary(beeDeck, beeChoice);
+      if (!dictionary.length) return;
+      session = createSession(beeRound(dictionary));
+      dismissedMilestone = null;
+      render();
+    });
   }
 
   function wireSettings(): void {

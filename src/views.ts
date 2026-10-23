@@ -38,6 +38,45 @@ export function settingsView(
     </button>`;
 }
 
+/** Mode switch shown above both setup screens (AC33). */
+export function modeBar(mode: 'patterns' | 'bee'): string {
+  const active = (value: string): string => (mode === value ? 'true' : 'false');
+  return `
+    <nav class="mode-bar" data-testid="mode-bar">
+      <button data-testid="mode-patterns" aria-pressed="${active('patterns')}"
+        class="${mode === 'patterns' ? 'on' : ''}">Sound patterns</button>
+      <button data-testid="mode-bee" aria-pressed="${active('bee')}"
+        class="${mode === 'bee' ? 'on' : ''}">Spelling bee</button>
+    </nav>`;
+}
+
+export function beeSettingsView(
+  choice: { starters: boolean; movers: boolean; nonsense: boolean },
+  wordCount: number,
+): string {
+  const box = (id: string, checked: boolean, label: string): string => `
+        <label class="option">
+          <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} />
+          <span>${label}</span>
+        </label>`;
+  return `
+    <h1 class="title">Spelling bee</h1>
+    <p class="hint">Grown-up screen. The app says a word, the child writes it, you press. Ten words a round.</p>
+
+    <div class="picker" data-testid="bee-panel">
+      <div class="options">
+        ${box('starters', choice.starters, 'Cambridge Starters words')}
+        ${box('movers', choice.movers, 'Cambridge Movers words')}
+        ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)')}
+      </div>
+    </div>
+
+    <p class="count" data-testid="bee-count">${wordCount} words to draw from</p>
+    <button class="primary" data-testid="start" ${wordCount ? '' : 'disabled'}>Start practice</button>
+    <p class="hint"><a href="./">← back to sound patterns</a></p>
+  `;
+}
+
 export function trackView(session: Session): string {
   const { filled, target } = cycleProgress(session);
   return `
@@ -49,6 +88,27 @@ export function trackView(session: Session): string {
     </div>`;
 }
 
+function gameControls(
+  canGrow: boolean,
+  canShrink: boolean,
+  volume: { label: string; canLouder: boolean; canQuieter: boolean },
+  hideWord: boolean,
+): string {
+  return `
+      <div class="size-controls" data-testid="size-controls">
+        ${
+          hideWord
+            ? ''
+            : `<button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
+        <button class="size-btn" data-testid="word-bigger" ${canGrow ? '' : 'disabled'} aria-label="Bigger word">A+</button>
+        <span class="control-sep" aria-hidden="true"></span>`
+        }
+        <button class="size-btn" data-testid="volume-down" ${volume.canQuieter ? '' : 'disabled'} aria-label="Quieter">🔉−</button>
+        <span class="volume-label" data-testid="volume-label">${volume.label}</span>
+        <button class="size-btn" data-testid="volume-up" ${volume.canLouder ? '' : 'disabled'} aria-label="Louder">🔉+</button>
+      </div>`;
+}
+
 export function gameView(
   session: Session,
   word: Word,
@@ -57,6 +117,8 @@ export function gameView(
   canGrow: boolean,
   canShrink: boolean,
   volume: { label: string; canLouder: boolean; canQuieter: boolean },
+  note?: string,
+  hideWord = false,
 ): string {
   const { position, total } = progress(session);
   const lastVerdict = session.marks.at(-1);
@@ -69,16 +131,13 @@ export function gameView(
         <span class="score">✓ ${session.right} · ✗ ${session.wrong}</span>
       </header>
 
-      <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}>${word.word}</div>
+      ${note ? `<p class="hint" data-testid="bee-note">${note}</p>` : ''}
 
-      <div class="size-controls" data-testid="size-controls">
-        <button class="size-btn" data-testid="word-smaller" ${canShrink ? '' : 'disabled'} aria-label="Smaller word">A−</button>
-        <button class="size-btn" data-testid="word-bigger" ${canGrow ? '' : 'disabled'} aria-label="Bigger word">A+</button>
-        <span class="control-sep" aria-hidden="true"></span>
-        <button class="size-btn" data-testid="volume-down" ${volume.canQuieter ? '' : 'disabled'} aria-label="Quieter">🔉−</button>
-        <span class="volume-label" data-testid="volume-label">${volume.label}</span>
-        <button class="size-btn" data-testid="volume-up" ${volume.canLouder ? '' : 'disabled'} aria-label="Louder">🔉+</button>
-      </div>
+      <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}${hideWord ? ' hidden' : ''}>${word.word}</div>
+
+      ${hideWord ? '<button class="size-btn" data-testid="peek" aria-label="Show the word to the grown-up">Show word</button>' : ''}
+
+      ${gameControls(canGrow, canShrink, volume, hideWord)}
 
       ${flash ? `<div class="flash" data-testid="flash">${flash}</div>` : '<div class="flash-slot"></div>'}
 
@@ -98,7 +157,7 @@ export function gameView(
         ${trackView(session)}
       </div>
 
-      <button class="link" data-testid="choose-patterns">Change patterns</button>
+      <button class="link" data-testid="choose-patterns">${hideWord ? 'Change settings' : 'Change patterns'}</button>
 
       ${
         session.celebrate && showCelebration

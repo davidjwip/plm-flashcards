@@ -183,6 +183,9 @@ body {
   font-weight: 600;
 }
 
+/* The card sets display:, which beats the hidden attribute. */
+[hidden] { display: none !important; }
+
 .card {
   display: grid;
   place-items: center;

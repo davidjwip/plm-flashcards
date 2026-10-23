@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createSession, mark } from './engine';
-import { endView, gameView, settingsView, trackView } from './views';
+import { endView, gameView, modeBar, settingsView, trackView } from './views';
 import type { Session } from './types';
 
 const options = [
@@ -151,5 +151,58 @@ describe('track and end views', () => {
     expect(html).toContain('Done — 2 of 3');
     expect(html).toContain('Not yet: 1');
     expect(html).toContain('Best streak: 2');
+  });
+});
+
+function volume() {
+  return { label: '85%', canLouder: true, canQuieter: true };
+}
+
+describe('AC32 — bee mode dictates the word instead of showing it', () => {
+  const base = () => createSession([word]);
+
+  it('AC32 — hides the word and offers the grown-up a peek', () => {
+    const html = gameView(base(), word, false, null, true, false, volume(), undefined, true);
+    expect(html).toContain('data-testid="word" hidden');
+    expect(html).toContain('data-testid="peek"');
+  });
+
+  it('AC32 — shows the word normally in pattern mode', () => {
+    const html = gameView(base(), word, false, null, true, false, volume());
+    expect(html).not.toContain('data-testid="word" hidden');
+    expect(html).not.toContain('data-testid="peek"');
+  });
+});
+
+describe('AC34 — bee mode keeps only meaningful game controls', () => {
+  const base = () => createSession([word]);
+
+  it('AC34 — hides word-size controls and names the footer for settings when the word is hidden', () => {
+    const html = gameView(base(), word, false, null, true, true, volume(), undefined, true);
+    expect(html).not.toContain('data-testid="word-smaller"');
+    expect(html).not.toContain('data-testid="word-bigger"');
+    expect(html).toContain('data-testid="volume-down"');
+    expect(html).toContain('data-testid="volume-label"');
+    expect(html).toContain('data-testid="volume-up"');
+    expect(html).toContain('Change settings');
+    expect(html).not.toContain('Change patterns');
+  });
+
+  it('AC34 — keeps word-size controls and the pattern link when the word is shown', () => {
+    const html = gameView(base(), word, false, null, true, true, volume());
+    expect(html).toContain('data-testid="word-smaller"');
+    expect(html).toContain('data-testid="word-bigger"');
+    expect(html).toContain('Change patterns');
+    expect(html).not.toContain('Change settings');
+  });
+});
+
+describe('AC33 — the mode is a visible toggle, not a hidden address', () => {
+  it('AC33 — marks the active mode and offers both', () => {
+    const bee = modeBar('bee');
+    expect(bee).toContain('data-testid="mode-bee" aria-pressed="true"');
+    expect(bee).toContain('data-testid="mode-patterns" aria-pressed="false"');
+    const patterns = modeBar('patterns');
+    expect(patterns).toContain('data-testid="mode-patterns" aria-pressed="true"');
   });
 });
