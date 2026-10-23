@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createSession, mark } from './engine';
-import { endView, gameView, modeBar, settingsView, trackView } from './views';
+import { endView, gameView, headerView, modeBar, patternPanel, trackView } from './views';
 import type { Session } from './types';
 
 const options = [
@@ -17,21 +17,24 @@ function sessionWith(verdicts: Array<'right' | 'wrong'>): Session {
   return session;
 }
 
-describe('settings view', () => {
-  it('disables Start and says there are no words when nothing is selected', () => {
-    const html = settingsView(options, [], 0, true);
-    expect(html).toContain('No words yet');
-    expect(html).toMatch(/data-testid="start"\s+disabled/);
-    expect(html).toContain('open');
+describe('pattern panel', () => {
+  it('asks for a pattern and hides the panel when nothing is selected', () => {
+    const html =
+      headerView('patterns', 'Patterns · 0', false, 'pick at least one pattern') +
+      patternPanel(options, [], false);
+    expect(html).toContain('pick at least one pattern');
+    expect(html).not.toContain('data-testid="start"');
+    expect(html).toMatch(/data-testid="pattern-panel"\s+hidden/);
   });
 
-  it('ticks the selected patterns and enables Start with a count', () => {
-    const html = settingsView(options, ['ai'], 42, false);
+  it('ticks the selected patterns and shows the count in the toggle', () => {
+    const html =
+      headerView('patterns', 'Patterns · 1', true, '42 words in this set') +
+      patternPanel(options, ['ai'], true);
     expect(html).toContain('42 words in this set');
-    expect(html).not.toMatch(/data-testid="start"\s+disabled/);
+    expect(html).toContain('Patterns · 1');
     expect(html).toMatch(/value="ai"\s+checked/);
     expect(html).not.toMatch(/value="oa"\s+checked/);
-    expect(html).toContain('1 selected');
   });
 });
 

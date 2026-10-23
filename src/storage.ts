@@ -36,6 +36,15 @@ export function saveSelection(
   }
 }
 
+/** True when the device has a selection at all, even an explicitly empty one. */
+export function hasStoredSelection(store: KeyValueStore | undefined = defaultStore()): boolean {
+  try {
+    return store?.getItem(STORAGE_KEY) !== null && store?.getItem(STORAGE_KEY) !== undefined;
+  } catch {
+    return false;
+  }
+}
+
 export { STORAGE_KEY };
 
 /** Word-size step, or null when nothing usable is stored. */
