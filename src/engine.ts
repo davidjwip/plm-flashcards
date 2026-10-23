@@ -31,9 +31,21 @@ export function patternOptions(bank: Bank): Pattern[] {
   return bank.patterns.filter((pattern) => populated.has(pattern.id));
 }
 
-export function createSession(words: Word[]): Session {
+/** A fresh Fisher–Yates permutation; the input array is never reordered. */
+export function shuffle<T>(items: T[], rand: () => number = Math.random): T[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    // Clamp so a deterministic rng that returns exactly 1 still cannot step off the end.
+    const j = Math.min(i, Math.floor(rand() * (i + 1)));
+    [shuffled[i], shuffled[j]] = [shuffled[j] as T, shuffled[i] as T];
+  }
+  return shuffled;
+}
+
+/** Start a run in a fresh random order, not the dictionary's alphabetical order. */
+export function createSession(words: Word[], rand: () => number = Math.random): Session {
   return {
-    words: [...words],
+    words: shuffle(words, rand),
     index: 0,
     right: 0,
     wrong: 0,

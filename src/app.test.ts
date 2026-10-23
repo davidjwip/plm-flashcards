@@ -43,9 +43,12 @@ const check = (value: string) => {
 describe('app wiring', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    // Keep the shuffled session in its input order for the assertions that name a word.
+    vi.spyOn(Math, 'random').mockReturnValue(1);
   });
   afterEach(() => {
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it('starts in a run with the five short vowels on a fresh device', () => {
@@ -146,6 +149,28 @@ describe('app wiring', () => {
 
     click(el.querySelector('[data-testid="pattern-toggle"]'));
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
+  });
+
+  it('AC58 — ticking a pattern keeps the panel scroll position', () => {
+    const el = root();
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    vi.spyOn(window, 'scrollY', 'get').mockReturnValue(240);
+
+    mount({ bank: bank(['rain', 'sail']), root: el, store: store() });
+    click(el.querySelector('[data-testid="pattern-toggle"]'));
+
+    const panel = el.querySelector<HTMLElement>('[data-testid="pattern-panel"]')!;
+    const options = panel.querySelector<HTMLElement>('.options')!;
+    panel.scrollTop = 120;
+    options.scrollTop = 80;
+
+    check('ai');
+
+    const after = el.querySelector<HTMLElement>('[data-testid="pattern-panel"]')!;
+    expect(after).not.toBe(panel);
+    expect(after.scrollTop).toBe(120);
+    expect(after.querySelector<HTMLElement>('.options')!.scrollTop).toBe(80);
+    expect(scrollTo).toHaveBeenCalledWith(0, 240);
   });
 
   it('AC16 — after dismissing the tenth, the twentieth celebration still appears', () => {
