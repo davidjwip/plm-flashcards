@@ -663,6 +663,13 @@ body {
 }
 
 @media (max-width: 480px) {
+  /* 44px is the smallest comfortable touch target; the pills are 40px at base size. */
+  .mode-bar button,
+  .word-list-toggle,
+  .how-to-toggle {
+    min-height: 2.75rem;
+  }
+
   .label-full {
     display: none;
   }

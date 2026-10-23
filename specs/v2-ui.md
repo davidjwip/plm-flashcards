@@ -91,7 +91,7 @@ A row appears here in the same PR as its test.
 | AC53      | `src/layout.test.ts`  | AC53 — the practice screen has no change-patterns link           | green  |
 | AC54      | `src/layout.test.ts`  | AC54 — the How to Use toggle opens a numbered instructions panel | green  |
 | AC55      | `src/layout.test.ts`  | AC55 — the header row never wraps and keeps the mode ring        | green  |
-| AC56      | `src/wordFit.test.ts` | AC56 — a long word shrinks to stay on one line                   | green  |
+| AC56      | `src/wordFit.test.ts` | AC56 — the shrink ramp steps down to the floor                   | green  |
 
 ## 6. Decisions
 

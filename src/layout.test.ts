@@ -350,7 +350,13 @@ describe('v2 UI — one-screen maths-game landing', () => {
     expect(views).toContain('>How to Use<');
     expect(views).toContain('>Close<');
 
-    const steps = views.match(/<li>/g) ?? [];
+    // Assert against the panel's own source slice: most of these keywords also occur
+    // elsewhere in views.ts, so matching the whole file would pass on an empty panel.
+    const panelStart = views.indexOf('export function howToPanel');
+    const panelEnd = views.indexOf('export function', panelStart + 10);
+    expect(panelStart).toBeGreaterThan(-1);
+    const panel = views.slice(panelStart, panelEnd);
+    const steps = panel.match(/<li>/g) ?? [];
     expect(steps.length).toBeGreaterThanOrEqual(4);
     for (const content of [
       'word-list',
@@ -365,7 +371,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
       'Path to the Party',
       'tenth',
     ]) {
-      expect(views, `instructions must cover "${content}"`).toContain(content);
+      expect(panel, `instructions must cover "${content}"`).toContain(content);
     }
 
     // Opening instructions must not restart the session or re-speak the word.
