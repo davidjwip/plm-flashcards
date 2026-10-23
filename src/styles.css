@@ -73,21 +73,23 @@ body {
   display: grid;
   gap: 0.4rem;
   margin-bottom: 0.9rem;
+  text-align: center;
 }
 
 .title {
   margin: 0;
   color: var(--coral);
-  font-size: 1.4rem;
+  font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  text-shadow: 2px 2px 0 rgba(255, 107, 107, 0.35);
+  text-align: center;
+  text-shadow: 2px 2px 0 #ffd1dc;
 }
 
 .subtitle {
   margin: 0;
   color: var(--teal);
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
@@ -102,7 +104,6 @@ body {
 
 .mode-bar {
   display: inline-flex;
-  overflow: hidden;
   border-radius: 50px;
 }
 
@@ -110,13 +111,21 @@ body {
   min-height: 2.5rem;
   padding: 0 0.85rem;
   border: 0;
-  border-radius: 50px;
+  border-radius: 0;
   background: var(--coral);
   color: #fff;
   font: inherit;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.mode-bar button:first-child {
+  border-radius: 50px 0 0 50px;
+}
+
+.mode-bar button:last-child {
+  border-radius: 0 50px 50px 0;
 }
 
 .mode-bar button.on {
@@ -207,6 +216,36 @@ body {
 }
 
 .action-btn:active {
+  transform: scale(0.98);
+}
+
+.peek-btn {
+  justify-self: center;
+  width: 100%;
+  max-width: 24rem;
+  min-height: 5rem;
+  margin: 0 auto;
+  padding: 0 1.3rem;
+  border: 0;
+  border-radius: 50px;
+  background: var(--teal);
+  color: #fff;
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition:
+    background 0.15s ease-out,
+    transform 0.15s ease-out;
+}
+
+.peek-btn:hover {
+  background: var(--teal-deep);
+  transform: scale(1.02);
+}
+
+.peek-btn:active {
   transform: scale(0.98);
 }
 
@@ -386,33 +425,59 @@ body {
   text-align: center;
 }
 
-.party {
-  display: grid;
-  gap: 0.4rem;
+.progress-area {
+  margin-top: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.party-label {
-  color: #6b7280;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.progress-area h2 {
+  margin: 0 0 10px;
+  color: var(--coral);
+  font-size: 1.35rem;
+  text-align: center;
 }
 
-.track {
-  display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
-  gap: 0.35rem;
+.goal-track {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 15px;
+  background: #f8f9fa;
+}
+
+.mascot {
+  font-size: 2.5rem;
+  line-height: 1;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.goal-steps-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.goal-steps {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .step {
   display: grid;
   place-items: center;
-  aspect-ratio: 1;
-  border: 1px solid var(--teal-tint);
-  border-radius: 999px;
-  color: #6b7280;
-  font-size: 0.75rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background: #e0e0e0;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  font-weight: bold;
   font-variant-numeric: tabular-nums;
   transition:
     background 0.15s ease-out,
@@ -420,17 +485,33 @@ body {
 }
 
 .step.filled {
-  border-color: var(--teal);
-  background: var(--teal);
+  background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
   color: #fff;
-  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(78, 205, 196, 0.4);
 }
 
-.track-end {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  font-size: 1rem;
+.goal-end {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.solved-line {
+  margin: 10px 0 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* ---------- summary, empty and celebration ---------- */
@@ -459,6 +540,17 @@ body {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+}
+
+.site-footer {
+  margin-top: 20px;
+  color: var(--teal);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
 }
 
 .celebration {
@@ -515,6 +607,10 @@ body {
     padding: 8px;
   }
 
+  .title {
+    font-size: 2rem;
+  }
+
   .action-btn {
     width: 100%;
   }
@@ -523,14 +619,17 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .flash,
   .step,
-  .action-btn {
+  .action-btn,
+  .mascot {
     animation: none;
     transition: none;
   }
 
   .verdict:active,
   .action-btn:hover,
-  .action-btn:active {
+  .action-btn:active,
+  .peek-btn:hover,
+  .peek-btn:active {
     transform: none;
   }
 }
