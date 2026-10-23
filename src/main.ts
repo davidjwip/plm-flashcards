@@ -5,13 +5,13 @@ import type { BeeDeck } from './bee';
 import type { Bank } from './types';
 
 // Bootstrap only: everything testable lives in app.ts, views.ts, engine.ts.
-// Bee mode is a route, not a second app: same engine, dictation deck.
+// The bee deck is always mounted so the header toggle works from a plain load;
+// the hash only chooses the initial mode.
 const root = document.querySelector<HTMLElement>('#app');
-const beeMode = window.location.hash.startsWith('#bee');
 if (root) {
   mount({
     bank: bankJson as Bank,
+    beeDeck: beeJson as BeeDeck,
     root,
-    ...(beeMode ? { beeDeck: beeJson as BeeDeck } : {}),
   });
 }

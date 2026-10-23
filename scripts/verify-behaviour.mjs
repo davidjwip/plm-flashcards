@@ -8,7 +8,7 @@
 // step table and the screenshots and compares them against plan.md. Assertions
 // catch the obvious breakage; the screenshots catch "it ran, but it looks wrong".
 //
-// Usage:  node scripts/verify-behaviour.mjs [--pattern=ai] [--headful]
+// Usage:  node scripts/verify-behaviour.mjs [--pattern=ai] [--hash=bee] [--headful]
 import { chromium } from '@playwright/test';
 import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -19,7 +19,9 @@ const PORT = Number(process.env.VERIFY_PORT ?? 4175);
 const BASE = `http://127.0.0.1:${PORT}`;
 const STAMP = new Date().toISOString().replace(/[:T]/g, '-').slice(0, 19);
 const OUT = join('verify', STAMP);
-const pattern = (process.argv.find((a) => a.startsWith('--pattern=')) ?? '--pattern=ai').split('=')[1];
+const pattern = (process.argv.find((a) => a.startsWith('--pattern=')) ?? '--pattern=ai').split(
+  '=',
+)[1];
 const headful = process.argv.includes('--headful');
 const HASH = (process.argv.find((a) => a.startsWith('--hash=')) ?? '').replace('--hash=', '');
 
@@ -57,39 +59,147 @@ async function dismissCelebration(page) {
   // Without this, a set of 10+ words stalls the run at the milestone.
   const cel = page.getByTestId('celebration');
   if (await cel.isVisible().catch(() => false)) {
-    await page.getByTestId('celebration-close').click().catch(() => {});
+    await page
+      .getByTestId('celebration-close')
+      .click()
+      .catch(() => {});
     await page.waitForTimeout(150);
   }
 }
 
 async function text(page, testid) {
-  return (await page.getByTestId(testid).textContent().catch(() => null))?.trim() ?? null;
+  return (
+    (
+      await page
+        .getByTestId(testid)
+        .textContent()
+        .catch(() => null)
+    )?.trim() ?? null
+  );
+}
+
+async function patternFlow(page, shot) {
+  // The app now lands in a run, so there is no setup gate before the first word.
+  await page.goto(HASH ? `${BASE}/#${HASH}` : BASE, { waitUntil: 'load' });
+  await settle(page, '[data-testid="word"]');
+  await shot('loaded');
+  const word0 = await text(page, 'word');
+  const count0 = await text(page, 'word-count');
+  const panelHidden = await page.getByTestId('pattern-panel').isHidden();
+  record(
+    'landing starts a run',
+    Boolean(word0) && panelHidden,
+    `word="${word0}"; count="${count0}"; panel hidden=${panelHidden}`,
+  );
+
+  // 1. Open the word list, pick one pattern — the run restarts with the new set.
+  if (panelHidden) await page.getByTestId('pattern-toggle').click();
+  await settle(page, '[data-testid="pattern-panel"]');
+  await shot('pattern-panel');
+  await page.locator(`[data-testid="pattern-option"][value="${pattern}"]`).check();
+  await settle(page, '[data-testid="word"]');
+  await shot('pattern-picked');
+  const count1 = await text(page, 'word-count');
+  const word1 = await text(page, 'word');
+  const nWords = Number((count1 ?? '').match(/(\d+)\s+words/)?.[1] ?? 0);
+  record(
+    'pattern picked restarts run',
+    Boolean(word1) && nWords > 0,
+    `pattern=${pattern}; count="${count1}"; word="${word1}"`,
+  );
+  await page.getByTestId('pattern-toggle').click();
+
+  // 2. Answer every word, marking the first one wrong — the run must end in a summary.
+  const progress1 = await text(page, 'progress');
+  const total = Number((progress1 ?? '').match(/of\s+(\d+)/)?.[1] ?? nWords);
+  const seen = [];
+  for (let i = 0; i < Math.max(total, 0) + 2; i++) {
+    if (
+      await page
+        .getByTestId('summary')
+        .isVisible()
+        .catch(() => false)
+    )
+      break;
+    seen.push(await text(page, 'word'));
+    await dismissCelebration(page);
+    await page.getByTestId(i === 0 ? 'mark-wrong' : 'mark-right').click();
+    await sleep(180);
+    await dismissCelebration(page);
+    if (i === Math.floor(total / 2)) await shot('mid-run');
+  }
+  await settle(page, '[data-testid="summary"]');
+  await shot('summary');
+  const summary = await text(page, 'summary');
+  const distinct = new Set(seen).size;
+  record(
+    'run completed',
+    Boolean(summary),
+    `${seen.length} words shown; summary="${(summary ?? '').slice(0, 60)}"`,
+  );
+  record(
+    'no repeated word in a run',
+    distinct === seen.length,
+    `distinct=${distinct} of ${seen.length}`,
+  );
+
+  // 3. Reload — the chosen pattern and the one-screen run must both survive.
+  await page.reload({ waitUntil: 'load' });
+  await settle(page, '[data-testid="word"]');
+  await page.getByTestId('pattern-toggle').click();
+  await settle(page, '[data-testid="pattern-panel"]');
+  await shot('after-reload');
+  const stillChecked = await page
+    .locator(`[data-testid="pattern-option"][value="${pattern}"]`)
+    .isChecked();
+  const wordAfter = await text(page, 'word');
+  record(
+    'selection persists with a run',
+    stillChecked && Boolean(wordAfter),
+    `checked=${stillChecked}; word="${wordAfter}"`,
+  );
 }
 
 async function beeFlow(page, shot) {
+  // Bee opens in a run too: the default deck is mounted, the word is dictated.
   await page.goto(`${BASE}/#bee`, { waitUntil: 'load' });
-  await settle(page, '[data-testid="bee-count"]');
-  await shot('bee-setup');
-  const count = await text(page, 'bee-count');
-  const startOn = await page.getByTestId('start').isEnabled();
-  record('bee setup loads', Boolean(startOn) && /\d+ words/.test(count ?? ''), `count="${count}"; start enabled=${startOn}`);
+  await settle(page, '[data-testid="hear"]');
+  await shot('bee-first-word');
+  const progress = await text(page, 'progress');
+  const hiddenOnArrival = await page.getByTestId('word').isHidden();
+  record(
+    'bee landing starts a run',
+    hiddenOnArrival && /\d+\s+of\s+\d+/.test(progress ?? ''),
+    `word hidden=${hiddenOnArrival}; progress="${progress}"`,
+  );
 
-  // AC27 / C5: no level chosen => no words, Start disabled.
+  // The same header toggle now opens the Cambridge level panel.
+  await page.getByTestId('pattern-toggle').click();
+  await settle(page, '[data-testid="bee-panel"]');
+  await shot('bee-panel');
+  const count = await text(page, 'bee-count');
+  record('level panel opens', /\d+ words/.test(count ?? ''), `count="${count}"`);
+
+  // No level chosen => no words, but the current run is not thrown away.
   for (const level of ['starters', 'movers', 'nonsense']) {
     await page.locator(`[data-testid="level-${level}"]`).uncheck();
   }
   await settle(page, '[data-testid="bee-count"]');
   await shot('bee-no-levels');
   const none = await text(page, 'bee-count');
-  const off = await page.getByTestId('start').isDisabled();
-  record('no level means no words', Boolean(off) && /^0 words/.test(none ?? ''), `count="${none}"; start disabled=${off}`);
+  const stillRunning = /\d+\s+of\s+\d+/.test((await text(page, 'progress')) ?? '');
+  record(
+    'no level means no words',
+    /^0 words/.test(none ?? '') && stillRunning,
+    `count="${none}"; current run kept=${stillRunning}`,
+  );
 
   // Nonsense only, so the round is guaranteed to contain labelled nonsense words (C4/AC30).
   await page.locator('[data-testid="level-nonsense"]').check();
-  await settle(page, '[data-testid="bee-count"]');
-  await page.getByTestId('start').click();
   await settle(page, '[data-testid="hear"]');
-  await shot('bee-first-word');
+  await page.getByTestId('pattern-toggle').click();
+  await settle(page, '[data-testid="hear"]');
+  await shot('bee-nonsense-word');
 
   // AC32: the word is dictated, not read — and the grown-up can peek to mark it.
   const wordHidden = await page.getByTestId('word').isHidden();
@@ -98,14 +208,29 @@ async function beeFlow(page, shot) {
   await page.getByTestId('peek').click();
   const peeked = await page.getByTestId('word').isVisible();
   const peekedText = (await page.getByTestId('word').textContent())?.trim() ?? '';
-  record('grown-up can reveal the word to mark it', peeked && peekedText.length > 0,
-    `visible=${peeked}; word="${peekedText}"`);
+  record(
+    'grown-up can reveal the word to mark it',
+    peeked && peekedText.length > 0,
+    `visible=${peeked}; word="${peekedText}"`,
+  );
 
   let answered = 0;
   let labelled = 0;
   for (let i = 0; i < 14; i += 1) {
-    if (await page.getByTestId('summary').isVisible().catch(() => false)) break;
-    if (await page.getByTestId('bee-note').isVisible().catch(() => false)) labelled += 1;
+    if (
+      await page
+        .getByTestId('summary')
+        .isVisible()
+        .catch(() => false)
+    )
+      break;
+    if (
+      await page
+        .getByTestId('bee-note')
+        .isVisible()
+        .catch(() => false)
+    )
+      labelled += 1;
     await dismissCelebration(page);
     await page.getByTestId('mark-right').click();
     answered += 1;
@@ -115,7 +240,11 @@ async function beeFlow(page, shot) {
   await settle(page, '[data-testid="summary"]');
   await shot('bee-summary');
   const summary = await text(page, 'summary');
-  record('bee round completes', Boolean(summary), `${answered} words answered; summary="${(summary ?? '').slice(0, 48)}"`);
+  record(
+    'bee round completes',
+    Boolean(summary),
+    `${answered} words answered; summary="${(summary ?? '').slice(0, 48)}"`,
+  );
   record('nonsense word is labelled', labelled > 0, `words showing the note: ${labelled}`);
 }
 
@@ -145,61 +274,7 @@ async function main() {
     if (HASH === 'bee') {
       await beeFlow(page, shot);
     } else {
-
-    // 1. Cold load — nothing selected, Start must be gated.
-    await page.goto(HASH ? `${BASE}/#${HASH}` : BASE, { waitUntil: 'load' });
-    await settle(page, '[data-testid="app"]');
-    await shot('loaded');
-    const count0 = await text(page, 'word-count');
-    const startDisabled = await page.getByTestId('start').isDisabled();
-    record('cold load', startDisabled && /no words yet/i.test(count0 ?? ''), `start disabled=${startDisabled}; count="${count0}"`);
-
-    // 2. Pick one pattern — the word set builds and Start unlocks.
-    const panelOpen = await page.getByTestId('pattern-panel').evaluate((el) => el.hasAttribute('open'));
-    if (!panelOpen) await page.getByTestId('pattern-toggle').click();
-    await page.locator(`[data-testid="pattern-option"][value="${pattern}"]`).check();
-    await settle(page, '[data-testid="word-count"]');
-    await shot('pattern-picked');
-    const count1 = await text(page, 'word-count');
-    const startEnabled = await page.getByTestId('start').isEnabled();
-    const nWords = Number((count1 ?? '').match(/(\d+)\s+words/)?.[1] ?? 0);
-    record('pattern picked', startEnabled && nWords > 0, `pattern=${pattern}; count="${count1}"; start enabled=${startEnabled}`);
-
-    // 3. Start the run — one word, huge, one of the two buttons live.
-    await page.getByTestId('start').click();
-    await settle(page, '[data-testid="word"]');
-    await shot('first-word');
-    const word1 = await text(page, 'word');
-    const progress1 = await text(page, 'progress');
-    record('run started', Boolean(word1) && /\d+\s+of\s+\d+/.test(progress1 ?? ''), `word="${word1}"; progress="${progress1}"`);
-
-    // 4. Answer every word, marking the first one wrong — the run must end in a summary.
-    const total = Number((progress1 ?? '').match(/of\s+(\d+)/)?.[1] ?? nWords);
-    let seen = [];
-    for (let i = 0; i < Math.max(total, 0) + 2; i++) {
-      if (await page.getByTestId('summary').isVisible().catch(() => false)) break;
-      const w = await text(page, 'word');
-      seen.push(w);
-      await dismissCelebration(page);
-      await page.getByTestId(i === 0 ? 'mark-wrong' : 'mark-right').click();
-      await sleep(180);
-      await dismissCelebration(page);
-      if (i === Math.floor(total / 2)) await shot('mid-run');
-    }
-    await settle(page, '[data-testid="summary"]');
-    await shot('summary');
-    const summary = await text(page, 'summary');
-    const distinct = new Set(seen).size;
-    record('run completed', Boolean(summary), `${seen.length} words shown, ${distinct} distinct; summary="${(summary ?? '').slice(0, 60)}"`);
-    record('no repeated word in a run', distinct === seen.length, `distinct=${distinct} of ${seen.length}`);
-
-    // 5. Reload — the chosen pattern must survive, Start must be enabled again.
-    await page.reload({ waitUntil: 'load' });
-    await settle(page, '[data-testid="app"]');
-    await shot('after-reload');
-    const stillChecked = await page.locator(`[data-testid="pattern-option"][value="${pattern}"]`).isChecked();
-    const startAfter = await page.getByTestId('start').isEnabled();
-    record('selection persists', stillChecked && startAfter, `checked=${stillChecked}; start enabled=${startAfter}`);
+      await patternFlow(page, shot);
     }
   } catch (err) {
     failed++;
@@ -213,7 +288,9 @@ async function main() {
   const report = { stamp: STAMP, pattern, base: BASE, failed, rows, screenshots: shots };
   writeFileSync(join(OUT, 'report.json'), JSON.stringify(report, null, 2));
 
-  console.log(`\n  ${failed === 0 ? 'RESULT: PASS' : `RESULT: FAIL (${failed} step${failed === 1 ? '' : 's'})`}`);
+  console.log(
+    `\n  ${failed === 0 ? 'RESULT: PASS' : `RESULT: FAIL (${failed} step${failed === 1 ? '' : 's'})`}`,
+  );
   console.log(`  evidence: ${OUT}/report.json + ${shots.length} screenshots`);
   console.log(`  compare against plan.md / specs/v1.md before claiming the change works.\n`);
   process.exit(failed === 0 ? 0 : 1);

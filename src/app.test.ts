@@ -48,28 +48,38 @@ describe('app wiring', () => {
     vi.useRealTimers();
   });
 
-  it('starts on the setup screen with Start disabled', () => {
+  it('starts in a run with the five short vowels on a fresh device', () => {
     const el = root();
-    mount({ bank: bank(['rain', 'sail']), root: el, store: store() });
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    const vowelBank: Bank = {
+      patterns: vowels.map((id) => ({ id, label: id })),
+      words: ['apple', 'egg', 'ink', 'ox', 'sun'].map((word, i) => ({
+        word,
+        patterns: [vowels[i]!],
+      })),
+    };
+    mount({ bank: vowelBank, root: el, store: store() });
     expect(el.textContent).toContain('Sound practice');
-    expect(el.querySelector<HTMLButtonElement>('[data-testid="start"]')!.disabled).toBe(true);
+    expect(el.querySelector('[data-testid="word"]')!.textContent).toBe('apple');
+    for (const id of vowels) {
+      expect(el.querySelector<HTMLInputElement>(`[value="${id}"]`)!.checked).toBe(true);
+    }
+    expect(el.querySelector('[data-testid="start"]')).toBeFalsy();
   });
 
-  it('selecting a pattern enables Start, saves it, and starting shows a word', () => {
+  it('selecting a pattern rebuilds the run, saves it and reports the count', () => {
     const el = root();
     const s = store();
     mount({ bank: bank(['rain', 'sail']), root: el, store: s });
 
+    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
     check('ai');
     expect(s.data['plm.selectedPatterns']).toBe('["ai"]');
-    expect(el.querySelector<HTMLButtonElement>('[data-testid="start"]')!.disabled).toBe(false);
-    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain('2 words');
-
-    click(el.querySelector('[data-testid="start"]'));
     expect(el.querySelector('[data-testid="word"]')!.textContent).toBe('rain');
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain('2 words');
   });
 
-  it('restores a saved selection on mount', () => {
+  it('restores a saved selection on mount and starts there', () => {
     const el = root();
     mount({
       bank: bank(['rain', 'sail']),
@@ -79,14 +89,14 @@ describe('app wiring', () => {
     expect(el.querySelector<HTMLInputElement>('[data-testid="pattern-option"]')!.checked).toBe(
       true,
     );
-    expect(el.querySelector<HTMLButtonElement>('[data-testid="start"]')!.disabled).toBe(false);
+    expect(el.querySelector('[data-testid="word"]')!.textContent).toBe('rain');
+    expect(el.querySelector('[data-testid="start"]')).toBeFalsy();
   });
 
   it('records verdicts, fills the track, flashes praise and fades it', () => {
     const el = root();
     mount({ bank: bank(Array.from({ length: 12 }, (_, i) => `w${i}`)), root: el, store: store() });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     click(el.querySelector('[data-testid="mark-right"]'));
     expect(el.querySelector('[data-testid="track"]')!.getAttribute('data-filled')).toBe('1');
@@ -118,16 +128,14 @@ describe('app wiring', () => {
       synth: { cancel: vi.fn(), speak } as never,
     });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
     click(el.querySelector('[data-testid="hear"]'));
     expect(speak).toHaveBeenCalled();
   });
 
-  it('celebrates at ten, dismisses, and returns to the patterns', () => {
+  it('celebrates at ten, dismisses, and opens the patterns again', () => {
     const el = root();
     mount({ bank: bank(Array.from({ length: 12 }, (_, i) => `w${i}`)), root: el, store: store() });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     for (let i = 0; i < 10; i++) click(el.querySelector('[data-testid="mark-right"]'));
     expect(el.querySelector('[data-testid="celebration"]')).toBeTruthy();
@@ -144,7 +152,6 @@ describe('app wiring', () => {
     const el = root();
     mount({ bank: bank(Array.from({ length: 25 }, (_, i) => `w${i}`)), root: el, store: store() });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     for (let i = 0; i < 10; i++) click(el.querySelector('[data-testid="mark-right"]'));
     expect(el.querySelector('[data-testid="celebration"]')).toBeTruthy();
@@ -163,7 +170,6 @@ describe('app wiring', () => {
     const clearTimer = vi.spyOn(globalThis, 'clearTimeout');
 
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
     const scheduled: unknown[] = [];
     for (let i = 0; i < 3; i++) {
       click(el.querySelector('[data-testid="mark-right"]'));
@@ -185,7 +191,6 @@ describe('app wiring', () => {
     const clearTimer = vi.spyOn(globalThis, 'clearTimeout');
 
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
     click(el.querySelector('[data-testid="mark-right"]'));
     const flashId = setTimer.mock.results.at(-1)?.value;
 
@@ -200,7 +205,6 @@ describe('app wiring', () => {
     const s = store();
     mount({ bank: bank(['rain', 'sail']), root: el, store: s });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     const card = () => el.querySelector('[data-testid="word"]') as HTMLElement;
     // Nothing chosen yet: no inline size, the stylesheet's clamp() is in charge.
@@ -225,7 +229,6 @@ describe('app wiring', () => {
         setItem: () => {},
       },
     });
-    click(el.querySelector('[data-testid="start"]'));
     expect((el.querySelector('[data-testid="word"]') as HTMLElement).style.fontSize).toBe('9rem');
   });
 
@@ -234,7 +237,6 @@ describe('app wiring', () => {
     const s = store();
     mount({ bank: bank(['rain', 'sail']), root: el, store: s });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     expect(el.querySelector('[data-testid="volume-label"]')!.textContent).toBe('85%');
     click(el.querySelector('[data-testid="volume-down"]'));
@@ -256,7 +258,6 @@ describe('app wiring', () => {
         setItem: () => {},
       },
     });
-    click(el.querySelector('[data-testid="start"]'));
     expect(el.querySelector('[data-testid="volume-label"]')!.textContent).toBe('30%');
   });
 
@@ -264,7 +265,6 @@ describe('app wiring', () => {
     const el = root();
     mount({ bank: bank(['rain', 'sail']), root: el, store: store() });
     check('ai');
-    click(el.querySelector('[data-testid="start"]'));
 
     click(el.querySelector('[data-testid="mark-right"]'));
     click(el.querySelector('[data-testid="mark-wrong"]'));
@@ -277,11 +277,16 @@ describe('app wiring', () => {
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
   });
 
-  it('does not start a run with no words', () => {
+  it('shows the pick-a-pattern prompt when the saved selection is empty', () => {
     const el = root();
-    mount({ bank: bank(['rain']), root: el, store: store() });
-    // Start is disabled, but the handler must also refuse if clicked.
-    click(el.querySelector('[data-testid="start"]'));
+    mount({
+      bank: bank(['rain']),
+      root: el,
+      store: { getItem: () => '[]', setItem: () => {} },
+    });
     expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
+      'pick at least one pattern',
+    );
   });
 });

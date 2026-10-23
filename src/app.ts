@@ -2,6 +2,7 @@ import { buildDictionary, createSession, currentWord, mark, patternOptions } fro
 import { createPlayer } from './audio';
 import type { Speaker } from './speech';
 import {
+  hasStoredSelection,
   loadSelection,
   loadVolume,
   loadWordSize,
@@ -20,14 +21,22 @@ import {
 } from './volume';
 import audioManifest from '../src/audio-manifest.json';
 import type { Bank, Session, Verdict } from './types';
-import { beeSettingsView, endView, gameView, modeBar, settingsView } from './views';
+import {
+  beePanel,
+  emptyView,
+  endView,
+  gameView,
+  headerView,
+  patternPanel,
+  type Mode,
+} from './views';
 import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
 import { DEFAULT_WORD_SIZE, canGrow, canShrink, stepWordSize, wordSizeStyle } from './wordSize';
 import './styles.css';
 
 export type MountOptions = {
   bank: Bank;
-  /** Present => spelling-bee mode: dictation deck instead of sound patterns. */
+  /** Always supplied by main.ts so the mode toggle works from a plain load (AC37). */
   beeDeck?: BeeDeck;
   root: HTMLElement;
   store?: KeyValueStore;
@@ -35,7 +44,7 @@ export type MountOptions = {
 };
 
 export type AppHandle = {
-  /** Current session, or null when the setup screen is showing. */
+  /** Current session, or null when no run can be built (an explicitly empty selection). */
   session: () => Session | null;
   /** Clear pending timers (the flash fade) so a torn-down app is inert. */
   unmount: () => void;
@@ -43,11 +52,14 @@ export type AppHandle = {
 
 const FLASH_MS = 1100;
 
+/** Only a first run gets the five short vowels (AC35). */
+export const DEFAULT_PATTERNS = ['a', 'e', 'i', 'o', 'u'] as const;
+
 /** Wire the app to a root element. All state lives in this closure. */
 export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppHandle {
   let beeChoice: BeeChoice = { starters: true, movers: true, nonsense: true };
   const MODE_KEY = 'mode';
-  const readMode = (): 'patterns' | 'bee' => {
+  const readMode = (): Mode => {
     try {
       return window.localStorage.getItem(MODE_KEY) === 'bee' ? 'bee' : 'patterns';
     } catch {
@@ -57,14 +69,18 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   // #bee stays a deep link (bookmarks, the phone home screen) even though the mode is
   // now a visible toggle: the hash wins at load, the toggle wins afterwards.
   const HASH = String.fromCharCode(35);
-  const hashMode = (): 'patterns' | 'bee' =>
+  const hashMode = (): Mode =>
     typeof window !== 'undefined' && window.location.hash.replace(HASH, '') === 'bee'
       ? 'bee'
       : readMode();
-  let mode: 'patterns' | 'bee' = hashMode();
-  const beeMode = (): boolean => Boolean(beeDeck) && mode === 'bee';
+  let mode: Mode = hashMode();
+  const beeMode = (): boolean => mode === 'bee' && beeDeck !== undefined;
   let spokenAt: string | null = null;
   let selected: string[] = loadSelection(store);
+  // An explicit empty selection is a choice; only a device with no saved selection
+  // falls back to the short vowels.
+  if (!hasStoredSelection(store)) selected = [...DEFAULT_PATTERNS];
+  let panelOpen = false;
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
   let volume = clampVolume(loadVolume(store) ?? DEFAULT_VOLUME);
@@ -81,35 +97,62 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   const store_ = store;
 
-  function renderSettings(): void {
-    if (beeMode() && beeDeck) {
-      root.innerHTML =
-        modeBar('bee') + beeSettingsView(beeChoice, beeDictionary(beeDeck, beeChoice).length);
-      wireMode();
-      wireBeeSettings();
-      return;
-    }
-    const open =
-      root.querySelector<HTMLDetailsElement>('[data-testid="pattern-panel"]')?.open ??
-      selected.length === 0;
-    root.innerHTML =
-      modeBar('patterns') +
-      settingsView(patternOptions(bank), selected, buildDictionary(bank, selected).length, open);
-    wireMode();
-    wireSettings();
+  function dictionarySize(): number {
+    return buildDictionary(bank, selected).length;
   }
 
-  function render(): void {
-    if (!session) return renderSettings();
-    const word = currentWord(session);
-    if (!word) {
-      root.innerHTML = endView(session);
-      wireEnd();
+  function beeSize(): number {
+    return beeDeck ? beeDictionary(beeDeck, beeChoice).length : 0;
+  }
+
+  function toggleLabel(): string {
+    if (beeMode()) {
+      const levels = [beeChoice.starters, beeChoice.movers, beeChoice.nonsense].filter(Boolean);
+      return `Levels · ${levels.length}`;
+    }
+    return `Patterns · ${selected.length}`;
+  }
+
+  function countText(): string {
+    if (beeMode()) return `${beeSize()} words to draw from`;
+    if (selected.length === 0) return 'pick at least one pattern';
+    return `${dictionarySize()} words in this set`;
+  }
+
+  function panelView(): string {
+    if (beeMode()) return beePanel(beeChoice, beeSize(), panelOpen);
+    return patternPanel(patternOptions(bank), selected, panelOpen);
+  }
+
+  function clearRun(): void {
+    dismissedMilestone = null;
+    spokenAt = null;
+    player.stop();
+  }
+
+  function startPatternRun(): void {
+    clearRun();
+    const dictionary = buildDictionary(bank, selected);
+    session = dictionary.length ? createSession(dictionary) : null;
+  }
+
+  function startBeeRun(): void {
+    clearRun();
+    if (!beeDeck) {
+      session = null;
       return;
     }
+    const dictionary = beeDictionary(beeDeck, beeChoice);
+    session = dictionary.length ? createSession(beeRound(dictionary)) : null;
+  }
+
+  function renderContent(): string {
+    if (!session) return emptyView();
+    const word = currentWord(session);
+    if (!word) return endView(session);
 
     const showCelebration = dismissedMilestone !== session.right;
-    root.innerHTML = gameView(
+    return gameView(
       session,
       word,
       showCelebration,
@@ -126,11 +169,109 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
         : undefined,
       beeMode(),
     );
+  }
+
+  function render(): void {
+    root.innerHTML = `<div class="app-card">${headerView(
+      mode,
+      toggleLabel(),
+      panelOpen,
+      countText(),
+    )}${panelView()}${renderContent()}</div>`;
+    wireHeader();
+    wirePanel();
+    wireGame();
+  }
+
+  function wireHeader(): void {
+    for (const [value, testid] of [
+      ['patterns', 'mode-patterns'],
+      ['bee', 'mode-bee'],
+    ] as const) {
+      root.querySelector(`[data-testid="${testid}"]`)?.addEventListener('click', () => {
+        if (mode === value) return;
+        mode = value;
+        try {
+          window.localStorage.setItem(MODE_KEY, value);
+          window.history.replaceState(
+            null,
+            '',
+            value === 'bee' ? '#bee' : window.location.pathname,
+          );
+        } catch {
+          /* private mode: the toggle still works for this session */
+        }
+        panelOpen = false;
+        if (value === 'bee') startBeeRun();
+        else startPatternRun();
+        render();
+      });
+    }
+
+    root.querySelector('[data-testid="pattern-toggle"]')?.addEventListener('click', () => {
+      panelOpen = !panelOpen;
+      render();
+    });
+  }
+
+  function applySelection(next: string[]): void {
+    selected = next;
+    saveSelection(selected, store_);
+    if (next.length === 0) {
+      render();
+      return;
+    }
+    startPatternRun();
+    render();
+  }
+
+  function applyBeeChoice(next: BeeChoice): void {
+    beeChoice = next;
+    if (beeSize() > 0) startBeeRun();
+    render();
+  }
+
+  function wirePanel(): void {
+    for (const input of root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')) {
+      input.addEventListener('change', () => {
+        const next = [...root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')]
+          .filter((box) => box.checked)
+          .map((box) => box.value);
+        applySelection(next);
+      });
+    }
+
+    for (const key of ['starters', 'movers', 'nonsense'] as const) {
+      root
+        .querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)
+        ?.addEventListener('change', (event) => {
+          applyBeeChoice({ ...beeChoice, [key]: (event.target as HTMLInputElement).checked });
+        });
+    }
+  }
+
+  function openPanel(): void {
+    panelOpen = true;
+    render();
+  }
+
+  function wireGame(): void {
+    root.querySelector('[data-testid="choose-patterns"]')?.addEventListener('click', openPanel);
+
+    root.querySelector('[data-testid="again"]')?.addEventListener('click', () => {
+      if (beeMode()) startBeeRun();
+      else startPatternRun();
+      render();
+    });
+
+    const word = session ? currentWord(session) : null;
+    if (!session || !word) return;
 
     // AC32: in bee mode the word is dictated, never read. The grown-up can reveal
     // it to mark the child's spelling, and each new word is spoken once on arrival.
     if (beeMode()) {
       root.querySelector('[data-testid="peek"]')?.addEventListener('click', () => {
+        root.querySelector('[data-testid="word-box"]')?.removeAttribute('hidden');
         root.querySelector('[data-testid="word"]')?.removeAttribute('hidden');
       });
       const key = `${word.word}:${session.right}:${session.wrong}`;
@@ -197,93 +338,12 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
       dismissedMilestone = session!.right;
       render();
     });
-
-    root
-      .querySelector('[data-testid="choose-patterns"]')
-      ?.addEventListener('click', backToSettings);
   }
 
-  function wireEnd(): void {
-    root.querySelector('[data-testid="again"]')?.addEventListener('click', () => {
-      session = createSession(buildDictionary(bank, selected));
-      dismissedMilestone = null;
-      render();
-    });
-    root
-      .querySelector('[data-testid="choose-patterns"]')
-      ?.addEventListener('click', backToSettings);
-  }
+  if (mode === 'bee') startBeeRun();
+  else startPatternRun();
+  render();
 
-function wireMode(): void {
-  const pairs = [
-    ["patterns", "mode-patterns"],
-    ["bee", "mode-bee"],
-  ] as const;
-  for (const [value, testid] of pairs) {
-    root.querySelector(`[data-testid="${testid}"]`)?.addEventListener("click", () => {
-      if (!beeDeck || mode === value) return;
-      mode = value;
-      try {
-        window.localStorage.setItem(MODE_KEY, value);
-        window.history.replaceState(null, '', value === 'bee' ? '#bee' : window.location.pathname);
-      } catch {
-        /* private mode: the toggle still works for this session */
-      }
-      session = null;
-      spokenAt = null;
-      player.stop();
-      renderSettings();
-    });
-  }
-}
-
-function wireBeeSettings(): void {
-    for (const key of ['starters', 'movers', 'nonsense'] as const) {
-      root
-        .querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)
-        ?.addEventListener('change', (event) => {
-          beeChoice = { ...beeChoice, [key]: (event.target as HTMLInputElement).checked };
-          renderSettings();
-        });
-    }
-
-    root.querySelector('[data-testid="start"]')?.addEventListener('click', () => {
-      if (!beeDeck) return;
-      const dictionary = beeDictionary(beeDeck, beeChoice);
-      if (!dictionary.length) return;
-      session = createSession(beeRound(dictionary));
-      dismissedMilestone = null;
-      render();
-    });
-  }
-
-  function wireSettings(): void {
-    for (const input of root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')) {
-      input.addEventListener('change', () => {
-        selected = [...root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')]
-          .filter((box) => box.checked)
-          .map((box) => box.value);
-        saveSelection(selected, store_);
-        renderSettings();
-      });
-    }
-
-    root.querySelector('[data-testid="start"]')?.addEventListener('click', () => {
-      const dictionary = buildDictionary(bank, selected);
-      if (!dictionary.length) return;
-      session = createSession(dictionary);
-      dismissedMilestone = null;
-      render();
-    });
-  }
-
-  function backToSettings(): void {
-    session = null;
-    dismissedMilestone = null;
-    renderSettings();
-  }
-
-  renderSettings();
   return {
     session: () => session,
     unmount: () => {
