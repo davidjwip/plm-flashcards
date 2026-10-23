@@ -5,25 +5,41 @@ import type { Pattern, Session, Word } from './types';
 
 export type Mode = 'patterns' | 'bee';
 
+/** A control that keeps its full label on a wide screen and a short one on a phone. */
+function labelled(full: string, short: string): string {
+  return `<span class="label-full">${full}</span><span class="label-short">${short}</span>`;
+}
+
+/** The How to Use pill flips to Close while the instructions are open (AC54). */
+function howToLabel(open: boolean): string {
+  return open
+    ? '<span class="label-full">Close</span><span class="label-short">Close</span>'
+    : '<span class="label-full">How to Use</span><span class="label-short">Help</span>';
+}
+
 /** Mode switch shown above every screen (AC33, AC36). */
 export function modeBar(mode: Mode): string {
   const active = (value: Mode): string => (mode === value ? 'true' : 'false');
   return `
     <nav class="mode-bar" data-testid="mode-bar">
       <button data-testid="mode-patterns" aria-pressed="${active('patterns')}"
-        class="${mode === 'patterns' ? 'on' : ''}">Sound patterns</button>
+        class="${mode === 'patterns' ? 'on' : ''}">${labelled('Sound patterns', 'Patterns')}</button>
       <button data-testid="mode-bee" aria-pressed="${active('bee')}"
-        class="${mode === 'bee' ? 'on' : ''}">Spelling bee</button>
+        class="${mode === 'bee' ? 'on' : ''}">${labelled('Spelling bee', 'Bee')}</button>
     </nav>`;
 }
 
-/** The maths-game header: title, the two switches, and the live set count. */
+/** The maths-game header: title, the switches, and the live set count. */
 export function headerView(
   mode: Mode,
   toggleLabel: string,
   open: boolean,
   countText: string,
+  howToOpen = false,
 ): string {
+  const separator = toggleLabel.indexOf('·');
+  const shortToggle =
+    separator === -1 ? toggleLabel : (toggleLabel.slice(separator + 1).trim() ?? '');
   return `
     <header class="app-header">
       <h1 class="title">${mode === 'bee' ? 'Spelling bee' : 'Sound practice'}</h1>
@@ -33,11 +49,28 @@ export function headerView(
       <div class="header-controls">
         ${modeBar(mode)}
         <button class="word-list-toggle" data-testid="pattern-toggle" aria-expanded="${open}">
-          ${toggleLabel}
+          ${labelled(toggleLabel, shortToggle)}
         </button>
+        <button class="how-to-toggle" data-testid="how-to" aria-expanded="${howToOpen}"
+          aria-label="${howToOpen ? 'Close' : 'How to Use'}">${howToLabel(howToOpen)}</button>
       </div>
       <p class="count" data-testid="word-count">${countText}</p>
     </header>`;
+}
+
+/** Grown-up instructions, behind a header pill and closed by default (AC54). */
+export function howToPanel(open: boolean): string {
+  return `
+    <section class="how-to-panel" data-testid="how-to-panel" ${open ? '' : 'hidden'}>
+      <h2>How to Use</h2>
+      <ol class="how-to-steps">
+        <li>Press the <strong>word-list</strong> button to choose sound patterns. Switch to <strong>Spelling bee</strong> to pick levels instead.</li>
+        <li>Ask the child to read each word <strong>aloud</strong>. In bee mode they <strong>write</strong> the word down.</li>
+        <li>Press <strong>✓ Got it</strong> when they read it correctly, or <strong>✗ Not yet</strong> to try again.</li>
+        <li>Use <strong>A−</strong> / <strong>A+</strong> to change the word size, and <strong>🔉</strong> for the volume.</li>
+        <li>Every <strong>tenth</strong> right answer fills the next step on the <strong>Path to the Party</strong>.</li>
+      </ol>
+    </section>`;
 }
 
 /** Pattern picker: a closed panel by default, never a modal (AC36, AC44). */

@@ -341,4 +341,87 @@ describe('v2 UI — one-screen maths-game landing', () => {
     const summary = views.slice(views.indexOf('export function endView'));
     expect(summary).toContain('data-testid="choose-patterns"');
   });
+
+  it('AC54 — the How to Use toggle opens a numbered instructions panel', () => {
+    expect(app).toMatch(/let howToOpen = false;/);
+    expect(views).toContain('data-testid="how-to"');
+    expect(views).toContain('data-testid="how-to-panel"');
+    expect(views).toContain('<h2>How to Use</h2>');
+    expect(views).toContain('>How to Use<');
+    expect(views).toContain('>Close<');
+
+    const steps = views.match(/<li>/g) ?? [];
+    expect(steps.length).toBeGreaterThanOrEqual(4);
+    for (const content of [
+      'word-list',
+      'Spelling bee',
+      'aloud',
+      'write',
+      'Got it',
+      'Not yet',
+      'A−',
+      'A+',
+      '🔉',
+      'Path to the Party',
+      'tenth',
+    ]) {
+      expect(views, `instructions must cover "${content}"`).toContain(content);
+    }
+
+    // Opening instructions must not restart the session or re-speak the word.
+    const handler = app.match(/\[data-testid="how-to"\][\s\S]{0,260}/)?.[0] ?? '';
+    expect(handler).toContain('howToOpen = !howToOpen');
+    expect(handler).toContain('render()');
+    expect(handler).not.toContain('startPatternRun');
+    expect(handler).not.toContain('startBeeRun');
+    const headerAt = app.indexOf('${headerView(');
+    const howToAt = app.indexOf('${howToPanel(');
+    expect(headerAt).toBeGreaterThan(-1);
+    expect(howToAt).toBeGreaterThan(headerAt);
+
+    expect(styles).toMatch(/\.how-to-panel\s*\{[^}]*background:\s*#fff/);
+    expect(styles).toMatch(/\.how-to-panel\s*\{[^}]*border-radius:\s*15px/);
+    expect(styles).toMatch(
+      /\.how-to-panel\s*\{[^}]*box-shadow:\s*0\s+5px\s+15px\s+rgba\(0,\s*0,\s*0,\s*0?\.1\)/,
+    );
+    expect(styles).toMatch(/\.how-to-panel\s*\{[^}]*padding:\s*15px/);
+    expect(styles).toMatch(
+      /\.how-to-panel\s*\{[^}]*(?:margin-bottom:\s*15px|margin:\s*0\s+0\s+15px)/,
+    );
+  });
+
+  it('AC55 — the header row never wraps and keeps the mode ring', () => {
+    const header = headerView('patterns', 'Patterns · 5', false, '10 words');
+    for (const label of [
+      '>Sound patterns<',
+      '>Patterns<',
+      '>Spelling bee<',
+      '>Bee<',
+      '>Patterns · 5<',
+      '>5<',
+      '>How to Use<',
+      '>Help<',
+    ]) {
+      expect(header, `header must carry ${label}`).toContain(label);
+    }
+
+    expect(styles).toMatch(/\.header-controls\s*\{[^}]*flex-wrap:\s*nowrap/);
+    expect(styles).toMatch(/\.header-controls\s*\{[^}]*gap:\s*clamp\(/);
+    expect(styles).toMatch(/\.header-controls\s+button\s*\{[^}]*white-space:\s*nowrap/);
+    expect(styles).toMatch(/font-size:\s*clamp\(0\.7rem,\s*2\.2vw,\s*0\.9rem\)/);
+    expect(styles).toMatch(/padding-inline:\s*clamp\(0\.45rem,\s*1\.6vw,\s*0\.95rem\)/);
+    expect(styles).toMatch(/\.label-short\s*\{[^}]*display:\s*none/);
+
+    const small = styles.match(/@media\s*\(max-width:\s*480px\)\s*\{[\s\S]*?\n\}/)?.[0] ?? '';
+    expect(small).toMatch(/\.label-full\s*\{[^}]*display:\s*none/);
+    expect(small).toMatch(/\.label-short\s*\{[^}]*display:\s*inline/);
+
+    // AC46: no ancestor may clip the active pill's 4px ring.
+    for (const selector of ['#app', '.app-card', '.app-header', '.header-controls', '.mode-bar']) {
+      const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const rule = styles.match(new RegExp(`(?:^|\\n)\\s*${escaped}\\s*\\{[^}]*\\}`))?.[0] ?? '';
+      expect(rule, `${selector} must have a rule`).not.toBe('');
+      expect(rule, `${selector} must not clip the ring`).not.toMatch(/overflow\s*:\s*hidden/);
+    }
+  });
 });

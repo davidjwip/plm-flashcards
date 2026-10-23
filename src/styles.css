@@ -95,8 +95,8 @@ body {
 
 .header-controls {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  flex-wrap: nowrap;
+  gap: clamp(0.3rem, 1.2vw, 0.6rem);
   align-items: center;
   justify-content: space-between;
   margin-top: 0.35rem;
@@ -133,7 +133,8 @@ body {
   box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.4);
 }
 
-.word-list-toggle {
+.word-list-toggle,
+.how-to-toggle {
   min-height: 2.5rem;
   padding: 0 0.95rem;
   border: 2px solid var(--teal);
@@ -144,6 +145,46 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.header-controls button {
+  padding-inline: clamp(0.45rem, 1.6vw, 0.95rem);
+  font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+  white-space: nowrap;
+}
+
+.label-full {
+  display: inline;
+}
+
+.label-short {
+  display: none;
+}
+
+/* ---------- how to use ---------- */
+
+.how-to-panel {
+  margin: 0 0 15px;
+  padding: 15px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-panel h2 {
+  margin: 0 0 10px;
+  color: var(--coral);
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.how-to-steps {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding-left: 1.4rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .count {
@@ -290,6 +331,8 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
   word-break: break-word;
 }
 
@@ -616,6 +659,16 @@ body {
 
   .action-btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .label-full {
+    display: none;
+  }
+
+  .label-short {
+    display: inline;
   }
 }
 

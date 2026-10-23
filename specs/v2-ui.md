@@ -30,27 +30,30 @@ grown-up needs (mode, word list) in the header.
 
 ## 3. Acceptance criteria
 
-| ID   | Given                               | When                               | Then                                                                                                                                                                                                                       |
-| ---- | ----------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AC35 | a fresh load with empty storage     | the app mounts                     | the practice screen renders with a word, and the selected patterns are exactly `a,e,i,o,u`; no setup screen is shown first                                                                                                 |
-| AC36 | the practice screen                 | it renders                         | the header holds a mode toggle with `mode-patterns` and `mode-bee`, exactly one `aria-pressed="true"`, and a `pattern-toggle` button                                                                                       |
-| AC37 | a fresh load with no `#bee` hash    | the grown-up presses Spelling bee  | the screen becomes bee practice (word hidden, peek present) — the deck is mounted regardless of URL                                                                                                                        |
-| AC38 | the practice screen                 | it renders                         | the word sits inside `data-testid="word-box"` and that box precedes the verdict pad in document order                                                                                                                      |
-| AC39 | the practice screen                 | it renders                         | exactly one `mark-right` and one `mark-wrong`, both enabled, both inside `data-testid="verdict-pad"`; CSS gives them ≥96px min-height in a two-column grid                                                                 |
-| AC40 | the stylesheet                      | it is read                         | it declares the maths palette (`#ff6b6b`, `#4ecdc4`, gradient `#ffd1dc`→`#a2d8f1`), a 15px-radius white panel shadow, and a self-hosted `@font-face` for Fredoka                                                           |
-| AC41 | bee practice                        | it renders                         | the word is hidden, `peek` reveals it, and no `word-smaller`/`word-bigger` exist (AC34 preserved)                                                                                                                          |
-| AC42 | any screen the browser suites drive | it renders                         | every test id in the contract list still exists: `app, mode-bar, mode-patterns, mode-bee, pattern-toggle, pattern-option, word-count, word, mark-right, mark-wrong, progress, hear, track, celebration, celebration-close` |
-| AC43 | a 600px viewport                    | the stylesheet applies             | the verdict pad stays two columns and the page stays single column                                                                                                                                                         |
-| AC44 | the pattern panel is open           | the grown-up unticks every pattern | the run does not restart, the count reads "pick at least one pattern", and re-ticking any pattern restarts it                                                                                                              |
-| AC45 | any screen                          | it renders                         | the screen title uses the maths h1 scale (2.5rem, 2rem under 600px) and is centred, in both modes                                                                                                                          |
-| AC46 | the mode toggle                     | a pill is active                   | the 4px active ring is fully visible — the mode bar does not clip it (`overflow` is not hidden)                                                                                                                            |
-| AC47 | bee practice                        | it renders                         | the `Show word` button is at least double the standard action-button height (min-height 5rem)                                                                                                                              |
-| AC48 | every screen                        | it renders                         | the footer reads exactly `© 2026 David Ip. Created for George and Teddy Ip.`                                                                                                                                               |
-| AC49 | the practice screen                 | it renders                         | the progress area is the maths "Path to the Party! 🎉" panel: two rows of five numbered steps (1–5, 6–10), filled = right answers mod 10, a goal-end 🎉, and a `Problems Solved: n / Total Problems: n` line               |
-| AC50 | the party track                     | it renders                         | the two rows of steps are horizontally centred whether or not the mascot is shown, and the mascot/goal do not shift them off-centre                                                                                        |
-| AC51 | Sound patterns practice             | the word card renders              | the word is not bold — `.card` font-weight is 500 or less                                                                                                                                                                  |
-| AC52 | the practice screen                 | it renders                         | the vertical gap above “hear it” equals the gap below it — the empty flash slot reserves no height and `.hear` has symmetric margins                                                                                       |
-| AC53 | the practice screen                 | it renders                         | no `choose-patterns` control is rendered; the header `pattern-toggle` is the only route back to the pattern list                                                                                                           |
+| ID   | Given                                                       | When                               | Then                                                                                                                                                                                                                       |
+| ---- | ----------------------------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AC35 | a fresh load with empty storage                             | the app mounts                     | the practice screen renders with a word, and the selected patterns are exactly `a,e,i,o,u`; no setup screen is shown first                                                                                                 |
+| AC36 | the practice screen                                         | it renders                         | the header holds a mode toggle with `mode-patterns` and `mode-bee`, exactly one `aria-pressed="true"`, and a `pattern-toggle` button                                                                                       |
+| AC37 | a fresh load with no `#bee` hash                            | the grown-up presses Spelling bee  | the screen becomes bee practice (word hidden, peek present) — the deck is mounted regardless of URL                                                                                                                        |
+| AC38 | the practice screen                                         | it renders                         | the word sits inside `data-testid="word-box"` and that box precedes the verdict pad in document order                                                                                                                      |
+| AC39 | the practice screen                                         | it renders                         | exactly one `mark-right` and one `mark-wrong`, both enabled, both inside `data-testid="verdict-pad"`; CSS gives them ≥96px min-height in a two-column grid                                                                 |
+| AC40 | the stylesheet                                              | it is read                         | it declares the maths palette (`#ff6b6b`, `#4ecdc4`, gradient `#ffd1dc`→`#a2d8f1`), a 15px-radius white panel shadow, and a self-hosted `@font-face` for Fredoka                                                           |
+| AC41 | bee practice                                                | it renders                         | the word is hidden, `peek` reveals it, and no `word-smaller`/`word-bigger` exist (AC34 preserved)                                                                                                                          |
+| AC42 | any screen the browser suites drive                         | it renders                         | every test id in the contract list still exists: `app, mode-bar, mode-patterns, mode-bee, pattern-toggle, pattern-option, word-count, word, mark-right, mark-wrong, progress, hear, track, celebration, celebration-close` |
+| AC43 | a 600px viewport                                            | the stylesheet applies             | the verdict pad stays two columns and the page stays single column                                                                                                                                                         |
+| AC44 | the pattern panel is open                                   | the grown-up unticks every pattern | the run does not restart, the count reads "pick at least one pattern", and re-ticking any pattern restarts it                                                                                                              |
+| AC45 | any screen                                                  | it renders                         | the screen title uses the maths h1 scale (2.5rem, 2rem under 600px) and is centred, in both modes                                                                                                                          |
+| AC46 | the mode toggle                                             | a pill is active                   | the 4px active ring is fully visible — the mode bar does not clip it (`overflow` is not hidden)                                                                                                                            |
+| AC47 | bee practice                                                | it renders                         | the `Show word` button is at least double the standard action-button height (min-height 5rem)                                                                                                                              |
+| AC48 | every screen                                                | it renders                         | the footer reads exactly `© 2026 David Ip. Created for George and Teddy Ip.`                                                                                                                                               |
+| AC49 | the practice screen                                         | it renders                         | the progress area is the maths "Path to the Party! 🎉" panel: two rows of five numbered steps (1–5, 6–10), filled = right answers mod 10, a goal-end 🎉, and a `Problems Solved: n / Total Problems: n` line               |
+| AC50 | the party track                                             | it renders                         | the two rows of steps are horizontally centred whether or not the mascot is shown, and the mascot/goal do not shift them off-centre                                                                                        |
+| AC51 | Sound patterns practice                                     | the word card renders              | the word is not bold — `.card` font-weight is 500 or less                                                                                                                                                                  |
+| AC52 | the practice screen                                         | it renders                         | the vertical gap above “hear it” equals the gap below it — the empty flash slot reserves no height and `.hear` has symmetric margins                                                                                       |
+| AC53 | the practice screen                                         | it renders                         | no `choose-patterns` control is rendered; the header `pattern-toggle` is the only route back to the pattern list                                                                                                           |
+| AC54 | the practice screen                                         | it renders                         | the header carries a `how-to` toggle; the instructions panel is closed by default and opens with an `h2` heading plus at least four numbered steps, and the button label flips between "How to Use" and "Close"            |
+| AC55 | the header control row                                      | it renders at any width            | the row never wraps (`flex-wrap: nowrap`), the controls scale with the viewport through `clamp()` sizing and short labels under 480px, and the active mode pill's 4px ring stays unclipped                                 |
+| AC56 | a long word at the adult's largest size on a 390px viewport | the practice screen renders        | the word stays on one line — the font shrinks to fit instead of wrapping (`fitFontSize` is a pure, unit-tested helper; Playwright asserts one line at 390px)                                                               |
 
 ## 4. Edge cases and refusals
 
@@ -65,27 +68,30 @@ grown-up needs (mode, word list) in the header.
 
 A row appears here in the same PR as its test.
 
-| Criterion | Test file            | Test name                                                      | Status |
-| --------- | -------------------- | -------------------------------------------------------------- | ------ |
-| AC35      | `src/layout.test.ts` | AC35 — a fresh load opens a short-vowel run                    | green  |
-| AC36      | `src/layout.test.ts` | AC36 — the header carries the mode and word-list toggles       | green  |
-| AC37      | `src/layout.test.ts` | AC37 — bee mode is reachable from a plain load                 | green  |
-| AC38      | `src/layout.test.ts` | AC38 — the word sits in the framed box before the verdicts     | green  |
-| AC39      | `src/layout.test.ts` | AC39 — the verdict pair fills the pad, enabled and two columns | green  |
-| AC40      | `src/layout.test.ts` | AC40 — the stylesheet carries the maths palette and the font   | green  |
-| AC41      | `src/layout.test.ts` | AC41 — bee practice hides the word and drops the size controls | green  |
-| AC42      | `src/layout.test.ts` | AC42 — every test id the browser suites need still renders     | green  |
-| AC43      | `src/layout.test.ts` | AC43 — the verdict pad stays two columns under 600px           | green  |
-| AC44      | `src/layout.test.ts` | AC44 — unticking everything does not restart the run           | green  |
-| AC45      | `src/layout.test.ts` | AC45 — the title is the maths scale and centred                | green  |
-| AC46      | `src/layout.test.ts` | AC46 — the active mode pill ring is not clipped                | green  |
-| AC47      | `src/layout.test.ts` | AC47 — the bee peek button is double height                    | green  |
-| AC48      | `src/layout.test.ts` | AC48 — the footer carries the copyright line                   | green  |
-| AC49      | `src/layout.test.ts` | AC49 — the party track mirrors the maths game                  | green  |
-| AC50      | `src/layout.test.ts` | AC50 — the party steps are centred with or without the mascot  | green  |
-| AC51      | `src/layout.test.ts` | AC51 — the word card is not bold                               | green  |
-| AC52      | `src/layout.test.ts` | AC52 — the gap above hear-it matches the gap below             | green  |
-| AC53      | `src/layout.test.ts` | AC53 — the practice screen has no change-patterns link         | green  |
+| Criterion | Test file             | Test name                                                        | Status |
+| --------- | --------------------- | ---------------------------------------------------------------- | ------ |
+| AC35      | `src/layout.test.ts`  | AC35 — a fresh load opens a short-vowel run                      | green  |
+| AC36      | `src/layout.test.ts`  | AC36 — the header carries the mode and word-list toggles         | green  |
+| AC37      | `src/layout.test.ts`  | AC37 — bee mode is reachable from a plain load                   | green  |
+| AC38      | `src/layout.test.ts`  | AC38 — the word sits in the framed box before the verdicts       | green  |
+| AC39      | `src/layout.test.ts`  | AC39 — the verdict pair fills the pad, enabled and two columns   | green  |
+| AC40      | `src/layout.test.ts`  | AC40 — the stylesheet carries the maths palette and the font     | green  |
+| AC41      | `src/layout.test.ts`  | AC41 — bee practice hides the word and drops the size controls   | green  |
+| AC42      | `src/layout.test.ts`  | AC42 — every test id the browser suites need still renders       | green  |
+| AC43      | `src/layout.test.ts`  | AC43 — the verdict pad stays two columns under 600px             | green  |
+| AC44      | `src/layout.test.ts`  | AC44 — unticking everything does not restart the run             | green  |
+| AC45      | `src/layout.test.ts`  | AC45 — the title is the maths scale and centred                  | green  |
+| AC46      | `src/layout.test.ts`  | AC46 — the active mode pill ring is not clipped                  | green  |
+| AC47      | `src/layout.test.ts`  | AC47 — the bee peek button is double height                      | green  |
+| AC48      | `src/layout.test.ts`  | AC48 — the footer carries the copyright line                     | green  |
+| AC49      | `src/layout.test.ts`  | AC49 — the party track mirrors the maths game                    | green  |
+| AC50      | `src/layout.test.ts`  | AC50 — the party steps are centred with or without the mascot    | green  |
+| AC51      | `src/layout.test.ts`  | AC51 — the word card is not bold                                 | green  |
+| AC52      | `src/layout.test.ts`  | AC52 — the gap above hear-it matches the gap below               | green  |
+| AC53      | `src/layout.test.ts`  | AC53 — the practice screen has no change-patterns link           | green  |
+| AC54      | `src/layout.test.ts`  | AC54 — the How to Use toggle opens a numbered instructions panel | green  |
+| AC55      | `src/layout.test.ts`  | AC55 — the header row never wraps and keeps the mode ring        | green  |
+| AC56      | `src/wordFit.test.ts` | AC56 — a long word shrinks to stay on one line                   | green  |
 
 ## 6. Decisions
 
@@ -133,3 +139,11 @@ teal, 1.2rem.
 | 2   | words are bold in Sound patterns                      | `.card { font-weight: 700 }`                                                              | AC51 |
 | 3   | too much space above _hear it_                        | the empty `.flash-slot` reserved `min-height: 2.2rem`                                     | AC52 |
 | 4   | the _Change patterns_ link at the bottom is redundant | the header `pattern-toggle` already opens the list                                        | AC53 |
+
+## 10. Amendments after merge (2026-10-23, post-#24)
+
+| #   | Ask                                              | Detail                                                                                                                                                                                                                                                                                                                  |
+| --- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | a _How to Use_ button like the maths page (AC54) | The maths page toggles an instructions card from a header pill whose label flips **How to Use → Close**. Same shape here: a closed-by-default panel with an `h2` and numbered steps a grown-up can read in ten seconds. It must not push the header onto a second line.                                                 |
+| 2   | the header row must never wrap (AC55)            | `.header-controls` is `flex-wrap: wrap` today, so adding a third control wraps it on a phone. Requires `nowrap`, `clamp()`-based sizing, and short labels under 480px — while the active mode pill's 4px ring stays visible (no `overflow: hidden` on any ancestor).                                                    |
+| 3   | the word must stay on one line (AC56)            | An adult can raise the size to 20rem; on a 390px phone a long word then wraps to two lines. The card gets `white-space: nowrap`, and after render (and on resize) the app steps the font down until the word fits, instead of letting it wrap. The shrink rule is a pure helper so it can be unit-tested without jsdom. |
