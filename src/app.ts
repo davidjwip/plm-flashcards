@@ -27,11 +27,21 @@ import {
   endView,
   gameView,
   headerView,
+  howToPanel,
   patternPanel,
   type Mode,
 } from './views';
 import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
-import { DEFAULT_WORD_SIZE, canGrow, canShrink, stepWordSize, wordSizeStyle } from './wordSize';
+import {
+  DEFAULT_WORD_SIZE,
+  canGrow,
+  canShrink,
+  clampWordSize,
+  stepWordSize,
+  wordSizeRem,
+  wordSizeStyle,
+} from './wordSize';
+import { firstFit, fitSizes } from './wordFit';
 import './styles.css';
 
 export type MountOptions = {
@@ -51,6 +61,11 @@ export type AppHandle = {
 };
 
 const FLASH_MS = 1100;
+const FIT_STEP = 0.92;
+// The adult may choose 20rem; on a 390px phone that needs a candidate well below
+// 40% of the ceiling, so the app's ramp goes further than the helper's default.
+const FIT_MIN_SCALE = 0.1;
+const RESIZE_DEBOUNCE_MS = 120;
 
 /** Only a first run gets the five short vowels (AC35). */
 export const DEFAULT_PATTERNS = ['a', 'e', 'i', 'o', 'u'] as const;
@@ -81,6 +96,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   // falls back to the short vowels.
   if (!hasStoredSelection(store)) selected = [...DEFAULT_PATTERNS];
   let panelOpen = false;
+  let howToOpen = false;
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
   let volume = clampVolume(loadVolume(store) ?? DEFAULT_VOLUME);
@@ -94,6 +110,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
    */
   let dismissedMilestone: number | null = null;
   let flashTimer: ReturnType<typeof setTimeout> | null = null;
+  let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 
   const store_ = store;
 
@@ -171,16 +188,60 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     );
   }
 
+  /**
+   * The adult's size is a ceiling: measure the rendered word and step the font
+   * down until it fits on one line. No chosen size means the stylesheet clamp is
+   * the ceiling; in both cases fitting only ever shrinks (AC56).
+   */
+  function fitWord(): void {
+    const card = root.querySelector<HTMLElement>('[data-testid="word"]');
+    if (!card || card.hasAttribute('hidden')) return;
+
+    const reset = (): void => {
+      if (wordSize === null) card.style.removeProperty('font-size');
+      else card.style.fontSize = wordSizeRem(clampWordSize(wordSize));
+    };
+    reset();
+
+    // jsdom has no layout; skip rather than shrink to the minimum blindly.
+    if (card.clientWidth === 0) return;
+
+    const ceiling = Number.parseFloat(window.getComputedStyle(card).fontSize);
+    if (!Number.isFinite(ceiling) || ceiling <= 0) return;
+
+    const sizes = fitSizes(ceiling, FIT_MIN_SCALE, FIT_STEP);
+    const fits = (px: number): boolean => {
+      card.style.fontSize = `${px}px`;
+      return card.scrollWidth <= card.clientWidth + 1;
+    };
+
+    if (fits(ceiling)) {
+      reset();
+      return;
+    }
+    card.style.fontSize = `${firstFit(sizes, fits)}px`;
+  }
+
+  function scheduleFit(): void {
+    if (resizeTimer !== null) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resizeTimer = null;
+      fitWord();
+    }, RESIZE_DEBOUNCE_MS);
+  }
+
   function render(): void {
     root.innerHTML = `<div class="app-card">${headerView(
       mode,
       toggleLabel(),
       panelOpen,
       countText(),
-    )}${panelView()}${renderContent()}</div>`;
+      howToOpen,
+    )}${howToPanel(howToOpen)}${panelView()}${renderContent()}</div>`;
     wireHeader();
     wirePanel();
     wireGame();
+    fitWord();
   }
 
   function wireHeader(): void {
@@ -210,6 +271,12 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
     root.querySelector('[data-testid="pattern-toggle"]')?.addEventListener('click', () => {
       panelOpen = !panelOpen;
+      render();
+    });
+
+    root.querySelector('[data-testid="how-to"]')?.addEventListener('click', () => {
+      // Instructions only: the run and the current word stay exactly as they are.
+      howToOpen = !howToOpen;
       render();
     });
   }
@@ -340,6 +407,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     });
   }
 
+  window.addEventListener('resize', scheduleFit);
+
   if (mode === 'bee') startBeeRun();
   else startPatternRun();
   render();
@@ -347,8 +416,11 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   return {
     session: () => session,
     unmount: () => {
+      window.removeEventListener('resize', scheduleFit);
       if (flashTimer !== null) clearTimeout(flashTimer);
+      if (resizeTimer !== null) clearTimeout(resizeTimer);
       flashTimer = null;
+      resizeTimer = null;
       player.stop();
     },
   };

@@ -103,3 +103,43 @@ test('AC16 — ten right answers raise the celebration, and the track starts aga
   await expect(page.getByTestId('track')).toHaveAttribute('data-filled', '0');
   await expect(page.getByTestId('streak')).toContainText('10 in a row');
 });
+
+test('AC56 — a long word stays on one line at 390px', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await openPicker(page);
+  // "au" contains astronaut (8) and restaurant (10); advance until a long one.
+  await page.locator('[data-testid="pattern-option"][value="au"]').check();
+
+  for (let i = 0; i < 10; i++) {
+    const text = ((await page.getByTestId('word').textContent()) ?? '').trim();
+    if (text.length >= 8) break;
+    await page.getByTestId('mark-right').click();
+  }
+  const word = ((await page.getByTestId('word').textContent()) ?? '').trim();
+  expect(word.length).toBeGreaterThanOrEqual(8);
+
+  for (let i = 0; i < 10; i++) {
+    const bigger = page.getByTestId('word-bigger');
+    if (await bigger.isDisabled()) break;
+    await bigger.click();
+  }
+  await expect(page.getByTestId('word-bigger')).toBeDisabled();
+
+  const metrics = await page.getByTestId('word').evaluate((el) => {
+    const style = getComputedStyle(el);
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return {
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth,
+      textHeight: range.getBoundingClientRect().height,
+      lineHeight: parseFloat(style.lineHeight),
+      whiteSpace: style.whiteSpace,
+    };
+  });
+
+  expect(metrics.whiteSpace).toBe('nowrap');
+  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+  expect(metrics.textHeight).toBeLessThanOrEqual(metrics.lineHeight * 1.5);
+});
