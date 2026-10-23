@@ -205,7 +205,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
     expect(game).toContain(footer);
     expect(empty).toContain(footer);
     expect(summary).toContain(footer);
-    expect(game).toContain('data-testid="choose-patterns"');
+    expect(summary).toContain('data-testid="choose-patterns"');
 
     expect(styles).toMatch(/\.site-footer\s*\{[^}]*margin-top:\s*20px/);
     expect(styles).toMatch(/\.site-footer\s*\{[^}]*color:\s*var\(--teal\)/);
@@ -244,9 +244,8 @@ describe('v2 UI — one-screen maths-game landing', () => {
     expect(styles).toMatch(/\.progress-area\s*\{[^}]*padding:\s*15px/);
     expect(styles).toMatch(/\.progress-area\s*\{[^}]*margin-top:\s*10px/);
 
-    expect(styles).toMatch(/\.goal-track\s*\{[^}]*display:\s*flex/);
+    expect(styles).toMatch(/\.goal-track\s*\{[^}]*display:\s*grid/);
     expect(styles).toMatch(/\.goal-track\s*\{[^}]*align-items:\s*center/);
-    expect(styles).toMatch(/\.goal-track\s*\{[^}]*justify-content:\s*space-between/);
     expect(styles).toMatch(/\.goal-track\s*\{[^}]*gap:\s*6px/);
     expect(styles).toMatch(/\.goal-track\s*\{[^}]*padding:\s*10px/);
     expect(styles).toMatch(/\.goal-track\s*\{[^}]*background:\s*#f8f9fa/);
@@ -276,5 +275,70 @@ describe('v2 UI — one-screen maths-game landing', () => {
       /\.step\.filled\s*\{[^}]*box-shadow:\s*0\s+2px\s+8px\s+rgba\(78,\s*205,\s*196,\s*0?\.4\)/,
     );
     expect(styles).toMatch(/\.goal-end\s*\{[^}]*font-size:\s*2\.5rem/);
+  });
+
+  it('AC50 — the party steps are centred with or without the mascot', () => {
+    const withMascot = trackView(sessionWith(2));
+    const withoutMascot = trackView(sessionWith(0));
+    expect(withMascot).toContain('class="mascot"');
+    expect(withoutMascot).not.toContain('class="mascot"');
+
+    const track = styles.match(/\.goal-track\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(track).toMatch(/display:\s*grid/);
+    expect(track).toMatch(/grid-template-columns:\s*1fr\s+auto\s+1fr/);
+    expect(track).toMatch(/align-items:\s*center/);
+    expect(track).not.toMatch(/justify-content:\s*space-between/);
+
+    const wrapper = styles.match(/\.goal-steps-wrapper\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(wrapper).toMatch(/grid-column:\s*2/);
+    expect(wrapper).toMatch(/grid-row:\s*1/);
+
+    const mascot = styles.match(/\.mascot\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(mascot).toMatch(/justify-self:\s*start/);
+
+    const end = styles.match(/\.goal-end\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(end).toMatch(/justify-self:\s*end/);
+
+    for (const html of [withMascot, withoutMascot]) {
+      expect(html).toContain('class="goal-steps-wrapper"');
+      expect(html).toContain('class="goal-end">🎉');
+    }
+  });
+
+  it('AC51 — the word card is not bold', () => {
+    const card = styles.match(/\.card\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(card).toMatch(/font-weight:\s*500/);
+    expect(card).not.toMatch(/font-weight:\s*(?:700|bold)/);
+    expect(card).toMatch(/font-size:\s*clamp\(3\.5rem,\s*12vw,\s*8rem\)/);
+    expect(card).toMatch(/letter-spacing:\s*-0\.02em/);
+    expect(card).toMatch(/line-height:\s*1/);
+    expect(views).toContain('data-testid="word"');
+  });
+
+  it('AC52 — the gap above hear-it matches the gap below', () => {
+    const slot = [...styles.matchAll(/\.flash-slot\s*\{[^}]*\}/g)].at(-1)?.[0] ?? '';
+    expect(slot).toMatch(/min-height:\s*0/);
+    expect(slot).toMatch(/height:\s*0/);
+    expect(slot).not.toMatch(/min-height:\s*2\.2rem/);
+
+    const flash = styles.match(/\.flash\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(flash).toMatch(/min-height:\s*2\.2rem/);
+    expect(flash).toMatch(/animation:\s*flash-in/);
+
+    const hear = [...styles.matchAll(/\.hear\s*\{[^}]*\}/g)].at(-1)?.[0] ?? '';
+    expect(hear).toMatch(/margin-block:\s*0\.5rem/);
+  });
+
+  it('AC53 — the practice screen has no change-patterns link', () => {
+    const game = views.slice(
+      views.indexOf('export function gameView'),
+      views.indexOf('export function emptyView'),
+    );
+    expect(game).not.toContain('choose-patterns');
+    expect(game).not.toContain('game-footer');
+    expect(views).toContain('data-testid="pattern-toggle"');
+
+    const summary = views.slice(views.indexOf('export function endView'));
+    expect(summary).toContain('data-testid="choose-patterns"');
   });
 });

@@ -47,6 +47,10 @@ grown-up needs (mode, word list) in the header.
 | AC47 | bee practice                        | it renders                         | the `Show word` button is at least double the standard action-button height (min-height 5rem)                                                                                                                              |
 | AC48 | every screen                        | it renders                         | the footer reads exactly `© 2026 David Ip. Created for George and Teddy Ip.`                                                                                                                                               |
 | AC49 | the practice screen                 | it renders                         | the progress area is the maths "Path to the Party! 🎉" panel: two rows of five numbered steps (1–5, 6–10), filled = right answers mod 10, a goal-end 🎉, and a `Problems Solved: n / Total Problems: n` line               |
+| AC50 | the party track                     | it renders                         | the two rows of steps are horizontally centred whether or not the mascot is shown, and the mascot/goal do not shift them off-centre                                                                                        |
+| AC51 | Sound patterns practice             | the word card renders              | the word is not bold — `.card` font-weight is 500 or less                                                                                                                                                                  |
+| AC52 | the practice screen                 | it renders                         | the vertical gap above “hear it” equals the gap below it — the empty flash slot reserves no height and `.hear` has symmetric margins                                                                                       |
+| AC53 | the practice screen                 | it renders                         | no `choose-patterns` control is rendered; the header `pattern-toggle` is the only route back to the pattern list                                                                                                           |
 
 ## 4. Edge cases and refusals
 
@@ -78,6 +82,10 @@ A row appears here in the same PR as its test.
 | AC47      | `src/layout.test.ts` | AC47 — the bee peek button is double height                    | green  |
 | AC48      | `src/layout.test.ts` | AC48 — the footer carries the copyright line                   | green  |
 | AC49      | `src/layout.test.ts` | AC49 — the party track mirrors the maths game                  | green  |
+| AC50      | `src/layout.test.ts` | AC50 — the party steps are centred with or without the mascot  | green  |
+| AC51      | `src/layout.test.ts` | AC51 — the word card is not bold                               | green  |
+| AC52      | `src/layout.test.ts` | AC52 — the gap above hear-it matches the gap below             | green  |
+| AC53      | `src/layout.test.ts` | AC53 — the practice screen has no change-patterns link         | green  |
 
 ## 6. Decisions
 
@@ -116,3 +124,12 @@ flex centred, `gap:5px`; `.step` 35×35, 8px radius, `#e0e0e0`, `#7f8c8d`, bold;
 `linear-gradient(135deg,#4ecdc4,#ff6b6b)` with white text and `0 2px 8px rgba(78,205,196,.4)`;
 `.mascot` 2.5rem with the `bounce` animation; `.goal-end` 2.5rem. Footer per maths: `margin-top:20px`,
 teal, 1.2rem.
+
+## 9. Amendments after the second look (2026-10-23)
+
+| #   | What Dave saw                                         | Cause                                                                                     | Fix  |
+| --- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---- |
+| 1   | the scoring numbers are not centred                   | `.goal-track { justify-content: space-between }` pinning the rows between mascot and goal | AC50 |
+| 2   | words are bold in Sound patterns                      | `.card { font-weight: 700 }`                                                              | AC51 |
+| 3   | too much space above _hear it_                        | the empty `.flash-slot` reserved `min-height: 2.2rem`                                     | AC52 |
+| 4   | the _Change patterns_ link at the bottom is redundant | the header `pattern-toggle` already opens the list                                        | AC53 |

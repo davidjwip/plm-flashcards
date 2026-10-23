@@ -249,17 +249,6 @@ body {
   transform: scale(0.98);
 }
 
-.link {
-  padding: 0.4rem;
-  border: 0;
-  background: none;
-  color: #6b7280;
-  font: inherit;
-  font-size: 0.85rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 /* ---------- practice ---------- */
 
 .game {
@@ -297,7 +286,7 @@ body {
   border-radius: 10px;
   background: var(--pale-yellow);
   font-size: clamp(3.5rem, 12vw, 8rem);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;
@@ -307,6 +296,10 @@ body {
 .game > .action-btn,
 .hear {
   justify-self: center;
+}
+
+.hear {
+  margin-block: 0.5rem;
 }
 
 .verdict-pad {
@@ -339,11 +332,6 @@ body {
 
 .verdict:active {
   transform: scale(0.985);
-}
-
-.game-footer {
-  display: flex;
-  justify-content: center;
 }
 
 /* ---------- word size + volume controls ---------- */
@@ -396,14 +384,20 @@ body {
 .flash-slot {
   display: grid;
   place-items: center;
-  min-height: 2.2rem;
   color: var(--coral);
   font-size: 1.3rem;
   font-weight: 700;
 }
 
 .flash {
+  min-height: 2.2rem;
   animation: flash-in 0.18s ease-out;
+}
+
+.flash-slot {
+  display: none;
+  min-height: 0;
+  height: 0;
 }
 
 .flash.gone {
@@ -441,9 +435,9 @@ body {
 }
 
 .goal-track {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 6px;
   padding: 10px;
   border-radius: 15px;
@@ -451,6 +445,9 @@ body {
 }
 
 .mascot {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
   font-size: 2.5rem;
   line-height: 1;
   animation: bounce 1.4s ease-in-out infinite;
@@ -459,6 +456,9 @@ body {
 .goal-steps-wrapper {
   display: flex;
   flex-direction: column;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
   gap: 4px;
 }
 
@@ -491,6 +491,9 @@ body {
 }
 
 .goal-end {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
   font-size: 2.5rem;
   line-height: 1;
 }
