@@ -115,6 +115,10 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
     await bigger.click();
   }
   await expect(page.getByTestId('word-bigger')).toBeDisabled();
+  const frame = await page.getByTestId('word').evaluate((el) => ({
+    h: el.clientHeight,
+    w: el.clientWidth,
+  }));
 
   // Ten words, no long-word lottery: at 20rem on a 390px screen even a short word overflows.
   for (let round = 0; round < 10; round++) {
@@ -131,6 +135,8 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
         whiteSpace: style.whiteSpace,
         fontSize: parseFloat(style.fontSize),
         pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
+        cardH: el.clientHeight,
+        cardW: el.clientWidth,
       };
     });
     expect(metrics.whiteSpace, `${metrics.text} must not wrap`).toBe('nowrap');
@@ -138,6 +144,13 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
       metrics.clientWidth + 1,
     );
     expect(metrics.pageOverflow, `${metrics.text} must not scroll the page`).toBeLessThanOrEqual(1);
+    // The frame keeps its size; only the text shrinks into it.
+    expect(metrics.cardH, 'the word box must not grow for the word').toBe(frame.h);
+    // A scrollbar appearing or leaving shifts the width a few px; the box is not resized for the word.
+    expect(
+      Math.abs(metrics.cardW - frame.w),
+      'the word box must not widen for the word',
+    ).toBeLessThanOrEqual(8);
     // At the maximum ceiling the font must actually have been shrunk to fit.
     expect(metrics.fontSize).toBeLessThan(320);
     expect(metrics.textHeight, `${metrics.text} must be one line`).toBeLessThanOrEqual(

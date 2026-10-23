@@ -213,6 +213,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     const fits = (px: number): boolean => {
       card.style.fontSize = `${px}px`;
       if (card.scrollWidth > card.clientWidth + 1) return false;
+      // The box height is fixed, so a word too tall to sit inside it must shrink too.
+      if (card.scrollHeight > card.clientHeight + 1) return false;
       // The card is capped by its container, so read the page too: if the document
       // scrolls sideways the word is still too wide for the screen.
       return document.documentElement.scrollWidth <= window.innerWidth + 1;

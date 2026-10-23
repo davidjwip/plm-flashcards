@@ -305,6 +305,15 @@ describe('v2 UI — one-screen maths-game landing', () => {
     }
   });
 
+  it('AC56 — the word card is a fixed frame, not a growing one', () => {
+    const card = styles.match(/\.card\s*\{[^}]*\}/)?.[0] ?? '';
+    expect(card).toMatch(/height:\s*clamp\(/);
+    expect(card).not.toMatch(/min-height:\s*clamp\(/);
+    // Padding in em would scale with the word and inflate the frame.
+    expect(card).toMatch(/padding:\s*0\s+[0-9.]+rem/);
+    expect(card).not.toMatch(/padding:\s*[0-9.]+em/);
+  });
+
   it('AC51 — the word card is not bold', () => {
     const card = styles.match(/\.card\s*\{[^}]*\}/)?.[0] ?? '';
     expect(card).toMatch(/font-weight:\s*(?:400|500)/);
