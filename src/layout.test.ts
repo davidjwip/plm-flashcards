@@ -407,10 +407,17 @@ describe('v2 UI — one-screen maths-game landing', () => {
   });
 
   it('AC57 — the short word-list label names the mode', () => {
-    const patterns = headerView('patterns', 'Patterns · 5', false, '24 words in this set');
-    const bee = headerView('bee', 'Levels · 3', false, '240 words to draw from');
+    const patterns = headerView(
+      'patterns',
+      'Patterns · 5',
+      false,
+      '24 words in this set',
+      false,
+      'Words',
+    );
+    const bee = headerView('bee', 'Levels · 3', false, '240 words to draw from', false, 'Levels');
 
-    expect(patterns).toMatch(/<span class="label-short">Patterns<\/span>/);
+    expect(patterns).toMatch(/<span class="label-short">Words<\/span>/);
     expect(bee).toMatch(/<span class="label-short">Levels<\/span>/);
     expect(patterns).not.toMatch(/<span class="label-short">\d+<\/span>/);
     expect(bee).not.toMatch(/<span class="label-short">\d+<\/span>/);

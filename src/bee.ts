@@ -1,3 +1,4 @@
+import { shuffle } from './engine';
 import type { Word } from './types';
 
 /**
@@ -26,25 +27,115 @@ export const NONSENSE_TAG = 'nonsense';
 
 /** Consonant onsets a 4-7 year old has met: single letters and common clusters. */
 const ONSETS = [
-  'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z',
-  'sh', 'ch', 'th', 'bl', 'br', 'cl', 'cr', 'dr', 'fl', 'fr', 'gl', 'gr', 'pl', 'pr',
-  'sc', 'sk', 'sl', 'sm', 'sn', 'sp', 'st', 'sw', 'tr', 'tw',
+  'b',
+  'c',
+  'd',
+  'f',
+  'g',
+  'h',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'p',
+  'r',
+  's',
+  't',
+  'v',
+  'w',
+  'y',
+  'z',
+  'sh',
+  'ch',
+  'th',
+  'bl',
+  'br',
+  'cl',
+  'cr',
+  'dr',
+  'fl',
+  'fr',
+  'gl',
+  'gr',
+  'pl',
+  'pr',
+  'sc',
+  'sk',
+  'sl',
+  'sm',
+  'sn',
+  'sp',
+  'st',
+  'sw',
+  'tr',
+  'tw',
 ];
 
 /** Vowel + optional coda, so onset+rime always contains a vowel to sound out. */
 const RIMES = [
-  'ab', 'ad', 'ag', 'am', 'an', 'ap', 'at', 'ax',
-  'eb', 'ed', 'eg', 'em', 'en', 'ep', 'et',
-  'ib', 'id', 'ig', 'im', 'in', 'ip', 'it', 'ix',
-  'ob', 'od', 'og', 'om', 'op', 'ot', 'ox',
-  'ub', 'ud', 'ug', 'um', 'un', 'up', 'ut',
-  'ack', 'eck', 'ick', 'ock', 'uck',
-  'ash', 'esh', 'ish', 'osh', 'ush',
-  'ang', 'ing', 'ong', 'ung',
-  'amp', 'imp', 'ump', 'ast', 'est', 'ist', 'ost', 'ust',
+  'ab',
+  'ad',
+  'ag',
+  'am',
+  'an',
+  'ap',
+  'at',
+  'ax',
+  'eb',
+  'ed',
+  'eg',
+  'em',
+  'en',
+  'ep',
+  'et',
+  'ib',
+  'id',
+  'ig',
+  'im',
+  'in',
+  'ip',
+  'it',
+  'ix',
+  'ob',
+  'od',
+  'og',
+  'om',
+  'op',
+  'ot',
+  'ox',
+  'ub',
+  'ud',
+  'ug',
+  'um',
+  'un',
+  'up',
+  'ut',
+  'ack',
+  'eck',
+  'ick',
+  'ock',
+  'uck',
+  'ash',
+  'esh',
+  'ish',
+  'osh',
+  'ush',
+  'ang',
+  'ing',
+  'ong',
+  'ung',
+  'amp',
+  'imp',
+  'ump',
+  'ast',
+  'est',
+  'ist',
+  'ost',
+  'ust',
 ];
 
-const pick = <T,>(items: T[], rng: () => number): T => items[Math.floor(rng() * items.length)] as T;
+const pick = <T>(items: T[], rng: () => number): T => items[Math.floor(rng() * items.length)] as T;
 
 /** Real words from the chosen levels, deduplicated and alphabetical. */
 export function beeWords(deck: BeeDeck, choice: BeeChoice): string[] {
@@ -58,7 +149,11 @@ export function beeWords(deck: BeeDeck, choice: BeeChoice): string[] {
  * Plausible non-words: an onset a child has met plus a rime with a real vowel.
  * Never returns a word in `avoid` (the bank and the bee deck).
  */
-export function nonsenseWords(count: number, avoid: Set<string>, rng: () => number = Math.random): string[] {
+export function nonsenseWords(
+  count: number,
+  avoid: Set<string>,
+  rng: () => number = Math.random,
+): string[] {
   const made = new Set<string>();
   let guard = 0;
   while (made.size < count && guard < count * 200) {
@@ -81,18 +176,15 @@ export function beeDictionary(
   if (!choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);
-  const nonsense: Word[] = nonsenseWords(BEE_ROUND, known, rng).map(
-    (word) => ({ word, patterns: [NONSENSE_TAG] }),
-  );
+  const nonsense: Word[] = nonsenseWords(BEE_ROUND, known, rng).map((word) => ({
+    word,
+    patterns: [NONSENSE_TAG],
+  }));
   return [...real, ...nonsense];
 }
 
 /** Shuffle and take a round's worth. The bee is a round of ten, not the whole list. */
 export function beeRound(words: Word[], rng: () => number = Math.random): Word[] {
-  const shuffled = [...words];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(rng() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j] as Word, shuffled[i] as Word];
-  }
-  return shuffled.slice(0, Math.min(BEE_ROUND, shuffled.length));
+  // Same shuffle as the sound-pattern runs: one Fisher-Yates, not two.
+  return shuffle(words, rng).slice(0, Math.min(BEE_ROUND, words.length));
 }

@@ -44,7 +44,9 @@ describe('app wiring', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     // Keep the shuffled session in its input order for the assertions that name a word.
-    vi.spyOn(Math, 'random').mockReturnValue(1);
+    // 0.999… rather than 1: Math.random is contractually [0,1), and other helpers in
+    // the app (nonsense-word picks) index with it directly, without a clamp.
+    vi.spyOn(Math, 'random').mockReturnValue(0.999999);
   });
   afterEach(() => {
     vi.useRealTimers();
@@ -151,25 +153,29 @@ describe('app wiring', () => {
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
   });
 
-  it('AC58 — ticking a pattern keeps the panel scroll position', () => {
+  it('AC58 — ticking a pattern keeps the list scroll position', () => {
     const el = root();
     const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
     vi.spyOn(window, 'scrollY', 'get').mockReturnValue(240);
 
-    mount({ bank: bank(['rain', 'sail']), root: el, store: store() });
+    // A dozen patterns, so the options list is the thing that scrolls (max-height 48vh).
+    const ids = Array.from({ length: 12 }, (_, i) => `p${i}`);
+    const many: Bank = {
+      patterns: ids.map((id) => ({ id, label: `${id} (x)` })),
+      words: ids.map((id) => ({ word: `${id}word`, patterns: [id] })),
+    };
+
+    mount({ bank: many, root: el, store: store() });
     click(el.querySelector('[data-testid="pattern-toggle"]'));
 
-    const panel = el.querySelector<HTMLElement>('[data-testid="pattern-panel"]')!;
-    const options = panel.querySelector<HTMLElement>('.options')!;
-    panel.scrollTop = 120;
-    options.scrollTop = 80;
+    const optionsBefore = el.querySelector<HTMLElement>('.pattern-panel .options')!;
+    optionsBefore.scrollTop = 96;
 
-    check('ai');
+    check('p3');
 
-    const after = el.querySelector<HTMLElement>('[data-testid="pattern-panel"]')!;
-    expect(after).not.toBe(panel);
-    expect(after.scrollTop).toBe(120);
-    expect(after.querySelector<HTMLElement>('.options')!.scrollTop).toBe(80);
+    const optionsAfter = el.querySelector<HTMLElement>('.pattern-panel .options')!;
+    expect(optionsAfter).not.toBe(optionsBefore); // the DOM really was replaced
+    expect(optionsAfter.scrollTop).toBe(96);
     expect(scrollTo).toHaveBeenCalledWith(0, 240);
   });
 
