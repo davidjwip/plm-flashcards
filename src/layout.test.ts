@@ -310,7 +310,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
     expect(card).toMatch(/height:\s*clamp\(/);
     expect(card).not.toMatch(/min-height:\s*clamp\(/);
     // Padding in em would scale with the word and inflate the frame.
-    expect(card).toMatch(/padding:\s*0\s+[0-9.]+rem/);
+    expect(card).toMatch(/padding:\s*[0-9.]+rem\s+[0-9.]+rem/);
     expect(card).not.toMatch(/padding:\s*[0-9.]+em/);
   });
 
@@ -320,7 +320,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
     expect(card).not.toMatch(/font-weight:\s*(?:700|bold)/);
     expect(card).toMatch(/font-size:\s*clamp\(3\.5rem,\s*12vw,\s*8rem\)/);
     expect(card).toMatch(/letter-spacing:\s*-0\.02em/);
-    expect(card).toMatch(/line-height:\s*1/);
+    expect(card).toMatch(/line-height:\s*1\.25/);
     expect(views).toContain('data-testid="word"');
   });
 

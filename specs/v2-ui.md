@@ -53,7 +53,7 @@ grown-up needs (mode, word list) in the header.
 | AC53 | the practice screen                                         | it renders                         | no `choose-patterns` control is rendered; the header `pattern-toggle` is the only route back to the pattern list                                                                                                           |
 | AC54 | the practice screen                                         | it renders                         | the header carries a `how-to` toggle; the instructions panel is closed by default and opens with an `h2` heading plus at least four numbered steps, and the button label flips between "How to Use" and "Close"            |
 | AC55 | the header control row                                      | it renders at any width            | the row never wraps (`flex-wrap: nowrap`), the controls scale with the viewport through `clamp()` sizing and short labels under 480px, and the active mode pill's 4px ring stays unclipped                                 |
-| AC56 | a long word at the adult's largest size on a 390px viewport | the practice screen renders        | the word stays on one line — the font shrinks to fit instead of wrapping (`fitFontSize` is a pure, unit-tested helper; Playwright asserts one line at 390px)                                                               |
+| AC56 | a long word at the adult's largest size on a 390px viewport | the practice screen renders        | the word stays on one line — the font shrinks to fit instead of wrapping (`fitSizes`/`firstFit` are pure, unit-tested helpers; Playwright asserts one line at 390px and 1024px)                                            |
 
 ## 4. Edge cases and refusals
 
@@ -68,30 +68,30 @@ grown-up needs (mode, word list) in the header.
 
 A row appears here in the same PR as its test.
 
-| Criterion | Test file             | Test name                                                        | Status |
-| --------- | --------------------- | ---------------------------------------------------------------- | ------ |
-| AC35      | `src/layout.test.ts`  | AC35 — a fresh load opens a short-vowel run                      | green  |
-| AC36      | `src/layout.test.ts`  | AC36 — the header carries the mode and word-list toggles         | green  |
-| AC37      | `src/layout.test.ts`  | AC37 — bee mode is reachable from a plain load                   | green  |
-| AC38      | `src/layout.test.ts`  | AC38 — the word sits in the framed box before the verdicts       | green  |
-| AC39      | `src/layout.test.ts`  | AC39 — the verdict pair fills the pad, enabled and two columns   | green  |
-| AC40      | `src/layout.test.ts`  | AC40 — the stylesheet carries the maths palette and the font     | green  |
-| AC41      | `src/layout.test.ts`  | AC41 — bee practice hides the word and drops the size controls   | green  |
-| AC42      | `src/layout.test.ts`  | AC42 — every test id the browser suites need still renders       | green  |
-| AC43      | `src/layout.test.ts`  | AC43 — the verdict pad stays two columns under 600px             | green  |
-| AC44      | `src/layout.test.ts`  | AC44 — unticking everything does not restart the run             | green  |
-| AC45      | `src/layout.test.ts`  | AC45 — the title is the maths scale and centred                  | green  |
-| AC46      | `src/layout.test.ts`  | AC46 — the active mode pill ring is not clipped                  | green  |
-| AC47      | `src/layout.test.ts`  | AC47 — the bee peek button is double height                      | green  |
-| AC48      | `src/layout.test.ts`  | AC48 — the footer carries the copyright line                     | green  |
-| AC49      | `src/layout.test.ts`  | AC49 — the party track mirrors the maths game                    | green  |
-| AC50      | `src/layout.test.ts`  | AC50 — the party steps are centred with or without the mascot    | green  |
-| AC51      | `src/layout.test.ts`  | AC51 — the word card is not bold                                 | green  |
-| AC52      | `src/layout.test.ts`  | AC52 — the gap above hear-it matches the gap below               | green  |
-| AC53      | `src/layout.test.ts`  | AC53 — the practice screen has no change-patterns link           | green  |
-| AC54      | `src/layout.test.ts`  | AC54 — the How to Use toggle opens a numbered instructions panel | green  |
-| AC55      | `src/layout.test.ts`  | AC55 — the header row never wraps and keeps the mode ring        | green  |
-| AC56      | `src/wordFit.test.ts` | AC56 — the shrink ramp steps down to the floor                   | green  |
+| Criterion | Test file                                     | Test name                                                                                                       | Status |
+| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------ |
+| AC35      | `src/layout.test.ts`                          | AC35 — a fresh load opens a short-vowel run                                                                     | green  |
+| AC36      | `src/layout.test.ts`                          | AC36 — the header carries the mode and word-list toggles                                                        | green  |
+| AC37      | `src/layout.test.ts`                          | AC37 — bee mode is reachable from a plain load                                                                  | green  |
+| AC38      | `src/layout.test.ts`                          | AC38 — the word sits in the framed box before the verdicts                                                      | green  |
+| AC39      | `src/layout.test.ts`                          | AC39 — the verdict pair fills the pad, enabled and two columns                                                  | green  |
+| AC40      | `src/layout.test.ts`                          | AC40 — the stylesheet carries the maths palette and the font                                                    | green  |
+| AC41      | `src/layout.test.ts`                          | AC41 — bee practice hides the word and drops the size controls                                                  | green  |
+| AC42      | `src/layout.test.ts`                          | AC42 — every test id the browser suites need still renders                                                      | green  |
+| AC43      | `src/layout.test.ts`                          | AC43 — the verdict pad stays two columns under 600px                                                            | green  |
+| AC44      | `src/layout.test.ts`                          | AC44 — unticking everything does not restart the run                                                            | green  |
+| AC45      | `src/layout.test.ts`                          | AC45 — the title is the maths scale and centred                                                                 | green  |
+| AC46      | `src/layout.test.ts`                          | AC46 — the active mode pill ring is not clipped                                                                 | green  |
+| AC47      | `src/layout.test.ts`                          | AC47 — the bee peek button is double height                                                                     | green  |
+| AC48      | `src/layout.test.ts`                          | AC48 — the footer carries the copyright line                                                                    | green  |
+| AC49      | `src/layout.test.ts`                          | AC49 — the party track mirrors the maths game                                                                   | green  |
+| AC50      | `src/layout.test.ts`                          | AC50 — the party steps are centred with or without the mascot                                                   | green  |
+| AC51      | `src/layout.test.ts`                          | AC51 — the word card is not bold                                                                                | green  |
+| AC52      | `src/layout.test.ts`                          | AC52 — the gap above hear-it matches the gap below                                                              | green  |
+| AC53      | `src/layout.test.ts`                          | AC53 — the practice screen has no change-patterns link                                                          | green  |
+| AC54      | `src/layout.test.ts`                          | AC54 — the How to Use toggle opens a numbered instructions panel                                                | green  |
+| AC55      | `src/layout.test.ts`                          | AC55 — the header row never wraps and keeps the mode ring                                                       | green  |
+| AC56      | `src/wordFit.test.ts`, `e2e/practice.spec.ts` | AC56 — the shrink ramp; every word one line at 390px; the box stays inside its card at 1024px; bee peek re-fits | green  |
 
 ## 6. Decisions
 

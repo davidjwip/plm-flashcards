@@ -207,6 +207,43 @@ test('AC56 — the word box stays inside its card at 1024px', async ({ page }) =
   }
 });
 
+test('AC56 — bee peek re-fits the revealed word', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+
+  // Max the ceiling in patterns mode, then switch to bee and reveal the dictated word.
+  for (let i = 0; i < 12; i++) {
+    const bigger = page.getByTestId('word-bigger');
+    if (await bigger.isDisabled()) break;
+    await bigger.click();
+  }
+  await page.getByTestId('mode-bee').click();
+  await page.getByTestId('peek').click();
+  await page.waitForTimeout(300);
+
+  const m = await page.evaluate(() => {
+    const card = document.querySelector('[data-testid="word"]') as HTMLElement;
+    const box = document.querySelector('[data-testid="word-box"]') as HTMLElement;
+    const app = document.querySelector('.app-card') as HTMLElement;
+    const range = document.createRange();
+    range.selectNodeContents(card);
+    const style = getComputedStyle(card);
+    return {
+      font: parseFloat(style.fontSize),
+      ink: range.getBoundingClientRect().height,
+      inner: card.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom),
+      boxW: box.clientWidth,
+      appW: app.clientWidth,
+      pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
+    };
+  });
+
+  expect(m.font).toBeLessThan(320);
+  expect(m.ink).toBeLessThanOrEqual(m.inner + 1);
+  expect(m.boxW).toBeLessThanOrEqual(m.appW + 1);
+  expect(m.pageOverflow).toBeLessThanOrEqual(1);
+});
+
 test('AC55 — the header row never wraps at 360px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto('/');
