@@ -83,12 +83,24 @@ export function beePanel(
 
 export function trackView(session: Session): string {
   const { filled, target } = cycleProgress(session);
+  const steps = Array.from({ length: target }, (_, i) => i + 1);
+  const row = (start: number, end: number): string =>
+    `<div class="goal-steps">${steps
+      .slice(start, end)
+      .map((step) => `<span class="step ${step <= filled ? 'filled' : ''}">${step}</span>`)
+      .join('')}</div>`;
   return `
-    <div class="track" data-testid="track" data-filled="${filled}">
-      ${Array.from({ length: target }, (_, i) => i + 1)
-        .map((step) => `<span class="step ${step <= filled ? 'filled' : ''}">${step}</span>`)
-        .join('')}
-      <span class="track-end">🎉</span>
+    <div class="progress-area">
+      <h2>Path to the Party! 🎉</h2>
+      <div class="goal-track" data-testid="track" data-filled="${filled}">
+        ${session.streak > 0 ? '<span class="mascot">🦊</span>' : ''}
+        <div class="goal-steps-wrapper">
+          ${row(0, 5)}
+          ${row(5, 10)}
+        </div>
+        <span class="goal-end">🎉</span>
+      </div>
+      <p class="solved-line">Problems Solved: <span data-testid="solved">${session.right}</span> / Total Problems: <span data-testid="answered">${session.right + session.wrong}</span></p>
     </div>`;
 }
 
@@ -141,7 +153,7 @@ export function gameView(
         <div class="card" data-testid="word"${wordSizeStyle ? ` style="${wordSizeStyle}"` : ''}${hideWord ? ' hidden' : ''}>${word.word}</div>
       </div>
 
-      ${hideWord ? '<button class="action-btn" data-testid="peek" aria-label="Show the word to the grown-up">Show word</button>' : ''}
+      ${hideWord ? '<button class="peek-btn" data-testid="peek" aria-label="Show the word to the grown-up">Show word</button>' : ''}
 
       ${gameControls(canGrow, canShrink, volume, hideWord)}
 
@@ -158,14 +170,13 @@ export function gameView(
         🔥 ${session.streak} in a row${session.bestStreak > 1 ? ` · best ${session.bestStreak}` : ''}
       </div>
 
-      <div class="party">
-        <span class="party-label">Path to the party</span>
-        ${trackView(session)}
+      ${trackView(session)}
+
+      <div class="game-footer">
+        <button class="link" data-testid="choose-patterns">${hideWord ? 'Change settings' : 'Change patterns'}</button>
       </div>
 
-      <footer class="game-footer">
-        <button class="link" data-testid="choose-patterns">${hideWord ? 'Change settings' : 'Change patterns'}</button>
-      </footer>
+      <footer class="site-footer"><p>© 2026 David Ip. Created for George and Teddy Ip.</p></footer>
 
       ${
         session.celebrate && showCelebration
@@ -186,6 +197,7 @@ export function emptyView(): string {
   return `
     <section class="empty">
       <p class="hint">pick at least one pattern</p>
+      <footer class="site-footer"><p>© 2026 David Ip. Created for George and Teddy Ip.</p></footer>
     </section>`;
 }
 
@@ -196,5 +208,6 @@ export function endView(session: Session): string {
       <p class="hint">Right: ${session.right} · Not yet: ${session.wrong} · Best streak: ${session.bestStreak}</p>
       <button class="action-btn" data-testid="again">Same patterns again</button>
       <button class="secondary" data-testid="choose-patterns">Change patterns</button>
+      <footer class="site-footer"><p>© 2026 David Ip. Created for George and Teddy Ip.</p></footer>
     </section>`;
 }

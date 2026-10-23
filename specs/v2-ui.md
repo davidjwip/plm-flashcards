@@ -42,6 +42,11 @@ grown-up needs (mode, word list) in the header.
 | AC42 | any screen the browser suites drive | it renders                         | every test id in the contract list still exists: `app, mode-bar, mode-patterns, mode-bee, pattern-toggle, pattern-option, word-count, word, mark-right, mark-wrong, progress, hear, track, celebration, celebration-close` |
 | AC43 | a 600px viewport                    | the stylesheet applies             | the verdict pad stays two columns and the page stays single column                                                                                                                                                         |
 | AC44 | the pattern panel is open           | the grown-up unticks every pattern | the run does not restart, the count reads "pick at least one pattern", and re-ticking any pattern restarts it                                                                                                              |
+| AC45 | any screen                          | it renders                         | the screen title uses the maths h1 scale (2.5rem, 2rem under 600px) and is centred, in both modes                                                                                                                          |
+| AC46 | the mode toggle                     | a pill is active                   | the 4px active ring is fully visible — the mode bar does not clip it (`overflow` is not hidden)                                                                                                                            |
+| AC47 | bee practice                        | it renders                         | the `Show word` button is at least double the standard action-button height (min-height 5rem)                                                                                                                              |
+| AC48 | every screen                        | it renders                         | the footer reads exactly `© 2026 David Ip. Created for George and Teddy Ip.`                                                                                                                                               |
+| AC49 | the practice screen                 | it renders                         | the progress area is the maths "Path to the Party! 🎉" panel: two rows of five numbered steps (1–5, 6–10), filled = right answers mod 10, a goal-end 🎉, and a `Problems Solved: n / Total Problems: n` line               |
 
 ## 4. Edge cases and refusals
 
@@ -68,6 +73,11 @@ A row appears here in the same PR as its test.
 | AC42      | `src/layout.test.ts` | AC42 — every test id the browser suites need still renders     | green  |
 | AC43      | `src/layout.test.ts` | AC43 — the verdict pad stays two columns under 600px           | green  |
 | AC44      | `src/layout.test.ts` | AC44 — unticking everything does not restart the run           | green  |
+| AC45      | `src/layout.test.ts` | AC45 — the title is the maths scale and centred                | green  |
+| AC46      | `src/layout.test.ts` | AC46 — the active mode pill ring is not clipped                | green  |
+| AC47      | `src/layout.test.ts` | AC47 — the bee peek button is double height                    | green  |
+| AC48      | `src/layout.test.ts` | AC48 — the footer carries the copyright line                   | green  |
+| AC49      | `src/layout.test.ts` | AC49 — the party track mirrors the maths game                  | green  |
 
 ## 6. Decisions
 
@@ -85,3 +95,24 @@ A row appears here in the same PR as its test.
    a grown-up can tick several patterns without reopening it.
 2. Does the bee mode want the same one-screen landing? Default: yes — bee opens a run from
    the default Cambridge deck (starters + movers + nonsense).
+
+## 8. Amendments after the first look (2026-10-23)
+
+Dave reviewed the preview build and named five defects. Each is now an acceptance criterion
+(AC45–AC49) rather than a styling opinion, so it cannot silently regress:
+
+| #   | What he saw                                               | Cause                                                                                                                            | Fix  |
+| --- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| 1   | the Spelling bee header is the wrong size and not centred | `.title` was 1.4rem with no centring, while the maths `h1` is 2.5rem                                                             | AC45 |
+| 2   | the highlight around the active mode pill is cut off      | `.mode-bar { overflow: hidden }` clipped the 4px `box-shadow` ring                                                               | AC46 |
+| 3   | `Show word` is too small in bee mode                      | it reused the header pill class                                                                                                  | AC47 |
+| 4   | the footer is missing                                     | the practice footer held only the _Change patterns_ link                                                                         | AC48 |
+| 5   | Path to the Party does not match the maths page           | PLM drew an 11-column mini-grid; the maths page draws a panel with two rows of five, a mascot, a goal 🎉 and a solved/total line | AC49 |
+
+Copied from `simpleKindergartenAdditionWebpage/src/style.css` for AC49 (values, not vibes):
+`.progress-area` white / 15px radius / `0 5px 15px rgba(0,0,0,.1)` / 15px padding; `.goal-track` flex,
+`gap:6px`, 10px padding, `#f8f9fa`, 15px radius; `.goal-steps-wrapper` column, `gap:4px`; `.goal-steps`
+flex centred, `gap:5px`; `.step` 35×35, 8px radius, `#e0e0e0`, `#7f8c8d`, bold; `.step.filled`
+`linear-gradient(135deg,#4ecdc4,#ff6b6b)` with white text and `0 2px 8px rgba(78,205,196,.4)`;
+`.mascot` 2.5rem with the `bounce` animation; `.goal-end` 2.5rem. Footer per maths: `margin-top:20px`,
+teal, 1.2rem.
