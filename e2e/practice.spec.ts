@@ -129,12 +129,17 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
         textHeight: range.getBoundingClientRect().height,
         lineHeight: parseFloat(style.lineHeight),
         whiteSpace: style.whiteSpace,
+        fontSize: parseFloat(style.fontSize),
+        pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
       };
     });
     expect(metrics.whiteSpace, `${metrics.text} must not wrap`).toBe('nowrap');
     expect(metrics.scrollWidth, `${metrics.text} must not overflow`).toBeLessThanOrEqual(
       metrics.clientWidth + 1,
     );
+    expect(metrics.pageOverflow, `${metrics.text} must not scroll the page`).toBeLessThanOrEqual(1);
+    // At the maximum ceiling the font must actually have been shrunk to fit.
+    expect(metrics.fontSize).toBeLessThan(320);
     expect(metrics.textHeight, `${metrics.text} must be one line`).toBeLessThanOrEqual(
       metrics.lineHeight * 1.5,
     );

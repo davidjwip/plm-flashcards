@@ -331,9 +331,10 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;
+  max-width: 100%;
+  box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
-  word-break: break-word;
 }
 
 .game > .action-btn,
