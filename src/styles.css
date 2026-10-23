@@ -321,8 +321,10 @@ body {
 .card {
   display: grid;
   place-items: center;
-  min-height: clamp(10rem, 30vh, 20rem);
-  padding: 0.25em;
+  /* The box is a fixed frame: the word shrinks to fit it, it never grows for the word. */
+  width: 100%;
+  height: clamp(10rem, 30vh, 20rem);
+  padding: 0 0.5rem;
   border: 3px solid var(--teal);
   border-radius: 10px;
   background: var(--pale-yellow);
