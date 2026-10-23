@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createSession, mark } from './engine';
-import { endView, gameView, headerView, modeBar, patternPanel, trackView } from './views';
+import { beePanel, endView, gameView, headerView, modeBar, patternPanel, trackView } from './views';
 import type { Session } from './types';
 
 const options = [
@@ -205,5 +205,23 @@ describe('AC33 — the mode is a visible toggle, not a hidden address', () => {
     expect(bee).toContain('data-testid="mode-patterns" aria-pressed="false"');
     const patterns = modeBar('patterns');
     expect(patterns).toContain('data-testid="mode-patterns" aria-pressed="true"');
+  });
+});
+
+describe('AC54 — the bee levels live behind the same header toggle', () => {
+  it('AC54 — renders three levels, honours the choice, and hides when closed', () => {
+    const open = beePanel({ starters: true, movers: false, nonsense: true }, 42, true);
+    expect(open).toContain('data-testid="bee-panel"');
+    expect(open).toContain('data-testid="level-starters"');
+    expect(open).toContain('data-testid="level-movers"');
+    expect(open).toContain('data-testid="level-nonsense"');
+    expect(open).toContain('42 words to draw from');
+    expect(open).not.toContain('hidden');
+
+    const checked = open.match(/data-testid="level-movers"[^>]*/)?.[0] ?? '';
+    expect(checked).not.toContain('checked');
+
+    const closed = beePanel({ starters: true, movers: true, nonsense: true }, 7, false);
+    expect(closed).toContain('hidden');
   });
 });
