@@ -130,6 +130,10 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     return `Patterns · ${selected.length}`;
   }
 
+  function toggleShortLabel(): string {
+    return beeMode() ? 'Levels' : 'Patterns';
+  }
+
   function countText(): string {
     if (beeMode()) return `${beeSize()} words to draw from`;
     if (selected.length === 0) return 'pick at least one pattern';
@@ -243,14 +247,51 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     }, RESIZE_DEBOUNCE_MS);
   }
 
+  type ScrollState = { panel: number; options: number; page: number };
+
+  /**
+   * Replacing root.innerHTML destroys the open panel's scroll box. Remember where
+   * the grown-up was before the swap, including the page when the panel is not the
+   * scrolling element on a short viewport (AC58).
+   */
+  function captureScroll(): ScrollState | null {
+    if (!panelOpen) return null;
+    const panel = root.querySelector<HTMLElement>('.pattern-panel');
+    if (!panel) return null;
+    const options = panel.querySelector<HTMLElement>('.options');
+    return {
+      panel: panel.scrollTop,
+      options: options?.scrollTop ?? 0,
+      page: typeof window.scrollY === 'number' ? window.scrollY : 0,
+    };
+  }
+
+  function restoreScroll(state: ScrollState): void {
+    const panel = root.querySelector<HTMLElement>('.pattern-panel');
+    if (panel) {
+      panel.scrollTop = state.panel;
+      const options = panel.querySelector<HTMLElement>('.options');
+      if (options) options.scrollTop = state.options;
+    }
+    if (state.page === 0) return;
+    try {
+      window.scrollTo(0, state.page);
+    } catch {
+      /* jsdom has no scrolling; the page position is best-effort */
+    }
+  }
+
   function render(): void {
+    const scroll = captureScroll();
     root.innerHTML = `<div class="app-card">${headerView(
       mode,
       toggleLabel(),
       panelOpen,
       countText(),
       howToOpen,
+      toggleShortLabel(),
     )}${howToPanel(howToOpen)}${panelView()}${renderContent()}</div>`;
+    if (scroll) restoreScroll(scroll);
     wireHeader();
     wirePanel();
     wireGame();

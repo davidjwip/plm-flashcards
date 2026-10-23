@@ -36,10 +36,8 @@ export function headerView(
   open: boolean,
   countText: string,
   howToOpen = false,
+  shortToggle = mode === 'bee' ? 'Levels' : 'Patterns',
 ): string {
-  const separator = toggleLabel.indexOf('·');
-  const shortToggle =
-    separator === -1 ? toggleLabel : (toggleLabel.slice(separator + 1).trim() ?? '');
   return `
     <header class="app-header">
       <h1 class="title">${mode === 'bee' ? 'Spelling bee' : 'Sound practice'}</h1>

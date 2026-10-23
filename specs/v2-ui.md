@@ -54,6 +54,9 @@ grown-up needs (mode, word list) in the header.
 | AC54 | the practice screen                                         | it renders                         | the header carries a `how-to` toggle; the instructions panel is closed by default and opens with an `h2` heading plus at least four numbered steps, and the button label flips between "How to Use" and "Close"            |
 | AC55 | the header control row                                      | it renders at any width            | the row never wraps (`flex-wrap: nowrap`), the controls scale with the viewport through `clamp()` sizing and short labels under 480px, and the active mode pill's 4px ring stays unclipped                                 |
 | AC56 | a long word at the adult's largest size on a 390px viewport | the practice screen renders        | the word stays on one line — the font shrinks to fit instead of wrapping (`fitSizes`/`firstFit` are pure, unit-tested helpers; Playwright asserts one line at 390px and 1024px)                                            |
+| AC57 | the viewport is 480px or narrower                           | the header renders                 | the word-list toggle shows a word, not a bare count — `Patterns` in sound-pattern mode and `Levels` in bee mode — and the header row still fits one line at 360px                                                          |
+| AC58 | the pattern panel is open                                   | a pattern is ticked or unticked    | the panel keeps its scroll position (and the page does not jump to the top); the ticked row stays where the grown-up left it                                                                                               |
+| AC59 | a run starts                                                | the session is built               | the words are drawn in a fresh random order — two runs over the same selection differ in order, and the shuffle is a permutation (every word appears exactly once)                                                         |
 
 ## 4. Edge cases and refusals
 
@@ -92,6 +95,9 @@ A row appears here in the same PR as its test.
 | AC54      | `src/layout.test.ts`                          | AC54 — the How to Use toggle opens a numbered instructions panel                                                | green  |
 | AC55      | `src/layout.test.ts`                          | AC55 — the header row never wraps and keeps the mode ring                                                       | green  |
 | AC56      | `src/wordFit.test.ts`, `e2e/practice.spec.ts` | AC56 — the shrink ramp; every word one line at 390px; the box stays inside its card at 1024px; bee peek re-fits | green  |
+| AC57      | `src/layout.test.ts`                          | AC57 — the short word-list label names the mode                                                                 | green  |
+| AC58      | `src/app.test.ts`                             | AC58 — ticking a pattern keeps the panel scroll position                                                        | green  |
+| AC59      | `src/engine.test.ts`                          | AC59 — each run shuffles the word order                                                                         | green  |
 
 ## 6. Decisions
 
@@ -147,3 +153,14 @@ teal, 1.2rem.
 | 1   | a _How to Use_ button like the maths page (AC54) | The maths page toggles an instructions card from a header pill whose label flips **How to Use → Close**. Same shape here: a closed-by-default panel with an `h2` and numbered steps a grown-up can read in ten seconds. It must not push the header onto a second line.                                                 |
 | 2   | the header row must never wrap (AC55)            | `.header-controls` is `flex-wrap: wrap` today, so adding a third control wraps it on a phone. Requires `nowrap`, `clamp()`-based sizing, and short labels under 480px — while the active mode pill's 4px ring stays visible (no `overflow: hidden` on any ancestor).                                                    |
 | 3   | the word must stay on one line (AC56)            | An adult can raise the size to 20rem; on a 390px phone a long word then wraps to two lines. The card gets `white-space: nowrap`, and after render (and on resize) the app steps the font down until the word fits, instead of letting it wrap. The shrink rule is a pure helper so it can be unit-tested without jsdom. |
+
+## 11. Amendments from real-device use (2026-10-23)
+
+Dave tried the word list on Edge for Android and found three problems. All three are behavioural, not
+cosmetic, so they are criteria rather than polish.
+
+| #   | What he saw                                       | Cause                                                                                                                      | Fix  |
+| --- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---- |
+| 1   | the word-list button has no label on mobile       | the short label is derived from the text after `·`, i.e. just the count — at ≤480px the button renders `5`, 24px wide      | AC57 |
+| 2   | ticking a pattern throws the list back to the top | every change re-renders the whole app, discarding the panel's scroll position                                              | AC58 |
+| 3   | the same words recur in the same order            | `buildDictionary` sorts alphabetically and `createSession` copies the array verbatim, so every run starts at the same word | AC59 |

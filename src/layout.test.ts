@@ -406,6 +406,20 @@ describe('v2 UI — one-screen maths-game landing', () => {
     );
   });
 
+  it('AC57 — the short word-list label names the mode', () => {
+    const patterns = headerView('patterns', 'Patterns · 5', false, '24 words in this set');
+    const bee = headerView('bee', 'Levels · 3', false, '240 words to draw from');
+
+    expect(patterns).toMatch(/<span class="label-short">Patterns<\/span>/);
+    expect(bee).toMatch(/<span class="label-short">Levels<\/span>/);
+    expect(patterns).not.toMatch(/<span class="label-short">\d+<\/span>/);
+    expect(bee).not.toMatch(/<span class="label-short">\d+<\/span>/);
+    expect(patterns).toContain('<span class="label-full">Patterns · 5</span>');
+    expect(bee).toContain('<span class="label-full">Levels · 3</span>');
+    expect(patterns).toContain('data-testid="word-count">24 words in this set');
+    expect(bee).toContain('data-testid="word-count">240 words to draw from');
+  });
+
   it('AC55 — the header row never wraps and keeps the mode ring', () => {
     const header = headerView('patterns', 'Patterns · 5', false, '10 words');
     for (const label of [
@@ -414,7 +428,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
       '>Spelling bee<',
       '>Bee<',
       '>Patterns · 5<',
-      '>5<',
+      'class="label-short">Patterns<',
       '>How to Use<',
       '>Help<',
     ]) {

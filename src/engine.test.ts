@@ -14,6 +14,9 @@ import {
 } from './engine';
 import type { Bank } from './types';
 
+/** A deterministic rng that leaves the Fisher–Yates swap targets in place. */
+const keepOrder = () => 1;
+
 const bank: Bank = {
   patterns: [
     { id: 'a', label: 'short a' },
@@ -53,13 +56,13 @@ describe('session', () => {
   const words = buildDictionary(bank, ['a', 'ai']);
 
   it('AC4 — one word is in play at a time', () => {
-    const session = createSession(words);
+    const session = createSession(words, keepOrder);
     expect(currentWord(session)).toEqual(words[0]);
     expect(progress(session)).toEqual({ position: 0, total: words.length });
   });
 
   it('AC5 — a right verdict counts it and moves on', () => {
-    const session = mark(createSession(words), 'right');
+    const session = mark(createSession(words, keepOrder), 'right');
     expect(session.right).toBe(1);
     expect(session.wrong).toBe(0);
     expect(currentWord(session)).toEqual(words[1]);
@@ -67,21 +70,21 @@ describe('session', () => {
   });
 
   it('AC6 — a wrong verdict counts it and moves on', () => {
-    const session = mark(createSession(words), 'wrong');
+    const session = mark(createSession(words, keepOrder), 'wrong');
     expect(session.right).toBe(0);
     expect(session.wrong).toBe(1);
     expect(currentWord(session)).toEqual(words[1]);
   });
 
   it('AC7 — nothing advances without a verdict', () => {
-    const session = createSession(words);
+    const session = createSession(words, keepOrder);
     expect(currentWord(session)).toEqual(words[0]);
     expect(currentWord(session)).toEqual(words[0]);
     expect(session.index).toBe(0);
   });
 
   it('AC8 — the session ends after the last word and reports the score', () => {
-    let session = createSession(words);
+    let session = createSession(words, keepOrder);
     for (let i = 0; i < words.length; i++) session = mark(session, i === 0 ? 'wrong' : 'right');
     expect(isDone(session)).toBe(true);
     expect(currentWord(session)).toBeNull();
@@ -95,13 +98,40 @@ describe('session', () => {
       word: `w${i}`,
       patterns: ['a'],
     }));
-    let session = createSession(long);
+    let session = createSession(long, keepOrder);
     const milestones: number[] = [];
     for (let i = 0; i < long.length; i++) {
       session = mark(session, 'right');
       if (session.celebrate) milestones.push(session.right);
     }
     expect(milestones).toEqual([CELEBRATE_EVERY, CELEBRATE_EVERY * 2]);
+  });
+});
+
+describe('AC59 — every run draws a fresh word order', () => {
+  const ten = Array.from({ length: 10 }, (_, i) => ({ word: `w${i}`, patterns: ['a'] }));
+  const firstWord = (rand: () => number): string | undefined =>
+    currentWord(createSession(ten, rand))?.word;
+
+  it('AC59 — a shuffled session is a permutation, not a sorted copy', () => {
+    const session = createSession(ten, () => 0);
+    const drawn = session.words.map((word) => word.word);
+    expect(drawn).toHaveLength(ten.length);
+    expect([...drawn].sort()).toEqual(ten.map((word) => word.word).sort());
+    expect(new Set(drawn).size).toBe(ten.length);
+    expect(drawn).not.toEqual(ten.map((word) => word.word));
+    // The input dictionary belongs to the bank: a run must never reorder it in place.
+    expect(ten.map((word) => word.word)).toEqual(Array.from({ length: 10 }, (_, i) => `w${i}`));
+  });
+
+  it('AC59 — two runs with different rands draw different orders', () => {
+    const first = createSession(ten, () => 0).words.map((word) => word.word);
+    const second = createSession(ten, () => 1).words.map((word) => word.word);
+    expect(first).not.toEqual(second);
+  });
+
+  it('AC59 — a ten-word run does not present the same first word twice', () => {
+    expect(firstWord(() => 0)).not.toBe(firstWord(() => 1));
   });
 });
 
