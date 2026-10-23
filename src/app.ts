@@ -212,7 +212,10 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     const sizes = fitSizes(ceiling, FIT_MIN_SCALE, FIT_STEP);
     const fits = (px: number): boolean => {
       card.style.fontSize = `${px}px`;
-      return card.scrollWidth <= card.clientWidth + 1;
+      if (card.scrollWidth > card.clientWidth + 1) return false;
+      // The card is capped by its container, so read the page too: if the document
+      // scrolls sideways the word is still too wide for the screen.
+      return document.documentElement.scrollWidth <= window.innerWidth + 1;
     };
 
     if (fits(ceiling)) {
