@@ -215,6 +215,14 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
       if (card.scrollWidth > card.clientWidth + 1) return false;
       // The box height is fixed, so a word too tall to sit inside it must shrink too.
       if (card.scrollHeight > card.clientHeight + 1) return false;
+      // The line box can fit while the glyph ink does not: measure the ink itself.
+      const range = document.createRange();
+      range.selectNodeContents(card);
+      const ink = range.getBoundingClientRect().height;
+      const style = window.getComputedStyle(card);
+      const inner =
+        card.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      if (ink > inner + 1) return false;
       // The card is capped by its container, so read the page too: if the document
       // scrolls sideways the word is still too wide for the screen.
       return document.documentElement.scrollWidth <= window.innerWidth + 1;

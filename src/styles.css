@@ -331,14 +331,17 @@ body {
   /* The box is a fixed frame: the word shrinks to fit it, it never grows for the word. */
   width: 100%;
   height: clamp(10rem, 30vh, 20rem);
-  padding: 0 0.5rem;
+  /* rem, never em: em padding scales with the word and inflates the frame.
+     The vertical padding gives ascenders/descenders room inside overflow:hidden. */
+  padding: 0.35rem 0.5rem;
   border: 3px solid var(--teal);
   border-radius: 10px;
   background: var(--pale-yellow);
   font-size: clamp(3.5rem, 12vw, 8rem);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1;
+  /* 1.25, not 1: Fredoka's ink is ~1.21em, so a 1em line box clips ascenders/descenders. */
+  line-height: 1.25;
   text-align: center;
   max-width: 100%;
   box-sizing: border-box;
@@ -398,7 +401,7 @@ body {
 
 .size-btn {
   min-width: 3.25rem;
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0 0.8rem;
   border: 2px solid var(--teal-tint);
   border-radius: 10px;
