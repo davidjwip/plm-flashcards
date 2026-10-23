@@ -131,7 +131,9 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function toggleShortLabel(): string {
-    return beeMode() ? 'Levels' : 'Patterns';
+    // The mode pill already reads "Patterns" at this width; name the list instead,
+    // or the header shows two identical pills side by side.
+    return beeMode() ? 'Levels' : 'Words';
   }
 
   function countText(): string {
@@ -247,38 +249,35 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     }, RESIZE_DEBOUNCE_MS);
   }
 
-  type ScrollState = { panel: number; options: number; page: number };
+  type ScrollState = { options: number; page: number };
 
   /**
    * Replacing root.innerHTML destroys the open panel's scroll box. Remember where
    * the grown-up was before the swap, including the page when the panel is not the
    * scrolling element on a short viewport (AC58).
+   *
+   * Scope: only while the panel is open. Re-renders with the panel closed (volume,
+   * word size, a verdict) still reset the page position — pre-existing behaviour,
+   * deliberately out of AC58's scope.
    */
   function captureScroll(): ScrollState | null {
     if (!panelOpen) return null;
     const panel = root.querySelector<HTMLElement>('.pattern-panel');
     if (!panel) return null;
+    // `.pattern-panel` is not a scroll container; `.options` is (max-height + overflow).
     const options = panel.querySelector<HTMLElement>('.options');
     return {
-      panel: panel.scrollTop,
       options: options?.scrollTop ?? 0,
-      page: typeof window.scrollY === 'number' ? window.scrollY : 0,
+      page: window.scrollY,
     };
   }
 
   function restoreScroll(state: ScrollState): void {
-    const panel = root.querySelector<HTMLElement>('.pattern-panel');
-    if (panel) {
-      panel.scrollTop = state.panel;
-      const options = panel.querySelector<HTMLElement>('.options');
-      if (options) options.scrollTop = state.options;
-    }
+    const options = root.querySelector<HTMLElement>('.pattern-panel .options');
+    if (options) options.scrollTop = state.options;
+    // Restoring a zero position is pointless and noisy in jsdom.
     if (state.page === 0) return;
-    try {
-      window.scrollTo(0, state.page);
-    } catch {
-      /* jsdom has no scrolling; the page position is best-effort */
-    }
+    window.scrollTo(0, state.page);
   }
 
   function render(): void {

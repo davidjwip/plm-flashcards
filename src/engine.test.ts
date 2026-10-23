@@ -4,6 +4,7 @@ import {
   PRAISE,
   buildDictionary,
   createSession,
+  shuffle,
   currentWord,
   cycleProgress,
   isDone,
@@ -112,6 +113,12 @@ describe('AC59 — every run draws a fresh word order', () => {
   const ten = Array.from({ length: 10 }, (_, i) => ({ word: `w${i}`, patterns: ['a'] }));
   const firstWord = (rand: () => number): string | undefined =>
     currentWord(createSession(ten, rand))?.word;
+
+  it('AC59 — a mid-range rng produces the known Fisher-Yates permutation', () => {
+    // i=2: j=floor(.5*3)=1 -> [a,c,b]; i=1: j=floor(.5*2)=1 -> unchanged.
+    // The +1 in the index maths is what makes this [a,c,b] and not [a,b,c].
+    expect(shuffle(['a', 'b', 'c'], () => 0.5)).toEqual(['a', 'c', 'b']);
+  });
 
   it('AC59 — a shuffled session is a permutation, not a sorted copy', () => {
     const session = createSession(ten, () => 0);
