@@ -61,6 +61,9 @@ body {
 .app-card {
   width: 100%;
   max-width: 600px;
+  /* A grid/flex child defaults to min-width:auto, i.e. min-content: a nowrap word
+     would then push the card wider than its container instead of shrinking. */
+  min-width: 0;
   padding: 20px;
   border-radius: 15px;
   background: var(--card);
@@ -297,6 +300,7 @@ body {
   grid-template-columns: 1fr;
   gap: 0.85rem;
   align-content: start;
+  min-width: 0;
 }
 
 .game-bar {
@@ -312,6 +316,9 @@ body {
 }
 
 .word-box {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 15px;
   background: #fff;
