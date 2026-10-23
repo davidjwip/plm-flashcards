@@ -144,7 +144,7 @@ describe('app wiring', () => {
     expect(el.querySelector('[data-testid="celebration"]')).toBeFalsy();
     expect(el.querySelector('[data-testid="track"]')!.getAttribute('data-filled')).toBe('0');
 
-    click(el.querySelector('[data-testid="choose-patterns"]'));
+    click(el.querySelector('[data-testid="pattern-toggle"]'));
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
   });
 
@@ -273,7 +273,7 @@ describe('app wiring', () => {
     click(el.querySelector('[data-testid="again"]'));
     expect(el.querySelector('[data-testid="word"]')!.textContent).toBe('rain');
 
-    click(el.querySelector('[data-testid="choose-patterns"]'));
+    click(el.querySelector('[data-testid="pattern-toggle"]'));
     expect(el.querySelector('[data-testid="pattern-panel"]')).toBeTruthy();
   });
 

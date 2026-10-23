@@ -180,23 +180,21 @@ describe('AC32 — bee mode dictates the word instead of showing it', () => {
 describe('AC34 — bee mode keeps only meaningful game controls', () => {
   const base = () => createSession([word]);
 
-  it('AC34 — hides word-size controls and names the footer for settings when the word is hidden', () => {
+  it('AC34 — hides word-size controls when the word is hidden (AC53 removes the footer link)', () => {
     const html = gameView(base(), word, false, null, true, true, volume(), undefined, true);
     expect(html).not.toContain('data-testid="word-smaller"');
     expect(html).not.toContain('data-testid="word-bigger"');
     expect(html).toContain('data-testid="volume-down"');
     expect(html).toContain('data-testid="volume-label"');
     expect(html).toContain('data-testid="volume-up"');
-    expect(html).toContain('Change settings');
-    expect(html).not.toContain('Change patterns');
+    expect(html).not.toContain('data-testid="choose-patterns"');
   });
 
-  it('AC34 — keeps word-size controls and the pattern link when the word is shown', () => {
+  it('AC34 — keeps word-size controls when the word is shown (AC53 removes the footer link)', () => {
     const html = gameView(base(), word, false, null, true, true, volume());
     expect(html).toContain('data-testid="word-smaller"');
     expect(html).toContain('data-testid="word-bigger"');
-    expect(html).toContain('Change patterns');
-    expect(html).not.toContain('Change settings');
+    expect(html).not.toContain('data-testid="choose-patterns"');
   });
 });
 

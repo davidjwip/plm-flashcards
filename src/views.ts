@@ -172,10 +172,6 @@ export function gameView(
 
       ${trackView(session)}
 
-      <div class="game-footer">
-        <button class="link" data-testid="choose-patterns">${hideWord ? 'Change settings' : 'Change patterns'}</button>
-      </div>
-
       <footer class="site-footer"><p>© 2026 David Ip. Created for George and Teddy Ip.</p></footer>
 
       ${
