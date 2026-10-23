@@ -137,6 +137,8 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
         pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
         cardH: el.clientHeight,
         cardW: el.clientWidth,
+        boxW: (document.querySelector('[data-testid="word-box"]') as HTMLElement).clientWidth,
+        appW: (document.querySelector('.app-card') as HTMLElement).clientWidth,
       };
     });
     expect(metrics.whiteSpace, `${metrics.text} must not wrap`).toBe('nowrap');
@@ -146,16 +148,61 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
     expect(metrics.pageOverflow, `${metrics.text} must not scroll the page`).toBeLessThanOrEqual(1);
     // The frame keeps its size; only the text shrinks into it.
     expect(metrics.cardH, 'the word box must not grow for the word').toBe(frame.h);
-    // A scrollbar appearing or leaving shifts the width a few px; the box is not resized for the word.
-    expect(
-      Math.abs(metrics.cardW - frame.w),
-      'the word box must not widen for the word',
-    ).toBeLessThanOrEqual(8);
+    expect(metrics.boxW, 'the word box must stay inside the card').toBeLessThanOrEqual(
+      metrics.appW + 1,
+    );
+    // Width is bounded by the container, not by the word: a scrollbar can shift it a few px.
+    expect(metrics.cardW, 'the word must stay inside its box').toBeLessThanOrEqual(
+      metrics.boxW + 1,
+    );
     // At the maximum ceiling the font must actually have been shrunk to fit.
     expect(metrics.fontSize).toBeLessThan(320);
     expect(metrics.textHeight, `${metrics.text} must be one line`).toBeLessThanOrEqual(
       metrics.lineHeight * 1.5,
     );
+    await page.getByTestId('mark-right').click();
+  }
+});
+
+test('AC56 — the word box stays inside its card at 1024px', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 800 });
+  await page.goto('/');
+
+  // Select a pattern with long words (ou: about, around, ground...), then max the size.
+  await page.getByTestId('pattern-toggle').click();
+  const options = page.getByTestId('pattern-option');
+  const count = await options.count();
+  for (let i = 0; i < count; i++) {
+    const option = options.nth(i);
+    if (await option.isChecked()) await option.uncheck();
+  }
+  await page.locator('[data-testid="pattern-option"][value="ou"]').check();
+  await page.getByTestId('pattern-toggle').click();
+
+  for (let i = 0; i < 12; i++) {
+    const bigger = page.getByTestId('word-bigger');
+    if (await bigger.isDisabled()) break;
+    await bigger.click();
+  }
+
+  for (let round = 0; round < 6; round++) {
+    const m = await page.evaluate(() => {
+      const card = document.querySelector('[data-testid="word"]') as HTMLElement;
+      const box = document.querySelector('[data-testid="word-box"]') as HTMLElement;
+      const app = document.querySelector('.app-card') as HTMLElement;
+      return {
+        word: card.textContent?.trim(),
+        cardW: card.clientWidth,
+        boxW: box.clientWidth,
+        appW: app.clientWidth,
+        pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
+      };
+    });
+    expect(m.boxW, `${m.word} must not outgrow the card`).toBeLessThanOrEqual(m.appW + 1);
+    expect(m.cardW, `${m.word} must not outgrow the card`).toBeLessThanOrEqual(m.boxW + 1);
+    expect(m.pageOverflow, `${m.word} must not scroll the page`).toBeLessThanOrEqual(1);
+    const close = page.getByTestId('celebration-close');
+    if (await close.count()) await close.click();
     await page.getByTestId('mark-right').click();
   }
 });
