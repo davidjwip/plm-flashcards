@@ -65,7 +65,7 @@ export function howToPanel(open: boolean): string {
     <section class="how-to-panel" id="how-to-panel" data-testid="how-to-panel" ${open ? '' : 'hidden'}>
       <h2>How to Use</h2>
       <ol class="how-to-steps">
-        <li>Press the <strong>word-list</strong> button to choose sound patterns. Switch to <strong>Spelling bee</strong> to pick levels instead.</li>
+        <li>Press the <strong>Patterns</strong> button to choose sound patterns — in Spelling bee mode the same button reads <strong>Levels</strong>.</li>
         <li>Ask the child to read each word <strong>aloud</strong>. In bee mode they <strong>write</strong> the word down.</li>
         <li>Press <strong>✓ Got it</strong> when they read it correctly, or <strong>✗ Not yet</strong> to try again.</li>
         <li>Use <strong>A−</strong> / <strong>A+</strong> to change the word size, and <strong>🔉</strong> for the volume.</li>

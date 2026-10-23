@@ -359,7 +359,8 @@ describe('v2 UI — one-screen maths-game landing', () => {
     const steps = panel.match(/<li>/g) ?? [];
     expect(steps.length).toBeGreaterThanOrEqual(4);
     for (const content of [
-      'word-list',
+      'Patterns',
+      'Levels',
       'Spelling bee',
       'aloud',
       'write',
