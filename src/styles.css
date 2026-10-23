@@ -286,7 +286,7 @@ body {
   border-radius: 10px;
   background: var(--pale-yellow);
   font-size: clamp(3.5rem, 12vw, 8rem);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;

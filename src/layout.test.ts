@@ -307,7 +307,7 @@ describe('v2 UI — one-screen maths-game landing', () => {
 
   it('AC51 — the word card is not bold', () => {
     const card = styles.match(/\.card\s*\{[^}]*\}/)?.[0] ?? '';
-    expect(card).toMatch(/font-weight:\s*500/);
+    expect(card).toMatch(/font-weight:\s*(?:400|500)/);
     expect(card).not.toMatch(/font-weight:\s*(?:700|bold)/);
     expect(card).toMatch(/font-size:\s*clamp\(3\.5rem,\s*12vw,\s*8rem\)/);
     expect(card).toMatch(/letter-spacing:\s*-0\.02em/);
