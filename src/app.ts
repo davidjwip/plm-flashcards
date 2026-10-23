@@ -41,7 +41,7 @@ import {
   wordSizeRem,
   wordSizeStyle,
 } from './wordSize';
-import { firstFit, fitSizes } from './wordFit';
+import { firstFit, fitSizes, inkFits } from './wordFit';
 import './styles.css';
 
 export type MountOptions = {
@@ -222,7 +222,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
       const style = window.getComputedStyle(card);
       const inner =
         card.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-      if (ink > inner + 1) return false;
+      if (!inkFits(ink, inner)) return false;
       // The card is capped by its container, so read the page too: if the document
       // scrolls sideways the word is still too wide for the screen.
       return document.documentElement.scrollWidth <= window.innerWidth + 1;

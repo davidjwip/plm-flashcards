@@ -21,6 +21,11 @@ export function fitSizes(maxPx: number, minScale = 0.4, step = 0.92): number[] {
   return sizes;
 }
 
+/** True when the glyph ink fits inside the frame's inner box. */
+export function inkFits(ink: number, inner: number, tolerance = 1): boolean {
+  return ink <= inner + tolerance;
+}
+
 /** The largest candidate that fits, or the smallest if none do. */
 export function firstFit(sizes: number[], fits: (px: number) => boolean): number {
   for (const size of sizes) {
