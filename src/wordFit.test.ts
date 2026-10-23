@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { firstFit, fitSizes } from './wordFit';
 
 describe('word auto-fit', () => {
-  it('AC56 — a long word shrinks to stay on one line', () => {
+  it('AC56 — the shrink ramp steps down to the floor', () => {
     expect(fitSizes(100, 0.5, 0.5)).toEqual([100, 50]);
 
     const sizes = fitSizes(320, 0.1, 0.92);

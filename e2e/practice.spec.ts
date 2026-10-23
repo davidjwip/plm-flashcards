@@ -104,42 +104,70 @@ test('AC16 — ten right answers raise the celebration, and the track starts aga
   await expect(page.getByTestId('streak')).toContainText('10 in a row');
 });
 
-test('AC56 — a long word stays on one line at 390px', async ({ page }) => {
+test('AC56 — every word fits on one line at 390px at maximum size', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await openPicker(page);
-  // "au" contains astronaut (8) and restaurant (10); advance until a long one.
-  await page.locator('[data-testid="pattern-option"][value="au"]').check();
 
-  for (let i = 0; i < 10; i++) {
-    const text = ((await page.getByTestId('word').textContent()) ?? '').trim();
-    if (text.length >= 8) break;
-    await page.getByTestId('mark-right').click();
-  }
-  const word = ((await page.getByTestId('word').textContent()) ?? '').trim();
-  expect(word.length).toBeGreaterThanOrEqual(8);
-
-  for (let i = 0; i < 10; i++) {
+  // Raise the adult's ceiling to the maximum, so every word has to be shrunk to fit.
+  for (let i = 0; i < 12; i++) {
     const bigger = page.getByTestId('word-bigger');
     if (await bigger.isDisabled()) break;
     await bigger.click();
   }
   await expect(page.getByTestId('word-bigger')).toBeDisabled();
 
-  const metrics = await page.getByTestId('word').evaluate((el) => {
-    const style = getComputedStyle(el);
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    return {
-      scrollWidth: el.scrollWidth,
-      clientWidth: el.clientWidth,
-      textHeight: range.getBoundingClientRect().height,
-      lineHeight: parseFloat(style.lineHeight),
-      whiteSpace: style.whiteSpace,
-    };
-  });
+  // Ten words, no long-word lottery: at 20rem on a 390px screen even a short word overflows.
+  for (let round = 0; round < 10; round++) {
+    const metrics = await page.getByTestId('word').evaluate((el) => {
+      const style = getComputedStyle(el);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return {
+        text: (el.textContent ?? '').trim(),
+        scrollWidth: el.scrollWidth,
+        clientWidth: el.clientWidth,
+        textHeight: range.getBoundingClientRect().height,
+        lineHeight: parseFloat(style.lineHeight),
+        whiteSpace: style.whiteSpace,
+      };
+    });
+    expect(metrics.whiteSpace, `${metrics.text} must not wrap`).toBe('nowrap');
+    expect(metrics.scrollWidth, `${metrics.text} must not overflow`).toBeLessThanOrEqual(
+      metrics.clientWidth + 1,
+    );
+    expect(metrics.textHeight, `${metrics.text} must be one line`).toBeLessThanOrEqual(
+      metrics.lineHeight * 1.5,
+    );
+    await page.getByTestId('mark-right').click();
+  }
+});
 
-  expect(metrics.whiteSpace).toBe('nowrap');
-  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
-  expect(metrics.textHeight).toBeLessThanOrEqual(metrics.lineHeight * 1.5);
+test('AC55 — the header row never wraps at 360px', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/');
+
+  const row = page.locator('.header-controls');
+  await expect(row).toHaveCSS('flex-wrap', 'nowrap');
+  const overflow = await row.evaluate((el) => el.scrollWidth - el.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+
+  // The active mode pill keeps its ring, and no ancestor clips it.
+  const ring = await page
+    .getByTestId('mode-patterns')
+    .evaluate((el) => getComputedStyle(el).boxShadow);
+  expect(ring).toContain('4px');
+
+  const clippers = await page.evaluate(() => {
+    const bad: string[] = [];
+    let node: HTMLElement | null = document.querySelector('.mode-bar');
+    while (node && node !== document.documentElement) {
+      const o = getComputedStyle(node);
+      if (o.overflow === 'hidden' || o.overflow === 'clip') {
+        bad.push(node.className || node.tagName);
+      }
+      node = node.parentElement;
+    }
+    return bad;
+  });
+  expect(clippers).toEqual([]);
 });

@@ -340,6 +340,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
       root.querySelector('[data-testid="peek"]')?.addEventListener('click', () => {
         root.querySelector('[data-testid="word-box"]')?.removeAttribute('hidden');
         root.querySelector('[data-testid="word"]')?.removeAttribute('hidden');
+        // A word revealed at a large stored size must be fitted, not clipped by nowrap.
+        fitWord();
       });
       const key = `${word.word}:${session.right}:${session.wrong}`;
       if (spokenAt !== key) {

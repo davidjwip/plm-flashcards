@@ -52,7 +52,8 @@ export function headerView(
           ${labelled(toggleLabel, shortToggle)}
         </button>
         <button class="how-to-toggle" data-testid="how-to" aria-expanded="${howToOpen}"
-          aria-label="${howToOpen ? 'Close' : 'How to Use'}">${howToLabel(howToOpen)}</button>
+          aria-controls="how-to-panel"
+          aria-label="${howToOpen ? 'Close' : 'How to Use'}"><span aria-hidden="true">${howToLabel(howToOpen)}</span></button>
       </div>
       <p class="count" data-testid="word-count">${countText}</p>
     </header>`;
@@ -61,7 +62,7 @@ export function headerView(
 /** Grown-up instructions, behind a header pill and closed by default (AC54). */
 export function howToPanel(open: boolean): string {
   return `
-    <section class="how-to-panel" data-testid="how-to-panel" ${open ? '' : 'hidden'}>
+    <section class="how-to-panel" id="how-to-panel" data-testid="how-to-panel" ${open ? '' : 'hidden'}>
       <h2>How to Use</h2>
       <ol class="how-to-steps">
         <li>Press the <strong>word-list</strong> button to choose sound patterns. Switch to <strong>Spelling bee</strong> to pick levels instead.</li>
