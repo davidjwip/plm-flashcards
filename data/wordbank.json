@@ -373,6 +373,12 @@
       ]
     },
     {
+      "word": "above",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "accept",
       "patterns": [
         "-pt"
@@ -2109,12 +2115,6 @@
       "word": "dot",
       "patterns": [
         "o"
-      ]
-    },
-    {
-      "word": "dove",
-      "patterns": [
-        "ghost_e"
       ]
     },
     {
@@ -4036,12 +4036,6 @@
       ]
     },
     {
-      "word": "live",
-      "patterns": [
-        "ghost_e"
-      ]
-    },
-    {
       "word": "load",
       "patterns": [
         "oa"
@@ -4587,12 +4581,6 @@
       ]
     },
     {
-      "word": "one",
-      "patterns": [
-        "ghost_e"
-      ]
-    },
-    {
       "word": "open",
       "patterns": [
         "schwa"
@@ -4985,6 +4973,12 @@
     },
     {
       "word": "pram",
+      "patterns": [
+        "pr-"
+      ]
+    },
+    {
+      "word": "prank",
       "patterns": [
         "pr-"
       ]
@@ -5816,6 +5810,12 @@
       ]
     },
     {
+      "word": "shove",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "show",
       "patterns": [
         "ow"
@@ -5881,6 +5881,12 @@
     },
     {
       "word": "shrug",
+      "patterns": [
+        "shr-"
+      ]
+    },
+    {
+      "word": "shrunk",
       "patterns": [
         "shr-"
       ]
@@ -6563,6 +6569,12 @@
       ]
     },
     {
+      "word": "sprung",
+      "patterns": [
+        "spr-"
+      ]
+    },
+    {
       "word": "squad",
       "patterns": [
         "squ-"
@@ -6577,6 +6589,12 @@
     },
     {
       "word": "squash",
+      "patterns": [
+        "squ-"
+      ]
+    },
+    {
+      "word": "squawk",
       "patterns": [
         "squ-"
       ]
@@ -7627,6 +7645,12 @@
       "word": "tusk",
       "patterns": [
         "-sk"
+      ]
+    },
+    {
+      "word": "twelve",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
