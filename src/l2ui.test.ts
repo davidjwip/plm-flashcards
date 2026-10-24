@@ -16,7 +16,10 @@ import {
   SILENT_E,
   SPELLING_L2,
   START_CLUSTERS,
+  isL2Word,
+  segment,
   syllables,
+  untaught,
 } from './levels';
 import type { KeyValueStore } from './storage';
 import type { Bank } from './types';
@@ -354,7 +357,7 @@ describe('level 2 pattern panel', () => {
   });
 });
 
-describe('AC69 — Level 2 means one syllable', () => {
+describe('AC69 — Level 2 means every sound taught', () => {
   it('AC69 — the syllable helper counts the twenty pinned examples', () => {
     const cases: [string, number][] = [
       ['cake', 1],
@@ -383,7 +386,73 @@ describe('AC69 — Level 2 means one syllable', () => {
     }
   });
 
-  it('AC69 — Level 2 never serves a multi-syllable word', () => {
+  it('AC69 — a word is Level 2 only when every sound in it has been taught', () => {
+    const inside = [
+      'smart',
+      'smash',
+      'thousand',
+      'sprout',
+      'prank',
+      'shrunk',
+      'sprung',
+      'help',
+      'next',
+      'duck',
+      'sing',
+      'ship',
+      'thin',
+      'stamp',
+      'black',
+      'jump',
+      'hand',
+      'bell',
+      'miss',
+      'fork',
+    ];
+    const outside = [
+      'armchair',
+      'chair',
+      'strawberry',
+      'squawk',
+      'splurge',
+      'scrawl',
+      'throne',
+      'cake',
+      'night',
+      'boat',
+      'coin',
+      'saw',
+      'snow',
+      'bird',
+      'her',
+      'catch',
+    ];
+    for (const word of inside) {
+      expect(isL2Word(word), `${word} is Level 2`).toBe(true);
+    }
+    for (const word of outside) {
+      expect(isL2Word(word), `${word} is not Level 2`).toBe(false);
+    }
+  });
+
+  it('AC69 — segmentation takes the longest grapheme, so air is not ai plus ir', () => {
+    expect(segment('chair')).toEqual(['ch', 'air']);
+
+    const armchair = segment('armchair');
+    expect(armchair).toContain('air');
+    expect(armchair).not.toContain('ai');
+    expect(armchair).not.toContain('ir');
+
+    expect(segment('squawk')).toContain('aw');
+  });
+
+  it('AC69 — a final -le is not a split digraph', () => {
+    expect(untaught('cake')).toEqual(['a_e']);
+    expect(untaught('table')).toEqual([]);
+    expect(untaught('smile')).toEqual([]);
+  });
+
+  it('AC69 — the chip serves only words whose every sound is taught; a manual subset brings the rest back', () => {
     const el = root();
     const app = mount({
       bank,
@@ -393,12 +462,12 @@ describe('AC69 — Level 2 means one syllable', () => {
     const served = app.session()?.words.map((entry) => entry.word) ?? [];
     expect(served.length).toBeGreaterThan(0);
     for (const word of served) {
-      expect(syllables(word), `${word} is one syllable`).toBe(1);
+      expect(untaught(word), `${word} has no untaught grapheme`).toEqual([]);
     }
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
       `${served.length} words in this set`,
     );
-    for (const word of ['armchair', 'strawberry', 'restaurant', 'thousand', 'yourself']) {
+    for (const word of ['armchair', 'strawberry', 'squawk', 'throne']) {
       expect(served, `${word} is not served by the chip`).not.toContain(word);
     }
 
@@ -408,11 +477,11 @@ describe('AC69 — Level 2 means one syllable', () => {
       bank,
       root: manualEl,
       store: store({
-        'plm.selectedPatterns': JSON.stringify(['air', 'str-', '-nt', 'th', '-lf']),
+        'plm.selectedPatterns': JSON.stringify(['air', 'str-', 'squ-', 'thr-']),
       }),
     });
     const manualWords = manual.session()?.words.map((entry) => entry.word) ?? [];
-    for (const word of ['armchair', 'strawberry', 'restaurant', 'thousand', 'yourself']) {
+    for (const word of ['armchair', 'strawberry', 'squawk', 'throne']) {
       expect(manualWords, `${word} returns with a manual subset`).toContain(word);
     }
   });

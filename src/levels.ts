@@ -170,6 +170,88 @@ export function tagsForSpelling(word: string): string[] {
   });
 }
 
+/** Multi-letter graphemes the app knows, longest first. Single letters are always taught. */
+const GRAPHEMES = [
+  'igh',
+  'ear',
+  'eer',
+  'air',
+  'are',
+  'tch',
+  'nch',
+  'oo',
+  'ou',
+  'ow',
+  'oi',
+  'oy',
+  'au',
+  'aw',
+  'al',
+  'ee',
+  'ea',
+  'ai',
+  'ay',
+  'ie',
+  'oa',
+  'ue',
+  'ui',
+  'ew',
+  'ur',
+  'ir',
+  'er',
+  'ar',
+  'or',
+  'ck',
+  'sh',
+  'ch',
+  'th',
+  'ng',
+];
+
+/** Those of the above that Level 2 has taught. */
+const L2_GRAPHEMES = new Set(['oo', 'ou', 'ar', 'or', 'ck', 'sh', 'ch', 'th', 'ng', 'nch']);
+
+const LONGEST_FIRST = [...GRAPHEMES].sort((a, b) => b.length - a.length);
+
+/** Walk left to right, taking the longest known grapheme at each position. */
+export function segment(word: string): string[] {
+  const lower = word.toLowerCase().replace(/[^a-z]/g, '');
+  const parts: string[] = [];
+  let at = 0;
+  while (at < lower.length) {
+    const grapheme = LONGEST_FIRST.find((candidate) => lower.startsWith(candidate, at));
+    if (grapheme) {
+      parts.push(grapheme);
+      at += grapheme.length;
+    } else {
+      parts.push(lower[at]!);
+      at += 1;
+    }
+  }
+  return parts;
+}
+
+/** A silent final `e` that changes the vowel before it, e.g. `cake` -> `a_e`. */
+function splitDigraph(word: string): string | null {
+  const lower = word.toLowerCase().replace(/[^a-z]/g, '');
+  if (!lower.endsWith('e') || lower.endsWith('le')) return null;
+  const vowel = lower[lower.length - 3];
+  const consonant = lower[lower.length - 2];
+  if (!vowel || !consonant) return null;
+  if (!/[aeiou]/.test(vowel) || /[aeiou]/.test(consonant)) return null;
+  return `${vowel}_e`;
+}
+
+/** Every multi-letter grapheme Level 2 has not taught. Empty means fully covered. */
+export function untaught(word: string): string[] {
+  const missing = segment(word).filter(
+    (grapheme) => grapheme.length > 1 && !L2_GRAPHEMES.has(grapheme),
+  );
+  const split = splitDigraph(word);
+  if (split) missing.push(split);
+  return missing;
+}
+
 /**
  * Syllables from spelling: vowel groups, minus a silent final `e`, except a
  * syllabic `-le` after a consonant, which keeps its vowel (`table` 2, `smile` 1).
@@ -191,7 +273,7 @@ export function syllables(word: string): number {
 }
 
 export function isL2Word(word: string): boolean {
-  return tagsForSpelling(word).length > 0 && syllables(word) === 1;
+  return tagsForSpelling(word).length > 0 && untaught(word).length === 0;
 }
 
 /** Which family heading a pattern row belongs under. */
