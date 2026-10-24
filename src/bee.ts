@@ -1,4 +1,5 @@
 import { shuffle } from './engine';
+import { isL2Word } from './levels';
 import type { Word } from './types';
 
 /**
@@ -19,6 +20,8 @@ export type BeeChoice = {
   starters: boolean;
   movers: boolean;
   nonsense: boolean;
+  /** Keep only words whose spelling proves at least one Level 2 pattern. */
+  l2: boolean;
 };
 
 export const BEE_ROUND = 10;
@@ -172,7 +175,9 @@ export function beeDictionary(
   avoid: Set<string> = new Set(),
   rng: () => number = Math.random,
 ): Word[] {
-  const real: Word[] = beeWords(deck, choice).map((word) => ({ word, patterns: [BEE_TAG] }));
+  const real: Word[] = beeWords(deck, choice)
+    .filter((word) => !choice.l2 || isL2Word(word))
+    .map((word) => ({ word, patterns: [BEE_TAG] }));
   if (!choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);

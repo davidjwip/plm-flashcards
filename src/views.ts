@@ -1,4 +1,5 @@
 import { CELEBRATE_EVERY, cycleProgress, praiseFor, progress } from './engine';
+import { GROUP_LABEL, GROUP_ORDER, L2_PATTERN_IDS, groupOf } from './levels';
 import type { Pattern, Session, Word } from './types';
 
 /** Keep view code boring: strings in, strings out, no state. */
@@ -73,27 +74,54 @@ export function howToPanel(open: boolean): string {
 }
 
 /** Pattern picker: a closed panel by default, never a modal (AC36, AC44). */
-export function patternPanel(options: Pattern[], selected: string[], open: boolean): string {
+export function patternPanel(
+  options: Pattern[],
+  selected: string[],
+  open: boolean,
+  collapsed: string[] = [],
+): string {
+  const selectedSet = new Set(selected);
+  const l2Selected = L2_PATTERN_IDS.filter((id) => selectedSet.has(id)).length;
+  const chipState =
+    l2Selected === L2_PATTERN_IDS.length ? 'true' : l2Selected === 0 ? 'false' : 'mixed';
+  const chipClass = chipState === 'true' ? ' on' : chipState === 'mixed' ? ' mixed' : '';
+
+  const group = (id: (typeof GROUP_ORDER)[number]): string => {
+    const rows = options.filter((pattern) => groupOf(pattern.id) === id);
+    return `
+      <details class="option-group" data-group="${id}"${collapsed.includes(id) ? '' : ' open'}>
+        <summary>${GROUP_LABEL[id]}</summary>
+        <div class="options">
+          ${rows
+            .map(
+              (pattern) => `
+            <label class="option">
+              <input type="checkbox" data-testid="pattern-option" value="${pattern.id}"
+                ${selected.includes(pattern.id) ? 'checked' : ''} />
+              <span>${pattern.label}</span>
+            </label>`,
+            )
+            .join('')}
+        </div>
+      </details>`;
+  };
+
   return `
     <section class="pattern-panel" data-testid="pattern-panel" ${open ? '' : 'hidden'}>
-      <div class="options">
-        ${options
-          .map(
-            (pattern) => `
-          <label class="option">
-            <input type="checkbox" data-testid="pattern-option" value="${pattern.id}"
-              ${selected.includes(pattern.id) ? 'checked' : ''} />
-            <span>${pattern.label}</span>
-          </label>`,
-          )
-          .join('')}
+      <div class="pattern-toolbar">
+        <input type="search" data-testid="pattern-search" placeholder="Find a pattern"
+          aria-label="Find a pattern" />
+        <button class="l2-chip${chipClass}" data-testid="l2-chip"
+          aria-pressed="${chipState}">Level 2</button>
       </div>
+      <p class="pattern-empty" data-testid="pattern-empty" hidden>no patterns match “”</p>
+      ${GROUP_ORDER.map(group).join('')}
     </section>`;
 }
 
 /** Bee levels live behind the same header toggle, instead of the pattern list. */
 export function beePanel(
-  choice: { starters: boolean; movers: boolean; nonsense: boolean },
+  choice: { starters: boolean; movers: boolean; nonsense: boolean; l2?: boolean },
   wordCount: number,
   open: boolean,
 ): string {
@@ -108,6 +136,7 @@ export function beePanel(
         ${box('starters', choice.starters, 'Cambridge Starters words')}
         ${box('movers', choice.movers, 'Cambridge Movers words')}
         ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)')}
+        ${box('l2', choice.l2 ?? false, 'Level 2 patterns only')}
       </div>
       <p class="count" data-testid="bee-count">${wordCount} words to draw from</p>
     </section>`;

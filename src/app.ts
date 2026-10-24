@@ -32,6 +32,7 @@ import {
   type Mode,
 } from './views';
 import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
+import { L2_PATTERN_IDS } from './levels';
 import {
   DEFAULT_WORD_SIZE,
   canGrow,
@@ -72,7 +73,7 @@ export const DEFAULT_PATTERNS = ['a', 'e', 'i', 'o', 'u'] as const;
 
 /** Wire the app to a root element. All state lives in this closure. */
 export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppHandle {
-  let beeChoice: BeeChoice = { starters: true, movers: true, nonsense: true };
+  let beeChoice: BeeChoice = { starters: true, movers: true, nonsense: true, l2: false };
   const MODE_KEY = 'mode';
   const readMode = (): Mode => {
     try {
@@ -96,6 +97,9 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   // falls back to the short vowels.
   if (!hasStoredSelection(store)) selected = [...DEFAULT_PATTERNS];
   let panelOpen = false;
+  let collapsedGroups: string[] = [];
+  // Tracked so focus lands in search only when the panel opens, never on a rerender.
+  let wasPanelOpen = false;
   let howToOpen = false;
   // null = nothing chosen yet, so the stylesheet's clamp() keeps the word responsive.
   let wordSize: number | null = loadWordSize(store);
@@ -144,7 +148,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   function panelView(): string {
     if (beeMode()) return beePanel(beeChoice, beeSize(), panelOpen);
-    return patternPanel(patternOptions(bank), selected, panelOpen);
+    return patternPanel(patternOptions(bank), selected, panelOpen, collapsedGroups);
   }
 
   function clearRun(): void {
@@ -295,6 +299,10 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     wirePanel();
     wireGame();
     fitWord();
+    if (panelOpen && !wasPanelOpen) {
+      root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]')?.focus();
+    }
+    wasPanelOpen = panelOpen;
   }
 
   function wireHeader(): void {
@@ -351,6 +359,39 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     render();
   }
 
+  /**
+   * Filter in place. Re-rendering would replace the checkboxes and silently drop a
+   * tick that the search had hidden, so every row stays in the DOM.
+   */
+  function filterPatterns(raw: string): void {
+    const query = raw.toLowerCase();
+    let matches = 0;
+
+    for (const group of root.querySelectorAll<HTMLDetailsElement>('.option-group')) {
+      let visible = 0;
+      for (const row of group.querySelectorAll<HTMLElement>('.option')) {
+        const box = row.querySelector<HTMLInputElement>('[data-testid="pattern-option"]');
+        const label = row.textContent?.toLowerCase() ?? '';
+        const hit =
+          query === '' ||
+          label.includes(query) ||
+          (box?.value.toLowerCase().includes(query) ?? false);
+        row.toggleAttribute('hidden', !hit);
+        if (hit) {
+          visible += 1;
+          matches += 1;
+        }
+      }
+      group.toggleAttribute('hidden', query !== '' && visible === 0);
+    }
+
+    const empty = root.querySelector<HTMLElement>('[data-testid="pattern-empty"]');
+    if (empty) {
+      empty.toggleAttribute('hidden', matches !== 0);
+      empty.textContent = `no patterns match “${raw}”`;
+    }
+  }
+
   function wirePanel(): void {
     for (const input of root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')) {
       input.addEventListener('change', () => {
@@ -361,12 +402,34 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
       });
     }
 
-    for (const key of ['starters', 'movers', 'nonsense'] as const) {
+    for (const key of ['starters', 'movers', 'nonsense', 'l2'] as const) {
       root
         .querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)
         ?.addEventListener('change', (event) => {
           applyBeeChoice({ ...beeChoice, [key]: (event.target as HTMLInputElement).checked });
         });
+    }
+
+    const search = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
+    search?.addEventListener('input', () => filterPatterns(search.value));
+
+    root.querySelector('[data-testid="l2-chip"]')?.addEventListener('click', () => {
+      const l2 = new Set(L2_PATTERN_IDS);
+      const allL2 = L2_PATTERN_IDS.every((id) => selected.includes(id));
+      const wanted = new Set(
+        allL2 ? selected.filter((id) => !l2.has(id)) : [...selected, ...L2_PATTERN_IDS],
+      );
+      // Bank order, so the saved selection is the same shape the checkboxes produce.
+      applySelection(bank.patterns.map((pattern) => pattern.id).filter((id) => wanted.has(id)));
+    });
+
+    for (const details of root.querySelectorAll<HTMLDetailsElement>('.option-group')) {
+      details.addEventListener('toggle', () => {
+        const group = details.dataset.group;
+        if (!group) return;
+        const kept = collapsedGroups.filter((id) => id !== group);
+        collapsedGroups = details.open ? kept : [...kept, group];
+      });
     }
   }
 
