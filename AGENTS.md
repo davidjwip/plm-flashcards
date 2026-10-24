@@ -25,6 +25,11 @@ Read this before touching anything in this repo.
 Never: write implementation then back-fill tests; skip the failing run; mark a
 criterion done without a row in the feature's test map.
 
+A **spec-only** branch must still map its new criteria, or `spec-audit` fails them as
+uncovered. Map each one to `(step N)` with status `pending` — the audit reports it as
+pending, not failed — and repoint the row at the real test file as that step lands.
+
+
 ## Definition of done (per PR)
 
 - [ ] every changed behaviour has a criterion in `specs/`
