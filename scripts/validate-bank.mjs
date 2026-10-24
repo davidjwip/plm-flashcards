@@ -1,8 +1,13 @@
 // Word bank validator: the data rules from specs/v1.md §6, enforced.
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-const FILE = new URL('../data/wordbank.json', import.meta.url).pathname;
+const DEFAULT_FILE = new URL('../data/wordbank.json', import.meta.url).pathname;
+const FILE = process.argv[2] ? resolve(process.argv[2]) : DEFAULT_FILE;
 const WORD_RE = /^[a-z]+(?:['-][a-z]+)*$/;
+const CLUSTER_ID_RE = /^(?:[a-z]{2,3}-|-[a-z]{2,3})$/;
+const MIN_WORDS = 10;
+const MIN_WORDS_EXCEPTIONS = { '-lp': 7, '-xt': 6 };
 
 const problems = [];
 let bank;
@@ -20,7 +25,7 @@ if (!Array.isArray(bank.words) || bank.words.length === 0) fail('no words array'
 
 const patternIds = new Set();
 for (const pattern of bank.patterns ?? []) {
-  if (!/^[a-z_]+$/.test(pattern.id ?? ''))
+  if (!/^[a-z_]+$/.test(pattern.id ?? '') && !CLUSTER_ID_RE.test(pattern.id ?? ''))
     fail(`pattern id ${JSON.stringify(pattern.id)} is not a-z/_`);
   if (!pattern.label) fail(`pattern ${pattern.id} has no label`);
   if (patternIds.has(pattern.id)) fail(`duplicate pattern id ${pattern.id}`);
@@ -28,6 +33,7 @@ for (const pattern of bank.patterns ?? []) {
 }
 
 const usedPatterns = new Set();
+const wordCounts = new Map();
 const seenWords = new Set();
 for (const entry of bank.words ?? []) {
   if (typeof entry.word !== 'string' || !WORD_RE.test(entry.word)) {
@@ -44,11 +50,15 @@ for (const entry of bank.words ?? []) {
   for (const pattern of entry.patterns) {
     if (!patternIds.has(pattern)) fail(`word ${entry.word} uses unknown pattern ${pattern}`);
     usedPatterns.add(pattern);
+    wordCounts.set(pattern, (wordCounts.get(pattern) ?? 0) + 1);
   }
 }
 
 for (const id of patternIds) {
   if (!usedPatterns.has(id)) fail(`pattern ${id} has no words (it would be a dead option)`);
+  const count = wordCounts.get(id) ?? 0;
+  const floor = MIN_WORDS_EXCEPTIONS[id] ?? MIN_WORDS;
+  if (count < floor) fail(`pattern ${id} has ${count} words, floor is ${floor}`);
 }
 
 if (problems.length) {
