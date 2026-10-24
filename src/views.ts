@@ -132,9 +132,13 @@ export function beePanel(
           <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} />
           <span>${label}</span>
         </label>`;
-  const count =
-    wordCount === 0
-      ? 'no levels selected — tick one to get words'
+  // Key the message on the choice, not the count: a level can be ticked while the
+  // filtered deck is empty, and "tick one" would then name a box already ticked.
+  const noLevelsSelected = !choice.starters && !choice.movers && !choice.nonsense;
+  const count = noLevelsSelected
+    ? 'no levels selected — tick one to get words'
+    : wordCount === 0
+      ? 'no words for this combination — change the levels'
       : `${wordCount} words to draw from`;
   return `
     <section class="pattern-panel" data-testid="bee-panel" ${open ? '' : 'hidden'}>
