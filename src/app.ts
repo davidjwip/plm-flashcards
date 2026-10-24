@@ -98,6 +98,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   if (!hasStoredSelection(store)) selected = [...DEFAULT_PATTERNS];
   let panelOpen = false;
   let collapsedGroups: string[] = [];
+  let searchQuery = '';
   // Tracked so focus lands in search only when the panel opens, never on a rerender.
   let wasPanelOpen = false;
   let howToOpen = false;
@@ -285,6 +286,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function render(): void {
+    const search = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
+    const hadSearchFocus = document.activeElement === search;
     const scroll = captureScroll();
     root.innerHTML = `<div class="app-card">${headerView(
       mode,
@@ -301,6 +304,18 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     fitWord();
     if (panelOpen && !wasPanelOpen) {
       root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]')?.focus();
+    }
+    if (panelOpen && searchQuery !== '') {
+      const field = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
+      if (field) {
+        field.value = searchQuery;
+        filterPatterns(searchQuery);
+        if (hadSearchFocus) {
+          field.focus();
+          const end = field.value.length;
+          field.setSelectionRange(end, end);
+        }
+      }
     }
     wasPanelOpen = panelOpen;
   }
@@ -411,7 +426,10 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     }
 
     const search = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
-    search?.addEventListener('input', () => filterPatterns(search.value));
+    search?.addEventListener('input', () => {
+      searchQuery = search.value;
+      filterPatterns(searchQuery);
+    });
 
     root.querySelector('[data-testid="l2-chip"]')?.addEventListener('click', () => {
       const l2 = new Set(L2_PATTERN_IDS);
