@@ -1,7 +1,9 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import bankJson from '../data/wordbank.json';
+import beeJson from '../data/bee.json';
 import { mount } from './app';
+import type { BeeDeck } from './bee';
 import { buildDictionary, patternOptions } from './engine';
 import {
   DIGRAPHS,
@@ -20,6 +22,7 @@ import type { Bank } from './types';
 import { patternPanel } from './views';
 
 const bank = bankJson as Bank;
+const beeDeck = beeJson as BeeDeck;
 
 function store(data: Record<string, string> = {}): KeyValueStore & {
   data: Record<string, string>;
@@ -57,6 +60,29 @@ function mountOpen(selection = '[]'): HTMLElement {
   mount({ bank, root: el, store: store({ 'plm.selectedPatterns': selection }) });
   click(el.querySelector('[data-testid="pattern-toggle"]'));
   return el;
+}
+
+function mountBee(selection = '[]'): HTMLElement {
+  const el = root();
+  mount({
+    bank,
+    beeDeck,
+    root: el,
+    store: store({ 'plm.selectedPatterns': selection }),
+  });
+  click(el.querySelector('[data-testid="mode-bee"]'));
+  return el;
+}
+
+function openBeePanel(el: HTMLElement): void {
+  click(el.querySelector('[data-testid="pattern-toggle"]'));
+}
+
+function level(key: string, checked: boolean): void {
+  const box = document.querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`);
+  expect(box, `level ${key} exists`).toBeTruthy();
+  box!.checked = checked;
+  box!.dispatchEvent(new Event('change', { bubbles: true }));
 }
 
 function checkedIds(el: HTMLElement): string[] {
@@ -308,5 +334,68 @@ describe('level 2 pattern panel', () => {
     }
     expect(L2_PATTERN_IDS).toContain('ghost_e');
     expect(SPELLING_L2).not.toContain('ghost_e');
+  });
+});
+
+describe('AC66 — the bee deck and the Level 2 switch', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('AC66 — an empty bee deck serves no words from the previous round', () => {
+    const el = mountBee();
+    const oldWord = el.querySelector('[data-testid="word"]')?.textContent;
+    expect(oldWord, 'the default bee deck starts a round').toBeTruthy();
+    expect(el.querySelector('[data-testid="mark-right"]')).toBeTruthy();
+
+    openBeePanel(el);
+    // Level 2 is a filter over the real levels; switch it on, then remove every source.
+    level('l2', true);
+    level('starters', false);
+    level('movers', false);
+    level('nonsense', false);
+    // A filter cannot supply words on its own: switch it off and the deck stays empty.
+    level('l2', false);
+
+    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
+    expect(el.querySelector('[data-testid="mark-right"]')).toBeFalsy();
+    expect(el.querySelector('[data-testid="mark-wrong"]')).toBeFalsy();
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
+      'no levels selected',
+    );
+  });
+
+  it('AC66 — turning Level 2 on always leaves a deck to filter', () => {
+    const el = mountBee();
+    openBeePanel(el);
+    for (const key of ['starters', 'movers', 'nonsense']) level(key, false);
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
+      'no levels selected',
+    );
+
+    level('l2', true);
+
+    expect(el.querySelector<HTMLInputElement>('[data-testid="level-starters"]')!.checked).toBe(
+      true,
+    );
+    expect(el.querySelector<HTMLInputElement>('[data-testid="level-movers"]')!.checked).toBe(true);
+    const count = Number(
+      el.querySelector('[data-testid="word-count"]')!.textContent!.match(/(\d+) words/)?.[1] ?? 0,
+    );
+    expect(count).toBeGreaterThan(0);
+  });
+
+  it('AC66 — the bee pill counts Level 2 as a level', () => {
+    const el = mountBee();
+    openBeePanel(el);
+    level('l2', true);
+    level('starters', false);
+    level('movers', false);
+    level('nonsense', false);
+
+    expect(el.querySelector('[data-testid="pattern-toggle"] .label-full')!.textContent).toBe(
+      'Levels · 1',
+    );
   });
 });
