@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { isL2Word } from './levels';
 import { BEE_ROUND, NONSENSE_TAG, beeDictionary, beeRound, beeWords, nonsenseWords } from './bee';
 
 const deck = {
@@ -78,6 +79,26 @@ describe('spelling bee deck', () => {
       seeded(1),
     );
     expect(all.map((w) => w.word)).toEqual(['about', 'cake', 'help', 'night', 'shrimp', 'stamp']);
+  });
+
+  it('AC66 — Level 2 filters nonsense words too', () => {
+    const mixed = {
+      starters: ['stamp', 'cake', 'help'],
+      movers: ['shrimp', 'night', 'about'],
+    };
+
+    const dict = beeDictionary(
+      mixed,
+      { starters: true, movers: true, nonsense: true, l2: true },
+      new Set(),
+      seeded(1),
+    );
+    const nonsense = dict.filter((w) => w.patterns.includes(NONSENSE_TAG));
+    expect(nonsense.length).toBeGreaterThan(0);
+    for (const { word } of dict) {
+      expect(isL2Word(word), `${word} must demonstrate an L2 pattern`).toBe(true);
+    }
+    expect(dict.length).toBeGreaterThan(1);
   });
 });
 

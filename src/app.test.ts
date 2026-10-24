@@ -158,7 +158,7 @@ describe('app wiring', () => {
     const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
     vi.spyOn(window, 'scrollY', 'get').mockReturnValue(240);
 
-    // A dozen patterns, so the options list is the thing that scrolls (max-height 48vh).
+    // A dozen patterns, so the shared option-group wrapper is the thing that scrolls.
     const ids = Array.from({ length: 12 }, (_, i) => `p${i}`);
     const many: Bank = {
       patterns: ids.map((id) => ({ id, label: `${id} (x)` })),
@@ -168,12 +168,12 @@ describe('app wiring', () => {
     mount({ bank: many, root: el, store: store() });
     click(el.querySelector('[data-testid="pattern-toggle"]'));
 
-    const optionsBefore = el.querySelector<HTMLElement>('.pattern-panel .options')!;
+    const optionsBefore = el.querySelector<HTMLElement>('.pattern-panel .option-groups')!;
     optionsBefore.scrollTop = 96;
 
     check('p3');
 
-    const optionsAfter = el.querySelector<HTMLElement>('.pattern-panel .options')!;
+    const optionsAfter = el.querySelector<HTMLElement>('.pattern-panel .option-groups')!;
     expect(optionsAfter).not.toBe(optionsBefore); // the DOM really was replaced
     expect(optionsAfter.scrollTop).toBe(96);
     expect(scrollTo).toHaveBeenCalledWith(0, 240);

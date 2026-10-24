@@ -115,7 +115,9 @@ export function patternPanel(
           aria-pressed="${chipState}">Level 2</button>
       </div>
       <p class="pattern-empty" data-testid="pattern-empty" hidden>no patterns match “”</p>
-      ${GROUP_ORDER.map(group).join('')}
+      <div class="option-groups">
+        ${GROUP_ORDER.map(group).join('')}
+      </div>
     </section>`;
 }
 
