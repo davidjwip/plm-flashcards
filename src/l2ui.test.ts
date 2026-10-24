@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import bankJson from '../data/wordbank.json';
 import { mount } from './app';
-import { patternOptions } from './engine';
+import { buildDictionary, patternOptions } from './engine';
 import { GROUP_ORDER, L2_PATTERN_IDS } from './levels';
 import type { KeyValueStore } from './storage';
 import type { Bank } from './types';
@@ -155,6 +155,28 @@ describe('level 2 pattern panel', () => {
     }
     expect(el.querySelector<HTMLInputElement>('[value="sm-"]')!.checked).toBe(true);
     expect(el.querySelector<HTMLInputElement>('[value="ai"]')!.checked).toBe(true);
+  });
+
+  it('AC64 — a tick keeps the typed filter and the focus', () => {
+    const el = mountOpen();
+
+    const search = el.querySelector<HTMLInputElement>('[data-testid="pattern-search"]')!;
+    search.focus();
+    typeSearch(el, 'sm');
+    expect(visibleRows(el).map((row) => row.querySelector('input')!.value)).toEqual(['sm-']);
+
+    check('sm-');
+
+    expect(el.querySelector<HTMLInputElement>('[data-testid="pattern-search"]')!.value).toBe('sm');
+    expect(visibleRows(el).map((row) => row.querySelector('input')!.value)).toEqual(['sm-']);
+    expect(el.querySelector<HTMLInputElement>('[value="sm-"]')!.checked).toBe(true);
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      `${buildDictionary(bank, ['sm-']).length} words in this set`,
+    );
+    expect(document.activeElement).toBe(el.querySelector('[data-testid="pattern-search"]'));
+
+    typeSearch(el, '');
+    expect(visibleRows(el)).toHaveLength(bank.patterns.length);
   });
 
   it('AC65 — the chip selects the whole class set and clears it again', () => {
