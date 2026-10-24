@@ -20,7 +20,7 @@ import {
   volumeValue,
 } from './volume';
 import audioManifest from '../src/audio-manifest.json';
-import type { Bank, Session, Verdict } from './types';
+import type { Bank, Session, Verdict, Word } from './types';
 import {
   beePanel,
   emptyView,
@@ -32,7 +32,7 @@ import {
   type Mode,
 } from './views';
 import { NONSENSE_TAG, beeDictionary, beeRound, type BeeChoice, type BeeDeck } from './bee';
-import { L2_PATTERN_IDS } from './levels';
+import { L2_PATTERN_IDS, syllables } from './levels';
 import {
   DEFAULT_WORD_SIZE,
   canGrow,
@@ -119,8 +119,19 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   const store_ = store;
 
+  /** The chip's full selection means Level 2: one-syllable words only. */
+  function l2ChipSelection(): boolean {
+    return L2_PATTERN_IDS.every((id) => selected.includes(id));
+  }
+
+  /** The run and the count share this list, so they can never disagree. */
+  function runDictionary(): Word[] {
+    const dictionary = buildDictionary(bank, selected);
+    return l2ChipSelection() ? dictionary.filter((word) => syllables(word.word) === 1) : dictionary;
+  }
+
   function dictionarySize(): number {
-    return buildDictionary(bank, selected).length;
+    return runDictionary().length;
   }
 
   function beeSize(): number {
@@ -174,7 +185,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   function startPatternRun(): void {
     clearRun();
-    const dictionary = buildDictionary(bank, selected);
+    const dictionary = runDictionary();
     session = dictionary.length ? createSession(dictionary) : null;
   }
 

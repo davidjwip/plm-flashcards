@@ -58,10 +58,10 @@ describe('spelling bee deck', () => {
     expect(new Set(round.map((w) => w.word)).size).toBe(BEE_ROUND);
   });
 
-  it('AC66 — Level 2 keeps only words the spelling proves are L2', () => {
+  it('AC66 — Level 2 keeps only one-syllable words the spelling proves are L2', () => {
     const mixed = {
-      starters: ['stamp', 'cake', 'help'],
-      movers: ['shrimp', 'night', 'about'],
+      starters: ['stamp', 'cake', 'help', 'armchair'],
+      movers: ['shrimp', 'night', 'about', 'strawberry', 'restaurant', 'have', 'give'],
     };
 
     const l2 = beeDictionary(
@@ -70,8 +70,25 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    // `about` now qualifies through its `ou` digraph; spelling still proves it.
-    expect(l2.map((w) => w.word)).toEqual(['about', 'help', 'shrimp', 'stamp']);
+    // `about` qualifies through its `ou` digraph but is two syllables; ghost e is
+    // not spelling-provable; the rest are three. All are out of a K2 deck. `cake`
+    // and `night` are out too: `a_e` and `igh` are not spelling-provable L2 tags.
+    expect(l2.map((w) => w.word)).toEqual(['help', 'shrimp', 'stamp']);
+    for (const word of [
+      'about',
+      'armchair',
+      'cake',
+      'night',
+      'strawberry',
+      'restaurant',
+      'have',
+      'give',
+    ]) {
+      expect(
+        l2.map((w) => w.word),
+        `${word} is out`,
+      ).not.toContain(word);
+    }
 
     const all = beeDictionary(
       mixed,
@@ -79,7 +96,19 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    expect(all.map((w) => w.word)).toEqual(['about', 'cake', 'help', 'night', 'shrimp', 'stamp']);
+    expect(all.map((w) => w.word)).toEqual([
+      'about',
+      'armchair',
+      'cake',
+      'give',
+      'have',
+      'help',
+      'night',
+      'restaurant',
+      'shrimp',
+      'stamp',
+      'strawberry',
+    ]);
   });
 
   it('AC66 — long vowel digraphs qualify by spelling but ghost e does not', () => {

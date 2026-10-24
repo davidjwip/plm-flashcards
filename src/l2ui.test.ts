@@ -16,6 +16,7 @@ import {
   SILENT_E,
   SPELLING_L2,
   START_CLUSTERS,
+  syllables,
 } from './levels';
 import type { KeyValueStore } from './storage';
 import type { Bank } from './types';
@@ -350,6 +351,70 @@ describe('level 2 pattern panel', () => {
     ]);
     expect(L2_PATTERN_IDS).toContain('ghost_e');
     expect(SPELLING_L2).not.toContain('ghost_e');
+  });
+});
+
+describe('AC69 — Level 2 means one syllable', () => {
+  it('AC69 — the syllable helper counts the twenty pinned examples', () => {
+    const cases: [string, number][] = [
+      ['cake', 1],
+      ['house', 1],
+      ['above', 2],
+      ['table', 2],
+      ['little', 2],
+      ['armchair', 2],
+      ['strawberry', 3],
+      ['smile', 1],
+      ['squiggle', 2],
+      ['restaurant', 3],
+      ['yourself', 2],
+      ['thousand', 2],
+      ['twelve', 1],
+      ['shove', 1],
+      ['script', 1],
+      ['swept', 1],
+      ['scalp', 1],
+      ['self', 1],
+      ['next', 1],
+      ['spring', 1],
+    ];
+    for (const [word, count] of cases) {
+      expect(syllables(word), word).toBe(count);
+    }
+  });
+
+  it('AC69 — Level 2 never serves a multi-syllable word', () => {
+    const el = root();
+    const app = mount({
+      bank,
+      root: el,
+      store: store({ 'plm.selectedPatterns': JSON.stringify(L2_PATTERN_IDS) }),
+    });
+    const served = app.session()?.words.map((entry) => entry.word) ?? [];
+    expect(served.length).toBeGreaterThan(0);
+    for (const word of served) {
+      expect(syllables(word), `${word} is one syllable`).toBe(1);
+    }
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      `${served.length} words in this set`,
+    );
+    for (const word of ['armchair', 'strawberry', 'restaurant', 'thousand', 'yourself']) {
+      expect(served, `${word} is not served by the chip`).not.toContain(word);
+    }
+
+    // A manual subset is the adult's call: the same words come back.
+    const manualEl = root();
+    const manual = mount({
+      bank,
+      root: manualEl,
+      store: store({
+        'plm.selectedPatterns': JSON.stringify(['air', 'str-', '-nt', 'th', '-lf']),
+      }),
+    });
+    const manualWords = manual.session()?.words.map((entry) => entry.word) ?? [];
+    for (const word of ['armchair', 'strawberry', 'restaurant', 'thousand', 'yourself']) {
+      expect(manualWords, `${word} returns with a manual subset`).toContain(word);
+    }
   });
 });
 
