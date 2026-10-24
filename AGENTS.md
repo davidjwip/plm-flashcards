@@ -29,7 +29,6 @@ A **spec-only** branch must still map its new criteria, or `spec-audit` fails th
 uncovered. Map each one to `(step N)` with status `pending` — the audit reports it as
 pending, not failed — and repoint the row at the real test file as that step lands.
 
-
 ## Definition of done (per PR)
 
 - [ ] every changed behaviour has a criterion in `specs/`
@@ -57,17 +56,17 @@ grown-up presses got-it / not-yet. No timers, no self-marking, no child data.
 
 ## Commands
 
-| command                  | does                                                                |
-| ------------------------ | ------------------------------------------------------------------- |
-| `npm run dev`            | dev server on :5173                                                 |
-| `npm test`               | Vitest unit + logic                                                 |
-| `npm run e2e`            | Playwright chromium                                                 |
-| `npm run validate:bank`  | word bank: tags exist, no duplicates, plain words, no dead patterns |
-| `npm run guardrail:scan` | fails if a tracked file contains an email, private IP or token      |
+| command                    | does                                                                          |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `npm run dev`              | dev server on :5173                                                           |
+| `npm test`                 | Vitest unit + logic                                                           |
+| `npm run e2e`              | Playwright chromium                                                           |
+| `npm run validate:bank`    | word bank: tags exist, no duplicates, plain words, no dead patterns           |
+| `npm run guardrail:scan`   | fails if a tracked file contains an email, private IP or token                |
 | `npm run verify:behaviour` | drives the built game in Chromium, screenshots every step, prints what it saw |
-| `npm run spec:audit`      | checks every criterion has a test and every test names a real criterion    |
-| `npm run format`         | prettier                                                            |
-| `npm run build`          | static build to `dist/`                                             |
+| `npm run spec:audit`       | checks every criterion has a test and every test names a real criterion       |
+| `npm run format`           | prettier                                                                      |
+| `npm run build`            | static build to `dist/`                                                       |
 
 ## Tooling layout
 
