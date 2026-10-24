@@ -224,4 +224,11 @@ describe('AC54 — the bee levels live behind the same header toggle', () => {
     const closed = beePanel({ starters: true, movers: true, nonsense: true }, 7, false);
     expect(closed).toContain('hidden');
   });
+
+  it('AC66 — an empty bee deck says no level is selected, not zero words', () => {
+    const empty = beePanel({ starters: false, movers: false, nonsense: false, l2: false }, 0, true);
+    expect(empty).toContain('data-testid="bee-count"');
+    expect(empty).toContain('no levels selected — tick one to get words');
+    expect(empty).not.toContain('0 words to draw from');
+  });
 });

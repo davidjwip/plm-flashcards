@@ -132,6 +132,10 @@ export function beePanel(
           <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} />
           <span>${label}</span>
         </label>`;
+  const count =
+    wordCount === 0
+      ? 'no levels selected — tick one to get words'
+      : `${wordCount} words to draw from`;
   return `
     <section class="pattern-panel" data-testid="bee-panel" ${open ? '' : 'hidden'}>
       <div class="options">
@@ -140,7 +144,7 @@ export function beePanel(
         ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)')}
         ${box('l2', choice.l2 ?? false, 'Level 2 patterns only')}
       </div>
-      <p class="count" data-testid="bee-count">${wordCount} words to draw from</p>
+      <p class="count" data-testid="bee-count">${count}</p>
     </section>`;
 }
 

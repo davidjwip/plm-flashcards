@@ -70,7 +70,8 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    expect(l2.map((w) => w.word)).toEqual(['help', 'shrimp', 'stamp']);
+    // `about` now qualifies through its `ou` digraph; spelling still proves it.
+    expect(l2.map((w) => w.word)).toEqual(['about', 'help', 'shrimp', 'stamp']);
 
     const all = beeDictionary(
       mixed,
@@ -79,6 +80,22 @@ describe('spelling bee deck', () => {
       seeded(1),
     );
     expect(all.map((w) => w.word)).toEqual(['about', 'cake', 'help', 'night', 'shrimp', 'stamp']);
+  });
+
+  it('AC66 — long vowel digraphs qualify by spelling but ghost e does not', () => {
+    const mixed = {
+      starters: ['have', 'see', 'food', 'loud', 'stamp'],
+      movers: [],
+    };
+
+    const l2 = beeDictionary(
+      mixed,
+      { starters: true, movers: false, nonsense: false, l2: true },
+      new Set(),
+      seeded(1),
+    );
+    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'see', 'stamp']);
+    expect(l2.map((w) => w.word)).not.toContain('have');
   });
 
   it('AC66 — Level 2 filters nonsense words too', () => {

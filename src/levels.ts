@@ -85,9 +85,19 @@ export const END_CLUSTERS = [
   '-ss',
 ];
 
-export type Group = 'short' | 'long' | 'r-controlled' | 'digraph' | 'start' | 'end';
+export const SILENT_E = ['ghost_e'];
 
-export const GROUP_ORDER: Group[] = ['short', 'long', 'r-controlled', 'digraph', 'start', 'end'];
+export type Group = 'short' | 'long' | 'r-controlled' | 'digraph' | 'start' | 'end' | 'silent';
+
+export const GROUP_ORDER: Group[] = [
+  'short',
+  'long',
+  'r-controlled',
+  'digraph',
+  'start',
+  'end',
+  'silent',
+];
 
 export const GROUP_LABEL: Record<Group, string> = {
   short: 'Short vowels',
@@ -96,11 +106,13 @@ export const GROUP_LABEL: Record<Group, string> = {
   digraph: 'Digraphs',
   start: 'Starting clusters',
   end: 'Ending clusters',
+  silent: 'Silent e',
 };
 
 /**
- * What the L2 chip selects: short vowels, both cluster families, ar/or, and the
- * digraphs the class can read. `tw` is deliberately not taught, so it is absent.
+ * What the L2 chip selects: short vowels, both cluster families, ar/or, the
+ * digraphs the class can read, the long vowels it covers, and ghost e. `tw` is
+ * deliberately not taught, so it is absent.
  */
 export const L2_PATTERN_IDS = [
   ...SHORT_VOWELS,
@@ -113,6 +125,10 @@ export const L2_PATTERN_IDS = [
   'th',
   'ck',
   'ng',
+  'ee',
+  'oo',
+  'ou',
+  'ghost_e',
 ];
 
 /**
@@ -130,6 +146,9 @@ export const SPELLING_L2 = [
   'th',
   'ck',
   'ng',
+  'ee',
+  'oo',
+  'ou',
 ];
 
 const SPELLING_SET = new Set(SPELLING_L2);
@@ -162,6 +181,7 @@ export function groupOf(id: string): Group {
   if (SHORT_VOWELS.includes(id)) return 'short';
   if (LONG_VOWELS.includes(id)) return 'long';
   if (R_CONTROLLED.includes(id)) return 'r-controlled';
+  if (SILENT_E.includes(id)) return 'silent';
   // The remaining bank ids are digraphs; unknown test fixtures stay in a group
   // rather than throwing away their row.
   return 'digraph';
