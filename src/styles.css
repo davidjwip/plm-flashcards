@@ -207,6 +207,84 @@ body {
   background: var(--panel-grey);
 }
 
+.pattern-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.pattern-search {
+  flex: 1 1 10rem;
+  min-width: 0;
+  min-height: 2.5rem;
+  padding: 0 0.9rem;
+  border: 2px solid var(--teal-tint);
+  border-radius: 50px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.l2-chip {
+  min-height: 2.5rem;
+  padding: 0 0.95rem;
+  border: 2px solid var(--teal);
+  border-radius: 50px;
+  background: var(--teal-tint);
+  color: var(--teal-deep);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.l2-chip.on {
+  background: var(--teal);
+  color: #fff;
+}
+
+.l2-chip.mixed {
+  border-color: #e0c200;
+  background: var(--pale-yellow);
+  color: #8a6d00;
+}
+
+.option-group {
+  margin-bottom: 0.35rem;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.option-group summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.6rem;
+  border-radius: 10px;
+  color: var(--teal-deep);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.option-group summary:hover {
+  background: var(--teal-tint);
+}
+
+.option-group .options {
+  padding: 0 0.25rem 0.25rem;
+}
+
+.pattern-empty {
+  margin: 0.4rem 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .options {
   display: grid;
   gap: 0.15rem;

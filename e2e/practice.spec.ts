@@ -244,6 +244,24 @@ test('AC56 — bee peek re-fits the revealed word', async ({ page }) => {
   expect(m.pageOverflow).toBeLessThanOrEqual(1);
 });
 
+test('AC63/AC64/AC65 — search narrows the groups and the chip rebuilds the set', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const before = await page.getByTestId('word-count').textContent();
+
+  await openPicker(page);
+  await page.getByTestId('pattern-search').fill('sm');
+  const visible = page.locator('.option:not([hidden])');
+  await expect(visible).toHaveCount(1);
+  await expect(visible.locator('input')).toHaveValue('sm-');
+  await expect(visible).toContainText('sm (start)');
+
+  await page.getByTestId('l2-chip').click();
+  await expect(page.getByTestId('l2-chip')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('word-count')).not.toHaveText(before ?? '');
+});
+
 test('AC55 — the header row never wraps at 360px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto('/');
