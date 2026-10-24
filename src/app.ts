@@ -129,7 +129,12 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   function toggleLabel(): string {
     if (beeMode()) {
-      const levels = [beeChoice.starters, beeChoice.movers, beeChoice.nonsense].filter(Boolean);
+      const levels = [
+        beeChoice.starters,
+        beeChoice.movers,
+        beeChoice.nonsense,
+        beeChoice.l2,
+      ].filter(Boolean);
       return `Levels · ${levels.length}`;
     }
     return `Patterns · ${selected.length}`;
@@ -142,7 +147,12 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function countText(): string {
-    if (beeMode()) return `${beeSize()} words to draw from`;
+    if (beeMode()) {
+      if (!beeChoice.starters && !beeChoice.movers && !beeChoice.nonsense) {
+        return 'no levels selected — tick one to get words';
+      }
+      return `${beeSize()} words to draw from`;
+    }
     if (selected.length === 0) return 'pick at least one pattern';
     return `${dictionarySize()} words in this set`;
   }
@@ -155,6 +165,10 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   function clearRun(): void {
     dismissedMilestone = null;
     spokenAt = null;
+    if (flashTimer !== null) {
+      clearTimeout(flashTimer);
+      flashTimer = null;
+    }
     player.stop();
   }
 
@@ -363,8 +377,18 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function applyBeeChoice(next: BeeChoice): void {
-    beeChoice = next;
-    if (beeSize() > 0) startBeeRun();
+    // Level 2 filters the deck; it is not a source. Turning it on with no real
+    // level chosen would otherwise leave nothing to filter.
+    const enableL2 = next.l2 && !beeChoice.l2 && !next.starters && !next.movers;
+    beeChoice = enableL2 ? { ...next, starters: true, movers: true } : next;
+    if (beeSize() === 0) {
+      // A run must never outlive the deck that produced it: without this the old
+      // word, verdict buttons and audio stay live next to a zero count.
+      clearRun();
+      session = null;
+    } else {
+      startBeeRun();
+    }
     render();
   }
 
