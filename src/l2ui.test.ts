@@ -323,15 +323,31 @@ describe('level 2 pattern panel', () => {
     expect(calls).toBe(total - 1);
   });
 
-  it('AC68 — ghost e words all end in e, are in the L2 set, and never filter spelling', () => {
+  it('AC68 — ghost e is exactly the pinned twelve, in the L2 set, and never filters spelling', () => {
+    // Ghost e: a silent final `e` that leaves the vowel before it unchanged, not a
+    // split digraph (`cake`, `like`, `bone`). `live`, `dove` and `one` are rejected:
+    // live = /lɪv/ vs /laɪv/, dove = bird vs past of dive, one has an unwritten /w/
+    // and is not decodable. Do not add them back. The exact set is pinned here on
+    // purpose: changing the word list must also be a deliberate change to this test.
     const words = bank.words
       .filter((entry) => entry.patterns.includes('ghost_e'))
-      .map((entry) => entry.word);
+      .map((entry) => entry.word)
+      .sort();
 
-    expect(words.length).toBeGreaterThanOrEqual(10);
-    for (const word of words) {
-      expect(word.endsWith('e'), `${word} ends in e`).toBe(true);
-    }
+    expect(words).toEqual([
+      'above',
+      'come',
+      'done',
+      'give',
+      'glove',
+      'gone',
+      'have',
+      'love',
+      'none',
+      'shove',
+      'some',
+      'twelve',
+    ]);
     expect(L2_PATTERN_IDS).toContain('ghost_e');
     expect(SPELLING_L2).not.toContain('ghost_e');
   });

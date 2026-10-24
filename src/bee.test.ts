@@ -84,7 +84,9 @@ describe('spelling bee deck', () => {
 
   it('AC66 — long vowel digraphs qualify by spelling but ghost e does not', () => {
     const mixed = {
-      starters: ['have', 'see', 'food', 'loud', 'stamp'],
+      // Two ghost-e words, so an implementation that special-cases one of them
+      // (or hard-codes "L2 ids minus ghost_e") still has to filter both out.
+      starters: ['have', 'give', 'see', 'food', 'loud', 'stamp'],
       movers: [],
     };
 
@@ -94,8 +96,10 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
+    // The cluster word survives; both ghost-e words are excluded.
     expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'see', 'stamp']);
     expect(l2.map((w) => w.word)).not.toContain('have');
+    expect(l2.map((w) => w.word)).not.toContain('give');
   });
 
   it('AC66 — Level 2 filters nonsense words too', () => {
