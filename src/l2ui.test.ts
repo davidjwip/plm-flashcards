@@ -11,6 +11,8 @@ import {
   LONG_VOWELS,
   R_CONTROLLED,
   SHORT_VOWELS,
+  SILENT_E,
+  SPELLING_L2,
   START_CLUSTERS,
 } from './levels';
 import type { KeyValueStore } from './storage';
@@ -77,6 +79,7 @@ function expectedFamily(id: string): string {
   if (LONG_VOWELS.includes(id)) return 'long';
   if (R_CONTROLLED.includes(id)) return 'r-controlled';
   if (DIGRAPHS.includes(id)) return 'digraph';
+  if (SILENT_E.includes(id)) return 'silent';
   throw new Error(`no expected family for bank id ${id}`);
 }
 
@@ -105,7 +108,15 @@ describe('level 2 pattern panel', () => {
     document.body.innerHTML = patternPanel(patternOptions(bank), [], true, ['long']);
 
     const groups = [...document.querySelectorAll<HTMLDetailsElement>('.option-group')];
-    expect(groups.map((group) => group.dataset.group)).toEqual([...GROUP_ORDER]);
+    expect(groups.map((group) => group.dataset.group)).toEqual([
+      'short',
+      'long',
+      'r-controlled',
+      'digraph',
+      'start',
+      'end',
+      'silent',
+    ]);
     expect(groups.map((group) => group.querySelector('summary')?.textContent?.trim())).toEqual([
       'Short vowels',
       'Long vowels',
@@ -113,9 +124,10 @@ describe('level 2 pattern panel', () => {
       'Digraphs',
       'Starting clusters',
       'Ending clusters',
+      'Silent e',
     ]);
 
-    // The six groups share one scroll box: six independently scrolling grids is the bug.
+    // The seven groups share one scroll box: seven independently scrolling grids is the bug.
     const wrappers = document.querySelectorAll<HTMLElement>('.option-groups');
     expect(wrappers, 'one option-groups scroll wrapper').toHaveLength(1);
     expect(wrappers[0]!.querySelectorAll('.option-group')).toHaveLength(GROUP_ORDER.length);
@@ -137,6 +149,7 @@ describe('level 2 pattern panel', () => {
         ?.closest<HTMLDetailsElement>('.option-group')?.dataset.group;
     expect(groupOfId('bl-')).toBe('start');
     expect(groupOfId('-nd')).toBe('end');
+    expect(groupOfId('ghost_e')).toBe('silent');
     // Every bank id, not a spot check: a typo in R_CONTROLLED/LONG_VOWELS must fail here.
     for (const id of bank.patterns.map((pattern) => pattern.id)) {
       expect(groupOfId(id), `${id} groups under ${expectedFamily(id)}`).toBe(expectedFamily(id));
@@ -219,8 +232,10 @@ describe('level 2 pattern panel', () => {
 
     click(chip(el));
     expect(checkedIds(el).sort()).toEqual([...L2_PATTERN_IDS].sort());
-    expect(checkedIds(el)).toContain('shr-');
-    expect(checkedIds(el)).toContain('spl-');
+    expect(checkedIds(el)).toHaveLength(62);
+    for (const id of ['ee', 'oo', 'ou', 'ghost_e', 'shr-', 'spl-']) {
+      expect(checkedIds(el), `${id} is selected`).toContain(id);
+    }
     expect(checkedIds(el)).not.toContain('tw');
     expect(checkedIds(el)).not.toContain('ff');
     expect(checkedIds(el)).not.toContain('zz');
@@ -280,5 +295,18 @@ describe('level 2 pattern panel', () => {
     expect(el.querySelector('[data-testid="progress"]')!.textContent).toBe(`1 of ${total}`);
     // One Fisher–Yates shuffle per restart: two restart paths would double this.
     expect(calls).toBe(total - 1);
+  });
+
+  it('AC68 — ghost e words all end in e, are in the L2 set, and never filter spelling', () => {
+    const words = bank.words
+      .filter((entry) => entry.patterns.includes('ghost_e'))
+      .map((entry) => entry.word);
+
+    expect(words.length).toBeGreaterThanOrEqual(10);
+    for (const word of words) {
+      expect(word.endsWith('e'), `${word} ends in e`).toBe(true);
+    }
+    expect(L2_PATTERN_IDS).toContain('ghost_e');
+    expect(SPELLING_L2).not.toContain('ghost_e');
   });
 });

@@ -359,6 +359,10 @@
     {
       "id": "-ss",
       "label": "-ss (end)"
+    },
+    {
+      "id": "ghost_e",
+      "label": "ghost e (have, come)"
     }
   ],
   "words": [
@@ -1628,6 +1632,12 @@
       ]
     },
     {
+      "word": "come",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "comma",
       "patterns": [
         "schwa"
@@ -2090,9 +2100,21 @@
       ]
     },
     {
+      "word": "done",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "dot",
       "patterns": [
         "o"
+      ]
+    },
+    {
+      "word": "dove",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
@@ -2964,6 +2986,12 @@
       ]
     },
     {
+      "word": "give",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "glad",
       "patterns": [
         "gl-"
@@ -3014,6 +3042,12 @@
       ]
     },
     {
+      "word": "glove",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "glow",
       "patterns": [
         "ow",
@@ -3055,6 +3089,12 @@
       "word": "golf",
       "patterns": [
         "-lf"
+      ]
+    },
+    {
+      "word": "gone",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
@@ -3265,6 +3305,12 @@
       "word": "haul",
       "patterns": [
         "au"
+      ]
+    },
+    {
+      "word": "have",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
@@ -3990,6 +4036,12 @@
       ]
     },
     {
+      "word": "live",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "load",
       "patterns": [
         "oa"
@@ -4047,6 +4099,12 @@
       "word": "loud",
       "patterns": [
         "ou"
+      ]
+    },
+    {
+      "word": "love",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
@@ -4439,6 +4497,12 @@
       ]
     },
     {
+      "word": "none",
+      "patterns": [
+        "ghost_e"
+      ]
+    },
+    {
       "word": "nor",
       "patterns": [
         "or"
@@ -4520,6 +4584,12 @@
       "word": "old",
       "patterns": [
         "-ld"
+      ]
+    },
+    {
+      "word": "one",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
@@ -6215,6 +6285,12 @@
       "word": "sold",
       "patterns": [
         "-ld"
+      ]
+    },
+    {
+      "word": "some",
+      "patterns": [
+        "ghost_e"
       ]
     },
     {
