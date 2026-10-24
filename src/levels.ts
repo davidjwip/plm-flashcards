@@ -170,8 +170,28 @@ export function tagsForSpelling(word: string): string[] {
   });
 }
 
+/**
+ * Syllables from spelling: vowel groups, minus a silent final `e`, except a
+ * syllabic `-le` after a consonant, which keeps its vowel (`table` 2, `smile` 1).
+ * Never returns less than one.
+ */
+export function syllables(word: string): number {
+  const lower = word.toLowerCase().replace(/[^a-z]/g, '');
+  const groups = lower.match(/[aeiouy]+/g) ?? [];
+  if (groups.length === 0) return 1;
+
+  let count = groups.length;
+  if (lower.endsWith('e')) {
+    const before = lower[lower.length - 2];
+    const beforeThat = lower[lower.length - 3];
+    const syllabicLe = before === 'l' && beforeThat !== undefined && !/[aeiouy]/.test(beforeThat);
+    if (!syllabicLe) count -= 1;
+  }
+  return Math.max(1, count);
+}
+
 export function isL2Word(word: string): boolean {
-  return tagsForSpelling(word).length > 0;
+  return tagsForSpelling(word).length > 0 && syllables(word) === 1;
 }
 
 /** Which family heading a pattern row belongs under. */
