@@ -3,7 +3,16 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import bankJson from '../data/wordbank.json';
 import { mount } from './app';
 import { buildDictionary, patternOptions } from './engine';
-import { GROUP_ORDER, L2_PATTERN_IDS } from './levels';
+import {
+  DIGRAPHS,
+  END_CLUSTERS,
+  GROUP_ORDER,
+  L2_PATTERN_IDS,
+  LONG_VOWELS,
+  R_CONTROLLED,
+  SHORT_VOWELS,
+  START_CLUSTERS,
+} from './levels';
 import type { KeyValueStore } from './storage';
 import type { Bank } from './types';
 import { patternPanel } from './views';
@@ -54,6 +63,23 @@ function checkedIds(el: HTMLElement): string[] {
   );
 }
 
+/** The family a bank id belongs under, derived from its shape and the exported lists. */
+function expectedFamily(id: string): string {
+  if (id.endsWith('-')) {
+    if (!START_CLUSTERS.includes(id)) throw new Error(`${id} is not in START_CLUSTERS`);
+    return 'start';
+  }
+  if (id.startsWith('-')) {
+    if (!END_CLUSTERS.includes(id)) throw new Error(`${id} is not in END_CLUSTERS`);
+    return 'end';
+  }
+  if (SHORT_VOWELS.includes(id)) return 'short';
+  if (LONG_VOWELS.includes(id)) return 'long';
+  if (R_CONTROLLED.includes(id)) return 'r-controlled';
+  if (DIGRAPHS.includes(id)) return 'digraph';
+  throw new Error(`no expected family for bank id ${id}`);
+}
+
 function chip(el: HTMLElement): HTMLButtonElement {
   return el.querySelector<HTMLButtonElement>('[data-testid="l2-chip"]')!;
 }
@@ -89,6 +115,11 @@ describe('level 2 pattern panel', () => {
       'Ending clusters',
     ]);
 
+    // The six groups share one scroll box: six independently scrolling grids is the bug.
+    const wrappers = document.querySelectorAll<HTMLElement>('.option-groups');
+    expect(wrappers, 'one option-groups scroll wrapper').toHaveLength(1);
+    expect(wrappers[0]!.querySelectorAll('.option-group')).toHaveLength(GROUP_ORDER.length);
+
     const values = [
       ...document.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]'),
     ].map((box) => box.value);
@@ -106,6 +137,10 @@ describe('level 2 pattern panel', () => {
         ?.closest<HTMLDetailsElement>('.option-group')?.dataset.group;
     expect(groupOfId('bl-')).toBe('start');
     expect(groupOfId('-nd')).toBe('end');
+    // Every bank id, not a spot check: a typo in R_CONTROLLED/LONG_VOWELS must fail here.
+    for (const id of bank.patterns.map((pattern) => pattern.id)) {
+      expect(groupOfId(id), `${id} groups under ${expectedFamily(id)}`).toBe(expectedFamily(id));
+    }
 
     const short = groups.find((group) => group.dataset.group === 'short')!;
     const long = groups.find((group) => group.dataset.group === 'long')!;
@@ -204,6 +239,20 @@ describe('level 2 pattern panel', () => {
     click(chip(el));
     expect(checkedIds(el)).toEqual(['ai']);
     expect(chip(el).getAttribute('aria-pressed')).toBe('false');
+  });
+
+  it('AC65 — clearing the last pattern leaves the empty state, not a stale word', () => {
+    const el = mountOpen(JSON.stringify(L2_PATTERN_IDS));
+
+    expect(el.querySelector('[data-testid="word"]')).toBeTruthy();
+
+    click(chip(el));
+
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      'pick at least one pattern',
+    );
+    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
+    expect(el.querySelector('.empty')).toBeTruthy();
   });
 
   it('AC67 — the chip restarts through the same path as a manual selection', () => {

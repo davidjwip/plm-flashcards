@@ -269,8 +269,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     if (!panelOpen) return null;
     const panel = root.querySelector<HTMLElement>('.pattern-panel');
     if (!panel) return null;
-    // `.pattern-panel` is not a scroll container; `.options` is (max-height + overflow).
-    const options = panel.querySelector<HTMLElement>('.options');
+    // `.pattern-panel` is not a scroll container; `.option-groups` is (max-height + overflow).
+    const options = panel.querySelector<HTMLElement>('.option-groups');
     return {
       options: options?.scrollTop ?? 0,
       page: window.scrollY,
@@ -278,7 +278,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function restoreScroll(state: ScrollState): void {
-    const options = root.querySelector<HTMLElement>('.pattern-panel .options');
+    const options = root.querySelector<HTMLElement>('.pattern-panel .option-groups');
     if (options) options.scrollTop = state.options;
     // Restoring a zero position is pointless and noisy in jsdom.
     if (state.page === 0) return;
@@ -307,15 +307,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     }
     if (panelOpen && searchQuery !== '') {
       const field = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
-      if (field) {
-        field.value = searchQuery;
-        filterPatterns(searchQuery);
-        if (hadSearchFocus) {
-          field.focus();
-          const end = field.value.length;
-          field.setSelectionRange(end, end);
-        }
-      }
+      if (field) restoreSearch(field, searchQuery, hadSearchFocus);
     }
     wasPanelOpen = panelOpen;
   }
@@ -361,6 +353,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     selected = next;
     saveSelection(selected, store_);
     if (next.length === 0) {
+      clearRun();
+      session = null;
       render();
       return;
     }
@@ -407,6 +401,16 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     }
   }
 
+  /** One restore path for the live input and for the field rebuilt by render (AC64). */
+  function restoreSearch(field: HTMLInputElement, query: string, focus: boolean): void {
+    if (field.value !== query) field.value = query;
+    filterPatterns(query);
+    if (!focus) return;
+    field.focus();
+    const end = field.value.length;
+    field.setSelectionRange(end, end);
+  }
+
   function wirePanel(): void {
     for (const input of root.querySelectorAll<HTMLInputElement>('[data-testid="pattern-option"]')) {
       input.addEventListener('change', () => {
@@ -428,7 +432,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     const search = root.querySelector<HTMLInputElement>('[data-testid="pattern-search"]');
     search?.addEventListener('input', () => {
       searchQuery = search.value;
-      filterPatterns(searchQuery);
+      restoreSearch(search, searchQuery, false);
     });
 
     root.querySelector('[data-testid="l2-chip"]')?.addEventListener('click', () => {

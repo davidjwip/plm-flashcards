@@ -150,19 +150,21 @@ export function beeWords(deck: BeeDeck, choice: BeeChoice): string[] {
 
 /**
  * Plausible non-words: an onset a child has met plus a rime with a real vowel.
- * Never returns a word in `avoid` (the bank and the bee deck).
+ * Never returns a word in `avoid` (the bank and the bee deck), and only words
+ * `keep` accepts, so the guard loop keeps trying until it has `count`.
  */
 export function nonsenseWords(
   count: number,
   avoid: Set<string>,
   rng: () => number = Math.random,
+  keep: (word: string) => boolean = () => true,
 ): string[] {
   const made = new Set<string>();
   let guard = 0;
   while (made.size < count && guard < count * 200) {
     guard += 1;
     const candidate = `${pick(ONSETS, rng)}${pick(RIMES, rng)}`;
-    if (avoid.has(candidate) || made.has(candidate)) continue;
+    if (avoid.has(candidate) || made.has(candidate) || !keep(candidate)) continue;
     made.add(candidate);
   }
   return [...made];
@@ -181,7 +183,12 @@ export function beeDictionary(
   if (!choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);
-  const nonsense: Word[] = nonsenseWords(BEE_ROUND, known, rng).map((word) => ({
+  const nonsense: Word[] = nonsenseWords(
+    BEE_ROUND,
+    known,
+    rng,
+    choice.l2 ? isL2Word : undefined,
+  ).map((word) => ({
     word,
     patterns: [NONSENSE_TAG],
   }));
