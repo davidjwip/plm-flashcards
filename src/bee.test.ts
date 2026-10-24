@@ -58,7 +58,7 @@ describe('spelling bee deck', () => {
     expect(new Set(round.map((w) => w.word)).size).toBe(BEE_ROUND);
   });
 
-  it('AC66 — Level 2 keeps only one-syllable words the spelling proves are L2', () => {
+  it('AC66 — Level 2 keeps only words whose every sound has been taught', () => {
     const mixed = {
       starters: ['stamp', 'cake', 'help', 'armchair'],
       movers: ['shrimp', 'night', 'about', 'strawberry', 'restaurant', 'have', 'give'],
@@ -70,20 +70,13 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    // `about` qualifies through its `ou` digraph but is two syllables; ghost e is
-    // not spelling-provable; the rest are three. All are out of a K2 deck. `cake`
-    // and `night` are out too: `a_e` and `igh` are not spelling-provable L2 tags.
-    expect(l2.map((w) => w.word)).toEqual(['help', 'shrimp', 'stamp']);
-    for (const word of [
-      'about',
-      'armchair',
-      'cake',
-      'night',
-      'strawberry',
-      'restaurant',
-      'have',
-      'give',
-    ]) {
+    // `about` and `thousand`-style words are in when every sound is taught: `ou`
+    // is an L2 grapheme and single letters always are, so syllable count does not
+    // matter. `armchair` and `chair` are out through `air`, `strawberry` and
+    // `squawk` through `aw`, `night` through `igh`, and the split digraphs in
+    // `cake`, `have` and `give` are untaught too.
+    expect(l2.map((w) => w.word)).toEqual(['about', 'help', 'shrimp', 'stamp']);
+    for (const word of ['armchair', 'cake', 'night', 'strawberry', 'restaurant', 'have', 'give']) {
       expect(
         l2.map((w) => w.word),
         `${word} is out`,
@@ -111,7 +104,7 @@ describe('spelling bee deck', () => {
     ]);
   });
 
-  it('AC66 — long vowel digraphs qualify by spelling but ghost e does not', () => {
+  it('AC66 — oo and ou are covered L2 sounds; ee and ghost e are not', () => {
     const mixed = {
       // Two ghost-e words, so an implementation that special-cases one of them
       // (or hard-codes "L2 ids minus ghost_e") still has to filter both out.
@@ -125,10 +118,15 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    // The cluster word survives; both ghost-e words are excluded.
-    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'see', 'stamp']);
-    expect(l2.map((w) => w.word)).not.toContain('have');
-    expect(l2.map((w) => w.word)).not.toContain('give');
+    // `oo` and `ou` are in L2_GRAPHEMES; `ee` is not, and the ghost-e words also
+    // hide an untaught split digraph.
+    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'stamp']);
+    for (const word of ['have', 'give', 'see']) {
+      expect(
+        l2.map((w) => w.word),
+        `${word} is out`,
+      ).not.toContain(word);
+    }
   });
 
   it('AC66 — Level 2 filters nonsense words too', () => {
