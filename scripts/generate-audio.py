@@ -66,6 +66,13 @@ async def main() -> int:
     if bee_path.exists():
         bee = json.loads(bee_path.read_text())
         words += bee["starters"] + bee["movers"]
+
+    # Nonsense rounds draw from a fixed pool too, so those words need Sonia audio
+    # rather than falling back to whatever voice the tablet happens to have.
+    nonsense_path = ROOT / "data" / "nonsense.json"
+    if nonsense_path.exists():
+        nonsense = json.loads(nonsense_path.read_text())
+        words += nonsense["words"]
     words = sorted(set(words))
     OUT.mkdir(parents=True, exist_ok=True)
 

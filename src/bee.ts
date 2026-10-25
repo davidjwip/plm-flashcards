@@ -1,3 +1,4 @@
+import nonsenseJson from '../data/nonsense.json';
 import { shuffle } from './engine';
 import type { Word } from './types';
 
@@ -5,9 +6,10 @@ import type { Word } from './types';
  * Spelling-bee mode: a dictation deck instead of sound patterns.
  *
  * The bee gives no word list, so the deck is the merged Cambridge Young Learners
- * A–Z vocabulary (Pre A1 Starters + A1 Movers). Pseudo words are generated here
- * because the contest uses them to test decoding rather than recognition: a child
- * who has memorised sight words falls over, a child who blends reads them fine.
+ * A–Z vocabulary (Pre A1 Starters + A1 Movers). Pseudo words are drawn from a
+ * committed pool because the contest uses them to test decoding rather than
+ * recognition: a child who has memorised sight words falls over, a child who
+ * blends reads them fine.
  */
 
 export type BeeDeck = {
@@ -27,117 +29,7 @@ export const BEE_ROUND = 10;
 export const BEE_TAG = 'bee';
 export const NONSENSE_TAG = 'nonsense';
 
-/** Consonant onsets a 4-7 year old has met: single letters and common clusters. */
-const ONSETS = [
-  'b',
-  'c',
-  'd',
-  'f',
-  'g',
-  'h',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'p',
-  'r',
-  's',
-  't',
-  'v',
-  'w',
-  'y',
-  'z',
-  'sh',
-  'ch',
-  'th',
-  'bl',
-  'br',
-  'cl',
-  'cr',
-  'dr',
-  'fl',
-  'fr',
-  'gl',
-  'gr',
-  'pl',
-  'pr',
-  'sc',
-  'sk',
-  'sl',
-  'sm',
-  'sn',
-  'sp',
-  'st',
-  'sw',
-  'tr',
-  'tw',
-];
-
-/** Vowel + optional coda, so onset+rime always contains a vowel to sound out. */
-const RIMES = [
-  'ab',
-  'ad',
-  'ag',
-  'am',
-  'an',
-  'ap',
-  'at',
-  'ax',
-  'eb',
-  'ed',
-  'eg',
-  'em',
-  'en',
-  'ep',
-  'et',
-  'ib',
-  'id',
-  'ig',
-  'im',
-  'in',
-  'ip',
-  'it',
-  'ix',
-  'ob',
-  'od',
-  'og',
-  'om',
-  'op',
-  'ot',
-  'ox',
-  'ub',
-  'ud',
-  'ug',
-  'um',
-  'un',
-  'up',
-  'ut',
-  'ack',
-  'eck',
-  'ick',
-  'ock',
-  'uck',
-  'ash',
-  'esh',
-  'ish',
-  'osh',
-  'ush',
-  'ang',
-  'ing',
-  'ong',
-  'ung',
-  'amp',
-  'imp',
-  'ump',
-  'ast',
-  'est',
-  'ist',
-  'ost',
-  'ust',
-];
-
-const pick = <T>(items: T[], rng: () => number): T => items[Math.floor(rng() * items.length)] as T;
+const NONSENSE_POOL = nonsenseJson.words;
 
 /** Real words from the chosen levels, deduplicated and alphabetical. */
 export function beeWords(deck: BeeDeck, choice: BeeChoice): string[] {
@@ -148,9 +40,9 @@ export function beeWords(deck: BeeDeck, choice: BeeChoice): string[] {
 }
 
 /**
- * Plausible non-words: an onset a child has met plus a rime with a real vowel.
- * Never returns a word in `avoid` (the bank and the bee deck), and only words
- * `keep` accepts, so the guard loop keeps trying until it has `count`.
+ * Draw plausible non-words from the committed pool. Never returns a word in
+ * `avoid` (the bank and the bee deck), and only words `keep` accepts. When the
+ * pool cannot supply `count`, it returns what it has.
  */
 export function nonsenseWords(
   count: number,
@@ -159,12 +51,10 @@ export function nonsenseWords(
   keep: (word: string) => boolean = () => true,
 ): string[] {
   const made = new Set<string>();
-  let guard = 0;
-  while (made.size < count && guard < count * 200) {
-    guard += 1;
-    const candidate = `${pick(ONSETS, rng)}${pick(RIMES, rng)}`;
-    if (avoid.has(candidate) || made.has(candidate) || !keep(candidate)) continue;
-    made.add(candidate);
+  for (const word of shuffle(NONSENSE_POOL, rng)) {
+    if (made.size >= count) break;
+    if (avoid.has(word) || made.has(word) || !keep(word)) continue;
+    made.add(word);
   }
   return [...made];
 }

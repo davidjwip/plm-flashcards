@@ -1,10 +1,19 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import beeJson from '../data/bee.json';
+import nonsenseJson from '../data/nonsense.json';
+import bankJson from '../data/wordbank.json';
 import { BEE_ROUND, NONSENSE_TAG, beeDictionary, beeRound, beeWords, nonsenseWords } from './bee';
+import manifest from './audio-manifest.json';
+import type { Bank } from './types';
 
 const deck = {
   starters: ['cat', 'apple', 'sun'],
   movers: ['dog', 'elephant', 'sun'],
 };
+
+const pool = nonsenseJson.words;
 
 /**
  * Deterministic RNG for the nonsense-word assertions. xorshift, so there are no long
@@ -213,5 +222,39 @@ describe('nonsense words', () => {
     expect(nonsense.length).toBeGreaterThan(0);
     const real = dict.filter((w) => w.patterns.includes('bee'));
     expect(real.map((w) => w.word)).toEqual(['apple', 'cat', 'dog', 'elephant', 'sun']);
+  });
+
+  it('AC66 — every nonsense word in a round has a committed mp3', () => {
+    const voiced = new Set(manifest.words);
+    for (const word of pool) {
+      expect(voiced.has(word), `${word} is missing from audio-manifest.json`).toBe(true);
+      expect(existsSync(join('public', 'audio', `${word}.mp3`)), `${word} has no mp3`).toBe(true);
+    }
+  });
+
+  it('AC66 — a nonsense round draws only from the pool', () => {
+    const dict = beeDictionary(
+      deck,
+      { starters: true, movers: true, nonsense: true, l2: false },
+      { avoid: new Set(), rng: seeded(5) },
+    );
+    const nonsense = dict
+      .filter((word) => word.patterns.includes(NONSENSE_TAG))
+      .map(({ word }) => word);
+    expect(nonsense).toHaveLength(BEE_ROUND);
+    const members = new Set(pool);
+    for (const word of nonsense) {
+      expect(members.has(word), `${word} is in data/nonsense.json`).toBe(true);
+    }
+  });
+
+  it('AC66 — the pool never collides with a real word', () => {
+    const bank = bankJson as Bank;
+    const bankWords = new Set(bank.words.map(({ word }) => word));
+    const deckWords = new Set([...beeJson.starters, ...beeJson.movers]);
+    for (const word of pool) {
+      expect(bankWords.has(word), `${word} is a bank word`).toBe(false);
+      expect(deckWords.has(word), `${word} is a bee deck word`).toBe(false);
+    }
   });
 });
