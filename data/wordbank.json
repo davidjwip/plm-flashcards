@@ -642,6 +642,12 @@
       ]
     },
     {
+      "word": "ban",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "banana",
       "patterns": [
         "schwa"
@@ -681,6 +687,19 @@
       "word": "bare",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "bash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "bast",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -732,6 +751,13 @@
       ]
     },
     {
+      "word": "beck",
+      "patterns": [
+        "ck",
+        "e"
+      ]
+    },
+    {
       "word": "bed",
       "patterns": [
         "e"
@@ -768,6 +794,12 @@
       ]
     },
     {
+      "word": "ben",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "bench",
       "patterns": [
         "ch",
@@ -793,9 +825,27 @@
       ]
     },
     {
+      "word": "bet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "beware",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "bib",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "bid",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -847,6 +897,13 @@
       ]
     },
     {
+      "word": "blab",
+      "patterns": [
+        "bl-",
+        "a"
+      ]
+    },
+    {
       "word": "black",
       "patterns": [
         "ck",
@@ -868,10 +925,31 @@
       ]
     },
     {
+      "word": "blat",
+      "patterns": [
+        "bl-",
+        "a"
+      ]
+    },
+    {
+      "word": "bled",
+      "patterns": [
+        "bl-",
+        "e"
+      ]
+    },
+    {
       "word": "blend",
       "patterns": [
         "bl-",
         "-nd"
+      ]
+    },
+    {
+      "word": "blest",
+      "patterns": [
+        "bl-",
+        "e"
       ]
     },
     {
@@ -889,10 +967,25 @@
       ]
     },
     {
+      "word": "bling",
+      "patterns": [
+        "bl-",
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "blink",
       "patterns": [
         "bl-",
         "-nk"
+      ]
+    },
+    {
+      "word": "blip",
+      "patterns": [
+        "bl-",
+        "i"
       ]
     },
     {
@@ -905,6 +998,13 @@
       "word": "block",
       "patterns": [
         "bl-"
+      ]
+    },
+    {
+      "word": "blog",
+      "patterns": [
+        "bl-",
+        "o"
       ]
     },
     {
@@ -946,6 +1046,18 @@
       ]
     },
     {
+      "word": "bob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "bog",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "boil",
       "patterns": [
         "oi"
@@ -970,6 +1082,13 @@
       ]
     },
     {
+      "word": "bong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
       "word": "book",
       "patterns": [
         "oo"
@@ -982,15 +1101,34 @@
       ]
     },
     {
+      "word": "bop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "born",
       "patterns": [
         "or"
       ]
     },
     {
+      "word": "bosh",
+      "patterns": [
+        "sh",
+        "o"
+      ]
+    },
+    {
       "word": "boss",
       "patterns": [
         "-ss"
+      ]
+    },
+    {
+      "word": "bot",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -1019,6 +1157,13 @@
       ]
     },
     {
+      "word": "brad",
+      "patterns": [
+        "br-",
+        "a"
+      ]
+    },
+    {
       "word": "brag",
       "patterns": [
         "br-"
@@ -1029,6 +1174,13 @@
       "patterns": [
         "ai",
         "br-"
+      ]
+    },
+    {
+      "word": "bran",
+      "patterns": [
+        "br-",
+        "a"
       ]
     },
     {
@@ -1043,6 +1195,14 @@
       "word": "brand",
       "patterns": [
         "br-"
+      ]
+    },
+    {
+      "word": "brash",
+      "patterns": [
+        "br-",
+        "sh",
+        "a"
       ]
     },
     {
@@ -1072,6 +1232,27 @@
       ]
     },
     {
+      "word": "bred",
+      "patterns": [
+        "br-",
+        "e"
+      ]
+    },
+    {
+      "word": "brest",
+      "patterns": [
+        "br-",
+        "e"
+      ]
+    },
+    {
+      "word": "bret",
+      "patterns": [
+        "br-",
+        "e"
+      ]
+    },
+    {
       "word": "brick",
       "patterns": [
         "br-"
@@ -1082,6 +1263,13 @@
       "patterns": [
         "ie",
         "br-"
+      ]
+    },
+    {
+      "word": "brig",
+      "patterns": [
+        "br-",
+        "i"
       ]
     },
     {
@@ -1109,6 +1297,21 @@
       "patterns": [
         "br-",
         "-sk"
+      ]
+    },
+    {
+      "word": "brit",
+      "patterns": [
+        "br-",
+        "i"
+      ]
+    },
+    {
+      "word": "brock",
+      "patterns": [
+        "br-",
+        "ck",
+        "o"
       ]
     },
     {
@@ -1148,9 +1351,22 @@
       ]
     },
     {
+      "word": "brut",
+      "patterns": [
+        "br-",
+        "u"
+      ]
+    },
+    {
       "word": "buck",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "bud",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -1180,6 +1396,12 @@
       ]
     },
     {
+      "word": "bum",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "bump",
       "patterns": [
         "-mp"
@@ -1195,6 +1417,13 @@
       "word": "bunch",
       "patterns": [
         "-nch"
+      ]
+    },
+    {
+      "word": "bung",
+      "patterns": [
+        "ng",
+        "u"
       ]
     },
     {
@@ -1223,6 +1452,37 @@
       ]
     },
     {
+      "word": "bush",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "bust",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "but",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "cab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "cad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "cage",
       "patterns": [
         "a_e"
@@ -1248,9 +1508,21 @@
       ]
     },
     {
+      "word": "cam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "camp",
       "patterns": [
         "-mp"
+      ]
+    },
+    {
+      "word": "can",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -1290,9 +1562,22 @@
       ]
     },
     {
+      "word": "cash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
       "word": "cashew",
       "patterns": [
         "ew"
+      ]
+    },
+    {
+      "word": "cast",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -1320,6 +1605,13 @@
       ]
     },
     {
+      "word": "chad",
+      "patterns": [
+        "ch",
+        "a"
+      ]
+    },
+    {
       "word": "chain",
       "patterns": [
         "ai"
@@ -1339,6 +1631,35 @@
       ]
     },
     {
+      "word": "champ",
+      "patterns": [
+        "ch",
+        "a"
+      ]
+    },
+    {
+      "word": "chan",
+      "patterns": [
+        "ch",
+        "a"
+      ]
+    },
+    {
+      "word": "chang",
+      "patterns": [
+        "ch",
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "chap",
+      "patterns": [
+        "ch",
+        "a"
+      ]
+    },
+    {
       "word": "chart",
       "patterns": [
         "ar"
@@ -1348,6 +1669,14 @@
       "word": "chat",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "check",
+      "patterns": [
+        "ch",
+        "ck",
+        "e"
       ]
     },
     {
@@ -1381,6 +1710,20 @@
       ]
     },
     {
+      "word": "chem",
+      "patterns": [
+        "ch",
+        "e"
+      ]
+    },
+    {
+      "word": "chen",
+      "patterns": [
+        "ch",
+        "e"
+      ]
+    },
+    {
       "word": "chess",
       "patterns": [
         "ch",
@@ -1401,9 +1744,24 @@
       ]
     },
     {
+      "word": "chick",
+      "patterns": [
+        "ch",
+        "ck",
+        "i"
+      ]
+    },
+    {
       "word": "chicken",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "chid",
+      "patterns": [
+        "ch",
+        "i"
       ]
     },
     {
@@ -1433,6 +1791,13 @@
       ]
     },
     {
+      "word": "chimp",
+      "patterns": [
+        "ch",
+        "i"
+      ]
+    },
+    {
       "word": "chin",
       "patterns": [
         "ch"
@@ -1451,6 +1816,21 @@
       ]
     },
     {
+      "word": "chit",
+      "patterns": [
+        "ch",
+        "i"
+      ]
+    },
+    {
+      "word": "chock",
+      "patterns": [
+        "ch",
+        "ck",
+        "o"
+      ]
+    },
+    {
       "word": "choice",
       "patterns": [
         "oi"
@@ -1463,10 +1843,53 @@
       ]
     },
     {
+      "word": "chuck",
+      "patterns": [
+        "ch",
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "chug",
+      "patterns": [
+        "ch",
+        "u"
+      ]
+    },
+    {
+      "word": "chum",
+      "patterns": [
+        "ch",
+        "u"
+      ]
+    },
+    {
+      "word": "chump",
+      "patterns": [
+        "ch",
+        "u"
+      ]
+    },
+    {
+      "word": "chung",
+      "patterns": [
+        "ch",
+        "ng",
+        "u"
+      ]
+    },
+    {
       "word": "church",
       "patterns": [
         "ur",
         "ch"
+      ]
+    },
+    {
+      "word": "cid",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -1488,6 +1911,14 @@
       ]
     },
     {
+      "word": "clack",
+      "patterns": [
+        "cl-",
+        "ck",
+        "a"
+      ]
+    },
+    {
       "word": "clad",
       "patterns": [
         "cl-"
@@ -1500,15 +1931,38 @@
       ]
     },
     {
+      "word": "clamp",
+      "patterns": [
+        "cl-",
+        "a"
+      ]
+    },
+    {
       "word": "clan",
       "patterns": [
         "cl-"
       ]
     },
     {
+      "word": "clang",
+      "patterns": [
+        "cl-",
+        "ng",
+        "a"
+      ]
+    },
+    {
       "word": "clap",
       "patterns": [
         "cl-"
+      ]
+    },
+    {
+      "word": "clash",
+      "patterns": [
+        "cl-",
+        "sh",
+        "a"
       ]
     },
     {
@@ -1547,9 +2001,46 @@
       ]
     },
     {
+      "word": "clem",
+      "patterns": [
+        "cl-",
+        "e"
+      ]
+    },
+    {
+      "word": "click",
+      "patterns": [
+        "cl-",
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "cling",
+      "patterns": [
+        "cl-",
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "clip",
       "patterns": [
         "cl-"
+      ]
+    },
+    {
+      "word": "clit",
+      "patterns": [
+        "cl-",
+        "i"
+      ]
+    },
+    {
+      "word": "clix",
+      "patterns": [
+        "cl-",
+        "i"
       ]
     },
     {
@@ -1567,10 +2058,38 @@
       ]
     },
     {
+      "word": "clod",
+      "patterns": [
+        "cl-",
+        "o"
+      ]
+    },
+    {
+      "word": "clog",
+      "patterns": [
+        "cl-",
+        "o"
+      ]
+    },
+    {
+      "word": "clop",
+      "patterns": [
+        "cl-",
+        "o"
+      ]
+    },
+    {
       "word": "close",
       "patterns": [
         "o_e",
         "cl-"
+      ]
+    },
+    {
+      "word": "clot",
+      "patterns": [
+        "cl-",
+        "o"
       ]
     },
     {
@@ -1606,6 +2125,21 @@
       ]
     },
     {
+      "word": "clump",
+      "patterns": [
+        "cl-",
+        "u"
+      ]
+    },
+    {
+      "word": "clung",
+      "patterns": [
+        "cl-",
+        "ng",
+        "u"
+      ]
+    },
+    {
       "word": "clutch",
       "patterns": [
         "tch",
@@ -1638,9 +2172,34 @@
       ]
     },
     {
+      "word": "cob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "cock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "cod",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "code",
       "patterns": [
         "o_e"
+      ]
+    },
+    {
+      "word": "cog",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -1674,6 +2233,12 @@
       ]
     },
     {
+      "word": "com",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "come",
       "patterns": [
         "ghost_e"
@@ -1704,6 +2269,13 @@
       ]
     },
     {
+      "word": "cong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
       "word": "context",
       "patterns": [
         "-xt"
@@ -1728,6 +2300,12 @@
       ]
     },
     {
+      "word": "cop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "cork",
       "patterns": [
         "or"
@@ -1737,6 +2315,12 @@
       "word": "corn",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "cost",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -1777,6 +2361,12 @@
       ]
     },
     {
+      "word": "cox",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "coy",
       "patterns": [
         "oy"
@@ -1799,6 +2389,34 @@
       "patterns": [
         "cr-",
         "-ft"
+      ]
+    },
+    {
+      "word": "crag",
+      "patterns": [
+        "cr-",
+        "a"
+      ]
+    },
+    {
+      "word": "cram",
+      "patterns": [
+        "cr-",
+        "a"
+      ]
+    },
+    {
+      "word": "cramp",
+      "patterns": [
+        "cr-",
+        "a"
+      ]
+    },
+    {
+      "word": "crap",
+      "patterns": [
+        "cr-",
+        "a"
       ]
     },
     {
@@ -1829,6 +2447,13 @@
       ]
     },
     {
+      "word": "crest",
+      "patterns": [
+        "cr-",
+        "e"
+      ]
+    },
+    {
       "word": "crew",
       "patterns": [
         "ew",
@@ -1842,6 +2467,14 @@
       ]
     },
     {
+      "word": "crick",
+      "patterns": [
+        "cr-",
+        "ck",
+        "i"
+      ]
+    },
+    {
       "word": "cried",
       "patterns": [
         "ie",
@@ -1849,10 +2482,25 @@
       ]
     },
     {
+      "word": "crimp",
+      "patterns": [
+        "cr-",
+        "i"
+      ]
+    },
+    {
       "word": "crisp",
       "patterns": [
         "cr-",
         "-sp"
+      ]
+    },
+    {
+      "word": "crock",
+      "patterns": [
+        "cr-",
+        "ck",
+        "o"
       ]
     },
     {
@@ -1876,6 +2524,13 @@
       ]
     },
     {
+      "word": "crud",
+      "patterns": [
+        "cr-",
+        "u"
+      ]
+    },
+    {
       "word": "cruise",
       "patterns": [
         "ui",
@@ -1890,15 +2545,42 @@
       ]
     },
     {
+      "word": "crush",
+      "patterns": [
+        "cr-",
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "crust",
+      "patterns": [
+        "cr-",
+        "u"
+      ]
+    },
+    {
       "word": "cry",
       "patterns": [
         "cr-"
       ]
     },
     {
+      "word": "cub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "cube",
       "patterns": [
         "u_e"
+      ]
+    },
+    {
+      "word": "cud",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -1911,6 +2593,12 @@
       "word": "cult",
       "patterns": [
         "-lt"
+      ]
+    },
+    {
+      "word": "cum",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -1956,6 +2644,12 @@
       ]
     },
     {
+      "word": "dab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "dad",
       "patterns": [
         "a"
@@ -1968,9 +2662,21 @@
       ]
     },
     {
+      "word": "dam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "damp",
       "patterns": [
         "-mp"
+      ]
+    },
+    {
+      "word": "dan",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -1983,6 +2689,19 @@
       "word": "dark",
       "patterns": [
         "ar"
+      ]
+    },
+    {
+      "word": "dash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "dat",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -2001,6 +2720,12 @@
       "word": "dear",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "deb",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -2046,6 +2771,18 @@
       ]
     },
     {
+      "word": "dem",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "den",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "dent",
       "patterns": [
         "-nt"
@@ -2076,6 +2813,19 @@
       ]
     },
     {
+      "word": "dick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "did",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "die",
       "patterns": [
         "ie"
@@ -2088,15 +2838,40 @@
       ]
     },
     {
+      "word": "dim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "din",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "dine",
       "patterns": [
         "i_e"
       ]
     },
     {
+      "word": "ding",
+      "patterns": [
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "dinosaur",
       "patterns": [
         "au"
+      ]
+    },
+    {
+      "word": "dip",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -2127,6 +2902,19 @@
       "word": "ditch",
       "patterns": [
         "tch"
+      ]
+    },
+    {
+      "word": "dix",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "dock",
+      "patterns": [
+        "ck",
+        "o"
       ]
     },
     {
@@ -2188,6 +2976,13 @@
       "patterns": [
         "ai",
         "dr-"
+      ]
+    },
+    {
+      "word": "dram",
+      "patterns": [
+        "dr-",
+        "a"
       ]
     },
     {
@@ -2264,6 +3059,20 @@
       ]
     },
     {
+      "word": "drub",
+      "patterns": [
+        "dr-",
+        "u"
+      ]
+    },
+    {
+      "word": "drug",
+      "patterns": [
+        "dr-",
+        "u"
+      ]
+    },
+    {
       "word": "drum",
       "patterns": [
         "dr-"
@@ -2276,6 +3085,12 @@
       ]
     },
     {
+      "word": "dub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "duck",
       "patterns": [
         "ck"
@@ -2285,6 +3100,12 @@
       "word": "duct",
       "patterns": [
         "-ct"
+      ]
+    },
+    {
+      "word": "dud",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -2312,6 +3133,19 @@
       ]
     },
     {
+      "word": "dun",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "dung",
+      "patterns": [
+        "ng",
+        "u"
+      ]
+    },
+    {
       "word": "dunk",
       "patterns": [
         "-nk"
@@ -2321,6 +3155,12 @@
       "word": "dusk",
       "patterns": [
         "-sk"
+      ]
+    },
+    {
+      "word": "dust",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -2438,6 +3278,18 @@
       ]
     },
     {
+      "word": "fad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "fag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "faint",
       "patterns": [
         "ai",
@@ -2470,6 +3322,13 @@
       ]
     },
     {
+      "word": "fang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
       "word": "far",
       "patterns": [
         "ar"
@@ -2494,6 +3353,12 @@
       ]
     },
     {
+      "word": "fat",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "father",
       "patterns": [
         "schwa"
@@ -2507,9 +3372,21 @@
       ]
     },
     {
+      "word": "fax",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "fear",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "feb",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -2543,9 +3420,27 @@
       ]
     },
     {
+      "word": "fem",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "fen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "fern",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "fest",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -2558,6 +3453,12 @@
       "word": "few",
       "patterns": [
         "ew"
+      ]
+    },
+    {
+      "word": "fib",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -2671,6 +3572,27 @@
       ]
     },
     {
+      "word": "fix",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "flab",
+      "patterns": [
+        "fl-",
+        "a"
+      ]
+    },
+    {
+      "word": "flack",
+      "patterns": [
+        "fl-",
+        "ck",
+        "a"
+      ]
+    },
+    {
       "word": "flag",
       "patterns": [
         "fl-"
@@ -2681,6 +3603,13 @@
       "patterns": [
         "air",
         "fl-"
+      ]
+    },
+    {
+      "word": "flan",
+      "patterns": [
+        "fl-",
+        "a"
       ]
     },
     {
@@ -2706,6 +3635,36 @@
       "word": "flat",
       "patterns": [
         "fl-"
+      ]
+    },
+    {
+      "word": "flax",
+      "patterns": [
+        "fl-",
+        "a"
+      ]
+    },
+    {
+      "word": "fleck",
+      "patterns": [
+        "fl-",
+        "ck",
+        "e"
+      ]
+    },
+    {
+      "word": "fled",
+      "patterns": [
+        "fl-",
+        "e"
+      ]
+    },
+    {
+      "word": "flesh",
+      "patterns": [
+        "fl-",
+        "sh",
+        "e"
       ]
     },
     {
@@ -2736,9 +3695,24 @@
       ]
     },
     {
+      "word": "fling",
+      "patterns": [
+        "fl-",
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "flip",
       "patterns": [
         "fl-"
+      ]
+    },
+    {
+      "word": "flit",
+      "patterns": [
+        "fl-",
+        "i"
       ]
     },
     {
@@ -2746,6 +3720,21 @@
       "patterns": [
         "oa",
         "fl-"
+      ]
+    },
+    {
+      "word": "flock",
+      "patterns": [
+        "fl-",
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "flog",
+      "patterns": [
+        "fl-",
+        "o"
       ]
     },
     {
@@ -2781,10 +3770,33 @@
       ]
     },
     {
+      "word": "flub",
+      "patterns": [
+        "fl-",
+        "u"
+      ]
+    },
+    {
       "word": "fluid",
       "patterns": [
         "ui",
         "fl-"
+      ]
+    },
+    {
+      "word": "flung",
+      "patterns": [
+        "fl-",
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "flush",
+      "patterns": [
+        "fl-",
+        "sh",
+        "u"
       ]
     },
     {
@@ -2798,6 +3810,12 @@
       "word": "fly",
       "patterns": [
         "fl-"
+      ]
+    },
+    {
+      "word": "fob",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -2837,6 +3855,12 @@
       ]
     },
     {
+      "word": "fop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "for",
       "patterns": [
         "or"
@@ -2868,15 +3892,51 @@
       ]
     },
     {
+      "word": "frack",
+      "patterns": [
+        "fr-",
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "frag",
+      "patterns": [
+        "fr-",
+        "a"
+      ]
+    },
+    {
       "word": "frame",
       "patterns": [
         "fr-"
       ]
     },
     {
+      "word": "fran",
+      "patterns": [
+        "fr-",
+        "a"
+      ]
+    },
+    {
       "word": "frank",
       "patterns": [
         "fr-"
+      ]
+    },
+    {
+      "word": "frat",
+      "patterns": [
+        "fr-",
+        "a"
+      ]
+    },
+    {
+      "word": "fred",
+      "patterns": [
+        "fr-",
+        "e"
       ]
     },
     {
@@ -2933,6 +3993,14 @@
       ]
     },
     {
+      "word": "frock",
+      "patterns": [
+        "fr-",
+        "ck",
+        "o"
+      ]
+    },
+    {
       "word": "frog",
       "patterns": [
         "fr-"
@@ -2979,9 +4047,35 @@
       ]
     },
     {
+      "word": "frump",
+      "patterns": [
+        "fr-",
+        "u"
+      ]
+    },
+    {
       "word": "fry",
       "patterns": [
         "fr-"
+      ]
+    },
+    {
+      "word": "fuck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "fud",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "fum",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -3015,6 +4109,24 @@
       ]
     },
     {
+      "word": "gab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "gad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "gag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "gain",
       "patterns": [
         "ai"
@@ -3027,10 +4139,30 @@
       ]
     },
     {
+      "word": "gang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "gap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "garden",
       "patterns": [
         "ar",
         "schwa"
+      ]
+    },
+    {
+      "word": "gash",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -3052,6 +4184,24 @@
       ]
     },
     {
+      "word": "ged",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "gem",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "gen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "germ",
       "patterns": [
         "er"
@@ -3070,9 +4220,34 @@
       ]
     },
     {
+      "word": "gig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "gin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "girl",
       "patterns": [
         "ir"
+      ]
+    },
+    {
+      "word": "gish",
+      "patterns": [
+        "sh",
+        "i"
+      ]
+    },
+    {
+      "word": "gist",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -3120,6 +4295,13 @@
       ]
     },
     {
+      "word": "glib",
+      "patterns": [
+        "gl-",
+        "i"
+      ]
+    },
+    {
       "word": "glide",
       "patterns": [
         "gl-"
@@ -3153,6 +4335,13 @@
       "word": "gloom",
       "patterns": [
         "gl-"
+      ]
+    },
+    {
+      "word": "glop",
+      "patterns": [
+        "gl-",
+        "o"
       ]
     },
     {
@@ -3206,6 +4395,24 @@
       ]
     },
     {
+      "word": "gob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "god",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "gog",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "gold",
       "patterns": [
         "-ld"
@@ -3224,9 +4431,35 @@
       ]
     },
     {
+      "word": "gong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
       "word": "good",
       "patterns": [
         "oo"
+      ]
+    },
+    {
+      "word": "gop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "gosh",
+      "patterns": [
+        "sh",
+        "o"
+      ]
+    },
+    {
+      "word": "got",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -3295,6 +4528,20 @@
       ]
     },
     {
+      "word": "greg",
+      "patterns": [
+        "gr-",
+        "e"
+      ]
+    },
+    {
+      "word": "grep",
+      "patterns": [
+        "gr-",
+        "e"
+      ]
+    },
+    {
       "word": "grew",
       "patterns": [
         "ew",
@@ -3305,6 +4552,13 @@
       "word": "grid",
       "patterns": [
         "gr-"
+      ]
+    },
+    {
+      "word": "grim",
+      "patterns": [
+        "gr-",
+        "i"
       ]
     },
     {
@@ -3320,6 +4574,27 @@
       ]
     },
     {
+      "word": "grist",
+      "patterns": [
+        "gr-",
+        "i"
+      ]
+    },
+    {
+      "word": "grit",
+      "patterns": [
+        "gr-",
+        "i"
+      ]
+    },
+    {
+      "word": "grog",
+      "patterns": [
+        "gr-",
+        "o"
+      ]
+    },
+    {
       "word": "ground",
       "patterns": [
         "ou",
@@ -3332,6 +4607,13 @@
       "patterns": [
         "ow",
         "gr-"
+      ]
+    },
+    {
+      "word": "grub",
+      "patterns": [
+        "gr-",
+        "u"
       ]
     },
     {
@@ -3363,6 +4645,50 @@
       "word": "gum",
       "patterns": [
         "u"
+      ]
+    },
+    {
+      "word": "gun",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "gush",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "gust",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "gut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "hack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "had",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "hag",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -3404,6 +4730,12 @@
       ]
     },
     {
+      "word": "han",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "hand",
       "patterns": [
         "-nd"
@@ -3425,6 +4757,13 @@
       "word": "hare",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "hash",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -3488,6 +4827,13 @@
       ]
     },
     {
+      "word": "heck",
+      "patterns": [
+        "ck",
+        "e"
+      ]
+    },
+    {
       "word": "held",
       "patterns": [
         "-ld"
@@ -3500,7 +4846,19 @@
       ]
     },
     {
+      "word": "hem",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "hen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "hep",
       "patterns": [
         "e"
       ]
@@ -3524,6 +4882,19 @@
       ]
     },
     {
+      "word": "hick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "hid",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "hide",
       "patterns": [
         "i_e"
@@ -3542,6 +4913,19 @@
       ]
     },
     {
+      "word": "him",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "hing",
+      "patterns": [
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "hip",
       "patterns": [
         "i"
@@ -3551,6 +4935,31 @@
       "word": "hit",
       "patterns": [
         "i"
+      ]
+    },
+    {
+      "word": "hob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "hock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "hod",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "hog",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -3585,6 +4994,13 @@
       ]
     },
     {
+      "word": "hong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
       "word": "hook",
       "patterns": [
         "oo"
@@ -3615,6 +5031,12 @@
       ]
     },
     {
+      "word": "host",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "hot",
       "patterns": [
         "o"
@@ -3630,6 +5052,25 @@
       "word": "how",
       "patterns": [
         "ow"
+      ]
+    },
+    {
+      "word": "hub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "huck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "hud",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -3654,6 +5095,24 @@
       "word": "hulk",
       "patterns": [
         "-lk"
+      ]
+    },
+    {
+      "word": "hum",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "hump",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "hun",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -3693,6 +5152,13 @@
       ]
     },
     {
+      "word": "hush",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
       "word": "husk",
       "patterns": [
         "-sk"
@@ -3729,6 +5195,25 @@
       ]
     },
     {
+      "word": "jab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "jack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "jag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "jail",
       "patterns": [
         "ai"
@@ -3736,6 +5221,12 @@
     },
     {
       "word": "jam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "jan",
       "patterns": [
         "a"
       ]
@@ -3753,6 +5244,12 @@
       ]
     },
     {
+      "word": "jed",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "jeer",
       "patterns": [
         "eer"
@@ -3762,6 +5259,12 @@
       "word": "jerk",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "jest",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -3777,7 +5280,38 @@
       ]
     },
     {
+      "word": "jib",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "jig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "jim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "job",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "jock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "jog",
       "patterns": [
         "o"
       ]
@@ -3805,6 +5339,19 @@
       "word": "jolt",
       "patterns": [
         "-lt"
+      ]
+    },
+    {
+      "word": "josh",
+      "patterns": [
+        "sh",
+        "o"
+      ]
+    },
+    {
+      "word": "jot",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -3838,15 +5385,47 @@
       ]
     },
     {
+      "word": "jun",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "jung",
+      "patterns": [
+        "ng",
+        "u"
+      ]
+    },
+    {
       "word": "junk",
       "patterns": [
         "-nk"
       ]
     },
     {
+      "word": "just",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "jut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "kangaroo",
       "patterns": [
         "k"
+      ]
+    },
+    {
+      "word": "keck",
+      "patterns": [
+        "ck",
+        "e"
       ]
     },
     {
@@ -3873,6 +5452,12 @@
       "patterns": [
         "k",
         "-lp"
+      ]
+    },
+    {
+      "word": "ken",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -3928,6 +5513,12 @@
       ]
     },
     {
+      "word": "kim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "kin",
       "patterns": [
         "k"
@@ -3952,6 +5543,12 @@
       "patterns": [
         "k",
         "-sk"
+      ]
+    },
+    {
+      "word": "kip",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -3993,6 +5590,38 @@
       ]
     },
     {
+      "word": "kong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
+      "word": "lab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "lack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "lad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "lag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "lair",
       "patterns": [
         "air"
@@ -4002,6 +5631,12 @@
       "word": "lake",
       "patterns": [
         "a_e"
+      ]
+    },
+    {
+      "word": "lam",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4023,9 +5658,35 @@
       ]
     },
     {
+      "word": "lang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "lap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "lash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
       "word": "last",
       "patterns": [
         "-st"
+      ]
+    },
+    {
+      "word": "lat",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4066,6 +5727,12 @@
       ]
     },
     {
+      "word": "lax",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "lay",
       "patterns": [
         "ay"
@@ -4102,15 +5769,33 @@
       ]
     },
     {
+      "word": "len",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "less",
       "patterns": [
         "-ss"
       ]
     },
     {
+      "word": "lest",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "let",
       "patterns": [
         "e"
+      ]
+    },
+    {
+      "word": "lib",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -4150,6 +5835,12 @@
       ]
     },
     {
+      "word": "lin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "line",
       "patterns": [
         "i_e"
@@ -4174,6 +5865,18 @@
       ]
     },
     {
+      "word": "lit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "lix",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "load",
       "patterns": [
         "oa"
@@ -4183,6 +5886,12 @@
       "word": "loaf",
       "patterns": [
         "oa"
+      ]
+    },
+    {
+      "word": "lob",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -4216,6 +5925,12 @@
       ]
     },
     {
+      "word": "lop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "lost",
       "patterns": [
         "-st"
@@ -4246,6 +5961,12 @@
       ]
     },
     {
+      "word": "lox",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "loyal",
       "patterns": [
         "oy"
@@ -4255,6 +5976,12 @@
       "word": "luck",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "lug",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -4268,6 +5995,39 @@
       "patterns": [
         "ch",
         "-nch"
+      ]
+    },
+    {
+      "word": "lung",
+      "patterns": [
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "lush",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "lust",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "mack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "mad",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4314,6 +6074,13 @@
       ]
     },
     {
+      "word": "mash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
       "word": "mask",
       "patterns": [
         "-sk"
@@ -4323,6 +6090,12 @@
       "word": "mass",
       "patterns": [
         "-ss"
+      ]
+    },
+    {
+      "word": "mast",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4338,15 +6111,33 @@
       ]
     },
     {
+      "word": "max",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "meat",
       "patterns": [
         "ea"
       ]
     },
     {
+      "word": "med",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "meet",
       "patterns": [
         "ee"
+      ]
+    },
+    {
+      "word": "meg",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -4362,15 +6153,47 @@
       ]
     },
     {
+      "word": "mesh",
+      "patterns": [
+        "sh",
+        "e"
+      ]
+    },
+    {
       "word": "mess",
       "patterns": [
         "-ss"
       ]
     },
     {
+      "word": "met",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "mick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "mid",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "midnight",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "mig",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -4398,9 +6221,59 @@
       ]
     },
     {
+      "word": "min",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "ming",
+      "patterns": [
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "mint",
       "patterns": [
         "-nt"
+      ]
+    },
+    {
+      "word": "mist",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "mit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "mix",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "mob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "mock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "mod",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -4417,6 +6290,12 @@
       ]
     },
     {
+      "word": "mom",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "moon",
       "patterns": [
         "oo"
@@ -4424,6 +6303,12 @@
     },
     {
       "word": "mop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "most",
       "patterns": [
         "o"
       ]
@@ -4467,6 +6352,13 @@
       ]
     },
     {
+      "word": "muck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
       "word": "mud",
       "patterns": [
         "u"
@@ -4485,9 +6377,29 @@
       ]
     },
     {
+      "word": "mum",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "munch",
       "patterns": [
         "-nch"
+      ]
+    },
+    {
+      "word": "mung",
+      "patterns": [
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "mush",
+      "patterns": [
+        "sh",
+        "u"
       ]
     },
     {
@@ -4509,9 +6421,27 @@
       ]
     },
     {
+      "word": "nab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "nag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "nail",
       "patterns": [
         "ai"
+      ]
+    },
+    {
+      "word": "nam",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4521,7 +6451,26 @@
       ]
     },
     {
+      "word": "nan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "nap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "nash",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "nat",
       "patterns": [
         "a"
       ]
@@ -4545,9 +6494,21 @@
       ]
     },
     {
+      "word": "ned",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "need",
       "patterns": [
         "ee"
+      ]
+    },
+    {
+      "word": "neg",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -4599,6 +6560,19 @@
       ]
     },
     {
+      "word": "nib",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "nick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
       "word": "niece",
       "patterns": [
         "ie"
@@ -4614,6 +6588,24 @@
       "word": "nine",
       "patterns": [
         "i_e"
+      ]
+    },
+    {
+      "word": "nip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "nit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "nix",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -4653,6 +6645,13 @@
       ]
     },
     {
+      "word": "nosh",
+      "patterns": [
+        "sh",
+        "o"
+      ]
+    },
+    {
       "word": "not",
       "patterns": [
         "o"
@@ -4677,9 +6676,21 @@
       ]
     },
     {
+      "word": "nub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "nuisance",
       "patterns": [
         "ui"
+      ]
+    },
+    {
+      "word": "nun",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -4749,6 +6760,12 @@
       ]
     },
     {
+      "word": "pad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "page",
       "patterns": [
         "a_e"
@@ -4780,7 +6797,26 @@
       ]
     },
     {
+      "word": "pam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "pan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "pang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "pap",
       "patterns": [
         "a"
       ]
@@ -4801,6 +6837,18 @@
       "word": "pass",
       "patterns": [
         "-ss"
+      ]
+    },
+    {
+      "word": "past",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "pat",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -4888,6 +6936,12 @@
       ]
     },
     {
+      "word": "pep",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "perch",
       "patterns": [
         "er"
@@ -4909,6 +6963,12 @@
       "word": "person",
       "patterns": [
         "er"
+      ]
+    },
+    {
+      "word": "pest",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -4960,6 +7020,12 @@
       ]
     },
     {
+      "word": "pimp",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "pin",
       "patterns": [
         "i"
@@ -4978,6 +7044,13 @@
       ]
     },
     {
+      "word": "ping",
+      "patterns": [
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "pink",
       "patterns": [
         "-nk"
@@ -4987,6 +7060,18 @@
       "word": "pioneer",
       "patterns": [
         "eer"
+      ]
+    },
+    {
+      "word": "pip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "pit",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -5041,6 +7126,13 @@
       ]
     },
     {
+      "word": "pled",
+      "patterns": [
+        "pl-",
+        "e"
+      ]
+    },
+    {
       "word": "plod",
       "patterns": [
         "pl-"
@@ -5050,6 +7142,21 @@
       "word": "plop",
       "patterns": [
         "pl-"
+      ]
+    },
+    {
+      "word": "plot",
+      "patterns": [
+        "pl-",
+        "o"
+      ]
+    },
+    {
+      "word": "pluck",
+      "patterns": [
+        "pl-",
+        "ck",
+        "u"
       ]
     },
     {
@@ -5078,9 +7185,30 @@
       ]
     },
     {
+      "word": "plush",
+      "patterns": [
+        "pl-",
+        "sh",
+        "u"
+      ]
+    },
+    {
       "word": "ply",
       "patterns": [
         "pl-"
+      ]
+    },
+    {
+      "word": "pock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "pod",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -5121,6 +7249,19 @@
       ]
     },
     {
+      "word": "posh",
+      "patterns": [
+        "sh",
+        "o"
+      ]
+    },
+    {
+      "word": "post",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "pot",
       "patterns": [
         "o"
@@ -5131,6 +7272,12 @@
       "patterns": [
         "ou",
         "-nd"
+      ]
+    },
+    {
+      "word": "pox",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -5157,6 +7304,13 @@
       "patterns": [
         "ay",
         "pr-"
+      ]
+    },
+    {
+      "word": "prep",
+      "patterns": [
+        "pr-",
+        "e"
       ]
     },
     {
@@ -5194,9 +7348,31 @@
       ]
     },
     {
+      "word": "prick",
+      "patterns": [
+        "pr-",
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "prig",
+      "patterns": [
+        "pr-",
+        "i"
+      ]
+    },
+    {
       "word": "prim",
       "patterns": [
         "pr-"
+      ]
+    },
+    {
+      "word": "primp",
+      "patterns": [
+        "pr-",
+        "i"
       ]
     },
     {
@@ -5216,6 +7392,13 @@
       "word": "prod",
       "patterns": [
         "pr-"
+      ]
+    },
+    {
+      "word": "prom",
+      "patterns": [
+        "pr-",
+        "o"
       ]
     },
     {
@@ -5245,9 +7428,35 @@
       ]
     },
     {
+      "word": "prut",
+      "patterns": [
+        "pr-",
+        "u"
+      ]
+    },
+    {
       "word": "pry",
       "patterns": [
         "pr-"
+      ]
+    },
+    {
+      "word": "pub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "puck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "pug",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -5260,6 +7469,12 @@
       "word": "pump",
       "patterns": [
         "-mp"
+      ]
+    },
+    {
+      "word": "pun",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -5300,6 +7515,19 @@
       ]
     },
     {
+      "word": "push",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "put",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "queen",
       "patterns": [
         "ee"
@@ -5336,6 +7564,12 @@
       ]
     },
     {
+      "word": "rag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "rail",
       "patterns": [
         "ai"
@@ -5345,6 +7579,24 @@
       "word": "rain",
       "patterns": [
         "ai"
+      ]
+    },
+    {
+      "word": "ram",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "ramp",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "ran",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -5360,6 +7612,12 @@
       ]
     },
     {
+      "word": "rap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "rapt",
       "patterns": [
         "-pt"
@@ -5369,6 +7627,13 @@
       "word": "rare",
       "patterns": [
         "are"
+      ]
+    },
+    {
+      "word": "rash",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -5432,6 +7697,18 @@
       ]
     },
     {
+      "word": "rem",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "rep",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "repair",
       "patterns": [
         "air"
@@ -5457,9 +7734,28 @@
       ]
     },
     {
+      "word": "rib",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "rich",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "rick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "rid",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -5469,9 +7765,21 @@
       ]
     },
     {
+      "word": "rig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "right",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "rim",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -5506,6 +7814,12 @@
       ]
     },
     {
+      "word": "rob",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "rock",
       "patterns": [
         "ck"
@@ -5521,6 +7835,12 @@
       "word": "rode",
       "patterns": [
         "o_e"
+      ]
+    },
+    {
+      "word": "rom",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -5548,6 +7868,12 @@
       ]
     },
     {
+      "word": "rot",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "round",
       "patterns": [
         "ou",
@@ -5564,6 +7890,12 @@
       "word": "royal",
       "patterns": [
         "oy"
+      ]
+    },
+    {
+      "word": "rub",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -5585,8 +7917,27 @@
       ]
     },
     {
+      "word": "rum",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "rump",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "run",
       "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "rung",
+      "patterns": [
+        "ng",
         "u"
       ]
     },
@@ -5597,6 +7948,18 @@
       ]
     },
     {
+      "word": "rust",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "rut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "sack",
       "patterns": [
         "ck"
@@ -5604,6 +7967,12 @@
     },
     {
       "word": "sad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "sag",
       "patterns": [
         "a"
       ]
@@ -5634,9 +8003,21 @@
       ]
     },
     {
+      "word": "sam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "same",
       "patterns": [
         "a_e"
+      ]
+    },
+    {
+      "word": "san",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -5649,6 +8030,19 @@
       "word": "sang",
       "patterns": [
         "ng"
+      ]
+    },
+    {
+      "word": "sap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "sash",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -5676,6 +8070,12 @@
       ]
     },
     {
+      "word": "sax",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "say",
       "patterns": [
         "ay"
@@ -5688,10 +8088,38 @@
       ]
     },
     {
+      "word": "scad",
+      "patterns": [
+        "sc-",
+        "a"
+      ]
+    },
+    {
+      "word": "scag",
+      "patterns": [
+        "sc-",
+        "a"
+      ]
+    },
+    {
       "word": "scalp",
       "patterns": [
         "sc-",
         "-lp"
+      ]
+    },
+    {
+      "word": "scam",
+      "patterns": [
+        "sc-",
+        "a"
+      ]
+    },
+    {
+      "word": "scamp",
+      "patterns": [
+        "sc-",
+        "a"
       ]
     },
     {
@@ -5721,6 +8149,13 @@
       ]
     },
     {
+      "word": "scat",
+      "patterns": [
+        "sc-",
+        "a"
+      ]
+    },
+    {
       "word": "school",
       "patterns": [
         "sc-"
@@ -5742,6 +8177,13 @@
       "word": "score",
       "patterns": [
         "sc-"
+      ]
+    },
+    {
+      "word": "scot",
+      "patterns": [
+        "sc-",
+        "o"
       ]
     },
     {
@@ -5830,6 +8272,20 @@
       ]
     },
     {
+      "word": "scud",
+      "patterns": [
+        "sc-",
+        "u"
+      ]
+    },
+    {
+      "word": "scum",
+      "patterns": [
+        "sc-",
+        "u"
+      ]
+    },
+    {
       "word": "sea",
       "patterns": [
         "ea"
@@ -5878,15 +8334,62 @@
       ]
     },
     {
+      "word": "sen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "sep",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "serve",
       "patterns": [
         "er"
       ]
     },
     {
+      "word": "set",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "shack",
+      "patterns": [
+        "sh",
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "shad",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "shag",
+      "patterns": [
+        "sh",
+        "a"
+      ]
+    },
+    {
       "word": "shake",
       "patterns": [
         "sh"
+      ]
+    },
+    {
+      "word": "sham",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -5912,6 +8415,13 @@
       "word": "sharp",
       "patterns": [
         "sh"
+      ]
+    },
+    {
+      "word": "shat",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -5972,6 +8482,20 @@
       ]
     },
     {
+      "word": "shim",
+      "patterns": [
+        "sh",
+        "i"
+      ]
+    },
+    {
+      "word": "shin",
+      "patterns": [
+        "sh",
+        "i"
+      ]
+    },
+    {
       "word": "shine",
       "patterns": [
         "sh"
@@ -5987,6 +8511,28 @@
       "word": "shirt",
       "patterns": [
         "ir"
+      ]
+    },
+    {
+      "word": "shit",
+      "patterns": [
+        "sh",
+        "i"
+      ]
+    },
+    {
+      "word": "shock",
+      "patterns": [
+        "sh",
+        "ck",
+        "o"
+      ]
+    },
+    {
+      "word": "shod",
+      "patterns": [
+        "sh",
+        "o"
       ]
     },
     {
@@ -6102,6 +8648,29 @@
       ]
     },
     {
+      "word": "shuck",
+      "patterns": [
+        "sh",
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "shun",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "shush",
+      "patterns": [
+        "sh",
+        "sh",
+        "u"
+      ]
+    },
+    {
       "word": "shut",
       "patterns": [
         "sh"
@@ -6111,6 +8680,12 @@
       "word": "sick",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "sid",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -6144,6 +8719,18 @@
       ]
     },
     {
+      "word": "sim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "sin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "sing",
       "patterns": [
         "ng"
@@ -6153,6 +8740,12 @@
       "word": "sink",
       "patterns": [
         "-nk"
+      ]
+    },
+    {
+      "word": "sip",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -6219,6 +8812,13 @@
       ]
     },
     {
+      "word": "skimp",
+      "patterns": [
+        "sk-",
+        "i"
+      ]
+    },
+    {
       "word": "skin",
       "patterns": [
         "sk-"
@@ -6241,6 +8841,13 @@
       "word": "skis",
       "patterns": [
         "sk-"
+      ]
+    },
+    {
+      "word": "skit",
+      "patterns": [
+        "sk-",
+        "i"
       ]
     },
     {
@@ -6270,15 +8877,53 @@
       ]
     },
     {
+      "word": "slack",
+      "patterns": [
+        "sl-",
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "slag",
+      "patterns": [
+        "sl-",
+        "a"
+      ]
+    },
+    {
       "word": "slam",
       "patterns": [
         "sl-"
       ]
     },
     {
+      "word": "slang",
+      "patterns": [
+        "sl-",
+        "ng",
+        "a"
+      ]
+    },
+    {
       "word": "slap",
       "patterns": [
         "sl-"
+      ]
+    },
+    {
+      "word": "slash",
+      "patterns": [
+        "sl-",
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "slat",
+      "patterns": [
+        "sl-",
+        "a"
       ]
     },
     {
@@ -6308,6 +8953,21 @@
       ]
     },
     {
+      "word": "slick",
+      "patterns": [
+        "sl-",
+        "ck",
+        "i"
+      ]
+    },
+    {
+      "word": "slid",
+      "patterns": [
+        "sl-",
+        "i"
+      ]
+    },
+    {
       "word": "slight",
       "patterns": [
         "igh",
@@ -6321,9 +8981,53 @@
       ]
     },
     {
+      "word": "sling",
+      "patterns": [
+        "sl-",
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "slip",
       "patterns": [
         "sl-"
+      ]
+    },
+    {
+      "word": "slit",
+      "patterns": [
+        "sl-",
+        "i"
+      ]
+    },
+    {
+      "word": "slob",
+      "patterns": [
+        "sl-",
+        "o"
+      ]
+    },
+    {
+      "word": "slog",
+      "patterns": [
+        "sl-",
+        "o"
+      ]
+    },
+    {
+      "word": "slop",
+      "patterns": [
+        "sl-",
+        "o"
+      ]
+    },
+    {
+      "word": "slosh",
+      "patterns": [
+        "sl-",
+        "sh",
+        "o"
       ]
     },
     {
@@ -6343,6 +9047,43 @@
       "word": "slug",
       "patterns": [
         "sl-"
+      ]
+    },
+    {
+      "word": "slum",
+      "patterns": [
+        "sl-",
+        "u"
+      ]
+    },
+    {
+      "word": "slump",
+      "patterns": [
+        "sl-",
+        "u"
+      ]
+    },
+    {
+      "word": "slung",
+      "patterns": [
+        "sl-",
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "slush",
+      "patterns": [
+        "sl-",
+        "sh",
+        "u"
+      ]
+    },
+    {
+      "word": "slut",
+      "patterns": [
+        "sl-",
+        "u"
       ]
     },
     {
@@ -6405,9 +9146,24 @@
       ]
     },
     {
+      "word": "smit",
+      "patterns": [
+        "sm-",
+        "i"
+      ]
+    },
+    {
       "word": "smith",
       "patterns": [
         "sm-"
+      ]
+    },
+    {
+      "word": "smock",
+      "patterns": [
+        "sm-",
+        "ck",
+        "o"
       ]
     },
     {
@@ -6438,6 +9194,13 @@
       "word": "smug",
       "patterns": [
         "sm-"
+      ]
+    },
+    {
+      "word": "smut",
+      "patterns": [
+        "sm-",
+        "u"
       ]
     },
     {
@@ -6497,6 +9260,20 @@
       ]
     },
     {
+      "word": "snit",
+      "patterns": [
+        "sn-",
+        "i"
+      ]
+    },
+    {
+      "word": "snob",
+      "patterns": [
+        "sn-",
+        "o"
+      ]
+    },
+    {
       "word": "snoop",
       "patterns": [
         "sn-"
@@ -6512,6 +9289,13 @@
       "word": "snort",
       "patterns": [
         "sn-"
+      ]
+    },
+    {
+      "word": "snot",
+      "patterns": [
+        "sn-",
+        "o"
       ]
     },
     {
@@ -6531,6 +9315,14 @@
       "word": "snub",
       "patterns": [
         "sn-"
+      ]
+    },
+    {
+      "word": "snuck",
+      "patterns": [
+        "sn-",
+        "ck",
+        "u"
       ]
     },
     {
@@ -6555,6 +9347,12 @@
       "word": "sock",
       "patterns": [
         "ck"
+      ]
+    },
+    {
+      "word": "sod",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -6606,9 +9404,21 @@
       ]
     },
     {
+      "word": "sop",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "sort",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "sot",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -6625,9 +9435,29 @@
       ]
     },
     {
+      "word": "sox",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "soy",
       "patterns": [
         "oy"
+      ]
+    },
+    {
+      "word": "spam",
+      "patterns": [
+        "sp-",
+        "a"
+      ]
+    },
+    {
+      "word": "span",
+      "patterns": [
+        "sp-",
+        "a"
       ]
     },
     {
@@ -6638,9 +9468,31 @@
       ]
     },
     {
+      "word": "spat",
+      "patterns": [
+        "sp-",
+        "a"
+      ]
+    },
+    {
       "word": "speak",
       "patterns": [
         "sp-"
+      ]
+    },
+    {
+      "word": "speck",
+      "patterns": [
+        "sp-",
+        "ck",
+        "e"
+      ]
+    },
+    {
+      "word": "sped",
+      "patterns": [
+        "sp-",
+        "e"
       ]
     },
     {
@@ -6759,6 +9611,14 @@
       "patterns": [
         "sp-",
         "spl-"
+      ]
+    },
+    {
+      "word": "spock",
+      "patterns": [
+        "sp-",
+        "ck",
+        "o"
       ]
     },
     {
@@ -6986,9 +9846,23 @@
       ]
     },
     {
+      "word": "stab",
+      "patterns": [
+        "st-",
+        "a"
+      ]
+    },
+    {
       "word": "stack",
       "patterns": [
         "st-"
+      ]
+    },
+    {
+      "word": "stag",
+      "patterns": [
+        "st-",
+        "a"
       ]
     },
     {
@@ -7011,6 +9885,13 @@
       "patterns": [
         "st-",
         "-mp"
+      ]
+    },
+    {
+      "word": "stan",
+      "patterns": [
+        "st-",
+        "a"
       ]
     },
     {
@@ -7042,6 +9923,21 @@
       ]
     },
     {
+      "word": "stash",
+      "patterns": [
+        "st-",
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "stat",
+      "patterns": [
+        "st-",
+        "a"
+      ]
+    },
+    {
       "word": "statue",
       "patterns": [
         "ue",
@@ -7067,6 +9963,13 @@
       "patterns": [
         "eer",
         "st-"
+      ]
+    },
+    {
+      "word": "stem",
+      "patterns": [
+        "st-",
+        "e"
       ]
     },
     {
@@ -7114,6 +10017,14 @@
       "patterns": [
         "tch",
         "st-"
+      ]
+    },
+    {
+      "word": "stock",
+      "patterns": [
+        "st-",
+        "ck",
+        "o"
       ]
     },
     {
@@ -7278,6 +10189,56 @@
       ]
     },
     {
+      "word": "stub",
+      "patterns": [
+        "st-",
+        "u"
+      ]
+    },
+    {
+      "word": "stuck",
+      "patterns": [
+        "st-",
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "stud",
+      "patterns": [
+        "st-",
+        "u"
+      ]
+    },
+    {
+      "word": "stump",
+      "patterns": [
+        "st-",
+        "u"
+      ]
+    },
+    {
+      "word": "stun",
+      "patterns": [
+        "st-",
+        "u"
+      ]
+    },
+    {
+      "word": "stung",
+      "patterns": [
+        "st-",
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "sub",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "subtext",
       "patterns": [
         "-xt"
@@ -7287,6 +10248,13 @@
       "word": "such",
       "patterns": [
         "ch"
+      ]
+    },
+    {
+      "word": "suck",
+      "patterns": [
+        "ck",
+        "u"
       ]
     },
     {
@@ -7332,6 +10300,12 @@
       ]
     },
     {
+      "word": "sump",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
       "word": "sun",
       "patterns": [
         "u"
@@ -7347,6 +10321,12 @@
       "word": "sunlight",
       "patterns": [
         "igh"
+      ]
+    },
+    {
+      "word": "sup",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -7368,6 +10348,20 @@
       ]
     },
     {
+      "word": "swam",
+      "patterns": [
+        "sw-",
+        "a"
+      ]
+    },
+    {
+      "word": "swamp",
+      "patterns": [
+        "sw-",
+        "a"
+      ]
+    },
+    {
       "word": "swan",
       "patterns": [
         "sw-"
@@ -7377,6 +10371,21 @@
       "word": "swap",
       "patterns": [
         "sw-"
+      ]
+    },
+    {
+      "word": "swash",
+      "patterns": [
+        "sw-",
+        "sh",
+        "a"
+      ]
+    },
+    {
+      "word": "swat",
+      "patterns": [
+        "sw-",
+        "a"
       ]
     },
     {
@@ -7414,6 +10423,13 @@
       ]
     },
     {
+      "word": "swig",
+      "patterns": [
+        "sw-",
+        "i"
+      ]
+    },
+    {
       "word": "swim",
       "patterns": [
         "sw-"
@@ -7427,10 +10443,25 @@
       ]
     },
     {
+      "word": "swish",
+      "patterns": [
+        "sw-",
+        "sh",
+        "i"
+      ]
+    },
+    {
       "word": "switch",
       "patterns": [
         "tch",
         "sw-"
+      ]
+    },
+    {
+      "word": "swop",
+      "patterns": [
+        "sw-",
+        "o"
       ]
     },
     {
@@ -7441,9 +10472,43 @@
       ]
     },
     {
+      "word": "swum",
+      "patterns": [
+        "sw-",
+        "u"
+      ]
+    },
+    {
+      "word": "swung",
+      "patterns": [
+        "sw-",
+        "ng",
+        "u"
+      ]
+    },
+    {
+      "word": "tab",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "tack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
       "word": "tact",
       "patterns": [
         "-ct"
+      ]
+    },
+    {
+      "word": "tad",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -7479,6 +10544,31 @@
       ]
     },
     {
+      "word": "tam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "tamp",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "tan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "tang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
       "word": "tank",
       "patterns": [
         "-nk"
@@ -7506,6 +10596,18 @@
       "word": "task",
       "patterns": [
         "-sk"
+      ]
+    },
+    {
+      "word": "tat",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "tax",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -7537,6 +10639,12 @@
       "word": "tear",
       "patterns": [
         "ear"
+      ]
+    },
+    {
+      "word": "ted",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -7576,9 +10684,22 @@
       ]
     },
     {
+      "word": "tet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "text",
       "patterns": [
         "-xt"
+      ]
+    },
+    {
+      "word": "thad",
+      "patterns": [
+        "th",
+        "a"
       ]
     },
     {
@@ -7604,6 +10725,13 @@
       "word": "their",
       "patterns": [
         "th"
+      ]
+    },
+    {
+      "word": "them",
+      "patterns": [
+        "th",
+        "e"
       ]
     },
     {
@@ -7671,6 +10799,14 @@
       "word": "this",
       "patterns": [
         "th"
+      ]
+    },
+    {
+      "word": "thong",
+      "patterns": [
+        "th",
+        "ng",
+        "o"
       ]
     },
     {
@@ -7785,9 +10921,37 @@
       ]
     },
     {
+      "word": "thud",
+      "patterns": [
+        "th",
+        "u"
+      ]
+    },
+    {
+      "word": "thug",
+      "patterns": [
+        "th",
+        "u"
+      ]
+    },
+    {
       "word": "thumb",
       "patterns": [
         "th"
+      ]
+    },
+    {
+      "word": "thump",
+      "patterns": [
+        "th",
+        "u"
+      ]
+    },
+    {
+      "word": "tick",
+      "patterns": [
+        "ck",
+        "i"
       ]
     },
     {
@@ -7821,6 +10985,12 @@
       ]
     },
     {
+      "word": "tim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "time",
       "patterns": [
         "i_e"
@@ -7829,6 +10999,13 @@
     {
       "word": "tin",
       "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "ting",
+      "patterns": [
+        "ng",
         "i"
       ]
     },
@@ -7845,6 +11022,12 @@
       ]
     },
     {
+      "word": "tit",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "toad",
       "patterns": [
         "oa"
@@ -7858,9 +11041,21 @@
       ]
     },
     {
+      "word": "tod",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "today",
       "patterns": [
         "ay"
+      ]
+    },
+    {
+      "word": "tog",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -7876,9 +11071,22 @@
       ]
     },
     {
+      "word": "tom",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
       "word": "tomboy",
       "patterns": [
         "oy"
+      ]
+    },
+    {
+      "word": "tong",
+      "patterns": [
+        "ng",
+        "o"
       ]
     },
     {
@@ -7915,6 +11123,18 @@
       "word": "torn",
       "patterns": [
         "or"
+      ]
+    },
+    {
+      "word": "tost",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "tot",
+      "patterns": [
+        "o"
       ]
     },
     {
@@ -7961,9 +11181,31 @@
       ]
     },
     {
+      "word": "tramp",
+      "patterns": [
+        "tr-",
+        "a"
+      ]
+    },
+    {
+      "word": "tran",
+      "patterns": [
+        "tr-",
+        "a"
+      ]
+    },
+    {
       "word": "trap",
       "patterns": [
         "tr-"
+      ]
+    },
+    {
+      "word": "trash",
+      "patterns": [
+        "tr-",
+        "sh",
+        "a"
       ]
     },
     {
@@ -7987,10 +11229,25 @@
       ]
     },
     {
+      "word": "trick",
+      "patterns": [
+        "tr-",
+        "ck",
+        "i"
+      ]
+    },
+    {
       "word": "tried",
       "patterns": [
         "ie",
         "tr-"
+      ]
+    },
+    {
+      "word": "trig",
+      "patterns": [
+        "tr-",
+        "i"
       ]
     },
     {
@@ -8032,9 +11289,29 @@
       ]
     },
     {
+      "word": "trump",
+      "patterns": [
+        "tr-",
+        "u"
+      ]
+    },
+    {
+      "word": "trust",
+      "patterns": [
+        "tr-",
+        "u"
+      ]
+    },
+    {
       "word": "try",
       "patterns": [
         "tr-"
+      ]
+    },
+    {
+      "word": "tub",
+      "patterns": [
+        "u"
       ]
     },
     {
@@ -8044,7 +11321,20 @@
       ]
     },
     {
+      "word": "tuck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
       "word": "tug",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "tun",
       "patterns": [
         "u"
       ]
@@ -8074,9 +11364,29 @@
       ]
     },
     {
+      "word": "tush",
+      "patterns": [
+        "sh",
+        "u"
+      ]
+    },
+    {
       "word": "tusk",
       "patterns": [
         "-sk"
+      ]
+    },
+    {
+      "word": "tut",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "twang",
+      "patterns": [
+        "ng",
+        "a"
       ]
     },
     {
@@ -8086,9 +11396,33 @@
       ]
     },
     {
+      "word": "twig",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "twin",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "twirl",
       "patterns": [
         "ir"
+      ]
+    },
+    {
+      "word": "twist",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "twit",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -8116,7 +11450,32 @@
       ]
     },
     {
+      "word": "vamp",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "van",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "vang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "vast",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "vat",
       "patterns": [
         "a"
       ]
@@ -8126,6 +11485,12 @@
       "patterns": [
         "au",
         "-lt"
+      ]
+    },
+    {
+      "word": "vax",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -8147,9 +11512,33 @@
       ]
     },
     {
+      "word": "vest",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "vet",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "vim",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
       "word": "vine",
       "patterns": [
         "i_e"
+      ]
+    },
+    {
+      "word": "vip",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -8183,6 +11572,25 @@
       ]
     },
     {
+      "word": "wack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "wad",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "wag",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "wait",
       "patterns": [
         "ai"
@@ -8209,6 +11617,19 @@
       ]
     },
     {
+      "word": "wan",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "wang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
       "word": "want",
       "patterns": [
         "-nt"
@@ -8218,6 +11639,13 @@
       "word": "war",
       "patterns": [
         "ar"
+      ]
+    },
+    {
+      "word": "wash",
+      "patterns": [
+        "sh",
+        "a"
       ]
     },
     {
@@ -8246,6 +11674,12 @@
       ]
     },
     {
+      "word": "wax",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "way",
       "patterns": [
         "ay"
@@ -8253,6 +11687,12 @@
     },
     {
       "word": "web",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "wed",
       "patterns": [
         "e"
       ]
@@ -8270,6 +11710,12 @@
       ]
     },
     {
+      "word": "wen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "went",
       "patterns": [
         "-nt"
@@ -8279,6 +11725,12 @@
       "word": "wept",
       "patterns": [
         "-pt"
+      ]
+    },
+    {
+      "word": "west",
+      "patterns": [
+        "e"
       ]
     },
     {
@@ -8306,6 +11758,13 @@
       ]
     },
     {
+      "word": "wick",
+      "patterns": [
+        "ck",
+        "i"
+      ]
+    },
+    {
       "word": "wide",
       "patterns": [
         "i_e"
@@ -8321,6 +11780,12 @@
       "word": "wilt",
       "patterns": [
         "-lt"
+      ]
+    },
+    {
+      "word": "wimp",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -8366,9 +11831,28 @@
       ]
     },
     {
+      "word": "wish",
+      "patterns": [
+        "sh",
+        "i"
+      ]
+    },
+    {
       "word": "wisp",
       "patterns": [
         "-sp"
+      ]
+    },
+    {
+      "word": "wist",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "wit",
+      "patterns": [
+        "i"
       ]
     },
     {
@@ -8402,6 +11886,13 @@
       ]
     },
     {
+      "word": "wong",
+      "patterns": [
+        "ng",
+        "o"
+      ]
+    },
+    {
       "word": "wood",
       "patterns": [
         "oo"
@@ -8411,6 +11902,38 @@
       "word": "wool",
       "patterns": [
         "oo"
+      ]
+    },
+    {
+      "word": "wot",
+      "patterns": [
+        "o"
+      ]
+    },
+    {
+      "word": "yack",
+      "patterns": [
+        "ck",
+        "a"
+      ]
+    },
+    {
+      "word": "yam",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
+      "word": "yang",
+      "patterns": [
+        "ng",
+        "a"
+      ]
+    },
+    {
+      "word": "yap",
+      "patterns": [
+        "a"
       ]
     },
     {
@@ -8444,7 +11967,25 @@
       ]
     },
     {
+      "word": "yen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "yep",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
       "word": "yes",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "yest",
       "patterns": [
         "e"
       ]
@@ -8463,9 +12004,29 @@
       ]
     },
     {
+      "word": "yip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "yock",
+      "patterns": [
+        "ck",
+        "o"
+      ]
+    },
+    {
       "word": "yolk",
       "patterns": [
         "-lk"
+      ]
+    },
+    {
+      "word": "yong",
+      "patterns": [
+        "ng",
+        "o"
       ]
     },
     {
@@ -8481,13 +12042,69 @@
       ]
     },
     {
+      "word": "yuck",
+      "patterns": [
+        "ck",
+        "u"
+      ]
+    },
+    {
+      "word": "yum",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "yup",
+      "patterns": [
+        "u"
+      ]
+    },
+    {
+      "word": "zap",
+      "patterns": [
+        "a"
+      ]
+    },
+    {
       "word": "zebra",
       "patterns": [
         "schwa"
       ]
     },
     {
+      "word": "zed",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "zen",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "zest",
+      "patterns": [
+        "e"
+      ]
+    },
+    {
+      "word": "zing",
+      "patterns": [
+        "ng",
+        "i"
+      ]
+    },
+    {
       "word": "zip",
+      "patterns": [
+        "i"
+      ]
+    },
+    {
+      "word": "zit",
       "patterns": [
         "i"
       ]
