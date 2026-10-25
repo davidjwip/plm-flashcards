@@ -228,7 +228,7 @@ describe('AC54 — the bee levels live behind the same header toggle', () => {
   it('AC66 — an empty bee deck says no level is selected, not zero words', () => {
     const empty = beePanel({ starters: false, movers: false, nonsense: false, l2: false }, 0, true);
     expect(empty).toContain('data-testid="bee-count"');
-    expect(empty).toContain('no levels selected — tick one to get words');
+    expect(empty).toContain('no source levels selected — tick one to get words');
     expect(empty).not.toContain('0 words to draw from');
   });
 
@@ -236,6 +236,6 @@ describe('AC54 — the bee levels live behind the same header toggle', () => {
     const empty = beePanel({ starters: true, movers: false, nonsense: false, l2: true }, 0, true);
     expect(empty).toContain('data-testid="bee-count"');
     expect(empty).toContain('no words for this combination — change the levels');
-    expect(empty).not.toContain('no levels selected');
+    expect(empty).not.toContain('no source levels selected');
   });
 });
