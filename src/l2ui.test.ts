@@ -525,47 +525,82 @@ describe('AC66 — the bee deck and the Level 2 switch', () => {
     window.history.replaceState(null, '', '/');
   });
 
-  it('AC66 — an empty bee deck serves no words from the previous round', () => {
-    const el = mountBee();
-    const oldWord = el.querySelector('[data-testid="word"]')?.textContent;
-    expect(oldWord, 'the default bee deck starts a round').toBeTruthy();
-    expect(el.querySelector('[data-testid="mark-right"]')).toBeTruthy();
+  it('AC66 — bee Level 2 is a mirror of the patterns Level 2 set', () => {
+    const el = root();
+    const app = mount({ bank, beeDeck, root: el, store: store({ 'plm.selectedPatterns': '[]' }) });
 
-    openBeePanel(el);
-    // Level 2 is a filter over the real levels; switch it on, then remove every source.
-    level('l2', true);
-    level('starters', false);
-    level('movers', false);
-    level('nonsense', false);
-    // A filter cannot supply words on its own: switch it off and the deck stays empty.
-    level('l2', false);
+    click(el.querySelector('[data-testid="pattern-toggle"]'));
+    click(chip(el));
 
-    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
-    expect(el.querySelector('[data-testid="mark-right"]')).toBeFalsy();
-    expect(el.querySelector('[data-testid="mark-wrong"]')).toBeFalsy();
-    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
-      'no source levels selected',
+    const patternsWords = app.session()!.words.map(({ word }) => word);
+    const count = patternsWords.length;
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      `${count} words in this set`,
     );
+    for (const word of ['cat', 'stamp', 'have']) {
+      expect(patternsWords, `${word} is in the patterns Level 2 set`).toContain(word);
+    }
+    for (const word of ['armchair', 'strawberry']) {
+      expect(patternsWords, `${word} is not in the patterns Level 2 set`).not.toContain(word);
+    }
+
+    click(el.querySelector('[data-testid="mode-bee"]'));
+    openBeePanel(el);
+    level('nonsense', false);
+    level('l2', true);
+
+    const mirror = `Level 2 uses the same ${count} words as Sound patterns`;
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(mirror);
+    expect(el.querySelector('[data-testid="bee-count"]')!.textContent).toBe(mirror);
   });
 
-  it('AC66 — turning Level 2 on always leaves a deck to filter', () => {
+  it('AC66 — the source boxes do not shrink a Level 2 deck', () => {
+    const el = mountBee(JSON.stringify(L2_PATTERN_IDS));
+    openBeePanel(el);
+    level('nonsense', false);
+    level('l2', true);
+
+    const before = el.querySelector('[data-testid="word-count"]')!.textContent;
+    const count = Number(before!.match(/(\d+) words/)?.[1] ?? 0);
+    expect(count).toBeGreaterThan(0);
+
+    for (const key of ['starters', 'movers', 'nonsense']) {
+      const box = el.querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)!;
+      expect(box.disabled, `${key} does not apply when Level 2 is on`).toBe(true);
+      level(key, false);
+    }
+
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(before);
+    expect(el.querySelector('[data-testid="word"]'), 'the round survives').toBeTruthy();
+  });
+
+  it('AC66 — with Level 2 off, an empty source selection still says so', () => {
     const el = mountBee();
+    expect(el.querySelector('[data-testid="word"]'), 'the default bee deck starts').toBeTruthy();
+
     openBeePanel(el);
     for (const key of ['starters', 'movers', 'nonsense']) level(key, false);
+
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
+      'no source levels selected — tick one to get words',
+    );
+    expect(el.querySelector('[data-testid="bee-count"]')!.textContent).toContain(
+      'no source levels selected — tick one to get words',
+    );
+    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
+    expect(el.querySelector('[data-testid="mark-right"]')).toBeFalsy();
+
+    level('l2', true);
+    expect(
+      el.querySelector('[data-testid="word"]'),
+      'Level 2 supplies words on its own',
+    ).toBeTruthy();
+
+    level('l2', false);
+    expect(el.querySelector('[data-testid="word"]')).toBeFalsy();
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
       'no source levels selected',
     );
-
-    level('l2', true);
-
-    expect(el.querySelector<HTMLInputElement>('[data-testid="level-starters"]')!.checked).toBe(
-      true,
-    );
-    expect(el.querySelector<HTMLInputElement>('[data-testid="level-movers"]')!.checked).toBe(true);
-    const count = Number(
-      el.querySelector('[data-testid="word-count"]')!.textContent!.match(/(\d+) words/)?.[1] ?? 0,
-    );
-    expect(count).toBeGreaterThan(0);
   });
 
   it('AC66 — the bee pill counts Level 2 as a level', () => {

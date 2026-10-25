@@ -170,16 +170,24 @@ export function nonsenseWords(
   return [...made];
 }
 
+export type BeeDictionaryOptions = {
+  /** The Level 2 word list; when choice.l2 is true this IS the deck. */
+  l2Words?: Word[];
+  /** Words that must not appear in a nonsense round (the bank and the real deck). */
+  avoid?: Set<string>;
+  rng?: () => number;
+};
+
 /** The bee dictionary: real words plus, optionally, nonsense words. */
 export function beeDictionary(
   deck: BeeDeck,
   choice: BeeChoice,
-  avoid: Set<string> = new Set(),
-  rng: () => number = Math.random,
+  options: BeeDictionaryOptions = {},
 ): Word[] {
-  const real: Word[] = beeWords(deck, choice)
-    .filter((word) => !choice.l2 || isL2Word(word))
-    .map((word) => ({ word, patterns: [BEE_TAG] }));
+  const { l2Words = [], avoid = new Set<string>(), rng = Math.random } = options;
+  // Level 2 is a source, not a filter: the curated bank set is the real-word half.
+  const realWords = choice.l2 ? l2Words.map(({ word }) => word) : beeWords(deck, choice);
+  const real: Word[] = realWords.map((word) => ({ word, patterns: [BEE_TAG] }));
   if (!choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);
