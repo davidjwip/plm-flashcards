@@ -408,6 +408,11 @@ describe('AC69 — Level 2 means every sound taught', () => {
       'bell',
       'miss',
       'fork',
+      'quit',
+      'quiz',
+      'squid',
+      'squint',
+      'quack',
     ];
     const outside = [
       'armchair',
@@ -444,6 +449,10 @@ describe('AC69 — Level 2 means every sound taught', () => {
     expect(armchair).not.toContain('ir');
 
     expect(segment('squawk')).toContain('aw');
+
+    const squid = segment('squid');
+    expect(squid).toContain('qu');
+    expect(squid).not.toContain('ui');
   });
 
   it('AC69 — a final -le is not a split digraph', () => {

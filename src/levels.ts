@@ -144,6 +144,7 @@ export const SPELLING_L2 = [
   'ch',
   'sh',
   'th',
+  'qu',
   'ck',
   'ng',
   'ee',
@@ -179,6 +180,7 @@ const GRAPHEMES = [
   'are',
   'tch',
   'nch',
+  'qu',
   'oo',
   'ou',
   'ow',
@@ -209,7 +211,7 @@ const GRAPHEMES = [
 ];
 
 /** Those of the above that Level 2 has taught. */
-const L2_GRAPHEMES = new Set(['oo', 'ou', 'ar', 'or', 'ck', 'sh', 'ch', 'th', 'ng', 'nch']);
+const L2_GRAPHEMES = new Set(['qu', 'oo', 'ou', 'ar', 'or', 'ck', 'sh', 'ch', 'th', 'ng', 'nch']);
 
 const LONGEST_FIRST = [...GRAPHEMES].sort((a, b) => b.length - a.length);
 
