@@ -121,34 +121,46 @@ export function patternPanel(
     </section>`;
 }
 
-/** Bee levels live behind the same header toggle, instead of the pattern list. */
-export function beePanel(
-  choice: { starters: boolean; movers: boolean; nonsense: boolean; l2?: boolean },
-  wordCount: number,
-  open: boolean,
-): string {
-  const box = (id: string, checked: boolean, label: string): string => `
-        <label class="option">
-          <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} />
-          <span>${label}</span>
-        </label>`;
+export type BeePanelChoice = {
+  starters: boolean;
+  movers: boolean;
+  nonsense: boolean;
+  l2?: boolean;
+};
+
+/**
+ * The panel and the header share one count sentence, so Level 2 cannot say two
+ * different things in two places.
+ */
+export function beeCountText(choice: BeePanelChoice, wordCount: number): string {
+  if (choice.l2) return `Level 2 uses the same ${wordCount} words as Sound patterns`;
   // Key the message on the choice, not the count: a level can be ticked while the
   // filtered deck is empty, and "tick one" would then name a box already ticked.
-  const noLevelsSelected = !choice.starters && !choice.movers && !choice.nonsense;
-  const count = noLevelsSelected
-    ? 'no source levels selected — tick one to get words'
-    : wordCount === 0
-      ? 'no words for this combination — change the levels'
-      : `${wordCount} words to draw from`;
+  if (!choice.starters && !choice.movers && !choice.nonsense) {
+    return 'no source levels selected — tick one to get words';
+  }
+  return wordCount === 0
+    ? 'no words for this combination — change the levels'
+    : `${wordCount} words to draw from`;
+}
+
+/** Bee levels live behind the same header toggle, instead of the pattern list. */
+export function beePanel(choice: BeePanelChoice, wordCount: number, open: boolean): string {
+  const box = (id: string, checked: boolean, label: string, disabled = false): string => `
+        <label class="option">
+          <input type="checkbox" data-testid="level-${id}" ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} />
+          <span>${label}</span>
+        </label>`;
+  const l2 = choice.l2 === true;
   return `
     <section class="pattern-panel" data-testid="bee-panel" ${open ? '' : 'hidden'}>
       <div class="options">
-        ${box('starters', choice.starters, 'Cambridge Starters words')}
-        ${box('movers', choice.movers, 'Cambridge Movers words')}
-        ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)')}
-        ${box('l2', choice.l2 ?? false, 'Level 2 patterns only')}
+        ${box('starters', choice.starters, 'Cambridge Starters words', l2)}
+        ${box('movers', choice.movers, 'Cambridge Movers words', l2)}
+        ${box('nonsense', choice.nonsense, 'Nonsense words (sound them out)', l2)}
+        ${box('l2', l2, 'Level 2 patterns only')}
       </div>
-      <p class="count" data-testid="bee-count">${count}</p>
+      <p class="count" data-testid="bee-count">${beeCountText(choice, wordCount)}</p>
     </section>`;
 }
 

@@ -22,6 +22,7 @@ import {
 import audioManifest from '../src/audio-manifest.json';
 import type { Bank, Session, Verdict, Word } from './types';
 import {
+  beeCountText,
   beePanel,
   emptyView,
   endView,
@@ -120,8 +121,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   const store_ = store;
 
   /** The chip's full selection means Level 2: every sound in the word must be taught. */
-  function l2ChipSelection(): boolean {
-    return L2_PATTERN_IDS.every((id) => selected.includes(id));
+  function l2ChipSelection(patterns: string[] = selected): boolean {
+    return L2_PATTERN_IDS.every((id) => patterns.includes(id));
   }
 
   /**
@@ -134,20 +135,41 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     );
   }
 
-  /** The run and the count share this list, so they can never disagree. */
-  function runDictionary(): Word[] {
-    const dictionary = buildDictionary(bank, selected);
-    return l2ChipSelection()
+  /**
+   * The run and the count share this list, so they can never disagree. A full L2
+   * selection also applies the coverage rule; a manual subset is left alone.
+   */
+  function dictionaryFor(patterns: string[]): Word[] {
+    const dictionary = buildDictionary(bank, patterns);
+    return l2ChipSelection(patterns)
       ? dictionary.filter((word) => coverageMissing(word).length === 0)
       : dictionary;
+  }
+
+  function runDictionary(): Word[] {
+    return dictionaryFor(selected);
+  }
+
+  /** The patterns chip's set, independent of what the bee panel currently says. */
+  function l2Words(): Word[] {
+    return dictionaryFor([...L2_PATTERN_IDS]);
   }
 
   function dictionarySize(): number {
     return runDictionary().length;
   }
 
+  /** In Level 2 the size is the shared bank set, not the Cambridge deck. */
   function beeSize(): number {
-    return beeDeck ? beeDictionary(beeDeck, beeChoice).length : 0;
+    if (!beeDeck) return 0;
+    return beeChoice.l2 ? l2Words().length : beeDictionary(beeDeck, beeChoice).length;
+  }
+
+  function beeDictionaryForChoice(): Word[] {
+    if (!beeDeck) return [];
+    return beeDictionary(beeDeck, beeChoice, {
+      l2Words: beeChoice.l2 ? l2Words() : [],
+    });
   }
 
   function toggleLabel(): string {
@@ -170,12 +192,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function countText(): string {
-    if (beeMode()) {
-      if (!beeChoice.starters && !beeChoice.movers && !beeChoice.nonsense) {
-        return 'no source levels selected — tick one to get words';
-      }
-      return `${beeSize()} words to draw from`;
-    }
+    if (beeMode()) return beeCountText(beeChoice, beeSize());
     if (selected.length === 0) return 'pick at least one pattern';
     return `${dictionarySize()} words in this set`;
   }
@@ -203,11 +220,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
 
   function startBeeRun(): void {
     clearRun();
-    if (!beeDeck) {
-      session = null;
-      return;
-    }
-    const dictionary = beeDictionary(beeDeck, beeChoice);
+    const dictionary = beeDictionaryForChoice();
     session = dictionary.length ? createSession(beeRound(dictionary)) : null;
   }
 
@@ -400,11 +413,8 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   }
 
   function applyBeeChoice(next: BeeChoice): void {
-    // Level 2 filters the deck; it is not a source. Turning it on with no real
-    // level chosen would otherwise leave nothing to filter.
-    const enableL2 = next.l2 && !beeChoice.l2 && !next.starters && !next.movers;
-    beeChoice = enableL2 ? { ...next, starters: true, movers: true } : next;
-    if (beeSize() === 0) {
+    beeChoice = next;
+    if (beeDictionaryForChoice().length === 0) {
       // A run must never outlive the deck that produced it: without this the old
       // word, verdict buttons and audio stay live next to a zero count.
       clearRun();

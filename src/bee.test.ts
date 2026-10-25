@@ -45,7 +45,7 @@ describe('spelling bee deck', () => {
   it('AC27 — with no level chosen there are no words at all', () => {
     const none = { starters: false, movers: false, nonsense: false, l2: false };
     expect(beeWords(deck, none)).toEqual([]);
-    expect(beeDictionary(deck, none, new Set(), seeded(1))).toEqual([]);
+    expect(beeDictionary(deck, none, { avoid: new Set(), rng: seeded(1) })).toEqual([]);
   });
 
   it('AC28 — a round is ten words, never repeating one', () => {
@@ -58,37 +58,38 @@ describe('spelling bee deck', () => {
     expect(new Set(round.map((w) => w.word)).size).toBe(BEE_ROUND);
   });
 
-  it('AC66 — Level 2 keeps only words whose every sound has been taught', () => {
+  it('AC66 — Level 2 draws exactly the supplied set, not the Cambridge deck', () => {
     const mixed = {
       starters: ['stamp', 'cake', 'help', 'armchair', 'cat'],
       movers: ['shrimp', 'night', 'about', 'strawberry', 'restaurant', 'have', 'give', 'banana'],
     };
+    // Coverage happens upstream, where the bank tags are known. Once a word is in
+    // the Level 2 set it is the bee's real-word source, in bank order.
+    const l2Words = ['about', 'banana', 'cat', 'have', 'help', 'shrimp', 'stamp'].map((word) => ({
+      word,
+      patterns: ['a'],
+    }));
 
     const l2 = beeDictionary(
       mixed,
       { starters: true, movers: true, nonsense: false, l2: true },
-      new Set(),
-      seeded(1),
+      { l2Words, rng: seeded(1) },
     );
-    // Level 2 is coverage alone: a word is in when every grapheme is taught, no
-    // matter whether it happens to show a cluster. A plain CVC (`cat`) and a
-    // multi-syllable word of taught sounds (`banana`) are both decodable, so both
-    // are in. `armchair` and `chair` are out through `air`, `strawberry` and
-    // `squawk` through `aw`, `night` through `igh`, and the split digraphs in
-    // `cake`, `have` and `give` are untaught too.
-    expect(l2.map((w) => w.word)).toEqual(['about', 'banana', 'cat', 'help', 'shrimp', 'stamp']);
-    for (const word of ['armchair', 'cake', 'night', 'strawberry', 'restaurant', 'have', 'give']) {
+    expect(l2.map((w) => w.word)).toEqual(l2Words.map((w) => w.word));
+    for (const word of ['armchair', 'cake', 'night', 'strawberry', 'restaurant', 'give']) {
       expect(
         l2.map((w) => w.word),
-        `${word} is out`,
+        `${word} is not in the Level 2 set`,
       ).not.toContain(word);
+    }
+    for (const word of l2) {
+      expect(word.patterns).toEqual(['bee']);
     }
 
     const all = beeDictionary(
       mixed,
       { starters: true, movers: true, nonsense: false, l2: false },
-      new Set(),
-      seeded(1),
+      { avoid: new Set(), rng: seeded(1) },
     );
     expect(all.map((w) => w.word)).toEqual([
       'about',
@@ -107,29 +108,60 @@ describe('spelling bee deck', () => {
     ]);
   });
 
-  it('AC66 — ee, oo and ou are covered L2 sounds; ghost e is not', () => {
+  it('AC66 — the Level 2 set is the authority, so ghost-e words such as have stay in', () => {
     const mixed = {
-      // Two ghost-e words, so an implementation that special-cases one of them
-      // (or hard-codes "L2 ids minus ghost_e") still has to filter both out.
       starters: ['have', 'give', 'see', 'food', 'loud', 'stamp'],
       movers: [],
     };
+    const l2Words = [
+      { word: 'food', patterns: ['oo'] },
+      { word: 'give', patterns: ['ghost_e'] },
+      { word: 'have', patterns: ['ghost_e'] },
+      { word: 'loud', patterns: ['ou'] },
+      { word: 'see', patterns: ['ee'] },
+      { word: 'stamp', patterns: ['st-', '-mp'] },
+    ];
 
     const l2 = beeDictionary(
       mixed,
       { starters: true, movers: false, nonsense: false, l2: true },
-      new Set(),
-      seeded(1),
+      { l2Words, rng: seeded(1) },
     );
-    // `ee`, `oo` and `ou` are in L2_GRAPHEMES. The ghost-e words hide a split
-    // digraph, which spelling cannot tell from a real one, so they stay out of
-    // the bee deck (the pattern chip knows better, from the bank tag).
-    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'see', 'stamp']);
+    // Deliberate reversal: the bee used to filter the Cambridge deck by spelling,
+    // so ghost e (`have`, `give`) could not be proved and was excluded. Level 2 is
+    // now the bank's curated set, and that list is the authority: if it says a
+    // word is Level 2, the bee draws it.
+    expect(l2.map((w) => w.word)).toEqual(['food', 'give', 'have', 'loud', 'see', 'stamp']);
     for (const word of ['have', 'give']) {
       expect(
         l2.map((w) => w.word),
-        `${word} is out`,
-      ).not.toContain(word);
+        `${word} stays in`,
+      ).toContain(word);
+    }
+  });
+
+  it('AC66 — the Level 2 set replaces the Cambridge deck word for word', () => {
+    const mixed = {
+      starters: ['armchair', 'strawberry', 'cat'],
+      movers: ['stamp'],
+    };
+    const l2Words = [
+      { word: 'cat', patterns: ['a'] },
+      { word: 'have', patterns: ['ghost_e'] },
+      { word: 'stamp', patterns: ['st-', '-mp'] },
+    ];
+
+    const deckWords = beeDictionary(
+      mixed,
+      { starters: true, movers: true, nonsense: false, l2: true },
+      { l2Words, rng: seeded(1) },
+    ).map((w) => w.word);
+
+    for (const word of ['cat', 'stamp', 'have']) {
+      expect(deckWords, `${word} is drawn from the Level 2 set`).toContain(word);
+    }
+    for (const word of ['armchair', 'strawberry']) {
+      expect(deckWords, `${word} is not a Level 2 source`).not.toContain(word);
     }
   });
 
@@ -138,12 +170,15 @@ describe('spelling bee deck', () => {
       starters: ['stamp', 'cake', 'help'],
       movers: ['shrimp', 'night', 'about'],
     };
+    const l2Words = ['about', 'help', 'shrimp', 'stamp'].map((word) => ({
+      word,
+      patterns: ['a'],
+    }));
 
     const dict = beeDictionary(
       mixed,
       { starters: true, movers: true, nonsense: true, l2: true },
-      new Set(),
-      seeded(1),
+      { l2Words, rng: seeded(1) },
     );
     const nonsense = dict.filter((w) => w.patterns.includes(NONSENSE_TAG));
     expect(nonsense.length).toBeGreaterThan(0);
@@ -172,8 +207,7 @@ describe('nonsense words', () => {
     const dict = beeDictionary(
       deck,
       { starters: true, movers: true, nonsense: true, l2: false },
-      new Set(),
-      seeded(3),
+      { avoid: new Set(), rng: seeded(3) },
     );
     const nonsense = dict.filter((w) => w.patterns.includes(NONSENSE_TAG));
     expect(nonsense.length).toBeGreaterThan(0);

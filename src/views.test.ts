@@ -232,10 +232,23 @@ describe('AC54 — the bee levels live behind the same header toggle', () => {
     expect(empty).not.toContain('0 words to draw from');
   });
 
-  it('AC66 — a ticked level with an empty filtered deck asks to change the levels', () => {
+  it('AC66 — Level 2 names the shared set even when it is empty', () => {
     const empty = beePanel({ starters: true, movers: false, nonsense: false, l2: true }, 0, true);
     expect(empty).toContain('data-testid="bee-count"');
-    expect(empty).toContain('no words for this combination — change the levels');
+    expect(empty).toContain('Level 2 uses the same 0 words as Sound patterns');
     expect(empty).not.toContain('no source levels selected');
+    expect(empty).not.toContain('no words for this combination');
+  });
+
+  it('AC66 — Level 2 disables the source boxes and names the shared count', () => {
+    const panel = beePanel({ starters: true, movers: true, nonsense: true, l2: true }, 689, true);
+    expect(panel).toContain('Level 2 uses the same 689 words as Sound patterns');
+    for (const key of ['starters', 'movers', 'nonsense']) {
+      const tag = panel.match(new RegExp(`data-testid="level-${key}"[^>]*`))?.[0] ?? '';
+      expect(tag, `${key} is disabled when Level 2 is on`).toContain('disabled');
+    }
+    const l2Box = panel.match(/data-testid="level-l2"[^>]*/)?.[0] ?? '';
+    expect(l2Box, 'Level 2 itself stays switchable').not.toContain('disabled');
+    expect(panel).not.toContain('no source levels selected');
   });
 });
