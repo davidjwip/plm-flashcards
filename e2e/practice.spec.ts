@@ -1,7 +1,18 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+const SHORT_VOWELS = ['a', 'e', 'i', 'o', 'u'];
+
+/** Each test starts from a selection it declares: localStorage survives between tests. */
+async function startWith(page: Page, patterns: string[]): Promise<void> {
+  await page.addInitScript(
+    ([ids]) => localStorage.setItem('plm.selectedPatterns', JSON.stringify(ids)),
+    [patterns],
+  );
+  await page.goto('/');
+}
 
 /** The panel starts closed; this keeps every selection click honest. */
-async function openPicker(page: import('@playwright/test').Page): Promise<void> {
+async function openPicker(page: Page): Promise<void> {
   const panel = page.getByTestId('pattern-panel');
   if (!(await panel.isVisible())) {
     await page.getByTestId('pattern-toggle').click();
@@ -12,7 +23,7 @@ async function openPicker(page: import('@playwright/test').Page): Promise<void> 
 test('AC1/AC2 — choosing patterns builds the word set on the one-screen landing', async ({
   page,
 }) => {
-  await page.goto('/');
+  await startWith(page, SHORT_VOWELS);
   await expect(page.getByTestId('word')).toBeVisible();
   await expect(page.getByTestId('pattern-panel')).toBeHidden();
 
@@ -29,9 +40,7 @@ test('AC1/AC2 — choosing patterns builds the word set on the one-screen landin
 test('AC5/AC6/AC8 — each press records a verdict, advances, and the run ends with a score', async ({
   page,
 }) => {
-  await page.goto('/');
-  await openPicker(page);
-  await page.locator('[data-testid="pattern-option"][value="ie"]').check();
+  await startWith(page, ['ie']);
 
   // The set size comes from the bank, which changes as patterns gain words: read it
   // from the screen rather than hardcoding it, and answer every word in the run.
@@ -54,6 +63,14 @@ test('AC5/AC6/AC8 — each press records a verdict, advances, and the run ends w
 });
 
 test('AC10 — the pattern selection survives a reload', async ({ page }) => {
+  // Seed once only: addInitScript runs on every navigation, so an unguarded seed
+  // would overwrite the tick this test makes before the reload.
+  await page.addInitScript(() => {
+    if (!localStorage.getItem('plm.e2e.seeded')) {
+      localStorage.setItem('plm.selectedPatterns', JSON.stringify(['ie']));
+      localStorage.setItem('plm.e2e.seeded', '1');
+    }
+  });
   await page.goto('/');
   await openPicker(page);
   await page.locator('[data-testid="pattern-option"][value="igh"]').check();
@@ -67,9 +84,7 @@ test('AC10 — the pattern selection survives a reload', async ({ page }) => {
 test('AC13/AC14 — the party track fills and encouragement flashes without blocking the game', async ({
   page,
 }) => {
-  await page.goto('/');
-  await openPicker(page);
-  await page.locator('[data-testid="pattern-option"][value="ai"]').check();
+  await startWith(page, ['ai']);
 
   const track = page.getByTestId('track');
   await expect(track).toHaveAttribute('data-filled', '0');
@@ -89,9 +104,7 @@ test('AC13/AC14 — the party track fills and encouragement flashes without bloc
 test('AC16 — ten right answers raise the celebration, and the track starts again', async ({
   page,
 }) => {
-  await page.goto('/');
-  await openPicker(page);
-  await page.locator('[data-testid="pattern-option"][value="ai"]').check();
+  await startWith(page, ['ai']);
 
   for (let i = 0; i < 10; i++) {
     await page.getByTestId('mark-right').click();
@@ -106,7 +119,7 @@ test('AC16 — ten right answers raise the celebration, and the track starts aga
 
 test('AC56 — every word fits on one line at 390px at maximum size', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await startWith(page, SHORT_VOWELS);
 
   // Raise the adult's ceiling to the maximum, so every word has to be shrunk to fit.
   for (let i = 0; i < 12; i++) {
@@ -166,18 +179,8 @@ test('AC56 — every word fits on one line at 390px at maximum size', async ({ p
 
 test('AC56 — the word box stays inside its card at 1024px', async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 800 });
-  await page.goto('/');
-
-  // Select a pattern with long words (ou: about, around, ground...), then max the size.
-  await page.getByTestId('pattern-toggle').click();
-  const options = page.getByTestId('pattern-option');
-  const count = await options.count();
-  for (let i = 0; i < count; i++) {
-    const option = options.nth(i);
-    if (await option.isChecked()) await option.uncheck();
-  }
-  await page.locator('[data-testid="pattern-option"][value="ou"]').check();
-  await page.getByTestId('pattern-toggle').click();
+  // Long words (ou: about, around, ground...), then max the size.
+  await startWith(page, ['ou']);
 
   for (let i = 0; i < 12; i++) {
     const bigger = page.getByTestId('word-bigger');
@@ -209,7 +212,7 @@ test('AC56 — the word box stays inside its card at 1024px', async ({ page }) =
 
 test('AC56 — bee peek re-fits the revealed word', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await startWith(page, SHORT_VOWELS);
 
   // Max the ceiling in patterns mode, then switch to bee and reveal the dictated word.
   for (let i = 0; i < 12; i++) {
@@ -247,7 +250,7 @@ test('AC56 — bee peek re-fits the revealed word', async ({ page }) => {
 test('AC63/AC64/AC65 — search narrows the groups and the chip rebuilds the set', async ({
   page,
 }) => {
-  await page.goto('/');
+  await startWith(page, SHORT_VOWELS);
   const before = await page.getByTestId('word-count').textContent();
 
   await openPicker(page);
@@ -264,7 +267,7 @@ test('AC63/AC64/AC65 — search narrows the groups and the chip rebuilds the set
 
 test('AC55 — the header row never wraps at 360px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
-  await page.goto('/');
+  await startWith(page, SHORT_VOWELS);
 
   const row = page.locator('.header-controls');
   await expect(row).toHaveCSS('flex-wrap', 'nowrap');
