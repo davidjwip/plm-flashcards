@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { isL2Word } from './levels';
 import { BEE_ROUND, NONSENSE_TAG, beeDictionary, beeRound, beeWords, nonsenseWords } from './bee';
 
 const deck = {
@@ -165,7 +164,7 @@ describe('spelling bee deck', () => {
     }
   });
 
-  it('AC66 — Level 2 filters nonsense words too', () => {
+  it('AC66 — Level 2 never appends nonsense words', () => {
     const mixed = {
       starters: ['stamp', 'cake', 'help'],
       movers: ['shrimp', 'night', 'about'],
@@ -180,12 +179,13 @@ describe('spelling bee deck', () => {
       { starters: true, movers: true, nonsense: true, l2: true },
       { l2Words, rng: seeded(1) },
     );
-    const nonsense = dict.filter((w) => w.patterns.includes(NONSENSE_TAG));
-    expect(nonsense.length).toBeGreaterThan(0);
-    for (const { word } of dict) {
-      expect(isL2Word(word), `${word} must demonstrate an L2 pattern`).toBe(true);
+    // A Level 2 round is dictated bank words, not pseudo-words: the nonsense box
+    // defaults to true and is disabled while Level 2 is on, so it must not append.
+    expect(dict.map((w) => w.word)).toEqual(l2Words.map((w) => w.word));
+    expect(dict.filter((w) => w.patterns.includes(NONSENSE_TAG))).toEqual([]);
+    for (const word of dict) {
+      expect(word.patterns).toEqual(['bee']);
     }
-    expect(dict.length).toBeGreaterThan(1);
   });
 });
 
