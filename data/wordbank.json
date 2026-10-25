@@ -908,6 +908,12 @@
       ]
     },
     {
+      "word": "blot",
+      "patterns": [
+        "bl-"
+      ]
+    },
+    {
       "word": "blow",
       "patterns": [
         "ow",
@@ -1034,10 +1040,22 @@
       ]
     },
     {
+      "word": "brand",
+      "patterns": [
+        "br-"
+      ]
+    },
+    {
       "word": "brass",
       "patterns": [
         "br-",
         "-ss"
+      ]
+    },
+    {
+      "word": "brat",
+      "patterns": [
+        "br-"
       ]
     },
     {
@@ -1470,7 +1488,19 @@
       ]
     },
     {
+      "word": "clad",
+      "patterns": [
+        "cl-"
+      ]
+    },
+    {
       "word": "clam",
+      "patterns": [
+        "cl-"
+      ]
+    },
+    {
+      "word": "clan",
       "patterns": [
         "cl-"
       ]
@@ -1558,6 +1588,12 @@
     },
     {
       "word": "club",
+      "patterns": [
+        "cl-"
+      ]
+    },
+    {
+      "word": "cluck",
       "patterns": [
         "cl-"
       ]
@@ -1872,6 +1908,12 @@
       ]
     },
     {
+      "word": "cult",
+      "patterns": [
+        "-lt"
+      ]
+    },
+    {
       "word": "cup",
       "patterns": [
         "u"
@@ -2130,6 +2172,12 @@
       ]
     },
     {
+      "word": "drab",
+      "patterns": [
+        "dr-"
+      ]
+    },
+    {
       "word": "drag",
       "patterns": [
         "dr-"
@@ -2182,6 +2230,12 @@
       "patterns": [
         "dr-",
         "-ft"
+      ]
+    },
+    {
+      "word": "drill",
+      "patterns": [
+        "dr-"
       ]
     },
     {
@@ -2662,6 +2716,12 @@
       ]
     },
     {
+      "word": "flick",
+      "patterns": [
+        "fl-"
+      ]
+    },
+    {
       "word": "flies",
       "patterns": [
         "ie",
@@ -2711,6 +2771,12 @@
       "word": "flower",
       "patterns": [
         "ow",
+        "fl-"
+      ]
+    },
+    {
+      "word": "flu",
+      "patterns": [
         "fl-"
       ]
     },
@@ -2808,6 +2874,12 @@
       ]
     },
     {
+      "word": "frank",
+      "patterns": [
+        "fr-"
+      ]
+    },
+    {
       "word": "free",
       "patterns": [
         "ee",
@@ -2824,6 +2896,12 @@
       "word": "fresh",
       "patterns": [
         "sh",
+        "fr-"
+      ]
+    },
+    {
+      "word": "fret",
+      "patterns": [
         "fr-"
       ]
     },
@@ -2849,6 +2927,12 @@
       ]
     },
     {
+      "word": "frill",
+      "patterns": [
+        "fr-"
+      ]
+    },
+    {
       "word": "frog",
       "patterns": [
         "fr-"
@@ -2856,6 +2940,12 @@
     },
     {
       "word": "from",
+      "patterns": [
+        "fr-"
+      ]
+    },
+    {
+      "word": "frond",
       "patterns": [
         "fr-"
       ]
@@ -2998,6 +3088,12 @@
       ]
     },
     {
+      "word": "gland",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
       "word": "glare",
       "patterns": [
         "are",
@@ -3018,13 +3114,31 @@
       ]
     },
     {
+      "word": "glen",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
       "word": "glide",
       "patterns": [
         "gl-"
       ]
     },
     {
+      "word": "glint",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
       "word": "glitter",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
+      "word": "glob",
       "patterns": [
         "gl-"
       ]
@@ -3037,6 +3151,12 @@
     },
     {
       "word": "gloom",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
+      "word": "gloss",
       "patterns": [
         "gl-"
       ]
@@ -3063,6 +3183,12 @@
     },
     {
       "word": "glum",
+      "patterns": [
+        "gl-"
+      ]
+    },
+    {
+      "word": "glut",
       "patterns": [
         "gl-"
       ]
@@ -3105,6 +3231,18 @@
     },
     {
       "word": "grab",
+      "patterns": [
+        "gr-"
+      ]
+    },
+    {
+      "word": "grad",
+      "patterns": [
+        "gr-"
+      ]
+    },
+    {
+      "word": "gram",
       "patterns": [
         "gr-"
       ]
@@ -4587,6 +4725,12 @@
       ]
     },
     {
+      "word": "opt",
+      "patterns": [
+        "-pt"
+      ]
+    },
+    {
       "word": "out",
       "patterns": [
         "ou"
@@ -4871,6 +5015,12 @@
       ]
     },
     {
+      "word": "plank",
+      "patterns": [
+        "pl-"
+      ]
+    },
+    {
       "word": "plant",
       "patterns": [
         "pl-",
@@ -4887,6 +5037,12 @@
       "word": "play",
       "patterns": [
         "ay",
+        "pl-"
+      ]
+    },
+    {
+      "word": "plod",
+      "patterns": [
         "pl-"
       ]
     },
@@ -4917,6 +5073,12 @@
     },
     {
       "word": "plus",
+      "patterns": [
+        "pl-"
+      ]
+    },
+    {
+      "word": "ply",
       "patterns": [
         "pl-"
       ]
@@ -5032,6 +5194,12 @@
       ]
     },
     {
+      "word": "prim",
+      "patterns": [
+        "pr-"
+      ]
+    },
+    {
       "word": "print",
       "patterns": [
         "pr-",
@@ -5040,6 +5208,18 @@
     },
     {
       "word": "prize",
+      "patterns": [
+        "pr-"
+      ]
+    },
+    {
+      "word": "prod",
+      "patterns": [
+        "pr-"
+      ]
+    },
+    {
+      "word": "prong",
       "patterns": [
         "pr-"
       ]
@@ -5061,6 +5241,12 @@
       "word": "prune",
       "patterns": [
         "u_e",
+        "pr-"
+      ]
+    },
+    {
+      "word": "pry",
+      "patterns": [
         "pr-"
       ]
     },
@@ -5171,6 +5357,12 @@
       "word": "rang",
       "patterns": [
         "ng"
+      ]
+    },
+    {
+      "word": "rapt",
+      "patterns": [
+        "-pt"
       ]
     },
     {
@@ -5553,6 +5745,12 @@
       ]
     },
     {
+      "word": "scram",
+      "patterns": [
+        "scr-"
+      ]
+    },
+    {
       "word": "scrap",
       "patterns": [
         "sc-",
@@ -5600,6 +5798,12 @@
       "patterns": [
         "ew",
         "sc-",
+        "scr-"
+      ]
+    },
+    {
+      "word": "scrip",
+      "patterns": [
         "scr-"
       ]
     },
@@ -5822,6 +6026,12 @@
       ]
     },
     {
+      "word": "shrank",
+      "patterns": [
+        "shr-"
+      ]
+    },
+    {
       "word": "shred",
       "patterns": [
         "shr-"
@@ -5984,6 +6194,12 @@
       ]
     },
     {
+      "word": "ski",
+      "patterns": [
+        "sk-"
+      ]
+    },
+    {
       "word": "skid",
       "patterns": [
         "sk-"
@@ -5994,6 +6210,12 @@
       "patterns": [
         "sk-",
         "-ll"
+      ]
+    },
+    {
+      "word": "skim",
+      "patterns": [
+        "sk-"
       ]
     },
     {
@@ -6016,6 +6238,12 @@
       ]
     },
     {
+      "word": "skis",
+      "patterns": [
+        "sk-"
+      ]
+    },
+    {
       "word": "skull",
       "patterns": [
         "sk-",
@@ -6033,6 +6261,12 @@
       "word": "sky",
       "patterns": [
         "sk-"
+      ]
+    },
+    {
+      "word": "slab",
+      "patterns": [
+        "sl-"
       ]
     },
     {
@@ -6112,6 +6346,12 @@
       ]
     },
     {
+      "word": "sly",
+      "patterns": [
+        "sl-"
+      ]
+    },
+    {
       "word": "smack",
       "patterns": [
         "sm-"
@@ -6146,6 +6386,12 @@
       ]
     },
     {
+      "word": "smelt",
+      "patterns": [
+        "sm-"
+      ]
+    },
+    {
       "word": "smile",
       "patterns": [
         "sm-"
@@ -6159,7 +6405,25 @@
       ]
     },
     {
+      "word": "smith",
+      "patterns": [
+        "sm-"
+      ]
+    },
+    {
+      "word": "smog",
+      "patterns": [
+        "sm-"
+      ]
+    },
+    {
       "word": "smoke",
+      "patterns": [
+        "sm-"
+      ]
+    },
+    {
+      "word": "smooch",
       "patterns": [
         "sm-"
       ]
@@ -6178,6 +6442,12 @@
     },
     {
       "word": "snack",
+      "patterns": [
+        "sn-"
+      ]
+    },
+    {
+      "word": "snag",
       "patterns": [
         "sn-"
       ]
@@ -6227,7 +6497,25 @@
       ]
     },
     {
+      "word": "snoop",
+      "patterns": [
+        "sn-"
+      ]
+    },
+    {
       "word": "snore",
+      "patterns": [
+        "sn-"
+      ]
+    },
+    {
+      "word": "snort",
+      "patterns": [
+        "sn-"
+      ]
+    },
+    {
+      "word": "snout",
       "patterns": [
         "sn-"
       ]
@@ -6236,6 +6524,12 @@
       "word": "snow",
       "patterns": [
         "ow",
+        "sn-"
+      ]
+    },
+    {
+      "word": "snub",
+      "patterns": [
         "sn-"
       ]
     },
@@ -6502,6 +6796,18 @@
       ]
     },
     {
+      "word": "sprang",
+      "patterns": [
+        "spr-"
+      ]
+    },
+    {
+      "word": "sprat",
+      "patterns": [
+        "spr-"
+      ]
+    },
+    {
       "word": "sprawl",
       "patterns": [
         "sp-",
@@ -6575,6 +6881,30 @@
       ]
     },
     {
+      "word": "spry",
+      "patterns": [
+        "spr-"
+      ]
+    },
+    {
+      "word": "spud",
+      "patterns": [
+        "sp-"
+      ]
+    },
+    {
+      "word": "spun",
+      "patterns": [
+        "sp-"
+      ]
+    },
+    {
+      "word": "squab",
+      "patterns": [
+        "squ-"
+      ]
+    },
+    {
       "word": "squad",
       "patterns": [
         "squ-"
@@ -6589,6 +6919,12 @@
     },
     {
       "word": "squash",
+      "patterns": [
+        "squ-"
+      ]
+    },
+    {
+      "word": "squat",
       "patterns": [
         "squ-"
       ]
@@ -6640,6 +6976,12 @@
       "word": "squirt",
       "patterns": [
         "ir",
+        "squ-"
+      ]
+    },
+    {
+      "word": "squish",
+      "patterns": [
         "squ-"
       ]
     },
@@ -6815,6 +7157,12 @@
       ]
     },
     {
+      "word": "strand",
+      "patterns": [
+        "str-"
+      ]
+    },
+    {
       "word": "strange",
       "patterns": [
         "st-",
@@ -6906,6 +7254,30 @@
       ]
     },
     {
+      "word": "struck",
+      "patterns": [
+        "str-"
+      ]
+    },
+    {
+      "word": "strum",
+      "patterns": [
+        "str-"
+      ]
+    },
+    {
+      "word": "strung",
+      "patterns": [
+        "str-"
+      ]
+    },
+    {
+      "word": "strut",
+      "patterns": [
+        "str-"
+      ]
+    },
+    {
       "word": "subtext",
       "patterns": [
         "-xt"
@@ -6981,6 +7353,18 @@
       "word": "surf",
       "patterns": [
         "ur"
+      ]
+    },
+    {
+      "word": "swab",
+      "patterns": [
+        "sw-"
+      ]
+    },
+    {
+      "word": "swag",
+      "patterns": [
+        "sw-"
       ]
     },
     {
@@ -7336,9 +7720,21 @@
       ]
     },
     {
+      "word": "thresh",
+      "patterns": [
+        "thr-"
+      ]
+    },
+    {
       "word": "threw",
       "patterns": [
         "ew",
+        "thr-"
+      ]
+    },
+    {
+      "word": "thrift",
+      "patterns": [
         "thr-"
       ]
     },
@@ -7379,6 +7775,12 @@
       "word": "throw",
       "patterns": [
         "ow",
+        "thr-"
+      ]
+    },
+    {
+      "word": "thrum",
+      "patterns": [
         "thr-"
       ]
     },
@@ -7540,9 +7942,21 @@
       ]
     },
     {
+      "word": "tract",
+      "patterns": [
+        "-ct"
+      ]
+    },
+    {
       "word": "train",
       "patterns": [
         "ai",
+        "tr-"
+      ]
+    },
+    {
+      "word": "tram",
+      "patterns": [
         "tr-"
       ]
     },
@@ -7567,6 +7981,12 @@
       ]
     },
     {
+      "word": "trek",
+      "patterns": [
+        "tr-"
+      ]
+    },
+    {
       "word": "tried",
       "patterns": [
         "ie",
@@ -7581,6 +8001,18 @@
     },
     {
       "word": "trip",
+      "patterns": [
+        "tr-"
+      ]
+    },
+    {
+      "word": "trod",
+      "patterns": [
+        "tr-"
+      ]
+    },
+    {
+      "word": "trot",
       "patterns": [
         "tr-"
       ]
@@ -8028,6 +8460,12 @@
       "patterns": [
         "ie",
         "-ld"
+      ]
+    },
+    {
+      "word": "yolk",
+      "patterns": [
+        "-lk"
       ]
     },
     {
