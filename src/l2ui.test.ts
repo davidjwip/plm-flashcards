@@ -546,18 +546,60 @@ describe('AC66 — the bee deck and the Level 2 switch', () => {
 
     click(el.querySelector('[data-testid="mode-bee"]'));
     openBeePanel(el);
-    level('nonsense', false);
+    // Leave nonsense at its default (true): Level 2 must ignore it, not rely on
+    // the grown-up unticking a box the panel has already disabled.
     level('l2', true);
 
     const mirror = `Level 2 uses the same ${count} words as Sound patterns`;
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(mirror);
     expect(el.querySelector('[data-testid="bee-count"]')!.textContent).toBe(mirror);
+
+    // The count is not enough: the round must serve the same words, not the
+    // Cambridge deck with a matching label.
+    const roundWords = app.session()!.words.map(({ word }) => word);
+    const served = el.querySelector('[data-testid="word"]')!.textContent;
+    expect(patternsWords, `the served word ${served} is a patterns Level 2 word`).toContain(served);
+    for (const word of roundWords) {
+      expect(patternsWords, `${word} in the round is a patterns Level 2 word`).toContain(word);
+    }
+    for (const word of ['armchair', 'strawberry']) {
+      expect(roundWords, `${word} from the Cambridge deck does not appear`).not.toContain(word);
+    }
+  });
+
+  it('AC66 — the bee Level 2 deck follows the live chip set, not a fixed canonical set', () => {
+    const el = root();
+    const app = mount({ bank, beeDeck, root: el, store: store({ 'plm.selectedPatterns': '[]' }) });
+
+    click(el.querySelector('[data-testid="pattern-toggle"]'));
+    click(chip(el));
+    // `k` is a bank pattern outside L2 whose words are all decodable, so the chip
+    // selection holds and the patterns set grows beyond the canonical L2 set.
+    check('k');
+
+    const patternsWords = app.session()!.words.map(({ word }) => word);
+    const count = patternsWords.length;
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      `${count} words in this set`,
+    );
+
+    click(el.querySelector('[data-testid="mode-bee"]'));
+    openBeePanel(el);
+    level('l2', true);
+
+    const mirror = `Level 2 uses the same ${count} words as Sound patterns`;
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(mirror);
+    expect(el.querySelector('[data-testid="bee-count"]')!.textContent).toBe(mirror);
+
+    const roundWords = app.session()!.words.map(({ word }) => word);
+    for (const word of roundWords) {
+      expect(patternsWords, `${word} in the round is a patterns word`).toContain(word);
+    }
   });
 
   it('AC66 — the source boxes do not shrink a Level 2 deck', () => {
     const el = mountBee(JSON.stringify(L2_PATTERN_IDS));
     openBeePanel(el);
-    level('nonsense', false);
     level('l2', true);
 
     const before = el.querySelector('[data-testid="word-count"]')!.textContent;
@@ -567,7 +609,6 @@ describe('AC66 — the bee deck and the Level 2 switch', () => {
     for (const key of ['starters', 'movers', 'nonsense']) {
       const box = el.querySelector<HTMLInputElement>(`[data-testid="level-${key}"]`)!;
       expect(box.disabled, `${key} does not apply when Level 2 is on`).toBe(true);
-      level(key, false);
     }
 
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(before);

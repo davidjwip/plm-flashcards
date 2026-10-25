@@ -150,9 +150,13 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     return dictionaryFor(selected);
   }
 
-  /** The patterns chip's set, independent of what the bee panel currently says. */
-  function l2Words(): Word[] {
-    return dictionaryFor([...L2_PATTERN_IDS]);
+  /**
+   * The Level 2 deck: the live chip set when the selection holds the whole chip
+   * (it may hold extra patterns), else the canonical set. One function of the real
+   * state, so the bee and a patterns run cannot disagree about what Level 2 is.
+   */
+  function l2Deck(): Word[] {
+    return l2ChipSelection() ? runDictionary() : dictionaryFor([...L2_PATTERN_IDS]);
   }
 
   function dictionarySize(): number {
@@ -162,13 +166,13 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   /** In Level 2 the size is the shared bank set, not the Cambridge deck. */
   function beeSize(): number {
     if (!beeDeck) return 0;
-    return beeChoice.l2 ? l2Words().length : beeDictionary(beeDeck, beeChoice).length;
+    return beeChoice.l2 ? l2Deck().length : beeDictionary(beeDeck, beeChoice).length;
   }
 
   function beeDictionaryForChoice(): Word[] {
     if (!beeDeck) return [];
     return beeDictionary(beeDeck, beeChoice, {
-      l2Words: beeChoice.l2 ? l2Words() : [],
+      l2Words: beeChoice.l2 ? l2Deck() : [],
     });
   }
 

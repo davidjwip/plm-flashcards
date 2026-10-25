@@ -1,5 +1,4 @@
 import { shuffle } from './engine';
-import { isL2Word } from './levels';
 import type { Word } from './types';
 
 /**
@@ -20,7 +19,7 @@ export type BeeChoice = {
   starters: boolean;
   movers: boolean;
   nonsense: boolean;
-  /** Keep only words whose spelling proves at least one Level 2 pattern. */
+  /** Draw the deck from the Level 2 bank set instead of the Cambridge deck. */
   l2: boolean;
 };
 
@@ -188,15 +187,12 @@ export function beeDictionary(
   // Level 2 is a source, not a filter: the curated bank set is the real-word half.
   const realWords = choice.l2 ? l2Words.map(({ word }) => word) : beeWords(deck, choice);
   const real: Word[] = realWords.map((word) => ({ word, patterns: [BEE_TAG] }));
-  if (!choice.nonsense) return real;
+  // A Level 2 round is dictated bank words, never pseudo-words, even though the
+  // nonsense box defaults to true and is disabled while Level 2 is on.
+  if (choice.l2 || !choice.nonsense) return real;
 
   const known = new Set([...avoid, ...real.map((w) => w.word)]);
-  const nonsense: Word[] = nonsenseWords(
-    BEE_ROUND,
-    known,
-    rng,
-    choice.l2 ? isL2Word : undefined,
-  ).map((word) => ({
+  const nonsense: Word[] = nonsenseWords(BEE_ROUND, known, rng).map((word) => ({
     word,
     patterns: [NONSENSE_TAG],
   }));
