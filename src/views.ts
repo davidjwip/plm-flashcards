@@ -136,7 +136,7 @@ export function beePanel(
   // filtered deck is empty, and "tick one" would then name a box already ticked.
   const noLevelsSelected = !choice.starters && !choice.movers && !choice.nonsense;
   const count = noLevelsSelected
-    ? 'no levels selected — tick one to get words'
+    ? 'no source levels selected — tick one to get words'
     : wordCount === 0
       ? 'no words for this combination — change the levels'
       : `${wordCount} words to draw from`;

@@ -211,7 +211,20 @@ const GRAPHEMES = [
 ];
 
 /** Those of the above that Level 2 has taught. */
-const L2_GRAPHEMES = new Set(['qu', 'oo', 'ou', 'ar', 'or', 'ck', 'sh', 'ch', 'th', 'ng', 'nch']);
+const L2_GRAPHEMES = new Set([
+  'qu',
+  'ee',
+  'oo',
+  'ou',
+  'ar',
+  'or',
+  'ck',
+  'sh',
+  'ch',
+  'th',
+  'ng',
+  'nch',
+]);
 
 const LONGEST_FIRST = [...GRAPHEMES].sort((a, b) => b.length - a.length);
 
@@ -275,7 +288,7 @@ export function syllables(word: string): number {
 }
 
 export function isL2Word(word: string): boolean {
-  return tagsForSpelling(word).length > 0 && untaught(word).length === 0;
+  return untaught(word).length === 0;
 }
 
 /** Which family heading a pattern row belongs under. */

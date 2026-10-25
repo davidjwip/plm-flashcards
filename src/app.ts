@@ -124,11 +124,21 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
     return L2_PATTERN_IDS.every((id) => selected.includes(id));
   }
 
+  /**
+   * Coverage ignores a split-digraph reading when the bank tags the word `ghost_e`:
+   * the bank is the authority on that vowel, and `have`/`come` only look like `a_e`/`o_e`.
+   */
+  function coverageMissing(word: Word): string[] {
+    return untaught(word.word).filter(
+      (grapheme) => !(word.patterns.includes('ghost_e') && grapheme.endsWith('_e')),
+    );
+  }
+
   /** The run and the count share this list, so they can never disagree. */
   function runDictionary(): Word[] {
     const dictionary = buildDictionary(bank, selected);
     return l2ChipSelection()
-      ? dictionary.filter((word) => untaught(word.word).length === 0)
+      ? dictionary.filter((word) => coverageMissing(word).length === 0)
       : dictionary;
   }
 
@@ -162,7 +172,7 @@ export function mount({ bank, root, beeDeck, store, synth }: MountOptions): AppH
   function countText(): string {
     if (beeMode()) {
       if (!beeChoice.starters && !beeChoice.movers && !beeChoice.nonsense) {
-        return 'no levels selected — tick one to get words';
+        return 'no source levels selected — tick one to get words';
       }
       return `${beeSize()} words to draw from`;
     }

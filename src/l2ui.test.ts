@@ -468,10 +468,15 @@ describe('AC69 — Level 2 means every sound taught', () => {
       root: el,
       store: store({ 'plm.selectedPatterns': JSON.stringify(L2_PATTERN_IDS) }),
     });
-    const served = app.session()?.words.map((entry) => entry.word) ?? [];
+    const servedWords = app.session()?.words ?? [];
+    const served = servedWords.map((entry) => entry.word);
     expect(served.length).toBeGreaterThan(0);
-    for (const word of served) {
-      expect(untaught(word), `${word} has no untaught grapheme`).toEqual([]);
+    for (const { word, patterns } of servedWords) {
+      // The bank is the authority on a ghost-e vowel; every other word must be clean.
+      const missing = untaught(word).filter(
+        (grapheme) => !(patterns.includes('ghost_e') && grapheme.endsWith('_e')),
+      );
+      expect(missing, `${word} has no untaught grapheme`).toEqual([]);
     }
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
       `${served.length} words in this set`,
@@ -493,6 +498,24 @@ describe('AC69 — Level 2 means every sound taught', () => {
     for (const word of ['armchair', 'strawberry', 'squawk', 'throne']) {
       expect(manualWords, `${word} returns with a manual subset`).toContain(word);
     }
+  });
+
+  it('AC69 — a bank-tagged ghost e word is served despite its split-digraph spelling', () => {
+    const el = root();
+    const app = mount({
+      bank,
+      root: el,
+      store: store({ 'plm.selectedPatterns': JSON.stringify(L2_PATTERN_IDS) }),
+    });
+    const served = app.session()?.words.map((entry) => entry.word) ?? [];
+    // The bank is the authority on these vowels: `have`/`come` look like `a_e`/`o_e`
+    // to the segmenter, but the silent e is exactly what the tag records.
+    for (const word of ['have', 'come', 'twelve']) {
+      expect(served, `${word} is served by the chip`).toContain(word);
+    }
+    expect(el.querySelector('[data-testid="word-count"]')!.textContent).toBe(
+      `${served.length} words in this set`,
+    );
   });
 });
 
@@ -521,7 +544,7 @@ describe('AC66 — the bee deck and the Level 2 switch', () => {
     expect(el.querySelector('[data-testid="mark-right"]')).toBeFalsy();
     expect(el.querySelector('[data-testid="mark-wrong"]')).toBeFalsy();
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
-      'no levels selected',
+      'no source levels selected',
     );
   });
 
@@ -530,7 +553,7 @@ describe('AC66 — the bee deck and the Level 2 switch', () => {
     openBeePanel(el);
     for (const key of ['starters', 'movers', 'nonsense']) level(key, false);
     expect(el.querySelector('[data-testid="word-count"]')!.textContent).toContain(
-      'no levels selected',
+      'no source levels selected',
     );
 
     level('l2', true);

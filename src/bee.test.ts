@@ -60,8 +60,8 @@ describe('spelling bee deck', () => {
 
   it('AC66 — Level 2 keeps only words whose every sound has been taught', () => {
     const mixed = {
-      starters: ['stamp', 'cake', 'help', 'armchair'],
-      movers: ['shrimp', 'night', 'about', 'strawberry', 'restaurant', 'have', 'give'],
+      starters: ['stamp', 'cake', 'help', 'armchair', 'cat'],
+      movers: ['shrimp', 'night', 'about', 'strawberry', 'restaurant', 'have', 'give', 'banana'],
     };
 
     const l2 = beeDictionary(
@@ -70,12 +70,13 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    // `about` and `thousand`-style words are in when every sound is taught: `ou`
-    // is an L2 grapheme and single letters always are, so syllable count does not
-    // matter. `armchair` and `chair` are out through `air`, `strawberry` and
+    // Level 2 is coverage alone: a word is in when every grapheme is taught, no
+    // matter whether it happens to show a cluster. A plain CVC (`cat`) and a
+    // multi-syllable word of taught sounds (`banana`) are both decodable, so both
+    // are in. `armchair` and `chair` are out through `air`, `strawberry` and
     // `squawk` through `aw`, `night` through `igh`, and the split digraphs in
     // `cake`, `have` and `give` are untaught too.
-    expect(l2.map((w) => w.word)).toEqual(['about', 'help', 'shrimp', 'stamp']);
+    expect(l2.map((w) => w.word)).toEqual(['about', 'banana', 'cat', 'help', 'shrimp', 'stamp']);
     for (const word of ['armchair', 'cake', 'night', 'strawberry', 'restaurant', 'have', 'give']) {
       expect(
         l2.map((w) => w.word),
@@ -92,7 +93,9 @@ describe('spelling bee deck', () => {
     expect(all.map((w) => w.word)).toEqual([
       'about',
       'armchair',
+      'banana',
       'cake',
+      'cat',
       'give',
       'have',
       'help',
@@ -104,7 +107,7 @@ describe('spelling bee deck', () => {
     ]);
   });
 
-  it('AC66 — oo and ou are covered L2 sounds; ee and ghost e are not', () => {
+  it('AC66 — ee, oo and ou are covered L2 sounds; ghost e is not', () => {
     const mixed = {
       // Two ghost-e words, so an implementation that special-cases one of them
       // (or hard-codes "L2 ids minus ghost_e") still has to filter both out.
@@ -118,10 +121,11 @@ describe('spelling bee deck', () => {
       new Set(),
       seeded(1),
     );
-    // `oo` and `ou` are in L2_GRAPHEMES; `ee` is not, and the ghost-e words also
-    // hide an untaught split digraph.
-    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'stamp']);
-    for (const word of ['have', 'give', 'see']) {
+    // `ee`, `oo` and `ou` are in L2_GRAPHEMES. The ghost-e words hide a split
+    // digraph, which spelling cannot tell from a real one, so they stay out of
+    // the bee deck (the pattern chip knows better, from the bank tag).
+    expect(l2.map((w) => w.word)).toEqual(['food', 'loud', 'see', 'stamp']);
+    for (const word of ['have', 'give']) {
       expect(
         l2.map((w) => w.word),
         `${word} is out`,
