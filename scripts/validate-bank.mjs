@@ -13,11 +13,23 @@ const MIN_WORDS_EXCEPTIONS = { '-lp': 7, '-xt': 6 };
 // fragment list applies only to generated words.
 const DENY_FILE = new URL('../data/denylist.json', import.meta.url).pathname;
 const POOL_FILE = new URL('../data/nonsense.json', import.meta.url).pathname;
+const COMMON_FILE = new URL('../data/common-words.txt', import.meta.url).pathname;
 if (!existsSync(DENY_FILE)) fail('data/denylist.json is missing: the word gate cannot run');
 const denylist = JSON.parse(readFileSync(DENY_FILE, 'utf8'));
 const denied = new Set(denylist.deny ?? []);
 const notWords = new Set(denylist.notWords ?? []);
 const strong = denylist.strongSubstrings ?? [];
+
+// A nonsense word that is a real English word teaches nothing. The system dictionary is not
+// enough (no fab/glam/drat/git), so this list comes from word frequency data.
+if (!existsSync(COMMON_FILE))
+  fail('data/common-words.txt is missing: the nonsense gate cannot run');
+const commonWords = new Set(
+  readFileSync(COMMON_FILE, 'utf8')
+    .split('\n')
+    .map((word) => word.trim())
+    .filter(Boolean),
+);
 
 const problems = [];
 let bank;
@@ -89,6 +101,7 @@ if (existsSync(POOL_FILE)) {
     if (why) fail(`nonsense word ${word} is on ${why}`);
     const frag = hasFragment(word);
     if (frag) fail(`nonsense word ${word} contains a denied fragment "${frag}"`);
+    if (commonWords.has(word)) fail(`nonsense word ${word} is a real English word`);
   }
 }
 
