@@ -1,5 +1,5 @@
 // Word bank validator: the data rules from specs/v1.md §6, enforced.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const DEFAULT_FILE = new URL('../data/wordbank.json', import.meta.url).pathname;
@@ -8,6 +8,16 @@ const WORD_RE = /^[a-z]+(?:['-][a-z]+)*$/;
 const CLUSTER_ID_RE = /^(?:[a-z]{2,3}-|-[a-z]{2,3})$/;
 const MIN_WORDS = 10;
 const MIN_WORDS_EXCEPTIONS = { '-lp': 7, '-xt': 6 };
+
+// AC70: the words this app must never show or speak. See data/denylist.json for why the
+// fragment list applies only to generated words.
+const DENY_FILE = new URL('../data/denylist.json', import.meta.url).pathname;
+const POOL_FILE = new URL('../data/nonsense.json', import.meta.url).pathname;
+if (!existsSync(DENY_FILE)) fail('data/denylist.json is missing: the word gate cannot run');
+const denylist = JSON.parse(readFileSync(DENY_FILE, 'utf8'));
+const denied = new Set(denylist.deny ?? []);
+const notWords = new Set(denylist.notWords ?? []);
+const strong = denylist.strongSubstrings ?? [];
 
 const problems = [];
 let bank;
@@ -59,6 +69,27 @@ for (const id of patternIds) {
   const count = wordCounts.get(id) ?? 0;
   const floor = MIN_WORDS_EXCEPTIONS[id] ?? MIN_WORDS;
   if (count < floor) fail(`pattern ${id} has ${count} words, floor is ${floor}`);
+}
+
+// AC70: no word source may contain profanity, a slur, or a non-word.
+const deniedWord = (word) =>
+  denied.has(word) ? 'the denylist (profanity/slur/sexual or drug vocabulary)' : null;
+const isNotWord = (word) => (notWords.has(word) ? 'the non-word list (jargon/abbreviation)' : null);
+const hasFragment = (word) => strong.find((frag) => word.includes(frag)) ?? null;
+
+for (const entry of bank.words ?? []) {
+  const why = deniedWord(entry.word) ?? isNotWord(entry.word);
+  if (why) fail(`word ${entry.word} is on ${why}`);
+}
+
+if (existsSync(POOL_FILE)) {
+  const pool = JSON.parse(readFileSync(POOL_FILE, 'utf8')).words ?? [];
+  for (const word of pool) {
+    const why = deniedWord(word) ?? isNotWord(word);
+    if (why) fail(`nonsense word ${word} is on ${why}`);
+    const frag = hasFragment(word);
+    if (frag) fail(`nonsense word ${word} contains a denied fragment "${frag}"`);
+  }
 }
 
 if (problems.length) {
