@@ -12,13 +12,18 @@ const MIN_WORDS_EXCEPTIONS = { '-lp': 7, '-xt': 6 };
 // AC70: the words this app must never show or speak. See data/denylist.json for why the
 // fragment list applies only to generated words.
 const DENY_FILE = new URL('../data/denylist.json', import.meta.url).pathname;
-const POOL_FILE = new URL('../data/nonsense.json', import.meta.url).pathname;
+// argv[3] overrides the pool, so the gate can be pointed at a candidate file in a test.
+const POOL_FILE = process.argv[3]
+  ? resolve(process.argv[3])
+  : new URL('../data/nonsense.json', import.meta.url).pathname;
 const COMMON_FILE = new URL('../data/common-words.txt', import.meta.url).pathname;
 if (!existsSync(DENY_FILE)) fail('data/denylist.json is missing: the word gate cannot run');
 const denylist = JSON.parse(readFileSync(DENY_FILE, 'utf8'));
 const denied = new Set(denylist.deny ?? []);
 const notWords = new Set(denylist.notWords ?? []);
 const strong = denylist.strongSubstrings ?? [];
+// real words too rare for a frequency list (Scots, dialect, slang) that must not be nonsense
+const knownWords = new Set(denylist.knownWords ?? []);
 
 // A nonsense word that is a real English word teaches nothing. The system dictionary is not
 // enough (no fab/glam/drat/git), so this list comes from word frequency data.
@@ -101,7 +106,8 @@ if (existsSync(POOL_FILE)) {
     if (why) fail(`nonsense word ${word} is on ${why}`);
     const frag = hasFragment(word);
     if (frag) fail(`nonsense word ${word} contains a denied fragment "${frag}"`);
-    if (commonWords.has(word)) fail(`nonsense word ${word} is a real English word`);
+    if (commonWords.has(word) || knownWords.has(word))
+      fail(`nonsense word ${word} is a real English word`);
   }
 }
 

@@ -65,6 +65,10 @@ describe('AC70 — no word source may contain a word this app must not say', () 
   });
 
   it('AC70 — no nonsense word is a real English word', () => {
+    const known = new Set(denylist.knownWords ?? []);
+    const rare = pool.words.filter((word) => known.has(word));
+    expect(rare, `pool words known to be real: ${rare.join(', ')}`).toEqual([]);
+
     // The system dictionary is not a usable oracle here: it has no `fab`, `glam`, `drat`,
     // `git` or `prat`. data/common-words.txt comes from word frequency data instead.
     const common = new Set(
@@ -109,6 +113,32 @@ describe('AC70 — no word source may contain a word this app must not say', () 
     expect(status, 'the validator must exit non-zero for a denied word').toBe(1);
     expect(stderr).toContain('fuck');
     expect(stderr).toContain('denylist');
+  });
+  it('AC70 — the validator refuses a pool containing a real word', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'plm-pool-'));
+    const poolFile = join(dir, 'nonsense.json');
+    writeFileSync(poolFile, JSON.stringify({ words: [...pool.words, 'fab'] }));
+
+    let status = 0;
+    let stderr = '';
+    try {
+      execFileSync(
+        process.execPath,
+        ['scripts/validate-bank.mjs', 'data/wordbank.json', poolFile],
+        {
+          encoding: 'utf8',
+          stdio: 'pipe',
+        },
+      );
+    } catch (error) {
+      const failure = error as { status?: number; stderr?: string };
+      status = failure.status ?? 1;
+      stderr = failure.stderr ?? '';
+    }
+
+    expect(status, 'the validator must exit non-zero for a real word in the pool').toBe(1);
+    expect(stderr).toContain('fab');
+    expect(stderr).toContain('is a real English word');
   });
 });
 
