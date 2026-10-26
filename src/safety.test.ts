@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import bank from '../data/wordbank.json';
@@ -44,7 +44,10 @@ describe('AC70 — no word source may contain a word this app must not say', () 
     // rejected: those fragments are deliberately absent. `grape` happens to contain `rape`,
     // which is why fragments are never applied to real words — only to generated nonsense.
     for (const fragment of strong) {
-      expect(fragment.length, `fragment "${fragment}" is too short to screen safely`).toBeGreaterThanOrEqual(4);
+      expect(
+        fragment.length,
+        `fragment "${fragment}" is too short to screen safely`,
+      ).toBeGreaterThanOrEqual(4);
     }
     expect(strong).not.toContain('nig');
     expect(strong).not.toContain('ass');
@@ -55,8 +58,28 @@ describe('AC70 — no word source may contain a word this app must not say', () 
     // If any real word does contain a fragment, it must still pass: the bank is screened on
     // exact matches only. The validator test below proves that path.
     for (const word of wouldTrip) {
-      expect(denied.has(word) || notWords.has(word), `${word} must rely on exact matching`).toBe(false);
+      expect(denied.has(word) || notWords.has(word), `${word} must rely on exact matching`).toBe(
+        false,
+      );
     }
+  });
+
+  it('AC70 — no nonsense word is a real English word', () => {
+    // The system dictionary is not a usable oracle here: it has no `fab`, `glam`, `drat`,
+    // `git` or `prat`. data/common-words.txt comes from word frequency data instead.
+    const common = new Set(
+      readFileSync('data/common-words.txt', 'utf8')
+        .split('\n')
+        .map((word) => word.trim())
+        .filter(Boolean),
+    );
+    expect(common.size, 'the frequency list did not load').toBeGreaterThan(50000);
+
+    const realWords = pool.words.filter((word) => common.has(word));
+    expect(
+      realWords,
+      `nonsense words that are real English words: ${realWords.join(', ')}`,
+    ).toEqual([]);
   });
 
   it('AC70 — the validator refuses a bank containing a denied word', () => {
@@ -101,9 +124,10 @@ describe('AC66 — every word the app can serve has a committed mp3', () => {
     const missing = sources.flatMap(([label, words]) =>
       words.filter((word) => !voiced.has(word)).map((word) => `${label}: ${word}`),
     );
-    expect(missing, `words that would fall back to the device voice: ${missing.join(', ')}`).toEqual(
-      [],
-    );
+    expect(
+      missing,
+      `words that would fall back to the device voice: ${missing.join(', ')}`,
+    ).toEqual([]);
 
     const noFile = [...voiced].filter((word) => !existsSync(`public/audio/${word}.mp3`));
     expect(noFile, `manifest entries without a file: ${noFile.join(', ')}`).toEqual([]);
