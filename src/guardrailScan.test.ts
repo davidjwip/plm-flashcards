@@ -78,12 +78,11 @@ describe('guardrail scan — school and class identifiers', () => {
     }
   });
 
-  it('AC7 a lowercase or embedded identifier is still a finding', () => {
-    // A leak typed in lowercase, or glued to a longer token, is the same leak: the rules are shapes,
-    // not spellings, and they must not depend on a word boundary or on capitalisation.
+  it('AC7 a lowercase identifier, or one standing beside punctuation or digits, is still a finding', () => {
+    // The rules are shapes, not spellings: lowercase and neighbouring punctuation must not hide one.
     const lower = ['26', '27', 'k053'].join('-');
-    const embedded = 'AK' + 2 + 'M';
-    const file = tempFile('sneaky.txt', `ref ${lower}\ncode ${embedded}\n`);
+    const bracketed = '(' + 'K' + 3 + 'B' + ')';
+    const file = tempFile('sneaky.txt', `ref ${lower}\ncode ${bracketed}\n`);
 
     const result = run(['--file', file]);
 
@@ -91,9 +90,19 @@ describe('guardrail scan — school and class identifiers', () => {
     expect(result.out).toContain('school circular identifier');
     expect(result.out).toContain(lower);
     expect(result.out).toContain('class code');
-    // Built, not typed: a literal here would be a class code in the repo, and the scanner would find
-    // it — which is how this line was caught.
-    expect(result.out).toContain('K' + 2 + 'M');
+    expect(result.out).toContain('K' + 3 + 'B');
+  });
+
+  it('AC7b a trigram inside an ordinary word is NOT a finding', () => {
+    // The word `back2school` contains a class-code shape in the middle of it. A shape rule without
+    // boundaries fails on that prose, and a scanner that fails on innocent writing gets switched off
+    // — so the class-code rule is bounded, and this test asserts the cost of that choice.
+    const file = tempFile('prose.txt', 'we go back2school in the morning\nand mock2nd drafts\n');
+
+    const result = run(['--file', file]);
+
+    expect(result.code, result.out).toBe(0);
+    expect(result.out).toContain('clean');
   });
 
   it('AC4 ordinary word-bank-shaped text passes', () => {
