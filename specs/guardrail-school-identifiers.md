@@ -34,7 +34,8 @@ list is a scanner that misses the next school.
 | AC4 | an unprefixed benign word list          | the scanner is run on that file      | it exits 0 — the rules must not fire on ordinary vocabulary |
 | AC5 | a denylist entry                        | the scanner runs with a denylist holding it | it exits 1 and names the entry it matched |
 | AC6 | the scanner                             | it is given an unknown argument, or a named denylist that does not exist | it exits 2 with a message rather than scanning with an empty list |
-| AC7 | an identifier written in lowercase, glued to a longer token, or separated by other punctuation | the scanner reads the file | it is still a finding — the rules are shapes, not spellings |
+| AC7 | an identifier written in lowercase, beside other punctuation, or separated by spaces, dots, slashes or underscores | the scanner reads the file | it is still a finding — the rules are shapes, not spellings |
+| AC7b | ordinary prose containing a class-code shape inside a word (the word `back2school`) | the scanner reads the file | it exits 0 — the class-code rule is bounded on both sides, deliberately |
 
 ## 4. Decisions
 
@@ -44,6 +45,11 @@ list is a scanner that misses the next school.
   change; leaving it empty is the honest default when the shapes already cover the case.
 - **Scanner output is line-based and rule-named**, so a failure says _what_ matched and where, not
   simply that something did.
+- **The two shapes are bounded differently, on purpose.** The circular identifier takes any single
+  separator, including underscores and spacing, and no word boundaries, because a leak glued into a
+  sentence is still a leak. The class code is bounded on both sides: the word `back2school` carries a
+  class-code shape inside it, and a scanner that fails on innocent prose gets switched off. The cost — an identifier buried
+  inside a longer token is not seen by that rule — is stated in AC7b rather than left implicit.
 
 ## 5. Test map
 

@@ -94,12 +94,16 @@ const RULES = [
   {
     // Separators vary (`-`, space, dot, slash): the identifier is the shape, not the punctuation.
     name: 'school circular identifier',
-    re: /\d{2}\W?\d{2}\W?K\d{3}/gi,
+    re: /\d{2}[\W_]{0,3}\d{2}[\W_]{0,3}K\d{3}/gi,
     ok: () => false,
   },
   {
+    // Bounded on both sides, and deliberately so: without boundaries this rule fires on ordinary
+    // words (`back2school` contains k2s), and a scanner that fails on innocent prose is a scanner
+    // people switch off. An identifier glued into a longer token is the circular-id rule's job,
+    // which keeps no boundaries at all.
     name: 'class code',
-    re: /K[1-3][A-Z]/gi,
+    re: /(?<![A-Za-z])[Kk][1-3][A-Za-z](?![A-Za-z])/g,
     ok: () => false,
   },
 ];
