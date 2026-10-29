@@ -1377,7 +1377,8 @@
     {
       "word": "cheese",
       "patterns": [
-        "ch"
+        "ch",
+        "ee"
       ]
     },
     {
@@ -1403,7 +1404,9 @@
     {
       "word": "chicken",
       "patterns": [
-        "ch"
+        "ch",
+        "i",
+        "ck"
       ]
     },
     {
@@ -2649,6 +2652,7 @@
     {
       "word": "fish",
       "patterns": [
+        "i",
         "sh"
       ]
     },
@@ -4394,6 +4398,7 @@
     {
       "word": "milk",
       "patterns": [
+        "i",
         "-lk"
       ]
     },
@@ -5127,6 +5132,12 @@
       ]
     },
     {
+      "word": "potato",
+      "patterns": [
+        "schwa"
+      ]
+    },
+    {
       "word": "pound",
       "patterns": [
         "ou",
@@ -5457,6 +5468,12 @@
       ]
     },
     {
+      "word": "rice",
+      "patterns": [
+        "i_e"
+      ]
+    },
+    {
       "word": "rich",
       "patterns": [
         "ch"
@@ -5612,6 +5629,13 @@
       "word": "sail",
       "patterns": [
         "ai"
+      ]
+    },
+    {
+      "word": "salad",
+      "patterns": [
+        "a",
+        "schwa"
       ]
     },
     {
