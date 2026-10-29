@@ -63,6 +63,21 @@ describe('guardrail scan — school and class identifiers', () => {
     expect(result.out).toMatch(/clean \(\d+ files scanned\)/);
   });
 
+  it('AC7a an identifier separated by other punctuation is still a finding', () => {
+    // The shape is the identifier, not its punctuation: a hyphen is how it is written, not the only
+    // way it can appear in a document.
+    for (const separator of [' ', '.', '/']) {
+      const id = ['26', '27', 'K053'].join(separator);
+      const file = tempFile('spaced.txt', `ref ${id}\n`);
+
+      const result = run(['--file', file]);
+
+      expect(result.code, separator).toBe(1);
+      expect(result.out, separator).toContain('school circular identifier');
+      expect(result.out, separator).toContain(id);
+    }
+  });
+
   it('AC7 a lowercase or embedded identifier is still a finding', () => {
     // A leak typed in lowercase, or glued to a longer token, is the same leak: the rules are shapes,
     // not spellings, and they must not depend on a word boundary or on capitalisation.
@@ -108,6 +123,15 @@ describe('guardrail scan — school and class identifiers', () => {
     expect(result.code).toBe(1);
     expect(result.out).toContain('denylist');
     expect(result.out).toContain(entry);
+  });
+
+  it('AC6b a named denylist that does not exist exits 2 instead of loading nothing', () => {
+    const file = tempFile('words.txt', 'ordinary words\n');
+
+    const result = run(['--file', file, '--denylist', join(tmpdir(), 'no-such-denylist.txt')]);
+
+    expect(result.code).toBe(2);
+    expect(result.out).toContain('no denylist');
   });
 
   it('AC6 an unknown argument exits 2 with usage', () => {

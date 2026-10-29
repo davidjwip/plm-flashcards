@@ -38,6 +38,12 @@ for (let i = 0; i < args.length; i++) {
   } else if (args[i] === '--denylist') {
     const path = args[++i];
     if (!path) usage();
+    // An explicitly named denylist that does not exist is a mistake, not an empty list: silently
+    // loading nothing would make a caller believe a name is blocked when it is not.
+    if (!existsSync(path)) {
+      console.error(`guardrail-scan: no denylist at ${path}`);
+      process.exit(2);
+    }
     denylistPath = path;
   } else {
     usage();
@@ -86,8 +92,9 @@ const RULES = [
   // longer token (`AK2M`, `X26-27-K053`), is the same leak. These are shape rules, so they would
   // rather over-report than let one through.
   {
+    // Separators vary (`-`, space, dot, slash): the identifier is the shape, not the punctuation.
     name: 'school circular identifier',
-    re: /\d{2}-\d{2}-K\d{3}/gi,
+    re: /\d{2}\W?\d{2}\W?K\d{3}/gi,
     ok: () => false,
   },
   {
