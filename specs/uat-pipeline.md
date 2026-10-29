@@ -29,7 +29,7 @@ Each criterion names the flow rule in `scripts/check-branch-flow.sh`, which runs
 
 | ID  | Given | When | Then |
 | --- | ----- | ---- | ---- |
-| AC1 | a base that is not `main` | any pull request is opened into it | the flow rule allows it; only the gate decides |
+| AC1 | a base of `UAT` | any pull request is opened into it | the flow rule allows it; only the gate decides |
 | AC2 | a base of `main` | `UAT` from this repository is opened into it | the flow rule allows the release |
 | AC3 | a base of `main` | a feature branch is opened into it | the flow rule refuses and names `UAT` as the route |
 | AC4 | a base of `main` | a branch from a fork is opened into it | the flow rule refuses and says the source is a fork |
@@ -41,6 +41,12 @@ Each criterion names the flow rule in `scripts/check-branch-flow.sh`, which runs
 - A pull request into a branch that does not exist yet, or a push to `UAT` — the `gates`
   job runs, the `flow` job is skipped, because only `main` carries a source rule.
 - A direct push to either protected branch — refused by the ruleset, not by the workflow.
+- Any base other than `main` is allowed by the flow rule, and `UAT` is the only such base that
+  exists, which is why AC1 names it. A future integration branch is allowed without a code change.
+- A pull request that edits the `flow` job itself, rather than the script it runs, still executes
+  its own copy of the workflow — a `pull_request` workflow comes from the merge ref. The base-copy
+  step protects the script and nothing else, so this is a diff a human reads, and the ruleset fails
+  closed when the named check stops reporting.
 - The Cloudflare Pages GitHub App losing access to the repository — deployments stop while
   pushes still succeed; checked by verifying a `github:push` deployment for the merge commit.
 
@@ -78,6 +84,11 @@ Each criterion names the flow rule in `scripts/check-branch-flow.sh`, which runs
 - **Any base other than `main` is allowed by the flow rule, deliberately.** The rule exists to gate
   `main`; an allow-list of integration branches would need a code change every time a new one is
   created, and the branch that matters is the one that publishes.
+- **Not adopted: `pull_request_target` for the flow job.** It would make the judging workflow come
+  from the base branch and close the residual hole above. It is not adopted yet because the first
+  release to `main` has no base copy of the workflow to run, so the `flow` check would never report
+  and the release would deadlock — the move needs the workflow on `main` first, then a required-check
+  change. Recorded here so the option is a decision, not a rediscovery.
 - **Every pull request gets a second-model review before it is marked ready.** Kimi K3 on
   OpenRouter — a different provider with different failure modes from the agent that wrote the
   code. Findings and their dispositions go in one comment on the PR, so the owner reads a change
