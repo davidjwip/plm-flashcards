@@ -2,17 +2,32 @@
 // Runs in CI and locally. Deliberately dumb and readable — a clever scanner
 // nobody understands is worse than a plain one everybody can audit.
 import { execSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 const ALLOWED_EMAIL_DOMAINS = ['users.noreply.github.com', 'example.com'];
 
 // Files we never scan: lockfiles are noise, this scanner contains the patterns,
-// and binary assets (audio, images, fonts) cannot contain a readable secret.
+// the denylist contains the names it denies by design, and binary assets
+// (audio, images, fonts) cannot contain a readable secret.
 const SKIP = [
   /^package-lock\.json$/,
   /^scripts\/guardrail-scan\.mjs$/,
+  /^scripts\/guardrail-denylist\.txt$/,
   /\.(?:mp3|wav|ogg|png|jpe?g|gif|webp|ico|woff2?|ttf|zip)$/i,
 ];
+
+const DENYLIST = 'scripts/guardrail-denylist.txt';
+
+/** Plain substrings, one per line; `#` starts a comment and blank lines mean nothing. */
+function readDenylist() {
+  if (!existsSync(DENYLIST)) return [];
+  return readFileSync(DENYLIST, 'utf8')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'));
+}
+
+const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /** A NUL byte in the first chunk is as good a binary test as any. */
 function looksBinary(buffer) {
@@ -41,12 +56,48 @@ const RULES = [
     // Audio/loudness constants and timestamps are legitimate; tokens are not.
     ok: (m) => m.startsWith('20') || m === '22050' || m === '16000',
   },
+  {
+    name: 'school circular identifier',
+    re: /\b\d{2}-\d{2}-K\d{3}\b/g,
+    ok: () => false,
+  },
+  {
+    name: 'class code',
+    re: /\bK[1-3][A-Z]\b/g,
+    ok: () => false,
+  },
 ];
 
-const files = execSync('git ls-files', { encoding: 'utf8' })
-  .split('\n')
-  .filter(Boolean)
-  .filter((f) => !SKIP.some((re) => re.test(f)));
+// Specific names and identifiers get a plain-substring rule each. Shape rules above are
+// preferred: an entry here writes the denied name into this public repository.
+for (const entry of readDenylist()) {
+  RULES.push({
+    name: `denylist entry (${entry})`,
+    re: new RegExp(escapeRegExp(entry), 'g'),
+    ok: () => false,
+  });
+}
+
+function usage() {
+  console.error('usage: node scripts/guardrail-scan.mjs [--file <path>]...');
+  process.exit(2);
+}
+
+const args = process.argv.slice(2);
+const explicitFiles = [];
+for (let i = 0; i < args.length; i++) {
+  if (args[i] !== '--file') usage();
+  const path = args[++i];
+  if (!path) usage();
+  explicitFiles.push(path);
+}
+
+const files = explicitFiles.length
+  ? explicitFiles
+  : execSync('git ls-files', { encoding: 'utf8' })
+      .split('\n')
+      .filter(Boolean)
+      .filter((f) => !SKIP.some((re) => re.test(f)));
 
 let failures = 0;
 for (const file of files) {
@@ -72,4 +123,4 @@ if (failures) {
   console.error(`\nguardrail-scan: ${failures} finding(s). Public repo — fix or remove.`);
   process.exit(1);
 }
-console.log(`guardrail-scan: clean (${files.length} tracked files)`);
+console.log(`guardrail-scan: clean (${files.length} files scanned)`);

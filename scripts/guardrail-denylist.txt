@@ -1,0 +1,9 @@
+# Guardrail scan denylist — one plain substring per line.
+#
+# Entries are matched literally and case-sensitively, anywhere in a tracked text
+# file. Use this only for a name or identifier too specific to be recognised by
+# shape. Adding an entry writes that name into this public repository, which is
+# the caller's call, not the scanner's: prefer a shape rule in
+# scripts/guardrail-scan.mjs when one fits.
+#
+# `#` starts a comment. Blank lines are ignored. This list is empty by default.
