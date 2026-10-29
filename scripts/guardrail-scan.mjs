@@ -3,12 +3,14 @@
 // nobody understands is worse than a plain one everybody can audit.
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ALLOWED_EMAIL_DOMAINS = ['users.noreply.github.com', 'example.com'];
 
-// Files we never scan: lockfiles are noise, this scanner contains the patterns,
-// the denylist contains the names it denies by design, and binary assets
-// (audio, images, fonts) cannot contain a readable secret.
+// Files we never scan: lockfiles are noise, this scanner contains the patterns, the denylist holds
+// the names it denies by design, and binary assets (audio, images, fonts) cannot contain a readable
+// secret.
 const SKIP = [
   /^package-lock\.json$/,
   /^scripts\/guardrail-scan\.mjs$/,
@@ -16,12 +18,36 @@ const SKIP = [
   /\.(?:mp3|wav|ogg|png|jpe?g|gif|webp|ico|woff2?|ttf|zip)$/i,
 ];
 
-const DENYLIST = 'scripts/guardrail-denylist.txt';
+// Resolved beside this script, not against the caller's working directory: invoked from anywhere
+// else, a cwd-relative path silently loads an empty denylist.
+const DEFAULT_DENYLIST = join(dirname(fileURLToPath(import.meta.url)), 'guardrail-denylist.txt');
+
+function usage() {
+  console.error('usage: node scripts/guardrail-scan.mjs [--file <path>]... [--denylist <path>]');
+  process.exit(2);
+}
+
+const args = process.argv.slice(2);
+const explicitFiles = [];
+let denylistPath = DEFAULT_DENYLIST;
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '--file') {
+    const path = args[++i];
+    if (!path) usage();
+    explicitFiles.push(path);
+  } else if (args[i] === '--denylist') {
+    const path = args[++i];
+    if (!path) usage();
+    denylistPath = path;
+  } else {
+    usage();
+  }
+}
 
 /** Plain substrings, one per line; `#` starts a comment and blank lines mean nothing. */
-function readDenylist() {
-  if (!existsSync(DENYLIST)) return [];
-  return readFileSync(DENYLIST, 'utf8')
+function readDenylist(path) {
+  if (!existsSync(path)) return [];
+  return readFileSync(path, 'utf8')
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith('#'));
@@ -56,40 +82,29 @@ const RULES = [
     // Audio/loudness constants and timestamps are legitimate; tokens are not.
     ok: (m) => m.startsWith('20') || m === '22050' || m === '16000',
   },
+  // No word-boundary anchors and no case sensitivity: a leak typed in lowercase, or glued to a
+  // longer token (`AK2M`, `X26-27-K053`), is the same leak. These are shape rules, so they would
+  // rather over-report than let one through.
   {
     name: 'school circular identifier',
-    re: /\b\d{2}-\d{2}-K\d{3}\b/g,
+    re: /\d{2}-\d{2}-K\d{3}/gi,
     ok: () => false,
   },
   {
     name: 'class code',
-    re: /\bK[1-3][A-Z]\b/g,
+    re: /K[1-3][A-Z]/gi,
     ok: () => false,
   },
 ];
 
-// Specific names and identifiers get a plain-substring rule each. Shape rules above are
-// preferred: an entry here writes the denied name into this public repository.
-for (const entry of readDenylist()) {
+// Specific names and identifiers get a plain-substring rule each. Shape rules above are preferred:
+// an entry here writes the denied name into this public repository.
+for (const entry of readDenylist(denylistPath)) {
   RULES.push({
     name: `denylist entry (${entry})`,
     re: new RegExp(escapeRegExp(entry), 'g'),
     ok: () => false,
   });
-}
-
-function usage() {
-  console.error('usage: node scripts/guardrail-scan.mjs [--file <path>]...');
-  process.exit(2);
-}
-
-const args = process.argv.slice(2);
-const explicitFiles = [];
-for (let i = 0; i < args.length; i++) {
-  if (args[i] !== '--file') usage();
-  const path = args[++i];
-  if (!path) usage();
-  explicitFiles.push(path);
 }
 
 const files = explicitFiles.length

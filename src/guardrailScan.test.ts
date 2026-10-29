@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -63,6 +63,24 @@ describe('guardrail scan — school and class identifiers', () => {
     expect(result.out).toMatch(/clean \(\d+ files scanned\)/);
   });
 
+  it('AC7 a lowercase or embedded identifier is still a finding', () => {
+    // A leak typed in lowercase, or glued to a longer token, is the same leak: the rules are shapes,
+    // not spellings, and they must not depend on a word boundary or on capitalisation.
+    const lower = ['26', '27', 'k053'].join('-');
+    const embedded = 'AK' + 2 + 'M';
+    const file = tempFile('sneaky.txt', `ref ${lower}\ncode ${embedded}\n`);
+
+    const result = run(['--file', file]);
+
+    expect(result.code).toBe(1);
+    expect(result.out).toContain('school circular identifier');
+    expect(result.out).toContain(lower);
+    expect(result.out).toContain('class code');
+    // Built, not typed: a literal here would be a class code in the repo, and the scanner would find
+    // it — which is how this line was caught.
+    expect(result.out).toContain('K' + 2 + 'M');
+  });
+
   it('AC4 ordinary word-bank-shaped text passes', () => {
     const file = tempFile(
       'words.txt',
@@ -75,22 +93,24 @@ describe('guardrail scan — school and class identifiers', () => {
     expect(result.out).toContain('clean');
   });
 
-  it('AC3b a denylist entry fails the scan and names it', () => {
+  it('AC5 a denylist entry fails the scan and names it', () => {
     const entry = ['Zzq', 'guardrail', 'probe'].join('-');
     const dir = mkdtempSync(join(tmpdir(), 'plm-guardrail-denylist-'));
-    mkdirSync(join(dir, 'scripts'));
-    writeFileSync(join(dir, 'scripts', 'guardrail-denylist.txt'), `# probe\n${entry}\n`);
+    const denylist = join(dir, 'denylist.txt');
+    writeFileSync(denylist, `# probe\n${entry}\n`);
     const file = join(dir, 'words.txt');
     writeFileSync(file, `ordinary words\n${entry}\n`);
 
-    const result = run(['--file', file], dir);
+    // The denylist is read from beside the script by default; the flag is how a test points it at a
+    // fixture, and it is also how a caller blocks a name without touching the repository's own copy.
+    const result = run(['--file', file, '--denylist', denylist]);
 
     expect(result.code).toBe(1);
     expect(result.out).toContain('denylist');
     expect(result.out).toContain(entry);
   });
 
-  it('rejects an unknown argument with exit 2 and usage', () => {
+  it('AC6 an unknown argument exits 2 with usage', () => {
     const result = run(['--bogus']);
 
     expect(result.code).toBe(2);
