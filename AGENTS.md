@@ -97,7 +97,16 @@ Two branches matter: `UAT` (integration, served at `spelling-uat.zt489.com`) and
 - **Branch rulesets enforce it** (no bypass actors, for anyone): both branches
   refuse deletion and force-push and require a pull request; `UAT` requires `gates`,
   `main` requires `gates` **and** `flow`. Approvals are deliberately not required —
-  one human account cannot approve its own pull request.
+  one human account cannot approve its own pull request, so a required-approval rule
+  would deadlock every change.
+- **Every pull request is reviewed by a second model before it is marked ready.** Kimi
+  K3 on OpenRouter, findings and dispositions in one comment on the PR. Dave reads a
+  change that has already survived an adversarial pass, not the first draft.
+- **Hermes does not merge.** Not into `UAT`, not into `main`. It opens the PR as a
+  draft, flips it to ready once the review is back and every gate is green, and Dave
+  merges — unless Dave has specifically said in the thread that Hermes may merge that
+  PR. Pressing merge on his token without that word is the one thing the workflow
+  cannot delegate.
 - Branch names: `spec/<slug>` for spec-only work, `feat/<slug>` for a feature,
   `fix/<slug>` for a defect, `ci/<slug>` or `chore/<slug>` for tooling.
 - Agents may commit on a branch but may **not** push: `git push` is denied in

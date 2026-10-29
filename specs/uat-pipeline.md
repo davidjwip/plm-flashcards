@@ -29,7 +29,7 @@ Each criterion names the flow rule in `scripts/check-branch-flow.sh`, which runs
 
 | ID  | Given | When | Then |
 | --- | ----- | ---- | ---- |
-| AC1 | a base of `UAT` | any pull request is opened into it | the flow rule allows it; only the gate decides |
+| AC1 | a base that is not `main` | any pull request is opened into it | the flow rule allows it; only the gate decides |
 | AC2 | a base of `main` | `UAT` from this repository is opened into it | the flow rule allows the release |
 | AC3 | a base of `main` | a feature branch is opened into it | the flow rule refuses and names `UAT` as the route |
 | AC4 | a base of `main` | a branch from a fork is opened into it | the flow rule refuses and says the source is a fork |
@@ -63,9 +63,30 @@ Each criterion names the flow rule in `scripts/check-branch-flow.sh`, which runs
 - **Browser evidence is a separate, non-required job.** The maths gate has no e2e for
   exactly this reason; a required check that flakes teaches the owner to bypass it.
 - **No required approvals.** GitHub forbids approving your own pull request; with one
-  human account a review requirement is a deadlock, not a control.
-- **`ci.yml` is replaced by `pr-gates.yml`.** Two workflows running the same suite on the
-  same event is double the minutes for one answer.
+  human account a review requirement is a deadlock, not a control. The review Dave requires is
+  therefore procedural — second-model review, then his sign-off or his merge button — and the ruleset
+  carries only what it can carry: PR-only, no force-push, no deletion, named checks green.
+- **`ci.yml` stays for pushes; `pr-gates.yml` covers pull requests.** Two workflows on the same
+  event would be double the minutes for one answer, so the split is by event, not by check.
+- **The gate's own files are review-controlled, not self-enforcing.** A `pull_request` workflow
+  is taken from the PR's merge ref, so any PR can rewrite either the `flow` job or the script it
+  runs. Two mitigations, both real: the `flow` job executes the **base branch's** copy of
+  `scripts/check-branch-flow.sh` whenever the base carries one (falling back to the PR's copy, with
+  a warning in the log, only for the first release that installs it on `main`); and the ruleset
+  blocks the merge when the named check never reports, so deleting or renaming the job fails
+  closed. Anything that changes the rule itself is therefore a diff a human has to read.
+- **Any base other than `main` is allowed by the flow rule, deliberately.** The rule exists to gate
+  `main`; an allow-list of integration branches would need a code change every time a new one is
+  created, and the branch that matters is the one that publishes.
+- **Every pull request gets a second-model review before it is marked ready.** Kimi K3 on
+  OpenRouter — a different provider with different failure modes from the agent that wrote the
+  code. Findings and their dispositions go in one comment on the PR, so the owner reads a change
+  that has already survived an adversarial pass rather than the first draft.
+- **Hermes does not merge.** Not into `UAT`, not into `main`. It opens the PR as a draft, flips it
+  to ready when the review is back and every gate is green, and Dave merges — unless Dave has said
+  in the thread that Hermes may merge that particular PR. The branch rulesets cannot express this:
+  pull requests are opened on the owner's own GitHub account, and GitHub refuses to let an account
+  approve its own pull request, so a required-approval rule would deadlock every change.
 
 ## 7. Open questions
 
