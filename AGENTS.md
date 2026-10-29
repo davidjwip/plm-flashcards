@@ -46,9 +46,10 @@ pending, not failed — and repoint the row at the real test file as that step l
 ## Stack
 
 Vite + TypeScript, no UI framework, vanilla DOM. Vitest for logic, Playwright
-for UI. Static build to `dist/`, deployed to GitHub Pages by Actions (Cloudflare
-Pages later). Layering mirrors Dave's maths game: a pure engine with no DOM, a
-thin rendering layer, tests against both.
+for UI. Static build to `dist/`, deployed to Cloudflare Pages: `UAT` builds
+`spelling-uat.zt489.com`, `main` builds `spelling.zt489.com`. Layering mirrors
+Dave's maths game: a pure engine with no DOM, a thin rendering layer, tests
+against both.
 
 The product is a **supervised** pronunciation game: the grown-up picks sound
 patterns, the app builds the word set, the child reads each word aloud and the
@@ -84,18 +85,27 @@ grown-up presses got-it / not-yet. No timers, no self-marking, no child data.
 
 ## Git workflow
 
-- `main` is never pushed to directly. One branch per change, one pull request
-  per branch, reviewed and merged by Dave.
-- **One branch per change, created fresh from `main` after the previous PR
-  merges.** Never continue work on a merged branch, never stack a second change
-  on top of an open PR.
+Two branches matter: `UAT` (integration, served at `spelling-uat.zt489.com`) and
+`main` (production, `spelling.zt489.com`). Everything lands on `UAT` first.
+
+- **A change is its own branch off `main`, merged into `UAT` by pull request with
+  the `gates` check green.** Never continue work on a merged branch, never stack a
+  second change on top of an open PR.
+- **`main` only ever receives a pull request from `UAT`.** The `flow` job runs
+  `scripts/check-branch-flow.sh` and refuses any other source, including a fork. A
+  feature branch aimed at `main` is a mistake, not a shortcut.
+- **Branch rulesets enforce it** (no bypass actors, for anyone): both branches
+  refuse deletion and force-push and require a pull request; `UAT` requires `gates`,
+  `main` requires `gates` **and** `flow`. Approvals are deliberately not required —
+  one human account cannot approve its own pull request.
 - Branch names: `spec/<slug>` for spec-only work, `feat/<slug>` for a feature,
-  `fix/<slug>` for a defect, `chore/<slug>` for tooling.
+  `fix/<slug>` for a defect, `ci/<slug>` or `chore/<slug>` for tooling.
 - Agents may commit on a branch but may **not** push: `git push` is denied in
   `opencode.json`, so the agent that wrote the code is never the one that
   publishes it.
 - A PR body carries the failing-test output and the passing-test output, pasted,
   not summarised.
+- The pipeline itself is specified in `specs/uat-pipeline.md`.
 
 ## Guardrails — public repo, non-negotiable
 

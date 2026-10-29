@@ -31,6 +31,7 @@ jobs:
       - name: Install
         run: npm ci
 
+      # Tests and the coverage thresholds in one command: `npm test` alone ignores them.
       - name: Tests + coverage
         run: npm run coverage
 
@@ -58,20 +59,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # The decision lives in a shell script so src/branchFlow.test.ts can prove each
+      # refusal, instead of it being asserted only by reading YAML.
       - name: main only accepts UAT, from this repository
         env:
           BASE: ${{ github.event.pull_request.base.ref }}
           HEAD: ${{ github.event.pull_request.head.ref }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           THIS_REPO: ${{ github.repository }}
-        run: |
-          echo "PR: $HEAD -> $BASE (from $HEAD_REPO)"
-          if [ "$HEAD" != "UAT" ]; then
-            echo "::error::main only accepts merges from UAT (got '$HEAD')"
-            exit 1
-          fi
-          if [ "$HEAD_REPO" != "$THIS_REPO" ]; then
-            echo "::error::main only accepts UAT from this repository (got '$HEAD_REPO')"
-            exit 1
-          fi
-          echo "UAT -> main flow OK"
+        run: bash scripts/check-branch-flow.sh
