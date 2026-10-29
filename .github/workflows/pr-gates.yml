@@ -1,0 +1,77 @@
+name: PR gates
+
+# Every pull request into UAT or main gets the same gate the laptop runs, and main additionally
+# refuses anything that did not come through UAT. Mirrors the maths app (kgadd-uat) so both
+# repos share one release discipline.
+on:
+  pull_request:
+    branches: [UAT, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-gates-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Tests + coverage
+        run: npm run coverage
+
+      - name: Word bank validator
+        run: npm run validate:bank
+
+      - name: Guardrail scan
+        run: npm run guardrail:scan
+
+      - name: Spec audit
+        run: npm run spec:audit
+
+      - name: Build
+        run: npm run build
+
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E
+        run: npm run e2e
+
+  flow:
+    # Only main has a source rule, so only PRs targeting main pay for this job.
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: main only accepts UAT, from this repository
+        env:
+          BASE: ${{ github.event.pull_request.base.ref }}
+          HEAD: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          THIS_REPO: ${{ github.repository }}
+        run: |
+          echo "PR: $HEAD -> $BASE (from $HEAD_REPO)"
+          if [ "$HEAD" != "UAT" ]; then
+            echo "::error::main only accepts merges from UAT (got '$HEAD')"
+            exit 1
+          fi
+          if [ "$HEAD_REPO" != "$THIS_REPO" ]; then
+            echo "::error::main only accepts UAT from this repository (got '$HEAD_REPO')"
+            exit 1
+          fi
+          echo "UAT -> main flow OK"
