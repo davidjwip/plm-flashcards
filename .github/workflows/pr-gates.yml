@@ -47,6 +47,25 @@ jobs:
       - name: Build
         run: npm run build
 
+  # Browser evidence is deliberately its own job and NOT a required check: a chromium flake must not
+  # be able to block a merge into UAT or main. specs/uat-pipeline.md B5 says exactly this, and until
+  # now the workflow contradicted it by running e2e inside `gates`.
+  browser-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
       - name: Install browser
         run: npx playwright install --with-deps chromium
 
