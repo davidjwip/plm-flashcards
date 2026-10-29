@@ -62,12 +62,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # The decision lives in a shell script so src/branchFlow.test.ts can prove each
-      # refusal, instead of it being asserted only by reading YAML.
+      # The rule is a shell script so src/branchFlow.test.ts can prove each refusal rather than it
+      # being asserted only by reading YAML. It is taken from the BASE branch whenever the base
+      # carries it: a pull_request workflow is taken from the PR's merge ref, so running the head's
+      # copy would let a PR aimed at main rewrite the rule that judges it. The first release to main
+      # has no copy on main yet, so it falls back to the PR's copy and says so in the log.
+      - name: Use the base branch's copy of the rule
+        env:
+          BASE: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -eu
+          if git fetch --depth=1 origin "$BASE" && git cat-file -e "FETCH_HEAD:scripts/check-branch-flow.sh"; then
+            git show "FETCH_HEAD:scripts/check-branch-flow.sh" > "$RUNNER_TEMP/check-branch-flow.sh"
+            echo "flow rule source: $BASE@$(git rev-parse --short FETCH_HEAD) sha256=$(sha256sum "$RUNNER_TEMP/check-branch-flow.sh" | cut -d' ' -f1)"
+          else
+            cp scripts/check-branch-flow.sh "$RUNNER_TEMP/check-branch-flow.sh"
+            echo "::warning::$BASE does not carry scripts/check-branch-flow.sh yet; running the PR's copy — read the diff"
+          fi
+
       - name: main only accepts UAT, from this repository
         env:
           BASE: ${{ github.event.pull_request.base.ref }}
           HEAD: ${{ github.event.pull_request.head.ref }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           THIS_REPO: ${{ github.repository }}
-        run: bash scripts/check-branch-flow.sh
+        run: bash "$RUNNER_TEMP/check-branch-flow.sh"
