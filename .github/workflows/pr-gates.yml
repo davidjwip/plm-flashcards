@@ -72,6 +72,19 @@ jobs:
       - name: E2E
         run: npm run e2e
 
+      # B5 says the evidence is attached to the pull request, so the report travels with the run rather
+      # than living only in a log nobody opens.
+      - name: Upload the browser report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-evidence-${{ github.run_number }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+          if-no-files-found: warn
+
   flow:
     # Only main has a source rule, so only PRs targeting main pay for this job.
     if: github.event.pull_request.base.ref == 'main'
