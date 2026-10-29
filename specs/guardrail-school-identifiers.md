@@ -32,6 +32,9 @@ list is a scanner that misses the next school.
 | AC2 | a file containing a class code          | the scanner is run on that file      | it exits 1 and names the `class code` rule                  |
 | AC3 | the repository's own tracked files      | the scanner is run with no arguments | it exits 0                                                  |
 | AC4 | an unprefixed benign word list          | the scanner is run on that file      | it exits 0 — the rules must not fire on ordinary vocabulary |
+| AC5 | a denylist entry                        | the scanner runs with a denylist holding it | it exits 1 and names the entry it matched |
+| AC6 | the scanner                             | it is given an unknown argument, or a named denylist that does not exist | it exits 2 with a message rather than scanning with an empty list |
+| AC7 | an identifier written in lowercase, glued to a longer token, or separated by other punctuation | the scanner reads the file | it is still a finding — the rules are shapes, not spellings |
 
 ## 4. Decisions
 
@@ -50,3 +53,8 @@ list is a scanner that misses the next school.
 | AC2       | `src/guardrailScan.test.ts` | `AC2 a class code fails the scan and names its rule`          | green  |
 | AC3       | `src/guardrailScan.test.ts` | `AC3 the repository's own tree passes`                        | green  |
 | AC4       | `src/guardrailScan.test.ts` | `AC4 ordinary word-bank-shaped text passes`                   | green  |
+| AC5       | `src/guardrailScan.test.ts` | `AC5 a denylist entry fails the scan and names it`            | green  |
+| AC6       | `src/guardrailScan.test.ts` | `AC6 an unknown argument exits 2 with usage`                  | green  |
+| AC6b      | `src/guardrailScan.test.ts` | `AC6b a named denylist that does not exist exits 2 instead of loading nothing` | green |
+| AC7       | `src/guardrailScan.test.ts` | `AC7 a lowercase or embedded identifier is still a finding`    | green  |
+| AC7a      | `src/guardrailScan.test.ts` | `AC7a an identifier separated by other punctuation is still a finding` | green |
